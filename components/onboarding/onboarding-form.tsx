@@ -17,14 +17,42 @@ type ProfileDraft = {
   career_goal: string | null;
 };
 
+type OnboardingCopy = {
+  badge: string;
+  title: string;
+  description: string;
+  signedInAs: string;
+  submit: string;
+  fields: {
+    fullName: string;
+    university: string;
+    major: string;
+    startYear: string;
+    currentYear: string;
+    targetGpa: string;
+    careerGoal: string;
+  };
+  placeholders: {
+    fullName: string;
+    university: string;
+    major: string;
+    startYear: string;
+    currentYear: string;
+    targetGpa: string;
+    careerGoal: string;
+  };
+};
+
 export function OnboardingForm({
   userId,
   email,
-  profile
+  profile,
+  copy
 }: {
   userId: string;
   email: string;
   profile: ProfileDraft | null;
+  copy: OnboardingCopy;
 }) {
   const router = useRouter();
   const [fullName, setFullName] = useState(profile?.full_name || "");
@@ -75,33 +103,33 @@ export function OnboardingForm({
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-300/18 bg-emerald-300/8 px-4 py-2 text-sm font-medium text-emerald-100 shadow-glow-emerald">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
-            Your first master plan
+            {copy.badge}
           </div>
           <h1 className="font-display text-5xl font-semibold leading-tight text-white">
-            Set up your university operating system.
+            {copy.title}
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
-            This creates your profile so Study Goal can personalize your dashboard, GPA targets, and roadmap.
+            {copy.description}
           </p>
-          <p className="mt-6 text-sm text-slate-500">Signed in as {email}</p>
+          <p className="mt-6 text-sm text-slate-500">{copy.signedInAs} {email}</p>
         </div>
 
         <form className="glass grid gap-4 rounded-[2rem] p-6 sm:grid-cols-2 sm:p-8" onSubmit={handleSubmit}>
-          <Field label="Full name" value={fullName} onChange={setFullName} placeholder="Maya Tran" />
-          <Field label="University" value={university} onChange={setUniversity} placeholder="National University" />
-          <Field label="Major" value={major} onChange={setMajor} placeholder="Computer Science" />
-          <Field label="Start year" value={startYear} onChange={setStartYear} type="number" placeholder="2026" />
-          <Field label="Current year" value={currentYear} onChange={setCurrentYear} type="number" placeholder="1" />
-          <Field label="Target GPA" value={targetGpa} onChange={setTargetGpa} type="number" step="0.01" placeholder="3.80" />
+          <Field label={copy.fields.fullName} value={fullName} onChange={setFullName} placeholder={copy.placeholders.fullName} />
+          <Field label={copy.fields.university} value={university} onChange={setUniversity} placeholder={copy.placeholders.university} />
+          <Field label={copy.fields.major} value={major} onChange={setMajor} placeholder={copy.placeholders.major} />
+          <Field label={copy.fields.startYear} value={startYear} onChange={setStartYear} type="number" placeholder={copy.placeholders.startYear} />
+          <Field label={copy.fields.currentYear} value={currentYear} onChange={setCurrentYear} type="number" placeholder={copy.placeholders.currentYear} />
+          <Field label={copy.fields.targetGpa} value={targetGpa} onChange={setTargetGpa} type="number" step="0.01" placeholder={copy.placeholders.targetGpa} />
 
           <label className="block sm:col-span-2">
-            <span className="text-sm font-medium text-slate-200">Career goal</span>
+            <span className="text-sm font-medium text-slate-200">{copy.fields.careerGoal}</span>
             <textarea
               required
               value={careerGoal}
               onChange={(event) => setCareerGoal(event.target.value)}
               className="mt-2 min-h-28 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
-              placeholder="Become an AI engineer, publish research, and land a strong internship."
+              placeholder={copy.placeholders.careerGoal}
             />
           </label>
 
@@ -113,7 +141,7 @@ export function OnboardingForm({
 
           <Button type="submit" size="lg" className="sm:col-span-2" disabled={isLoading}>
             {isLoading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
-            Continue to dashboard
+            {copy.submit}
           </Button>
         </form>
       </div>

@@ -23,26 +23,26 @@ const copy = {
   login: {
     eyebrow: "Đăng nhập",
     title: "Tiếp tục xây dựng kế hoạch đại học của bạn.",
-    description: "Truy cập dashboard cá nhân, lộ trình học tập, mục tiêu và hồ sơ phát triển.",
+    description: "Truy cập bảng điều khiển cá nhân, lộ trình học tập, mục tiêu và hồ sơ phát triển.",
     submit: "Đăng nhập",
     google: "Tiếp tục với Google",
     footer: "Chưa có tài khoản?",
     footerLink: "Đăng ký miễn phí",
     footerHref: "/register",
-    sideTitle: "Một workspace cho toàn bộ hành trình đại học.",
-    sideCopy: "Từ GPA, tín chỉ, mục tiêu, nghiên cứu đến portfolio - mọi thứ được kết nối vào một master plan."
+    sideTitle: "Một không gian làm việc cho toàn bộ hành trình đại học.",
+    sideCopy: "Từ GPA, tín chỉ, mục tiêu, nghiên cứu đến hồ sơ năng lực - mọi thứ được kết nối vào một kế hoạch tổng thể."
   },
   register: {
     eyebrow: "Tạo tài khoản",
-    title: "Bắt đầu Study Goal workspace của bạn.",
-    description: "Tạo tài khoản để lưu roadmap, điểm số, mục tiêu và quá trình phát triển cá nhân.",
+    title: "Bắt đầu không gian Study Goal của bạn.",
+    description: "Tạo tài khoản để lưu lộ trình, điểm số, mục tiêu và quá trình phát triển cá nhân.",
     submit: "Tạo tài khoản",
     google: "Đăng ký với Google",
     footer: "Đã có tài khoản?",
     footerLink: "Đăng nhập",
     footerHref: "/login",
     sideTitle: "Biến 4 năm đại học thành một hệ thống có chiến lược.",
-    sideCopy: "Thiết lập hồ sơ một lần, sau đó Study Goal sẽ trở thành command center cho quá trình học tập."
+    sideCopy: "Thiết lập hồ sơ một lần, sau đó Study Goal sẽ trở thành trung tâm điều khiển cho quá trình học tập."
   },
   "forgot-password": {
     eyebrow: "Khôi phục mật khẩu",
@@ -187,7 +187,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
           <Button asChild variant="secondary">
             <a href="/">
               <ArrowRight className="h-4 w-4 rotate-180" aria-hidden="true" />
-              Landing
+              Trang chủ
             </a>
           </Button>
         </header>
@@ -198,7 +198,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             <div className="relative">
               <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-300/18 bg-emerald-300/8 px-4 py-2 text-sm font-medium text-emerald-100">
                 <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-                Secure student workspace
+                Không gian học tập an toàn
               </div>
               <h1 className="max-w-2xl font-display text-5xl font-semibold leading-tight text-white lg:text-6xl">
                 {text.sideTitle}
@@ -208,8 +208,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
               <div className="mt-10 grid gap-4 sm:grid-cols-3">
                 {[
                   ["GPA", "3.82", BookOpenCheck],
-                  ["Goals", "18", Target],
-                  ["Portfolio", "38", FolderKanban]
+                  ["Mục tiêu", "18", Target],
+                  ["Hồ sơ năng lực", "38", FolderKanban]
                 ].map(([label, value, Icon]) => (
                   <div key={label as string} className="rounded-2xl border border-white/10 bg-slate-950/62 p-4">
                     <div className="flex items-center justify-between">
@@ -224,18 +224,18 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
               <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-slate-950/68 p-5">
                 <div className="mb-5 flex items-center justify-between">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Master Plan</p>
-                    <h2 className="mt-1 font-display text-2xl font-semibold text-white">Spring 2027</h2>
+                    <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Kế hoạch tổng thể</p>
+                    <h2 className="mt-1 font-display text-2xl font-semibold text-white">Học kỳ xuân 2027</h2>
                   </div>
                   <span className="rounded-full bg-emerald-300/10 px-3 py-1.5 text-sm text-emerald-100 ring-1 ring-emerald-200/18">
-                    91% ready
+                    Sẵn sàng 91%
                   </span>
                 </div>
                 <div className="space-y-3">
                   {[
-                    ["Academic roadmap", 82],
-                    ["Research progress", 64],
-                    ["Internship preparation", 76]
+                    ["Lộ trình học tập", 82],
+                    ["Tiến độ nghiên cứu", 64],
+                    ["Chuẩn bị thực tập", 76]
                   ].map(([label, value]) => (
                     <div key={label as string}>
                       <div className="mb-2 flex items-center justify-between text-sm">

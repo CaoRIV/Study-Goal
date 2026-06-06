@@ -48,6 +48,12 @@ The project currently has:
 - Onboarding page for profile setup.
 - `profiles` SQL migration with RLS policies.
 - Landing page navigation links to login and registration.
+- Shared language cookie for authenticated pages.
+- Phase 2 core migration for semesters, courses, and goals.
+- Academic planner page at `/grades`.
+- Goal management page at `/goals`.
+- Dashboard Phase 2.2 now reads real `semesters`, `courses`, and `goals` data.
+- Dashboard shows live GPA, completed credits, active goals, average goal progress, readiness score, recent courses, active goals, and next-best actions.
 
 Important existing files:
 
@@ -61,16 +67,21 @@ Important existing files:
 - `app/onboarding/page.tsx`
 - `app/dashboard/page.tsx`
 - `app/profile/page.tsx`
+- `app/grades/page.tsx`
+- `app/goals/page.tsx`
 - `components/ui/button.tsx`
 - `components/auth/auth-form.tsx`
 - `components/onboarding/onboarding-form.tsx`
 - `components/dashboard/sign-out-button.tsx`
 - `components/profile/profile-form.tsx`
+- `components/grades/academic-planner.tsx`
+- `components/goals/goals-manager.tsx`
 - `lib/supabase/client.ts`
 - `lib/supabase/server.ts`
 - `lib/supabase/env.ts`
 - `middleware.ts`
 - `supabase/migrations/001_create_profiles.sql`
+- `supabase/migrations/002_create_academic_core.sql`
 - `tailwind.config.ts`
 - `package.json`
 
@@ -792,10 +803,9 @@ lib/
 
 The auth foundation code has been added. The next implementation milestone should be:
 
-1. Run `supabase/migrations/001_create_profiles.sql` inside the Supabase SQL Editor.
-2. Confirm Google OAuth redirect URL points to `/auth/callback`.
-3. Test email/password registration.
-4. Test Google login.
-5. Complete onboarding with a real user.
-6. Confirm `/dashboard` loads after onboarding.
-7. Start Phase 2: semesters, courses, goals, and GPA data.
+1. Run `supabase/migrations/001_create_profiles.sql` inside the Supabase SQL Editor if it has not been run.
+2. Run `supabase/migrations/002_create_academic_core.sql` inside the Supabase SQL Editor.
+3. Test `/grades`: create a semester, add courses, enter credits and grades.
+4. Test `/goals`: create goals and update progress.
+5. Continue Phase 2 with edit forms, filters, empty states, and better bilingual copy for all new CRUD surfaces.
+6. Add semester/course editing, goal editing, status filters, and richer analytics charts.

@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { LANGUAGE_COOKIE } from "@/lib/language";
 import { cn } from "@/lib/utils";
 
 type Language = "en" | "vi";
@@ -499,15 +500,22 @@ export default function Home() {
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem("study-goal-language");
+    const savedCookie = document.cookie
+      .split("; ")
+      .find((item) => item.startsWith(`${LANGUAGE_COOKIE}=`))
+      ?.split("=")[1];
 
     if (savedLanguage === "en" || savedLanguage === "vi") {
       setLanguage(savedLanguage);
+    } else if (savedCookie === "en" || savedCookie === "vi") {
+      setLanguage(savedCookie);
     }
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = language;
-    window.localStorage.setItem("study-goal-language", language);
+    window.localStorage.setItem(LANGUAGE_COOKIE, language);
+    document.cookie = `${LANGUAGE_COOKIE}=${language}; path=/; max-age=31536000; SameSite=Lax`;
   }, [language]);
 
   const t = content[language];
