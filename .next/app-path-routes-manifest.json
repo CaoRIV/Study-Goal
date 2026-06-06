@@ -1,4 +1,11 @@
 {
+  "/auth/callback/route": "/auth/callback",
   "/_not-found/page": "/_not-found",
-  "/page": "/"
+  "/forgot-password/page": "/forgot-password",
+  "/dashboard/page": "/dashboard",
+  "/login/page": "/login",
+  "/onboarding/page": "/onboarding",
+  "/register/page": "/register",
+  "/page": "/",
+  "/profile/page": "/profile"
 }

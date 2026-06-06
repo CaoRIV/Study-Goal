@@ -1,4 +1,11 @@
 {
+  "/auth/callback/route": "app/auth/callback/route.js",
   "/_not-found/page": "app/_not-found/page.js",
-  "/page": "app/page.js"
+  "/forgot-password/page": "app/forgot-password/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/login/page": "app/login/page.js",
+  "/onboarding/page": "app/onboarding/page.js",
+  "/register/page": "app/register/page.js",
+  "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js"
 }
