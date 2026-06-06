@@ -46,6 +46,8 @@ const content = {
       features: "Features",
       analytics: "Analytics",
       cta: "Get Started",
+      login: "Log in",
+      register: "Sign up free",
       languageLabel: "Change language",
       english: "EN",
       vietnamese: "VI"
@@ -269,6 +271,8 @@ const content = {
       features: "Tính năng",
       analytics: "Phân tích",
       cta: "Bắt đầu",
+      login: "Đăng nhập",
+      register: "Đăng ký miễn phí",
       languageLabel: "Đổi ngôn ngữ",
       english: "EN",
       vietnamese: "VI"
@@ -550,8 +554,11 @@ function Nav({
         </div>
         <div className="flex items-center gap-2">
           <LanguageToggle language={language} setLanguage={setLanguage} t={t} />
+          <Button asChild size="default" variant="ghost" className="hidden lg:inline-flex">
+            <a href="/login">{t.nav.login}</a>
+          </Button>
           <Button asChild size="default" className="hidden sm:inline-flex">
-            <a href="#start">{t.nav.cta}</a>
+            <a href="/register">{t.nav.register}</a>
           </Button>
         </div>
       </nav>
@@ -617,7 +624,7 @@ function Hero({ t }: { t: Content }) {
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
-              <a href="#start">
+              <a href="/register">
                 {t.hero.primaryCta} <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </Button>
@@ -1213,7 +1220,7 @@ function FinalCta({ t }: { t: Content }) {
               {t.finalCta.copy}
             </p>
             <Button asChild size="lg" className="mt-9">
-              <a href="#">
+              <a href="/register">
                 {t.finalCta.cta} <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </Button>
