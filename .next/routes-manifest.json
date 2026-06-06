@@ -51,6 +51,18 @@
       "namedRegex": "^/forgot\\-password(?:/)?$"
     },
     {
+      "page": "/goals",
+      "regex": "^/goals(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/goals(?:/)?$"
+    },
+    {
+      "page": "/grades",
+      "regex": "^/grades(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/grades(?:/)?$"
+    },
+    {
       "page": "/login",
       "regex": "^/login(?:/)?$",
       "routeKeys": {},

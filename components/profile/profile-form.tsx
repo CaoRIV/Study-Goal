@@ -17,14 +17,42 @@ type Profile = {
   career_goal: string | null;
 };
 
+type ProfileFormCopy = {
+  active: string;
+  fallbackName: string;
+  fields: {
+    fullName: string;
+    university: string;
+    major: string;
+    startYear: string;
+    currentYear: string;
+    targetGpa: string;
+    careerGoal: string;
+  };
+  placeholders: {
+    fullName: string;
+    university: string;
+    major: string;
+    startYear: string;
+    currentYear: string;
+    targetGpa: string;
+    careerGoal: string;
+  };
+  saved: string;
+  back: string;
+  save: string;
+};
+
 export function ProfileForm({
   userId,
   email,
-  profile
+  profile,
+  copy
 }: {
   userId: string;
   email: string;
   profile: Profile | null;
+  copy: ProfileFormCopy;
 }) {
   const router = useRouter();
   const [fullName, setFullName] = useState(profile?.full_name || "");
@@ -67,7 +95,7 @@ export function ProfileForm({
       return;
     }
 
-    setMessage("Hồ sơ đã được cập nhật.");
+    setMessage(copy.saved);
     setIsLoading(false);
     router.refresh();
   }
@@ -80,31 +108,31 @@ export function ProfileForm({
             <UserRound className="h-7 w-7" aria-hidden="true" />
           </div>
           <div>
-            <p className="font-display text-2xl font-semibold text-white">{fullName || "Sinh viên Study Goal"}</p>
+            <p className="font-display text-2xl font-semibold text-white">{fullName || copy.fallbackName}</p>
             <p className="mt-1 text-sm text-slate-400">{email}</p>
           </div>
         </div>
         <div className="rounded-full border border-emerald-300/18 bg-emerald-300/8 px-4 py-2 text-sm font-medium text-emerald-100">
-          Profile active
+          {copy.active}
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Họ và tên" value={fullName} onChange={setFullName} placeholder="Maya Tran" />
-        <Field label="Trường đại học" value={university} onChange={setUniversity} placeholder="National University" />
-        <Field label="Ngành học" value={major} onChange={setMajor} placeholder="Computer Science" />
-        <Field label="Năm bắt đầu" value={startYear} onChange={setStartYear} type="number" placeholder="2026" />
-        <Field label="Năm hiện tại" value={currentYear} onChange={setCurrentYear} type="number" placeholder="1" />
-        <Field label="GPA mục tiêu" value={targetGpa} onChange={setTargetGpa} type="number" step="0.01" placeholder="3.80" />
+        <Field label={copy.fields.fullName} value={fullName} onChange={setFullName} placeholder={copy.placeholders.fullName} />
+        <Field label={copy.fields.university} value={university} onChange={setUniversity} placeholder={copy.placeholders.university} />
+        <Field label={copy.fields.major} value={major} onChange={setMajor} placeholder={copy.placeholders.major} />
+        <Field label={copy.fields.startYear} value={startYear} onChange={setStartYear} type="number" placeholder={copy.placeholders.startYear} />
+        <Field label={copy.fields.currentYear} value={currentYear} onChange={setCurrentYear} type="number" placeholder={copy.placeholders.currentYear} />
+        <Field label={copy.fields.targetGpa} value={targetGpa} onChange={setTargetGpa} type="number" step="0.01" placeholder={copy.placeholders.targetGpa} />
 
         <label className="block sm:col-span-2">
-          <span className="text-sm font-medium text-slate-200">Mục tiêu nghề nghiệp</span>
+          <span className="text-sm font-medium text-slate-200">{copy.fields.careerGoal}</span>
           <textarea
             required
             value={careerGoal}
             onChange={(event) => setCareerGoal(event.target.value)}
             className="mt-2 min-h-32 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
-            placeholder="Trở thành AI Engineer, có research tốt và portfolio mạnh."
+            placeholder={copy.placeholders.careerGoal}
           />
         </label>
       </div>
@@ -124,11 +152,11 @@ export function ProfileForm({
 
       <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:justify-end">
         <Button asChild variant="secondary">
-          <a href="/dashboard">Quay lại dashboard</a>
+          <a href="/dashboard">{copy.back}</a>
         </Button>
         <Button type="submit" disabled={isLoading}>
           {isLoading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
-          Lưu hồ sơ
+          {copy.save}
         </Button>
       </div>
     </form>

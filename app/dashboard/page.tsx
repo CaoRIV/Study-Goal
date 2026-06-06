@@ -1,17 +1,196 @@
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import type { ReactNode } from "react";
 import {
+  ArrowRight,
   BarChart3,
   BookOpenCheck,
   BrainCircuit,
   CalendarDays,
+  CheckCircle2,
   GraduationCap,
-  Target
+  LineChart,
+  Medal,
+  Target,
+  Trophy
 } from "lucide-react";
 
 import { SignOutButton } from "@/components/dashboard/sign-out-button";
+import { LanguageSwitcher } from "@/components/language/language-switcher";
+import { calculateCompletedCredits, calculateGpa } from "@/lib/calculations/academic";
+import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
 import { createClient } from "@/lib/supabase/server";
 
+type Course = {
+  id: string;
+  semester_id: string;
+  code: string | null;
+  name: string;
+  credits: number;
+  final_grade: number | null;
+  status: string;
+};
+
+type Goal = {
+  id: string;
+  title: string;
+  category: string;
+  progress: number;
+  status: string;
+  priority: string;
+};
+
+const dashboardCopy = {
+  en: {
+    appSubtitle: "Personal university OS",
+    profile: "Profile",
+    grades: "Academic planner",
+    goals: "Goals",
+    signOut: "Sign out",
+    languageLabel: "Change language",
+    eyebrow: "Dashboard",
+    welcome: "Welcome back",
+    description:
+      "Your live command center now reflects semesters, courses, grades, and goals from your Study Goal workspace.",
+    fallbackName: "Student",
+    notSet: "Not set",
+    unavailable: "N/A",
+    year: "Year",
+    units: {
+      courses: "courses",
+      credits: "credits",
+      active: "active",
+      completed: "completed"
+    },
+    courseFallback: "Course",
+    statusLabels: {
+      planned: "Planned",
+      in_progress: "In progress",
+      completed: "Completed",
+      dropped: "Dropped"
+    },
+    metricLabels: {
+      currentGpa: "Current GPA",
+      completedCredits: "Completed credits",
+      activeGoals: "Active goals",
+      goalProgress: "Goal progress",
+      coursesTracked: "Courses tracked",
+      semesters: "Semesters"
+    },
+    modules: {
+      academicTitle: "Academic Planner",
+      academicText: "Courses and credits tracked from your semester plan.",
+      goalsTitle: "Goal Management",
+      goalsText: "Active academic, skill, research, and career goals.",
+      skillsTitle: "Skill Tree",
+      skillsText: "Next phase will connect skill progress and evidence."
+    },
+    nextActions: {
+      title: "Next best actions",
+      createSemester: "Create your first semester",
+      createSemesterCopy: "Start the academic planner by adding the semester you are currently studying.",
+      addCourse: "Add your first course",
+      addCourseCopy: "Connect credits and grades to make GPA analytics meaningful.",
+      createGoal: "Create your first goal",
+      createGoalCopy: "Give the dashboard a target to track beyond grades.",
+      completeCourse: "Complete one course record",
+      completeCourseCopy: "Add a final grade to unlock your current GPA.",
+      review: "Review this week's plan",
+      reviewCopy: "Your core data is live. Keep updating grades and goal progress weekly."
+    },
+    recentCourses: "Recent courses",
+    activeGoalsTitle: "Active goals",
+    noCourses: "No courses yet.",
+    noGoals: "No goals yet.",
+    careerGoal: "Career goal",
+    emptyCareerGoal: "No career goal yet.",
+    readiness: "Readiness score"
+  },
+  vi: {
+    appSubtitle: "Hệ điều hành đại học cá nhân",
+    profile: "Hồ sơ",
+    grades: "Kế hoạch học tập",
+    goals: "Mục tiêu",
+    signOut: "Đăng xuất",
+    languageLabel: "Đổi ngôn ngữ",
+    eyebrow: "Bảng điều khiển",
+    welcome: "Chào mừng trở lại",
+    description:
+      "Trung tâm điều khiển của bạn giờ phản ánh dữ liệu thật từ học kỳ, môn học, điểm số và mục tiêu trong Study Goal.",
+    fallbackName: "Sinh viên",
+    notSet: "Chưa thiết lập",
+    unavailable: "Chưa có",
+    year: "Năm",
+    units: {
+      courses: "môn học",
+      credits: "tín chỉ",
+      active: "đang làm",
+      completed: "đã hoàn thành"
+    },
+    courseFallback: "Môn học",
+    statusLabels: {
+      planned: "Dự định",
+      in_progress: "Đang học",
+      completed: "Hoàn thành",
+      dropped: "Đã hủy"
+    },
+    metricLabels: {
+      currentGpa: "GPA hiện tại",
+      completedCredits: "Tín chỉ hoàn thành",
+      activeGoals: "Mục tiêu đang làm",
+      goalProgress: "Tiến độ mục tiêu",
+      coursesTracked: "Môn học đã theo dõi",
+      semesters: "Học kỳ"
+    },
+    modules: {
+      academicTitle: "Lập kế hoạch học tập",
+      academicText: "Môn học và tín chỉ được lấy từ kế hoạch học kỳ của bạn.",
+      goalsTitle: "Quản lý mục tiêu",
+      goalsText: "Các mục tiêu học tập, kỹ năng, nghiên cứu và sự nghiệp đang hoạt động.",
+      skillsTitle: "Cây kỹ năng",
+      skillsText: "Giai đoạn tiếp theo sẽ kết nối tiến độ kỹ năng và minh chứng."
+    },
+    nextActions: {
+      title: "Hành động tiếp theo",
+      createSemester: "Tạo học kỳ đầu tiên",
+      createSemesterCopy: "Bắt đầu trình lập kế hoạch học tập bằng học kỳ bạn đang học.",
+      addCourse: "Thêm môn học đầu tiên",
+      addCourseCopy: "Kết nối tín chỉ và điểm số để phân tích GPA có ý nghĩa.",
+      createGoal: "Tạo mục tiêu đầu tiên",
+      createGoalCopy: "Cho bảng điều khiển một mục tiêu để theo dõi ngoài điểm số.",
+      completeCourse: "Hoàn tất một môn học",
+      completeCourseCopy: "Nhập điểm cuối kỳ để mở khóa GPA hiện tại.",
+      review: "Xem lại kế hoạch tuần này",
+      reviewCopy: "Dữ liệu lõi đã hoạt động. Hãy cập nhật điểm và tiến độ mục tiêu hằng tuần."
+    },
+    recentCourses: "Môn học gần đây",
+    activeGoalsTitle: "Mục tiêu đang hoạt động",
+    noCourses: "Chưa có môn học.",
+    noGoals: "Chưa có mục tiêu.",
+    careerGoal: "Mục tiêu nghề nghiệp",
+    emptyCareerGoal: "Chưa có mục tiêu nghề nghiệp.",
+    readiness: "Điểm sẵn sàng"
+  }
+} as const;
+
+type NextActionsCopy = {
+  title: string;
+  createSemester: string;
+  createSemesterCopy: string;
+  addCourse: string;
+  addCourseCopy: string;
+  createGoal: string;
+  createGoalCopy: string;
+  completeCourse: string;
+  completeCourseCopy: string;
+  review: string;
+  reviewCopy: string;
+};
+
 export default async function DashboardPage() {
+  const cookieStore = await cookies();
+  const language = normalizeLanguage(cookieStore.get(LANGUAGE_COOKIE)?.value);
+  const t = dashboardCopy[language];
   const supabase = await createClient();
   const {
     data: { user }
@@ -31,7 +210,55 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const displayName = profile.full_name || user.email || "Student";
+  const [{ data: semesters }, { data: courses }, { data: goals }] = await Promise.all([
+    supabase
+      .from("semesters")
+      .select("id, name, year_index, term")
+      .eq("user_id", user.id)
+      .order("year_index", { ascending: true })
+      .order("created_at", { ascending: true }),
+    supabase
+      .from("courses")
+      .select("id, semester_id, code, name, credits, final_grade, status")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("goals")
+      .select("id, title, category, progress, status, priority")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false })
+  ]);
+
+  const safeCourses = (courses || []).map((course) => ({
+    ...course,
+    credits: Number(course.credits || 0),
+    final_grade: course.final_grade === null ? null : Number(course.final_grade)
+  })) as Course[];
+  const safeGoals = (goals || []) as Goal[];
+  const displayName = profile.full_name || user.email || t.fallbackName;
+  const completedCredits = calculateCompletedCredits(safeCourses);
+  const gpa = calculateGpa(safeCourses);
+  const activeGoals = safeGoals.filter((goal) => !["completed", "paused"].includes(goal.status));
+  const completedGoals = safeGoals.filter((goal) => goal.status === "completed");
+  const goalProgress = safeGoals.length
+    ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
+    : 0;
+  const readinessScore = Math.min(
+    100,
+    Math.round(
+      (gpa ? Math.min(gpa / 4, 1) * 35 : 0) +
+        Math.min(completedCredits / 120, 1) * 30 +
+        Math.min(goalProgress / 100, 1) * 25 +
+        (safeCourses.length > 0 && safeGoals.length > 0 ? 10 : 0)
+    )
+  );
+  const nextAction = getNextAction({
+    hasSemesters: Boolean(semesters?.length),
+    hasCourses: safeCourses.length > 0,
+    hasGoals: safeGoals.length > 0,
+    hasGpa: gpa !== null,
+    copy: t.nextActions
+  });
 
   return (
     <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
@@ -43,34 +270,53 @@ export default async function DashboardPage() {
             </span>
             <div>
               <p className="font-display text-lg font-semibold text-white">Study Goal</p>
-              <p className="text-sm text-slate-400">Personal university OS</p>
+              <p className="text-sm text-slate-400">{t.appSubtitle}</p>
             </div>
           </a>
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/profile">
-              Profile
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <LanguageSwitcher language={language} label={t.languageLabel} />
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/grades">
+              {t.grades}
             </a>
-            <SignOutButton />
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/goals">
+              {t.goals}
+            </a>
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/profile">
+              {t.profile}
+            </a>
+            <SignOutButton label={t.signOut} />
           </div>
         </header>
 
-        <section className="grid gap-6 py-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <section className="grid gap-6 py-10 lg:grid-cols-[0.92fr_1.08fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">Dashboard</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">{t.eyebrow}</p>
             <h1 className="mt-4 font-display text-5xl font-semibold leading-tight text-white">
-              Welcome back, {displayName}.
+              {t.welcome}, {displayName}.
             </h1>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-              Your profile is ready. The next step is connecting real semesters, courses, goals, and grades to this command center.
-            </p>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">{t.description}</p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              <IdentityPill label={t.metricLabels.semesters} value={String(semesters?.length || 0)} icon={CalendarDays} />
+              <IdentityPill label={t.metricLabels.coursesTracked} value={String(safeCourses.length)} icon={BookOpenCheck} />
+            </div>
           </div>
 
           <div className="glass rounded-[2rem] p-6">
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">{t.readiness}</p>
+                <h2 className="mt-2 font-display text-4xl font-semibold text-white">{readinessScore}/100</h2>
+              </div>
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-emerald-300/24 bg-emerald-300/10 text-emerald-100 shadow-glow-emerald">
+                <Trophy className="h-8 w-8" aria-hidden="true" />
+              </div>
+            </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <ProfileStat label="University" value={profile.university || "Not set"} icon={GraduationCap} />
-              <ProfileStat label="Major" value={profile.major || "Not set"} icon={BookOpenCheck} />
-              <ProfileStat label="Current year" value={`Year ${profile.current_year || 1}`} icon={CalendarDays} />
-              <ProfileStat label="Target GPA" value={String(profile.target_gpa || "Not set")} icon={BarChart3} />
+              <MetricCard label={t.metricLabels.currentGpa} value={gpa === null ? t.unavailable : String(gpa)} icon={BarChart3} />
+              <MetricCard label={t.metricLabels.completedCredits} value={String(completedCredits)} icon={GraduationCap} />
+              <MetricCard label={t.metricLabels.activeGoals} value={String(activeGoals.length)} icon={Target} />
+              <MetricCard label={t.metricLabels.goalProgress} value={`${goalProgress}%`} icon={LineChart} />
             </div>
           </div>
         </section>
@@ -78,25 +324,70 @@ export default async function DashboardPage() {
         <section className="grid gap-4 md:grid-cols-3">
           <NextModule
             icon={BookOpenCheck}
-            title="Academic Planner"
-            text="Create semesters, add courses, enter credits, and calculate GPA."
+            title={t.modules.academicTitle}
+            text={`${t.modules.academicText} ${safeCourses.length} ${t.units.courses} / ${completedCredits} ${t.units.credits}.`}
+            href="/grades"
           />
           <NextModule
             icon={Target}
-            title="Goal Management"
-            text="Turn academic, skill, research, and career ambitions into measurable progress."
+            title={t.modules.goalsTitle}
+            text={`${t.modules.goalsText} ${activeGoals.length} ${t.units.active} / ${completedGoals.length} ${t.units.completed}.`}
+            href="/goals"
           />
           <NextModule
             icon={BrainCircuit}
-            title="Skill Tree"
-            text="Build your AI, CS, research, and career skill paths with evidence attached."
+            title={t.modules.skillsTitle}
+            text={t.modules.skillsText}
+            href="/dashboard"
           />
         </section>
 
+        <section className="mt-6 grid gap-6 lg:grid-cols-[0.86fr_1.14fr]">
+          <div className="glass rounded-[2rem] p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">{t.nextActions.title}</p>
+            <h2 className="mt-4 font-display text-3xl font-semibold text-white">{nextAction.title}</h2>
+            <p className="mt-3 leading-7 text-slate-300">{nextAction.copy}</p>
+            <a href={nextAction.href} className="mt-6 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-slate-950 transition-colors hover:bg-sky-100">
+              {nextAction.cta}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <ListPanel title={t.recentCourses} empty={t.noCourses}>
+              {safeCourses.slice(0, 4).map((course) => (
+                <div key={course.id} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/52 p-4">
+                  <div>
+                    <p className="font-semibold text-white">{course.name}</p>
+                    <p className="mt-1 text-xs text-slate-500">
+                      {course.code || t.courseFallback} / {t.statusLabels[course.status as keyof typeof t.statusLabels] || course.status}
+                    </p>
+                  </div>
+                  <span className="text-sm font-semibold text-emerald-100">{course.final_grade ?? "-"}</span>
+                </div>
+              ))}
+            </ListPanel>
+
+            <ListPanel title={t.activeGoalsTitle} empty={t.noGoals}>
+              {activeGoals.slice(0, 4).map((goal) => (
+                <div key={goal.id} className="rounded-2xl border border-white/10 bg-slate-950/52 p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <p className="font-semibold text-white">{goal.title}</p>
+                    <span className="text-sm text-emerald-100">{goal.progress}%</span>
+                  </div>
+                  <div className="mt-3 h-2 rounded-full bg-slate-800">
+                    <div className="h-full rounded-full bg-gradient-to-r from-sky-300 to-emerald-300" style={{ width: `${goal.progress}%` }} />
+                  </div>
+                </div>
+              ))}
+            </ListPanel>
+          </div>
+        </section>
+
         <section className="mt-6 rounded-[2rem] border border-white/10 bg-white/[0.055] p-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">Career goal</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">{t.careerGoal}</p>
           <p className="mt-4 text-lg leading-8 text-slate-200">
-            {profile.career_goal || "No career goal yet."}
+            {profile.career_goal || t.emptyCareerGoal}
           </p>
         </section>
       </div>
@@ -104,7 +395,84 @@ export default async function DashboardPage() {
   );
 }
 
-function ProfileStat({
+function getNextAction({
+  hasSemesters,
+  hasCourses,
+  hasGoals,
+  hasGpa,
+  copy
+}: {
+  hasSemesters: boolean;
+  hasCourses: boolean;
+  hasGoals: boolean;
+  hasGpa: boolean;
+  copy: NextActionsCopy;
+}) {
+  if (!hasSemesters) {
+    return {
+      title: copy.createSemester,
+      copy: copy.createSemesterCopy,
+      href: "/grades",
+      cta: copy.createSemester
+    };
+  }
+
+  if (!hasCourses) {
+    return {
+      title: copy.addCourse,
+      copy: copy.addCourseCopy,
+      href: "/grades",
+      cta: copy.addCourse
+    };
+  }
+
+  if (!hasGoals) {
+    return {
+      title: copy.createGoal,
+      copy: copy.createGoalCopy,
+      href: "/goals",
+      cta: copy.createGoal
+    };
+  }
+
+  if (!hasGpa) {
+    return {
+      title: copy.completeCourse,
+      copy: copy.completeCourseCopy,
+      href: "/grades",
+      cta: copy.completeCourse
+    };
+  }
+
+  return {
+    title: copy.review,
+    copy: copy.reviewCopy,
+    href: "/goals",
+    cta: copy.review
+  };
+}
+
+function IdentityPill({
+  label,
+  value,
+  icon: Icon
+}: {
+  label: string;
+  value: string;
+  icon: typeof GraduationCap;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-sm text-slate-400">{label}</span>
+        <Icon className="h-4 w-4 text-sky-200" aria-hidden="true" />
+      </div>
+      <p className="mt-3 font-display text-2xl font-semibold text-white">{value}</p>
+    </div>
+  );
+}
+
+function MetricCard({
   label,
   value,
   icon: Icon
@@ -119,7 +487,7 @@ function ProfileStat({
         <span className="text-sm text-slate-400">{label}</span>
         <Icon className="h-4 w-4 text-sky-200" aria-hidden="true" />
       </div>
-      <div className="mt-3 font-display text-2xl font-semibold text-white">{value}</div>
+      <p className="mt-3 font-display text-3xl font-semibold text-white">{value}</p>
     </div>
   );
 }
@@ -127,19 +495,45 @@ function ProfileStat({
 function NextModule({
   icon: Icon,
   title,
-  text
+  text,
+  href
 }: {
   icon: typeof GraduationCap;
   title: string;
   text: string;
+  href: string;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
+    <a href={href} className="block rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors hover:border-sky-300/30 hover:bg-white/[0.085]">
       <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-sky-300/10 text-sky-200 ring-1 ring-sky-200/16">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <h2 className="font-display text-xl font-semibold text-white">{title}</h2>
       <p className="mt-3 text-sm leading-6 text-slate-400">{text}</p>
+    </a>
+  );
+}
+
+function ListPanel({
+  title,
+  empty,
+  children
+}: {
+  title: string;
+  empty: string;
+  children: ReactNode;
+}) {
+  const hasItems = Array.isArray(children) ? children.length > 0 : Boolean(children);
+
+  return (
+    <div className="glass rounded-[2rem] p-5">
+      <div className="mb-5 flex items-center gap-3">
+        <CheckCircle2 className="h-5 w-5 text-emerald-200" aria-hidden="true" />
+        <h2 className="font-display text-xl font-semibold text-white">{title}</h2>
+      </div>
+      <div className="space-y-3">
+        {hasItems ? children : <p className="rounded-2xl border border-white/10 bg-slate-950/52 p-4 text-sm text-slate-400">{empty}</p>}
+      </div>
     </div>
   );
 }
