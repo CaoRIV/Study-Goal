@@ -1,13 +1,13 @@
 {
   "/auth/callback/route": "app/auth/callback/route.js",
   "/_not-found/page": "app/_not-found/page.js",
+  "/goals/page": "app/goals/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/grades/page": "app/grades/page.js",
   "/forgot-password/page": "app/forgot-password/page.js",
   "/login/page": "app/login/page.js",
-  "/register/page": "app/register/page.js",
-  "/profile/page": "app/profile/page.js",
   "/onboarding/page": "app/onboarding/page.js",
-  "/goals/page": "app/goals/page.js",
-  "/page": "app/page.js"
+  "/register/page": "app/register/page.js",
+  "/grades/page": "app/grades/page.js",
+  "/page": "app/page.js",
+  "/profile/page": "app/profile/page.js"
 }

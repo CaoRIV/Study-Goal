@@ -50,6 +50,23 @@ const goalsCopy = {
         deadline: "Deadline",
         noMatches: "No goals match these filters."
       },
+      board: {
+        title: "Goal board",
+        emptyColumn: "No goals here yet.",
+        moveTo: "Move to"
+      },
+      milestones: {
+        title: "Milestones",
+        add: "Add milestone",
+        placeholder: "Add the next step",
+        empty: "No milestones yet.",
+        next: "Next step",
+        dueDate: "Due date",
+        todo: "To do",
+        inProgress: "In progress",
+        completed: "Completed",
+        confirmDelete: "Delete this milestone?"
+      },
       empty: {
         title: "No goals yet",
         description: "Create your first goal to start tracking meaningful progress."
@@ -130,6 +147,23 @@ const goalsCopy = {
         deadline: "Hạn mục tiêu",
         noMatches: "Không có mục tiêu nào khớp với bộ lọc."
       },
+      board: {
+        title: "Bảng mục tiêu",
+        emptyColumn: "Chưa có mục tiêu ở cột này.",
+        moveTo: "Chuyển sang"
+      },
+      milestones: {
+        title: "Cột mốc",
+        add: "Thêm cột mốc",
+        placeholder: "Thêm bước tiếp theo",
+        empty: "Chưa có cột mốc.",
+        next: "Bước tiếp theo",
+        dueDate: "Hạn",
+        todo: "Cần làm",
+        inProgress: "Đang làm",
+        completed: "Hoàn thành",
+        confirmDelete: "Xóa cột mốc này?"
+      },
       empty: {
         title: "Chưa có mục tiêu",
         description: "Tạo mục tiêu đầu tiên để bắt đầu theo dõi tiến độ có ý nghĩa."
@@ -200,9 +234,16 @@ export default async function GoalsPage() {
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
 
+  const { data: milestones } = await supabase
+    .from("goal_milestones")
+    .select("id, user_id, goal_id, title, notes, due_date, status, sort_order")
+    .eq("user_id", user.id)
+    .order("sort_order", { ascending: true })
+    .order("created_at", { ascending: true });
+
   return (
     <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto max-w-[1500px]">
         <header className="mb-8 flex flex-col gap-4 rounded-[2rem] border border-white/12 bg-slate-950/64 p-5 shadow-2xl shadow-black/35 backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
           <a href="/dashboard" className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-300 via-indigo-400 to-emerald-300 text-slate-950 shadow-glow-blue">
@@ -233,7 +274,7 @@ export default async function GoalsPage() {
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
         </section>
 
-        <GoalsManager userId={user.id} initialGoals={goals || []} copy={t.manager} />
+        <GoalsManager userId={user.id} initialGoals={goals || []} initialMilestones={milestones || []} copy={t.manager} />
       </div>
     </main>
   );

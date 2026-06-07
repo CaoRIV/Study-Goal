@@ -46,6 +46,14 @@ type Goal = {
   priority: string;
 };
 
+type Milestone = {
+  id: string;
+  goal_id: string;
+  title: string;
+  due_date: string | null;
+  status: string;
+};
+
 const dashboardCopy = {
   en: {
     appSubtitle: "Personal university OS",
@@ -115,6 +123,9 @@ const dashboardCopy = {
     },
     recentCourses: "Recent courses",
     activeGoalsTitle: "Active goals",
+    weeklyFocus: "Weekly focus",
+    noFocus: "No active milestones yet.",
+    sourceGoal: "Goal",
     noCourses: "No courses yet.",
     noGoals: "No goals yet.",
     careerGoal: "Career goal",
@@ -189,6 +200,9 @@ const dashboardCopy = {
     },
     recentCourses: "Môn học gần đây",
     activeGoalsTitle: "Mục tiêu đang hoạt động",
+    weeklyFocus: "Trọng tâm tuần này",
+    noFocus: "Chưa có cột mốc đang hoạt động.",
+    sourceGoal: "Mục tiêu",
     noCourses: "Chưa có môn học.",
     noGoals: "Chưa có mục tiêu.",
     careerGoal: "Mục tiêu nghề nghiệp",
@@ -234,7 +248,7 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const [{ data: semesters }, { data: courses }, { data: goals }] = await Promise.all([
+  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }] = await Promise.all([
     supabase
       .from("semesters")
       .select("id, name, year_index, term")
@@ -250,7 +264,14 @@ export default async function DashboardPage() {
       .from("goals")
       .select("id, title, category, progress, status, priority")
       .eq("user_id", user.id)
-      .order("created_at", { ascending: false })
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("goal_milestones")
+      .select("id, goal_id, title, due_date, status")
+      .eq("user_id", user.id)
+      .neq("status", "completed")
+      .order("due_date", { ascending: true, nullsFirst: false })
+      .order("created_at", { ascending: true })
   ]);
 
   const safeCourses = (courses || []).map((course) => ({
@@ -260,6 +281,7 @@ export default async function DashboardPage() {
     final_grade: course.final_grade === null ? null : Number(course.final_grade)
   })) as Course[];
   const safeGoals = (goals || []) as Goal[];
+  const safeMilestones = (milestones || []) as Milestone[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
@@ -270,6 +292,7 @@ export default async function DashboardPage() {
   const isProjectedHealthy = targetGpa && projectedGpa ? projectedGpa >= targetGpa : true;
   const activeGoals = safeGoals.filter((goal) => !["completed", "paused"].includes(goal.status));
   const completedGoals = safeGoals.filter((goal) => goal.status === "completed");
+  const goalTitleById = new Map(safeGoals.map((goal) => [goal.id, goal.title]));
   const goalProgress = safeGoals.length
     ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
     : 0;
@@ -419,6 +442,17 @@ export default async function DashboardPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
+            <ListPanel title={t.weeklyFocus} empty={t.noFocus}>
+              {safeMilestones.slice(0, 4).map((milestone) => (
+                <div key={milestone.id} className="rounded-2xl border border-white/10 bg-slate-950/52 p-4">
+                  <p className="font-semibold text-white">{milestone.title}</p>
+                  <p className="mt-1 text-xs text-slate-500">
+                    {t.sourceGoal}: {goalTitleById.get(milestone.goal_id) || t.goals}
+                  </p>
+                </div>
+              ))}
+            </ListPanel>
+
             <ListPanel title={t.recentCourses} empty={t.noCourses}>
               {safeCourses.slice(0, 4).map((course) => (
                 <div key={course.id} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/52 p-4">
