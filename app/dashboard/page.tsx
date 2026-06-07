@@ -5,12 +5,11 @@ import {
   ArrowRight,
   BarChart3,
   BookOpenCheck,
-  BrainCircuit,
   CalendarDays,
   CheckCircle2,
   GraduationCap,
   LineChart,
-  Medal,
+  Map as MapIcon,
   Target,
   Trophy
 } from "lucide-react";
@@ -58,6 +57,7 @@ const dashboardCopy = {
   en: {
     appSubtitle: "Personal university OS",
     profile: "Profile",
+    roadmap: "Roadmap",
     grades: "Academic planner",
     goals: "Goals",
     signOut: "Sign out",
@@ -108,6 +108,11 @@ const dashboardCopy = {
       skillsTitle: "Skill Tree",
       skillsText: "Next phase will connect skill progress and evidence."
     },
+    roadmapModule: {
+      title: "Roadmap",
+      yearUnit: "year",
+      text: "See every year, semester, course, goal, and milestone in one master plan."
+    },
     nextActions: {
       title: "Next best actions",
       createSemester: "Create your first semester",
@@ -135,6 +140,7 @@ const dashboardCopy = {
   vi: {
     appSubtitle: "Hệ điều hành đại học cá nhân",
     profile: "Hồ sơ",
+    roadmap: "Lộ trình",
     grades: "Kế hoạch học tập",
     goals: "Mục tiêu",
     signOut: "Đăng xuất",
@@ -184,6 +190,11 @@ const dashboardCopy = {
       goalsText: "Các mục tiêu học tập, kỹ năng, nghiên cứu và sự nghiệp đang hoạt động.",
       skillsTitle: "Cây kỹ năng",
       skillsText: "Giai đoạn tiếp theo sẽ kết nối tiến độ kỹ năng và minh chứng."
+    },
+    roadmapModule: {
+      title: "Lộ trình",
+      yearUnit: "năm",
+      text: "Xem từng năm, học kỳ, môn học, mục tiêu và cột mốc trong một kế hoạch tổng thể."
     },
     nextActions: {
       title: "Hành động tiếp theo",
@@ -240,7 +251,7 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, university, major, start_year, current_year, target_gpa, graduation_credit_target, career_goal, is_onboarded")
+    .select("full_name, university, major, start_year, current_year, academic_year_target, target_gpa, graduation_credit_target, career_goal, is_onboarded")
     .eq("user_id", user.id)
     .maybeSingle();
 
@@ -293,6 +304,9 @@ export default async function DashboardPage() {
   const activeGoals = safeGoals.filter((goal) => !["completed", "paused"].includes(goal.status));
   const completedGoals = safeGoals.filter((goal) => goal.status === "completed");
   const goalTitleById = new Map(safeGoals.map((goal) => [goal.id, goal.title]));
+  const targetYears = Number(profile.academic_year_target || 4);
+  const expectedSemesters = Math.max(1, targetYears * 2);
+  const roadmapCompletion = Math.min(100, Math.round(((semesters?.length || 0) / expectedSemesters) * 100));
   const goalProgress = safeGoals.length
     ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
     : 0;
@@ -331,6 +345,9 @@ export default async function DashboardPage() {
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/grades">
               {t.grades}
             </a>
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/roadmap">
+              {t.roadmap}
+            </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/goals">
               {t.goals}
             </a>
@@ -351,7 +368,7 @@ export default async function DashboardPage() {
 
             <div className="mt-8 grid gap-3 sm:grid-cols-2">
               <IdentityPill label={t.metricLabels.semesters} value={String(semesters?.length || 0)} icon={CalendarDays} />
-              <IdentityPill label={t.metricLabels.coursesTracked} value={String(safeCourses.length)} icon={BookOpenCheck} />
+              <IdentityPill label={t.roadmap} value={`${roadmapCompletion}%`} icon={MapIcon} />
             </div>
           </div>
 
@@ -411,6 +428,16 @@ export default async function DashboardPage() {
 
         <section className="grid gap-4 md:grid-cols-3">
           <NextModule
+            icon={MapIcon}
+            title={
+              language === "en"
+                ? `${targetYears}-${t.roadmapModule.yearUnit} ${t.roadmapModule.title}`
+                : `${t.roadmapModule.title} ${targetYears} ${t.roadmapModule.yearUnit}`
+            }
+            text={t.roadmapModule.text}
+            href="/roadmap"
+          />
+          <NextModule
             icon={BookOpenCheck}
             title={t.modules.academicTitle}
             text={`${t.modules.academicText} ${safeCourses.length} ${t.units.courses} / ${completedCredits} ${t.units.credits}.`}
@@ -421,12 +448,6 @@ export default async function DashboardPage() {
             title={t.modules.goalsTitle}
             text={`${t.modules.goalsText} ${activeGoals.length} ${t.units.active} / ${completedGoals.length} ${t.units.completed}.`}
             href="/goals"
-          />
-          <NextModule
-            icon={BrainCircuit}
-            title={t.modules.skillsTitle}
-            text={t.modules.skillsText}
-            href="/dashboard"
           />
         </section>
 

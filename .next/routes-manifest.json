@@ -85,6 +85,12 @@
       "regex": "^/register(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/register(?:/)?$"
+    },
+    {
+      "page": "/roadmap",
+      "regex": "^/roadmap(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/roadmap(?:/)?$"
     }
   ],
   "dataRoutes": [],

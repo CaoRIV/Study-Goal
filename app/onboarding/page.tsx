@@ -21,6 +21,7 @@ const onboardingCopy = {
       major: "Major",
       startYear: "Start year",
       currentYear: "Current year",
+      academicYearTarget: "Study duration",
       targetGpa: "Target GPA",
       careerGoal: "Career goal"
     },
@@ -30,6 +31,7 @@ const onboardingCopy = {
       major: "Computer Science",
       startYear: "2026",
       currentYear: "1",
+      academicYearTarget: "4",
       targetGpa: "3.80",
       careerGoal: "Become an AI engineer, publish research, and land a strong internship."
     }
@@ -48,6 +50,7 @@ const onboardingCopy = {
       major: "Ngành học",
       startYear: "Năm bắt đầu",
       currentYear: "Năm hiện tại",
+      academicYearTarget: "Thời lượng học dự kiến",
       targetGpa: "GPA mục tiêu",
       careerGoal: "Mục tiêu nghề nghiệp"
     },
@@ -57,6 +60,7 @@ const onboardingCopy = {
       major: "Khoa học máy tính",
       startYear: "2026",
       currentYear: "1",
+      academicYearTarget: "4",
       targetGpa: "3.80",
       careerGoal: "Trở thành kỹ sư AI, có nghiên cứu tốt và có kỳ thực tập nổi bật."
     }
@@ -78,7 +82,7 @@ export default async function OnboardingPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, university, major, start_year, current_year, target_gpa, career_goal")
+    .select("full_name, university, major, start_year, current_year, academic_year_target, target_gpa, career_goal")
     .eq("user_id", user.id)
     .maybeSingle();
 

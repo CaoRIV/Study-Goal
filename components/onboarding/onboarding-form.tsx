@@ -13,6 +13,7 @@ type ProfileDraft = {
   major: string | null;
   start_year: number | null;
   current_year: number | null;
+  academic_year_target: number | null;
   target_gpa: number | null;
   career_goal: string | null;
 };
@@ -29,6 +30,7 @@ type OnboardingCopy = {
     major: string;
     startYear: string;
     currentYear: string;
+    academicYearTarget: string;
     targetGpa: string;
     careerGoal: string;
   };
@@ -38,6 +40,7 @@ type OnboardingCopy = {
     major: string;
     startYear: string;
     currentYear: string;
+    academicYearTarget: string;
     targetGpa: string;
     careerGoal: string;
   };
@@ -60,6 +63,7 @@ export function OnboardingForm({
   const [major, setMajor] = useState(profile?.major || "");
   const [startYear, setStartYear] = useState(String(profile?.start_year || new Date().getFullYear()));
   const [currentYear, setCurrentYear] = useState(String(profile?.current_year || 1));
+  const [academicYearTarget, setAcademicYearTarget] = useState(String(profile?.academic_year_target || 4));
   const [targetGpa, setTargetGpa] = useState(String(profile?.target_gpa || "3.80"));
   const [careerGoal, setCareerGoal] = useState(profile?.career_goal || "");
   const [error, setError] = useState("");
@@ -79,6 +83,7 @@ export function OnboardingForm({
         major,
         start_year: Number(startYear),
         current_year: Number(currentYear),
+        academic_year_target: Number(academicYearTarget),
         target_gpa: Number(targetGpa),
         career_goal: careerGoal,
         is_onboarded: true,
@@ -120,6 +125,7 @@ export function OnboardingForm({
           <Field label={copy.fields.major} value={major} onChange={setMajor} placeholder={copy.placeholders.major} />
           <Field label={copy.fields.startYear} value={startYear} onChange={setStartYear} type="number" placeholder={copy.placeholders.startYear} />
           <Field label={copy.fields.currentYear} value={currentYear} onChange={setCurrentYear} type="number" placeholder={copy.placeholders.currentYear} />
+          <Field label={copy.fields.academicYearTarget} value={academicYearTarget} onChange={setAcademicYearTarget} type="number" min="1" max="8" placeholder={copy.placeholders.academicYearTarget} />
           <Field label={copy.fields.targetGpa} value={targetGpa} onChange={setTargetGpa} type="number" step="0.01" placeholder={copy.placeholders.targetGpa} />
 
           <label className="block sm:col-span-2">
@@ -155,7 +161,9 @@ function Field({
   onChange,
   placeholder,
   type = "text",
-  step
+  step,
+  min,
+  max
 }: {
   label: string;
   value: string;
@@ -163,6 +171,8 @@ function Field({
   placeholder: string;
   type?: string;
   step?: string;
+  min?: string;
+  max?: string;
 }) {
   return (
     <label className="block">
@@ -171,6 +181,8 @@ function Field({
         required
         type={type}
         step={step}
+        min={min}
+        max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
