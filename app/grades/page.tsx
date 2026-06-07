@@ -72,6 +72,13 @@ const gradesCopy = {
         noCode: "No code",
         noCourses: "No courses in this semester yet."
       },
+      actions: {
+        edit: "Edit",
+        save: "Save",
+        cancel: "Cancel",
+        confirmDeleteSemester: "Delete this semester and all courses inside it?",
+        confirmDeleteCourse: "Delete this course?"
+      },
       empty: {
         title: "No semesters yet",
         description: "Create your first semester to start tracking courses and GPA."
@@ -140,6 +147,13 @@ const gradesCopy = {
         delete: "Xóa",
         noCode: "Chưa có mã",
         noCourses: "Chưa có môn học trong học kỳ này."
+      },
+      actions: {
+        edit: "Sửa",
+        save: "Lưu",
+        cancel: "Hủy",
+        confirmDeleteSemester: "Xóa học kỳ này và toàn bộ môn học bên trong?",
+        confirmDeleteCourse: "Xóa môn học này?"
       },
       empty: {
         title: "Chưa có học kỳ",

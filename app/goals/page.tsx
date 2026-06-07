@@ -38,6 +38,18 @@ const goalsCopy = {
         targetDateLabel: "Target date",
         submit: "Add goal"
       },
+      filters: {
+        title: "Filter goals",
+        allStatuses: "All statuses",
+        allCategories: "All categories",
+        allPriorities: "All priorities",
+        sortLabel: "Sort by",
+        newest: "Newest",
+        priority: "Priority",
+        progress: "Progress",
+        deadline: "Deadline",
+        noMatches: "No goals match these filters."
+      },
       empty: {
         title: "No goals yet",
         description: "Create your first goal to start tracking meaningful progress."
@@ -46,6 +58,12 @@ const goalsCopy = {
         targetDate: "Target date",
         progress: "Progress",
         delete: "Delete"
+      },
+      actions: {
+        edit: "Edit",
+        save: "Save",
+        cancel: "Cancel",
+        confirmDelete: "Delete this goal?"
       },
       labels: {
         categories: {
@@ -100,6 +118,18 @@ const goalsCopy = {
         targetDateLabel: "Ngày mục tiêu",
         submit: "Thêm mục tiêu"
       },
+      filters: {
+        title: "Lọc mục tiêu",
+        allStatuses: "Tất cả trạng thái",
+        allCategories: "Tất cả danh mục",
+        allPriorities: "Tất cả độ ưu tiên",
+        sortLabel: "Sắp xếp theo",
+        newest: "Mới nhất",
+        priority: "Độ ưu tiên",
+        progress: "Tiến độ",
+        deadline: "Hạn mục tiêu",
+        noMatches: "Không có mục tiêu nào khớp với bộ lọc."
+      },
       empty: {
         title: "Chưa có mục tiêu",
         description: "Tạo mục tiêu đầu tiên để bắt đầu theo dõi tiến độ có ý nghĩa."
@@ -108,6 +138,12 @@ const goalsCopy = {
         targetDate: "Ngày mục tiêu",
         progress: "Tiến độ",
         delete: "Xóa"
+      },
+      actions: {
+        edit: "Sửa",
+        save: "Lưu",
+        cancel: "Hủy",
+        confirmDelete: "Xóa mục tiêu này?"
       },
       labels: {
         categories: {
