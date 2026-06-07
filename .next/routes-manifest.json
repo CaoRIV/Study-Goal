@@ -91,6 +91,12 @@
       "regex": "^/roadmap(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/roadmap(?:/)?$"
+    },
+    {
+      "page": "/skills",
+      "regex": "^/skills(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/skills(?:/)?$"
     }
   ],
   "dataRoutes": [],
