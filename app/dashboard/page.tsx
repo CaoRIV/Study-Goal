@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BarChart3,
   BookOpenCheck,
+  BrainCircuit,
   CalendarDays,
   CheckCircle2,
   GraduationCap,
@@ -53,6 +54,13 @@ type Milestone = {
   status: string;
 };
 
+type Skill = {
+  id: string;
+  level: number;
+  target_level: number;
+  status: string;
+};
+
 const dashboardCopy = {
   en: {
     appSubtitle: "Personal university OS",
@@ -60,6 +68,7 @@ const dashboardCopy = {
     roadmap: "Roadmap",
     grades: "Academic planner",
     goals: "Goals",
+    skills: "Skills",
     signOut: "Sign out",
     languageLabel: "Change language",
     eyebrow: "Dashboard",
@@ -106,7 +115,7 @@ const dashboardCopy = {
       goalsTitle: "Goal Management",
       goalsText: "Active academic, skill, research, and career goals.",
       skillsTitle: "Skill Tree",
-      skillsText: "Next phase will connect skill progress and evidence."
+      skillsText: "Portfolio-ready skill progress with levels and evidence."
     },
     roadmapModule: {
       title: "Roadmap",
@@ -143,12 +152,13 @@ const dashboardCopy = {
     roadmap: "Lộ trình",
     grades: "Kế hoạch học tập",
     goals: "Mục tiêu",
+    skills: "Kỹ năng",
     signOut: "Đăng xuất",
     languageLabel: "Đổi ngôn ngữ",
     eyebrow: "Bảng điều khiển",
     welcome: "Chào mừng trở lại",
     description:
-      "Trung tâm điều khiển của bạn giờ phản ánh dữ liệu thật từ học kỳ, môn học, điểm số và mục tiêu trong Study Goal.",
+      "Trung tâm điều khiển của bạn giờ phản ánh dữ liệu thật từ học kỳ, môn học, điểm số, mục tiêu và kỹ năng trong Study Goal.",
     fallbackName: "Sinh viên",
     notSet: "Chưa thiết lập",
     unavailable: "Chưa có",
@@ -189,7 +199,7 @@ const dashboardCopy = {
       goalsTitle: "Quản lý mục tiêu",
       goalsText: "Các mục tiêu học tập, kỹ năng, nghiên cứu và sự nghiệp đang hoạt động.",
       skillsTitle: "Cây kỹ năng",
-      skillsText: "Giai đoạn tiếp theo sẽ kết nối tiến độ kỹ năng và minh chứng."
+      skillsText: "Tiến độ kỹ năng có cấp độ và minh chứng cho portfolio."
     },
     roadmapModule: {
       title: "Lộ trình",
@@ -207,7 +217,7 @@ const dashboardCopy = {
       completeCourse: "Hoàn tất một môn học",
       completeCourseCopy: "Nhập điểm cuối kỳ để mở khóa GPA hiện tại.",
       review: "Xem lại kế hoạch tuần này",
-      reviewCopy: "Dữ liệu lõi đã hoạt động. Hãy cập nhật điểm và tiến độ mục tiêu hằng tuần."
+      reviewCopy: "Dữ liệu lõi đã hoạt động. Hãy cập nhật điểm, kỹ năng và tiến độ mục tiêu hằng tuần."
     },
     recentCourses: "Môn học gần đây",
     activeGoalsTitle: "Mục tiêu đang hoạt động",
@@ -259,7 +269,7 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }] = await Promise.all([
+  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }, { data: skills }] = await Promise.all([
     supabase
       .from("semesters")
       .select("id, name, year_index, term")
@@ -282,7 +292,11 @@ export default async function DashboardPage() {
       .eq("user_id", user.id)
       .neq("status", "completed")
       .order("due_date", { ascending: true, nullsFirst: false })
-      .order("created_at", { ascending: true })
+      .order("created_at", { ascending: true }),
+    supabase
+      .from("skills")
+      .select("id, level, target_level, status")
+      .eq("user_id", user.id)
   ]);
 
   const safeCourses = (courses || []).map((course) => ({
@@ -293,6 +307,11 @@ export default async function DashboardPage() {
   })) as Course[];
   const safeGoals = (goals || []) as Goal[];
   const safeMilestones = (milestones || []) as Milestone[];
+  const safeSkills = (skills || []).map((skill) => ({
+    ...skill,
+    level: Number(skill.level || 0),
+    target_level: Number(skill.target_level || 1)
+  })) as Skill[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
@@ -307,6 +326,12 @@ export default async function DashboardPage() {
   const targetYears = Number(profile.academic_year_target || 4);
   const expectedSemesters = Math.max(1, targetYears * 2);
   const roadmapCompletion = Math.min(100, Math.round(((semesters?.length || 0) / expectedSemesters) * 100));
+  const skillProgress = safeSkills.length
+    ? Math.round(
+        safeSkills.reduce((total, skill) => total + Math.min(100, Math.round((skill.level / Math.max(1, skill.target_level)) * 100)), 0) /
+          safeSkills.length
+      )
+    : 0;
   const goalProgress = safeGoals.length
     ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
     : 0;
@@ -316,7 +341,7 @@ export default async function DashboardPage() {
       (gpa ? Math.min(gpa / 4, 1) * 35 : 0) +
         Math.min(completedCredits / targetCredits, 1) * 30 +
         Math.min(goalProgress / 100, 1) * 25 +
-        (safeCourses.length > 0 && safeGoals.length > 0 ? 10 : 0)
+        Math.min(skillProgress / 100, 1) * 10
     )
   );
   const nextAction = getNextAction({
@@ -350,6 +375,9 @@ export default async function DashboardPage() {
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/goals">
               {t.goals}
+            </a>
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/skills">
+              {t.skills}
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/profile">
               {t.profile}
@@ -426,7 +454,7 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <NextModule
             icon={MapIcon}
             title={
@@ -448,6 +476,12 @@ export default async function DashboardPage() {
             title={t.modules.goalsTitle}
             text={`${t.modules.goalsText} ${activeGoals.length} ${t.units.active} / ${completedGoals.length} ${t.units.completed}.`}
             href="/goals"
+          />
+          <NextModule
+            icon={BrainCircuit}
+            title={t.modules.skillsTitle}
+            text={`${t.modules.skillsText} ${safeSkills.length} ${t.skills.toLowerCase()} / ${skillProgress}%.`}
+            href="/skills"
           />
         </section>
 
@@ -657,3 +691,4 @@ function ListPanel({
     </div>
   );
 }
+

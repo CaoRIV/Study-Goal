@@ -1,14 +1,15 @@
 {
   "/auth/callback/route": "/auth/callback",
   "/_not-found/page": "/_not-found",
-  "/dashboard/page": "/dashboard",
-  "/onboarding/page": "/onboarding",
   "/forgot-password/page": "/forgot-password",
-  "/profile/page": "/profile",
-  "/register/page": "/register",
-  "/roadmap/page": "/roadmap",
-  "/grades/page": "/grades",
+  "/dashboard/page": "/dashboard",
+  "/login/page": "/login",
   "/page": "/",
   "/goals/page": "/goals",
-  "/login/page": "/login"
+  "/grades/page": "/grades",
+  "/register/page": "/register",
+  "/skills/page": "/skills",
+  "/roadmap/page": "/roadmap",
+  "/onboarding/page": "/onboarding",
+  "/profile/page": "/profile"
 }
