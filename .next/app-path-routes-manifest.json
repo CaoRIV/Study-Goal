@@ -1,13 +1,14 @@
 {
   "/auth/callback/route": "/auth/callback",
   "/_not-found/page": "/_not-found",
-  "/goals/page": "/goals",
   "/dashboard/page": "/dashboard",
-  "/forgot-password/page": "/forgot-password",
-  "/login/page": "/login",
   "/onboarding/page": "/onboarding",
+  "/forgot-password/page": "/forgot-password",
+  "/profile/page": "/profile",
   "/register/page": "/register",
+  "/roadmap/page": "/roadmap",
   "/grades/page": "/grades",
   "/page": "/",
-  "/profile/page": "/profile"
+  "/goals/page": "/goals",
+  "/login/page": "/login"
 }

@@ -25,6 +25,7 @@ const profileCopy = {
         major: "Major",
         startYear: "Start year",
         currentYear: "Current year",
+        academicYearTarget: "Study duration",
         targetGpa: "Target GPA",
         graduationCreditTarget: "Graduation credits",
         careerGoal: "Career goal"
@@ -35,6 +36,7 @@ const profileCopy = {
         major: "Khoa học máy tính",
         startYear: "2026",
         currentYear: "1",
+        academicYearTarget: "4",
         targetGpa: "3.80",
         graduationCreditTarget: "128",
         careerGoal: "Become an AI engineer, publish strong research, and build a standout portfolio."
@@ -60,6 +62,7 @@ const profileCopy = {
         major: "Ngành học",
         startYear: "Năm bắt đầu",
         currentYear: "Năm hiện tại",
+        academicYearTarget: "Thời lượng học dự kiến",
         targetGpa: "GPA mục tiêu",
         graduationCreditTarget: "Tín chỉ tốt nghiệp",
         careerGoal: "Mục tiêu nghề nghiệp"
@@ -70,6 +73,7 @@ const profileCopy = {
         major: "Computer Science",
         startYear: "2026",
         currentYear: "1",
+        academicYearTarget: "4",
         targetGpa: "3.80",
         graduationCreditTarget: "128",
         careerGoal: "Trở thành kỹ sư AI, có nghiên cứu tốt và hồ sơ năng lực nổi bật."
@@ -96,7 +100,7 @@ export default async function ProfilePage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, university, major, start_year, current_year, target_gpa, graduation_credit_target, career_goal")
+    .select("full_name, university, major, start_year, current_year, academic_year_target, target_gpa, graduation_credit_target, career_goal")
     .eq("user_id", user.id)
     .maybeSingle();
 
