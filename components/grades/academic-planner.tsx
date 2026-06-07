@@ -2,7 +2,7 @@
 
 import { FormEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { BookOpenCheck, CalendarDays, Loader2, Plus, Trash2 } from "lucide-react";
+import { BookOpenCheck, CalendarDays, Loader2, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { calculateCompletedCredits, calculateGpa } from "@/lib/calculations/academic";
@@ -70,10 +70,33 @@ type AcademicPlannerCopy = {
     noCode: string;
     noCourses: string;
   };
+  actions: {
+    edit: string;
+    save: string;
+    cancel: string;
+    confirmDeleteSemester: string;
+    confirmDeleteCourse: string;
+  };
   empty: {
     title: string;
     description: string;
   };
+};
+
+type SemesterDraft = {
+  name: string;
+  yearIndex: string;
+  term: string;
+};
+
+type CourseDraft = {
+  semesterId: string;
+  code: string;
+  name: string;
+  credits: string;
+  targetGrade: string;
+  finalGrade: string;
+  status: string;
 };
 
 const termOptions = ["fall", "spring", "summer", "winter", "other"];
@@ -102,15 +125,28 @@ export function AcademicPlanner({
   const [targetGrade, setTargetGrade] = useState("3.70");
   const [finalGrade, setFinalGrade] = useState("");
   const [status, setStatus] = useState("planned");
+  const [editingSemesterId, setEditingSemesterId] = useState("");
+  const [semesterDraft, setSemesterDraft] = useState<SemesterDraft>({ name: "", yearIndex: "1", term: "fall" });
+  const [editingCourseId, setEditingCourseId] = useState("");
+  const [courseDraft, setCourseDraft] = useState<CourseDraft>({
+    semesterId: "",
+    code: "",
+    name: "",
+    credits: "3",
+    targetGrade: "",
+    finalGrade: "",
+    status: "planned"
+  });
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [pendingAction, setPendingAction] = useState("");
 
   const gpa = calculateGpa(initialCourses);
   const completedCredits = calculateCompletedCredits(initialCourses);
+  const isBusy = Boolean(pendingAction);
 
   async function createSemester(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsLoading(true);
+    setPendingAction("create-semester");
     setError("");
 
     const { error: insertError } = await supabase.from("semesters").insert({
@@ -122,18 +158,18 @@ export function AcademicPlanner({
 
     if (insertError) {
       setError(insertError.message);
-      setIsLoading(false);
+      setPendingAction("");
       return;
     }
 
     setSemesterName("");
-    setIsLoading(false);
+    setPendingAction("");
     router.refresh();
   }
 
   async function createCourse(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsLoading(true);
+    setPendingAction("create-course");
     setError("");
 
     const { error: insertError } = await supabase.from("courses").insert({
@@ -149,38 +185,128 @@ export function AcademicPlanner({
 
     if (insertError) {
       setError(insertError.message);
-      setIsLoading(false);
+      setPendingAction("");
       return;
     }
 
     setCourseCode("");
     setCourseName("");
     setFinalGrade("");
-    setIsLoading(false);
+    setPendingAction("");
     router.refresh();
   }
 
-  async function deleteCourse(courseId: string) {
-    setError("");
-    const { error: deleteError } = await supabase.from("courses").delete().eq("id", courseId);
+  function startEditingSemester(semester: Semester) {
+    setEditingSemesterId(semester.id);
+    setSemesterDraft({
+      name: semester.name,
+      yearIndex: String(semester.year_index),
+      term: semester.term
+    });
+  }
 
-    if (deleteError) {
-      setError(deleteError.message);
+  async function updateSemester(semesterId: string) {
+    setPendingAction(`semester-${semesterId}`);
+    setError("");
+
+    const { error: updateError } = await supabase
+      .from("semesters")
+      .update({
+        name: semesterDraft.name,
+        year_index: Number(semesterDraft.yearIndex),
+        term: semesterDraft.term
+      })
+      .eq("id", semesterId)
+      .eq("user_id", userId);
+
+    if (updateError) {
+      setError(updateError.message);
+      setPendingAction("");
       return;
     }
 
+    setEditingSemesterId("");
+    setPendingAction("");
     router.refresh();
   }
 
   async function deleteSemester(semesterId: string) {
-    setError("");
-    const { error: deleteError } = await supabase.from("semesters").delete().eq("id", semesterId);
-
-    if (deleteError) {
-      setError(deleteError.message);
+    if (!window.confirm(copy.actions.confirmDeleteSemester)) {
       return;
     }
 
+    setPendingAction(`delete-semester-${semesterId}`);
+    setError("");
+    const { error: deleteError } = await supabase.from("semesters").delete().eq("id", semesterId).eq("user_id", userId);
+
+    if (deleteError) {
+      setError(deleteError.message);
+      setPendingAction("");
+      return;
+    }
+
+    setPendingAction("");
+    router.refresh();
+  }
+
+  function startEditingCourse(course: Course) {
+    setEditingCourseId(course.id);
+    setCourseDraft({
+      semesterId: course.semester_id,
+      code: course.code || "",
+      name: course.name,
+      credits: String(course.credits),
+      targetGrade: course.target_grade === null ? "" : String(course.target_grade),
+      finalGrade: course.final_grade === null ? "" : String(course.final_grade),
+      status: course.status
+    });
+  }
+
+  async function updateCourse(courseId: string) {
+    setPendingAction(`course-${courseId}`);
+    setError("");
+
+    const { error: updateError } = await supabase
+      .from("courses")
+      .update({
+        semester_id: courseDraft.semesterId,
+        code: courseDraft.code || null,
+        name: courseDraft.name,
+        credits: Number(courseDraft.credits),
+        target_grade: courseDraft.targetGrade ? Number(courseDraft.targetGrade) : null,
+        final_grade: courseDraft.finalGrade ? Number(courseDraft.finalGrade) : null,
+        status: courseDraft.status
+      })
+      .eq("id", courseId)
+      .eq("user_id", userId);
+
+    if (updateError) {
+      setError(updateError.message);
+      setPendingAction("");
+      return;
+    }
+
+    setEditingCourseId("");
+    setPendingAction("");
+    router.refresh();
+  }
+
+  async function deleteCourse(courseId: string) {
+    if (!window.confirm(copy.actions.confirmDeleteCourse)) {
+      return;
+    }
+
+    setPendingAction(`delete-course-${courseId}`);
+    setError("");
+    const { error: deleteError } = await supabase.from("courses").delete().eq("id", courseId).eq("user_id", userId);
+
+    if (deleteError) {
+      setError(deleteError.message);
+      setPendingAction("");
+      return;
+    }
+
+    setPendingAction("");
     router.refresh();
   }
 
@@ -211,8 +337,8 @@ export function AcademicPlanner({
               <Input label={copy.semesterForm.name} value={semesterName} onChange={setSemesterName} placeholder={copy.semesterForm.namePlaceholder} />
               <Input label={copy.semesterForm.yearIndex} type="number" value={yearIndex} onChange={setYearIndex} placeholder="1" />
               <Select label={copy.semesterForm.term} value={term} onChange={setTerm} options={termOptions} labels={copy.terms} />
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
+              <Button type="submit" className="w-full" disabled={isBusy}>
+                {pendingAction === "create-semester" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
                 {copy.semesterForm.submit}
               </Button>
             </div>
@@ -226,23 +352,15 @@ export function AcademicPlanner({
               <h2 className="font-display text-xl font-semibold text-white">{copy.courseForm.title}</h2>
             </div>
             <div className="space-y-3">
-              <label className="block">
-                <span className="text-sm font-medium text-slate-200">{copy.courseForm.semester}</span>
-                <select required className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-white outline-none focus:border-sky-300/50" value={selectedSemesterId} onChange={(event) => setSelectedSemesterId(event.target.value)}>
-                  <option value="" disabled>{copy.courseForm.semesterEmpty}</option>
-                  {initialSemesters.map((semester) => (
-                    <option key={semester.id} value={semester.id}>{semester.name}</option>
-                  ))}
-                </select>
-              </label>
+              <Select label={copy.courseForm.semester} value={selectedSemesterId} onChange={setSelectedSemesterId} options={initialSemesters.map((semester) => semester.id)} labels={Object.fromEntries(initialSemesters.map((semester) => [semester.id, semester.name]))} placeholder={copy.courseForm.semesterEmpty} required />
               <Input label={copy.courseForm.code} value={courseCode} onChange={setCourseCode} placeholder={copy.courseForm.codePlaceholder} required={false} />
               <Input label={copy.courseForm.name} value={courseName} onChange={setCourseName} placeholder={copy.courseForm.namePlaceholder} />
               <Input label={copy.courseForm.credits} type="number" step="0.5" value={credits} onChange={setCredits} placeholder="3" />
               <Input label={copy.courseForm.targetGrade} type="number" step="0.01" value={targetGrade} onChange={setTargetGrade} placeholder="3.70" required={false} />
               <Input label={copy.courseForm.finalGrade} type="number" step="0.01" value={finalGrade} onChange={setFinalGrade} placeholder="4.00" required={false} />
               <Select label={copy.courseForm.status} value={status} onChange={setStatus} options={statusOptions} labels={copy.statuses} />
-              <Button type="submit" className="w-full" disabled={isLoading || !selectedSemesterId}>
-                {isLoading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
+              <Button type="submit" className="w-full" disabled={isBusy || !selectedSemesterId}>
+                {pendingAction === "create-course" ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Plus className="h-4 w-4" aria-hidden="true" />}
                 {copy.courseForm.submit}
               </Button>
             </div>
@@ -259,21 +377,39 @@ export function AcademicPlanner({
 
           {initialSemesters.map((semester) => {
             const courses = initialCourses.filter((course) => course.semester_id === semester.id);
+            const isEditingSemester = editingSemesterId === semester.id;
 
             return (
               <section key={semester.id} className="glass rounded-[2rem] p-5">
-                <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{copy.table.year} {semester.year_index} / {copy.terms[semester.term] || semester.term}</p>
-                    <h2 className="mt-1 font-display text-2xl font-semibold text-white">{semester.name}</h2>
+                <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  {isEditingSemester ? (
+                    <div className="grid w-full gap-3 sm:grid-cols-[1fr_120px_150px]">
+                      <Input label={copy.semesterForm.name} value={semesterDraft.name} onChange={(value) => setSemesterDraft((draft) => ({ ...draft, name: value }))} placeholder={copy.semesterForm.namePlaceholder} />
+                      <Input label={copy.semesterForm.yearIndex} type="number" value={semesterDraft.yearIndex} onChange={(value) => setSemesterDraft((draft) => ({ ...draft, yearIndex: value }))} placeholder="1" />
+                      <Select label={copy.semesterForm.term} value={semesterDraft.term} onChange={(value) => setSemesterDraft((draft) => ({ ...draft, term: value }))} options={termOptions} labels={copy.terms} />
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{copy.table.year} {semester.year_index} / {copy.terms[semester.term] || semester.term}</p>
+                      <h2 className="mt-1 font-display text-2xl font-semibold text-white">{semester.name}</h2>
+                    </div>
+                  )}
+                  <div className="flex gap-2">
+                    {isEditingSemester ? (
+                      <>
+                        <IconButton label={copy.actions.save} disabled={isBusy} onClick={() => updateSemester(semester.id)} icon={Save} />
+                        <IconButton label={copy.actions.cancel} disabled={isBusy} onClick={() => setEditingSemesterId("")} icon={X} />
+                      </>
+                    ) : (
+                      <>
+                        <IconButton label={copy.actions.edit} disabled={isBusy} onClick={() => startEditingSemester(semester)} icon={Pencil} />
+                        <IconButton label={copy.table.delete} disabled={isBusy} onClick={() => deleteSemester(semester.id)} icon={Trash2} danger />
+                      </>
+                    )}
                   </div>
-                  <button type="button" onClick={() => deleteSemester(semester.id)} className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-white/10 px-4 text-sm font-semibold text-slate-300 transition-colors hover:bg-red-400/10 hover:text-red-100">
-                    <Trash2 className="h-4 w-4" aria-hidden="true" />
-                    {copy.table.delete}
-                  </button>
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-white/10">
-                  <div className="grid grid-cols-[1fr_0.7fr_0.6fr_0.6fr_0.7fr_44px] gap-2 bg-white/8 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 bg-white/8 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
                     <span>{copy.table.course}</span>
                     <span>{copy.table.credits}</span>
                     <span>{copy.table.target}</span>
@@ -284,21 +420,46 @@ export function AcademicPlanner({
                   {courses.length === 0 ? (
                     <div className="px-4 py-6 text-sm text-slate-400">{copy.table.noCourses}</div>
                   ) : null}
-                  {courses.map((course) => (
-                    <div key={course.id} className="grid grid-cols-[1fr_0.7fr_0.6fr_0.6fr_0.7fr_44px] gap-2 border-t border-white/10 px-4 py-4 text-sm text-slate-200">
-                      <div>
-                        <div className="font-semibold text-white">{course.name}</div>
-                        <div className="mt-1 text-xs text-slate-500">{course.code || copy.table.noCode}</div>
+                  {courses.map((course) => {
+                    const isEditingCourse = editingCourseId === course.id;
+
+                    return (
+                      <div key={course.id} className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 border-t border-white/10 px-4 py-4 text-sm text-slate-200">
+                        {isEditingCourse ? (
+                          <>
+                            <div className="space-y-2">
+                              <Select label={copy.courseForm.semester} value={courseDraft.semesterId} onChange={(value) => setCourseDraft((draft) => ({ ...draft, semesterId: value }))} options={initialSemesters.map((item) => item.id)} labels={Object.fromEntries(initialSemesters.map((item) => [item.id, item.name]))} />
+                              <Input label={copy.courseForm.code} value={courseDraft.code} onChange={(value) => setCourseDraft((draft) => ({ ...draft, code: value }))} placeholder={copy.courseForm.codePlaceholder} required={false} />
+                              <Input label={copy.courseForm.name} value={courseDraft.name} onChange={(value) => setCourseDraft((draft) => ({ ...draft, name: value }))} placeholder={copy.courseForm.namePlaceholder} />
+                            </div>
+                            <Input label={copy.table.credits} type="number" step="0.5" value={courseDraft.credits} onChange={(value) => setCourseDraft((draft) => ({ ...draft, credits: value }))} placeholder="3" />
+                            <Input label={copy.table.target} type="number" step="0.01" value={courseDraft.targetGrade} onChange={(value) => setCourseDraft((draft) => ({ ...draft, targetGrade: value }))} placeholder="3.70" required={false} />
+                            <Input label={copy.table.final} type="number" step="0.01" value={courseDraft.finalGrade} onChange={(value) => setCourseDraft((draft) => ({ ...draft, finalGrade: value }))} placeholder="4.00" required={false} />
+                            <Select label={copy.table.status} value={courseDraft.status} onChange={(value) => setCourseDraft((draft) => ({ ...draft, status: value }))} options={statusOptions} labels={copy.statuses} />
+                            <div className="flex items-start gap-2 pt-7">
+                              <IconButton label={copy.actions.save} disabled={isBusy} onClick={() => updateCourse(course.id)} icon={Save} />
+                              <IconButton label={copy.actions.cancel} disabled={isBusy} onClick={() => setEditingCourseId("")} icon={X} />
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div>
+                              <div className="font-semibold text-white">{course.name}</div>
+                              <div className="mt-1 text-xs text-slate-500">{course.code || copy.table.noCode}</div>
+                            </div>
+                            <span>{course.credits}</span>
+                            <span>{course.target_grade ?? "-"}</span>
+                            <span>{course.final_grade ?? "-"}</span>
+                            <span>{copy.statuses[course.status] || course.status}</span>
+                            <div className="flex gap-2">
+                              <IconButton label={copy.actions.edit} disabled={isBusy} onClick={() => startEditingCourse(course)} icon={Pencil} />
+                              <IconButton label={copy.table.delete} disabled={isBusy} onClick={() => deleteCourse(course.id)} icon={Trash2} danger />
+                            </div>
+                          </>
+                        )}
                       </div>
-                      <span>{course.credits}</span>
-                      <span>{course.target_grade ?? "-"}</span>
-                      <span>{course.final_grade ?? "-"}</span>
-                      <span>{copy.statuses[course.status] || course.status}</span>
-                      <button type="button" onClick={() => deleteCourse(course.id)} className="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-red-400/10 hover:text-red-100" aria-label={copy.table.delete}>
-                        <Trash2 className="h-4 w-4" aria-hidden="true" />
-                      </button>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
             );
@@ -337,14 +498,14 @@ function Input({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-slate-200">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
       <input
         required={required}
         type={type}
         step={step}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
+        className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
         placeholder={placeholder}
       />
     </label>
@@ -356,22 +517,56 @@ function Select({
   value,
   onChange,
   options,
-  labels
+  labels,
+  placeholder,
+  required = false
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
   options: string[];
   labels: Record<string, string>;
+  placeholder?: string;
+  required?: boolean;
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-slate-200">{label}</span>
-      <select className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-white outline-none focus:border-sky-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
+      <select required={required} className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-white outline-none focus:border-sky-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
+        {placeholder ? <option value="" disabled>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option} value={option}>{labels[option] || option}</option>
         ))}
       </select>
     </label>
+  );
+}
+
+function IconButton({
+  label,
+  icon: Icon,
+  onClick,
+  disabled,
+  danger = false
+}: {
+  label: string;
+  icon: typeof Pencil;
+  onClick: () => void;
+  disabled?: boolean;
+  danger?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50 ${
+        danger ? "text-slate-500 hover:bg-red-400/10 hover:text-red-100" : "text-slate-400 hover:bg-white/8 hover:text-white"
+      }`}
+      aria-label={label}
+      title={label}
+    >
+      <Icon className="h-4 w-4" aria-hidden="true" />
+    </button>
   );
 }

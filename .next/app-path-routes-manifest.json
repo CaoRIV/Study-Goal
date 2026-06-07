@@ -2,12 +2,12 @@
   "/auth/callback/route": "/auth/callback",
   "/_not-found/page": "/_not-found",
   "/goals/page": "/goals",
-  "/dashboard/page": "/dashboard",
   "/forgot-password/page": "/forgot-password",
   "/grades/page": "/grades",
-  "/onboarding/page": "/onboarding",
   "/login/page": "/login",
-  "/profile/page": "/profile",
+  "/dashboard/page": "/dashboard",
+  "/onboarding/page": "/onboarding",
   "/register/page": "/register",
+  "/profile/page": "/profile",
   "/page": "/"
 }
