@@ -1,13 +1,13 @@
 {
   "/auth/callback/route": "/auth/callback",
   "/_not-found/page": "/_not-found",
+  "/goals/page": "/goals",
   "/dashboard/page": "/dashboard",
-  "/grades/page": "/grades",
   "/forgot-password/page": "/forgot-password",
   "/login/page": "/login",
-  "/register/page": "/register",
-  "/profile/page": "/profile",
   "/onboarding/page": "/onboarding",
-  "/goals/page": "/goals",
-  "/page": "/"
+  "/register/page": "/register",
+  "/grades/page": "/grades",
+  "/page": "/",
+  "/profile/page": "/profile"
 }
