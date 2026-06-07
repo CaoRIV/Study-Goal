@@ -17,7 +17,12 @@ import {
 
 import { SignOutButton } from "@/components/dashboard/sign-out-button";
 import { LanguageSwitcher } from "@/components/language/language-switcher";
-import { calculateCompletedCredits, calculateGpa } from "@/lib/calculations/academic";
+import {
+  calculateCompletedCredits,
+  calculateCreditProgress,
+  calculateGpa,
+  calculateProjectedGpa
+} from "@/lib/calculations/academic";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
 import { createClient } from "@/lib/supabase/server";
 
@@ -27,6 +32,7 @@ type Course = {
   code: string | null;
   name: string;
   credits: number;
+  target_grade: number | null;
   final_grade: number | null;
   status: string;
 };
@@ -72,10 +78,19 @@ const dashboardCopy = {
     metricLabels: {
       currentGpa: "Current GPA",
       completedCredits: "Completed credits",
+      creditProgress: "Credit progress",
+      projectedGpa: "Projected GPA",
       activeGoals: "Active goals",
       goalProgress: "Goal progress",
       coursesTracked: "Courses tracked",
       semesters: "Semesters"
+    },
+    intelligence: {
+      academicSignal: "Academic signal",
+      graduationCredits: "graduation credits",
+      targetGpa: "Target GPA",
+      gpaHealthy: "Your projection is aligned with your target.",
+      gpaWarning: "Your projection is below target. Review unfinished courses and target grades."
     },
     modules: {
       academicTitle: "Academic Planner",
@@ -137,10 +152,19 @@ const dashboardCopy = {
     metricLabels: {
       currentGpa: "GPA hiện tại",
       completedCredits: "Tín chỉ hoàn thành",
+      creditProgress: "Tiến độ tín chỉ",
+      projectedGpa: "GPA dự kiến",
       activeGoals: "Mục tiêu đang làm",
       goalProgress: "Tiến độ mục tiêu",
       coursesTracked: "Môn học đã theo dõi",
       semesters: "Học kỳ"
+    },
+    intelligence: {
+      academicSignal: "Tín hiệu học tập",
+      graduationCredits: "tín chỉ tốt nghiệp",
+      targetGpa: "GPA mục tiêu",
+      gpaHealthy: "GPA dự kiến đang phù hợp với mục tiêu của bạn.",
+      gpaWarning: "GPA dự kiến đang thấp hơn mục tiêu. Hãy xem lại các môn chưa hoàn thành và điểm mục tiêu."
     },
     modules: {
       academicTitle: "Lập kế hoạch học tập",
@@ -202,7 +226,7 @@ export default async function DashboardPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("full_name, university, major, start_year, current_year, target_gpa, career_goal, is_onboarded")
+    .select("full_name, university, major, start_year, current_year, target_gpa, graduation_credit_target, career_goal, is_onboarded")
     .eq("user_id", user.id)
     .maybeSingle();
 
@@ -219,7 +243,7 @@ export default async function DashboardPage() {
       .order("created_at", { ascending: true }),
     supabase
       .from("courses")
-      .select("id, semester_id, code, name, credits, final_grade, status")
+      .select("id, semester_id, code, name, credits, target_grade, final_grade, status")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false }),
     supabase
@@ -232,12 +256,18 @@ export default async function DashboardPage() {
   const safeCourses = (courses || []).map((course) => ({
     ...course,
     credits: Number(course.credits || 0),
+    target_grade: course.target_grade === null ? null : Number(course.target_grade),
     final_grade: course.final_grade === null ? null : Number(course.final_grade)
   })) as Course[];
   const safeGoals = (goals || []) as Goal[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
+  const targetCredits = Number(profile.graduation_credit_target || 128);
+  const creditProgress = calculateCreditProgress(completedCredits, targetCredits);
+  const targetGpa = profile.target_gpa === null ? null : Number(profile.target_gpa);
+  const projectedGpa = calculateProjectedGpa(safeCourses, targetGpa);
+  const isProjectedHealthy = targetGpa && projectedGpa ? projectedGpa >= targetGpa : true;
   const activeGoals = safeGoals.filter((goal) => !["completed", "paused"].includes(goal.status));
   const completedGoals = safeGoals.filter((goal) => goal.status === "completed");
   const goalProgress = safeGoals.length
@@ -247,7 +277,7 @@ export default async function DashboardPage() {
     100,
     Math.round(
       (gpa ? Math.min(gpa / 4, 1) * 35 : 0) +
-        Math.min(completedCredits / 120, 1) * 30 +
+        Math.min(completedCredits / targetCredits, 1) * 30 +
         Math.min(goalProgress / 100, 1) * 25 +
         (safeCourses.length > 0 && safeGoals.length > 0 ? 10 : 0)
     )
@@ -318,6 +348,41 @@ export default async function DashboardPage() {
               <MetricCard label={t.metricLabels.activeGoals} value={String(activeGoals.length)} icon={Target} />
               <MetricCard label={t.metricLabels.goalProgress} value={`${goalProgress}%`} icon={LineChart} />
             </div>
+          </div>
+        </section>
+
+        <section className="grid gap-4 pb-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="glass rounded-[2rem] p-6">
+            <div className="mb-5 flex items-start justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">{t.metricLabels.creditProgress}</p>
+                <h2 className="mt-2 font-display text-4xl font-semibold text-white">{creditProgress}%</h2>
+              </div>
+              <span className="rounded-full bg-emerald-300/10 px-4 py-2 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-200/16">
+                {completedCredits}/{targetCredits} {t.units.credits}
+              </span>
+            </div>
+            <div className="h-2 rounded-full bg-slate-800">
+              <div className="h-full rounded-full bg-gradient-to-r from-sky-300 to-emerald-300" style={{ width: `${creditProgress}%` }} />
+            </div>
+            <p className="mt-4 text-sm text-slate-400">{targetCredits} {t.intelligence.graduationCredits}</p>
+          </div>
+
+          <div className="glass rounded-[2rem] p-6">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">{t.intelligence.academicSignal}</p>
+            <div className="mt-4 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-sm text-slate-400">{t.metricLabels.projectedGpa}</p>
+                <p className="mt-1 font-display text-4xl font-semibold text-white">{projectedGpa === null ? t.unavailable : projectedGpa}</p>
+              </div>
+              <div className="text-right">
+                <p className="text-sm text-slate-400">{t.intelligence.targetGpa}</p>
+                <p className="mt-1 text-xl font-semibold text-slate-100">{targetGpa || t.unavailable}</p>
+              </div>
+            </div>
+            <p className={`mt-5 rounded-2xl px-4 py-3 text-sm ${isProjectedHealthy ? "bg-emerald-300/10 text-emerald-100" : "bg-amber-300/10 text-amber-100"}`}>
+              {isProjectedHealthy ? t.intelligence.gpaHealthy : t.intelligence.gpaWarning}
+            </p>
           </div>
         </section>
 
