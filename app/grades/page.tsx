@@ -26,6 +26,19 @@ const gradesCopy = {
         coursesTracked: "Courses tracked",
         unavailable: "N/A"
       },
+      intelligence: {
+        creditProgress: "Credit progress",
+        graduationTarget: "Based on your graduation credit target.",
+        projectedGpa: "Projected GPA",
+        simulator: "GPA simulator",
+        simulatorLabel: "Assumed grade",
+        requiredAverage: "Average needed for target GPA",
+        targetGpa: "Target GPA",
+        remainingCredits: "remaining credits",
+        onTrack: "On track",
+        needsFocus: "Needs focus",
+        noRemainingCourses: "Add planned or in-progress courses to calculate the needed average."
+      },
       semesterForm: {
         title: "Create semester",
         name: "Semester name",
@@ -101,6 +114,19 @@ const gradesCopy = {
         completedCredits: "Tín chỉ hoàn thành",
         coursesTracked: "Môn học đã theo dõi",
         unavailable: "Chưa có"
+      },
+      intelligence: {
+        creditProgress: "Tiến độ tín chỉ",
+        graduationTarget: "Dựa trên mục tiêu tín chỉ tốt nghiệp của bạn.",
+        projectedGpa: "GPA dự kiến",
+        simulator: "Mô phỏng GPA",
+        simulatorLabel: "Điểm giả định",
+        requiredAverage: "Điểm trung bình cần đạt để chạm GPA mục tiêu",
+        targetGpa: "GPA mục tiêu",
+        remainingCredits: "tín chỉ còn lại",
+        onTrack: "Đúng hướng",
+        needsFocus: "Cần tập trung",
+        noRemainingCourses: "Thêm môn dự định hoặc đang học để tính điểm trung bình cần đạt."
       },
       semesterForm: {
         title: "Tạo học kỳ",
@@ -178,7 +204,7 @@ export default async function GradesPage() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("is_onboarded")
+    .select("is_onboarded, target_gpa, graduation_credit_target")
     .eq("user_id", user.id)
     .maybeSingle();
 
@@ -236,6 +262,8 @@ export default async function GradesPage() {
           userId={user.id}
           initialSemesters={semesters || []}
           initialCourses={courses || []}
+          targetGpa={profile.target_gpa === null ? null : Number(profile.target_gpa)}
+          graduationCreditTarget={Number(profile.graduation_credit_target || 128)}
           copy={t.planner}
         />
       </div>

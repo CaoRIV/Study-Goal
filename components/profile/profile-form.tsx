@@ -14,6 +14,7 @@ type Profile = {
   start_year: number | null;
   current_year: number | null;
   target_gpa: number | null;
+  graduation_credit_target: number | null;
   career_goal: string | null;
 };
 
@@ -27,6 +28,7 @@ type ProfileFormCopy = {
     startYear: string;
     currentYear: string;
     targetGpa: string;
+    graduationCreditTarget: string;
     careerGoal: string;
   };
   placeholders: {
@@ -36,6 +38,7 @@ type ProfileFormCopy = {
     startYear: string;
     currentYear: string;
     targetGpa: string;
+    graduationCreditTarget: string;
     careerGoal: string;
   };
   saved: string;
@@ -61,6 +64,7 @@ export function ProfileForm({
   const [startYear, setStartYear] = useState(String(profile?.start_year || new Date().getFullYear()));
   const [currentYear, setCurrentYear] = useState(String(profile?.current_year || 1));
   const [targetGpa, setTargetGpa] = useState(String(profile?.target_gpa || "3.80"));
+  const [graduationCreditTarget, setGraduationCreditTarget] = useState(String(profile?.graduation_credit_target || 128));
   const [careerGoal, setCareerGoal] = useState(profile?.career_goal || "");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -82,6 +86,7 @@ export function ProfileForm({
         start_year: Number(startYear),
         current_year: Number(currentYear),
         target_gpa: Number(targetGpa),
+        graduation_credit_target: Number(graduationCreditTarget),
         career_goal: careerGoal,
         is_onboarded: true,
         updated_at: new Date().toISOString()
@@ -124,6 +129,7 @@ export function ProfileForm({
         <Field label={copy.fields.startYear} value={startYear} onChange={setStartYear} type="number" placeholder={copy.placeholders.startYear} />
         <Field label={copy.fields.currentYear} value={currentYear} onChange={setCurrentYear} type="number" placeholder={copy.placeholders.currentYear} />
         <Field label={copy.fields.targetGpa} value={targetGpa} onChange={setTargetGpa} type="number" step="0.01" placeholder={copy.placeholders.targetGpa} />
+        <Field label={copy.fields.graduationCreditTarget} value={graduationCreditTarget} onChange={setGraduationCreditTarget} type="number" placeholder={copy.placeholders.graduationCreditTarget} />
 
         <label className="block sm:col-span-2">
           <span className="text-sm font-medium text-slate-200">{copy.fields.careerGoal}</span>

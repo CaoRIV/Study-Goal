@@ -5,7 +5,13 @@ import { useRouter } from "next/navigation";
 import { BookOpenCheck, CalendarDays, Loader2, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { calculateCompletedCredits, calculateGpa } from "@/lib/calculations/academic";
+import {
+  calculateCompletedCredits,
+  calculateCreditProgress,
+  calculateGpa,
+  calculateProjectedGpa,
+  calculateRequiredAverageForTarget
+} from "@/lib/calculations/academic";
 import { createClient } from "@/lib/supabase/client";
 
 type Semester = {
@@ -34,6 +40,19 @@ type AcademicPlannerCopy = {
     completedCredits: string;
     coursesTracked: string;
     unavailable: string;
+  };
+  intelligence: {
+    creditProgress: string;
+    graduationTarget: string;
+    projectedGpa: string;
+    simulator: string;
+    simulatorLabel: string;
+    requiredAverage: string;
+    targetGpa: string;
+    remainingCredits: string;
+    onTrack: string;
+    needsFocus: string;
+    noRemainingCourses: string;
   };
   semesterForm: {
     title: string;
@@ -106,11 +125,15 @@ export function AcademicPlanner({
   userId,
   initialSemesters,
   initialCourses,
+  targetGpa,
+  graduationCreditTarget,
   copy
 }: {
   userId: string;
   initialSemesters: Semester[];
   initialCourses: Course[];
+  targetGpa: number | null;
+  graduationCreditTarget: number;
   copy: AcademicPlannerCopy;
 }) {
   const router = useRouter();
@@ -125,6 +148,7 @@ export function AcademicPlanner({
   const [targetGrade, setTargetGrade] = useState("3.70");
   const [finalGrade, setFinalGrade] = useState("");
   const [status, setStatus] = useState("planned");
+  const [simulatedGrade, setSimulatedGrade] = useState(String(targetGpa || "3.70"));
   const [editingSemesterId, setEditingSemesterId] = useState("");
   const [semesterDraft, setSemesterDraft] = useState<SemesterDraft>({ name: "", yearIndex: "1", term: "fall" });
   const [editingCourseId, setEditingCourseId] = useState("");
@@ -142,6 +166,15 @@ export function AcademicPlanner({
 
   const gpa = calculateGpa(initialCourses);
   const completedCredits = calculateCompletedCredits(initialCourses);
+  const targetCredits = graduationCreditTarget || 128;
+  const creditProgress = calculateCreditProgress(completedCredits, targetCredits);
+  const projectedGpa = calculateProjectedGpa(initialCourses, null);
+  const simulatedGpa = calculateProjectedGpa(initialCourses, Number(simulatedGrade || 0));
+  const requiredAverage = calculateRequiredAverageForTarget(initialCourses, targetGpa);
+  const remainingCredits = initialCourses
+    .filter((course) => course.status !== "completed" && course.status !== "dropped")
+    .reduce((total, course) => total + Number(course.credits || 0), 0);
+  const isOnTrack = targetGpa && (simulatedGpa || gpa || 0) >= targetGpa;
   const isBusy = Boolean(pendingAction);
 
   async function createSemester(event: FormEvent<HTMLFormElement>) {
@@ -318,6 +351,58 @@ export function AcademicPlanner({
         <SummaryCard label={copy.summary.coursesTracked} value={String(initialCourses.length)} />
       </section>
 
+      <section className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-sm text-slate-400">{copy.intelligence.creditProgress}</p>
+              <p className="mt-2 font-display text-3xl font-semibold text-white">{creditProgress}%</p>
+            </div>
+            <span className="rounded-full bg-emerald-300/10 px-3 py-1 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-200/16">
+              {completedCredits}/{targetCredits}
+            </span>
+          </div>
+          <div className="mt-5 h-2 rounded-full bg-slate-800">
+            <div className="h-full rounded-full bg-gradient-to-r from-sky-300 to-emerald-300" style={{ width: `${creditProgress}%` }} />
+          </div>
+          <p className="mt-3 text-sm text-slate-500">{copy.intelligence.graduationTarget}</p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
+          <p className="text-sm text-slate-400">{copy.intelligence.projectedGpa}</p>
+          <p className="mt-2 font-display text-3xl font-semibold text-white">
+            {projectedGpa === null ? copy.summary.unavailable : projectedGpa}
+          </p>
+          <p className="mt-3 text-sm text-slate-500">{copy.intelligence.targetGpa}: {targetGpa || copy.summary.unavailable}</p>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
+          <p className="text-sm text-slate-400">{copy.intelligence.simulator}</p>
+          <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
+            <Input label={copy.intelligence.simulatorLabel} type="number" step="0.01" min="0" max="4.3" value={simulatedGrade} onChange={setSimulatedGrade} placeholder="3.70" />
+            <p className="pb-2 font-display text-3xl font-semibold text-white">
+              {simulatedGpa === null ? copy.summary.unavailable : simulatedGpa}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-white/10 bg-slate-950/52 p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">{copy.intelligence.requiredAverage}</p>
+            <p className="mt-2 text-lg text-slate-200">
+              {remainingCredits > 0 && requiredAverage !== null
+                ? `${requiredAverage} / ${copy.intelligence.remainingCredits}: ${remainingCredits}`
+                : copy.intelligence.noRemainingCourses}
+            </p>
+          </div>
+          <span className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${isOnTrack ? "bg-emerald-300/10 text-emerald-100 ring-emerald-200/16" : "bg-amber-300/10 text-amber-100 ring-amber-200/16"}`}>
+            {isOnTrack ? copy.intelligence.onTrack : copy.intelligence.needsFocus}
+          </span>
+        </div>
+      </section>
+
       {error ? (
         <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
           {error}
@@ -486,6 +571,8 @@ function Input({
   placeholder,
   type = "text",
   step,
+  min,
+  max,
   required = true
 }: {
   label: string;
@@ -494,6 +581,8 @@ function Input({
   placeholder: string;
   type?: string;
   step?: string;
+  min?: string;
+  max?: string;
   required?: boolean;
 }) {
   return (
@@ -503,6 +592,8 @@ function Input({
         required={required}
         type={type}
         step={step}
+        min={min}
+        max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
