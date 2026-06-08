@@ -693,6 +693,15 @@ Tasks:
 - Portfolio item system.
 - Career readiness calculation.
 
+Current status:
+
+- Four-year roadmap from real data: completed and expanded to support 1-8 years.
+- Skill tree from real data: completed.
+- Research tracker: deferred.
+- Club tracker: completed.
+- Portfolio item system: completed.
+- Career readiness calculation and opportunity pipeline: completed.
+
 Exit criteria:
 
 - User can see an integrated university master plan.
@@ -809,3 +818,5 @@ The auth foundation code has been added. The next implementation milestone shoul
 4. Test `/goals`: create goals and update progress.
 5. Continue Phase 2 with edit forms, filters, empty states, and better bilingual copy for all new CRUD surfaces.
 6. Add semester/course editing, goal editing, status filters, and richer analytics charts.
+7. Run `supabase/migrations/009_create_career_readiness.sql`.
+8. Verify `/career`, then prepare the Vercel production deployment.

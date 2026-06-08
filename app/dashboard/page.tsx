@@ -6,6 +6,7 @@ import {
   BarChart3,
   BookOpenCheck,
   BrainCircuit,
+  BriefcaseBusiness,
   CalendarDays,
   CheckCircle2,
   GraduationCap,
@@ -24,6 +25,7 @@ import {
   calculateGpa,
   calculateProjectedGpa
 } from "@/lib/calculations/academic";
+import { calculateCareerReadiness } from "@/lib/calculations/career";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
 import { createClient } from "@/lib/supabase/server";
 
@@ -75,6 +77,19 @@ type PortfolioItem = {
   related_goal_id: string | null;
   related_skill_id: string | null;
   related_club_id: string | null;
+};
+
+type CareerReadiness = {
+  resume_status: string;
+  linkedin_status: string;
+  github_status: string;
+  portfolio_status: string;
+  interview_practice_count: number;
+  networking_contacts_count: number;
+};
+
+type CareerTarget = {
+  stage: string;
 };
 
 const dashboardCopy = {
@@ -285,7 +300,17 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }, { data: skills }, { data: clubs }, { data: portfolioItems }] = await Promise.all([
+  const [
+    { data: semesters },
+    { data: courses },
+    { data: goals },
+    { data: milestones },
+    { data: skills },
+    { data: clubs },
+    { data: portfolioItems },
+    { data: careerReadiness },
+    { data: careerTargets }
+  ] = await Promise.all([
     supabase
       .from("semesters")
       .select("id, name, year_index, term")
@@ -320,6 +345,15 @@ export default async function DashboardPage() {
     supabase
       .from("portfolio_items")
       .select("id, status, related_course_id, related_goal_id, related_skill_id, related_club_id")
+      .eq("user_id", user.id),
+    supabase
+      .from("career_readiness")
+      .select("resume_status, linkedin_status, github_status, portfolio_status, interview_practice_count, networking_contacts_count")
+      .eq("user_id", user.id)
+      .maybeSingle(),
+    supabase
+      .from("career_targets")
+      .select("stage")
       .eq("user_id", user.id)
   ]);
 
@@ -338,6 +372,8 @@ export default async function DashboardPage() {
   })) as Skill[];
   const safeClubs = (clubs || []) as Club[];
   const safePortfolioItems = (portfolioItems || []) as PortfolioItem[];
+  const safeCareerReadiness = careerReadiness as CareerReadiness | null;
+  const safeCareerTargets = (careerTargets || []) as CareerTarget[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
@@ -379,15 +415,16 @@ export default async function DashboardPage() {
   const goalProgress = safeGoals.length
     ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
     : 0;
-  const readinessScore = Math.min(
-    100,
-    Math.round(
-      (gpa ? Math.min(gpa / 4, 1) * 35 : 0) +
-        Math.min(completedCredits / targetCredits, 1) * 30 +
-        Math.min(goalProgress / 100, 1) * 25 +
-        Math.min(skillProgress / 100, 1) * 10
-    )
-  );
+  const readinessScore = calculateCareerReadiness(safeCareerReadiness, safeCareerTargets);
+  const activeCareerTargets = safeCareerTargets.filter((target) =>
+    ["applied", "interviewing", "offer"].includes(target.stage)
+  ).length;
+  const careerLabel = language === "vi" ? "Sự nghiệp" : "Career";
+  const careerTitle = language === "vi" ? "Sẵn sàng nghề nghiệp" : "Career Readiness";
+  const careerText =
+    language === "vi"
+      ? `${readinessScore}/100 điểm sẵn sàng / ${activeCareerTargets} cơ hội đang hoạt động.`
+      : `${readinessScore}/100 readiness / ${activeCareerTargets} active opportunities.`;
   const nextAction = getNextAction({
     hasSemesters: Boolean(semesters?.length),
     hasCourses: safeCourses.length > 0,
@@ -428,6 +465,9 @@ export default async function DashboardPage() {
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/portfolio">
               {portfolioLabel}
+            </a>
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/career">
+              {careerLabel}
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/profile">
               {t.profile}
@@ -544,6 +584,12 @@ export default async function DashboardPage() {
             title={portfolioTitle}
             text={portfolioText}
             href="/portfolio"
+          />
+          <NextModule
+            icon={BriefcaseBusiness}
+            title={careerTitle}
+            text={careerText}
+            href="/career"
           />
         </section>
 
