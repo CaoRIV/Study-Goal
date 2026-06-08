@@ -17,3 +17,10 @@
  GET /login?next=%2Fclubs 200 in 10062ms
  ○ Compiling / ...
  ✓ Compiled / in 9.6s (1391 modules)
+ ✓ Compiled in 2.8s (686 modules)
+ ✓ Compiled in 848ms (686 modules)
+ ✓ Compiled in 2.2s (801 modules)
+ ✓ Compiled in 612ms (686 modules)
+ ✓ Compiled /login in 413ms (391 modules)
+ GET /login?next=%2Fportfolio 200 in 1822ms
+ GET /login?next=%2Fdashboard 200 in 1847ms
