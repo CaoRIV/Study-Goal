@@ -68,6 +68,15 @@ type Club = {
   is_leadership: boolean;
 };
 
+type PortfolioItem = {
+  id: string;
+  status: string;
+  related_course_id: string | null;
+  related_goal_id: string | null;
+  related_skill_id: string | null;
+  related_club_id: string | null;
+};
+
 const dashboardCopy = {
   en: {
     appSubtitle: "Personal university OS",
@@ -276,7 +285,7 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }, { data: skills }, { data: clubs }] = await Promise.all([
+  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }, { data: skills }, { data: clubs }, { data: portfolioItems }] = await Promise.all([
     supabase
       .from("semesters")
       .select("id, name, year_index, term")
@@ -307,6 +316,10 @@ export default async function DashboardPage() {
     supabase
       .from("clubs")
       .select("id, status, is_leadership")
+      .eq("user_id", user.id),
+    supabase
+      .from("portfolio_items")
+      .select("id, status, related_course_id, related_goal_id, related_skill_id, related_club_id")
       .eq("user_id", user.id)
   ]);
 
@@ -324,6 +337,7 @@ export default async function DashboardPage() {
     target_level: Number(skill.target_level || 1)
   })) as Skill[];
   const safeClubs = (clubs || []) as Club[];
+  const safePortfolioItems = (portfolioItems || []) as PortfolioItem[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
@@ -352,6 +366,16 @@ export default async function DashboardPage() {
     language === "vi"
       ? `${activeClubs.length} CLB đang tham gia / ${leadershipClubs.length} vai trò lãnh đạo.`
       : `${activeClubs.length} active clubs / ${leadershipClubs.length} leadership roles.`;
+  const portfolioLabel = language === "vi" ? "Portfolio" : "Portfolio";
+  const portfolioTitle = language === "vi" ? "Portfolio thành tựu" : "Achievement Portfolio";
+  const readyPortfolioItems = safePortfolioItems.filter((item) => item.status === "ready" || item.status === "featured");
+  const linkedPortfolioItems = safePortfolioItems.filter((item) =>
+    Boolean(item.related_course_id || item.related_goal_id || item.related_skill_id || item.related_club_id)
+  );
+  const portfolioText =
+    language === "vi"
+      ? `${readyPortfolioItems.length} minh chứng sẵn sàng / ${linkedPortfolioItems.length} đã liên kết.`
+      : `${readyPortfolioItems.length} ready items / ${linkedPortfolioItems.length} linked evidence.`;
   const goalProgress = safeGoals.length
     ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
     : 0;
@@ -401,6 +425,9 @@ export default async function DashboardPage() {
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/clubs">
               {clubsLabel}
+            </a>
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/portfolio">
+              {portfolioLabel}
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/profile">
               {t.profile}
@@ -477,7 +504,7 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <NextModule
             icon={MapIcon}
             title={
@@ -511,6 +538,12 @@ export default async function DashboardPage() {
             title={clubsTitle}
             text={clubsText}
             href="/clubs"
+          />
+          <NextModule
+            icon={Trophy}
+            title={portfolioTitle}
+            text={portfolioText}
+            href="/portfolio"
           />
         </section>
 
