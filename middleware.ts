@@ -10,6 +10,7 @@ const protectedPrefixes = [
   "/research",
   "/clubs",
   "/portfolio",
+  "/career",
   "/profile",
   "/settings"
 ];

@@ -12,6 +12,9 @@ Study Goal is a premium university operating system for ambitious students. It h
 - Goal management with status board and milestones.
 - Dynamic roadmap that supports custom study duration from 1 to 8 years.
 - Skill Tree for AI/CS and portfolio-ready skill tracking.
+- Club participation and leadership tracking.
+- Achievement portfolio with linked academic evidence.
+- Career readiness score and internship/job opportunity pipeline.
 
 ## Tech Stack
 
@@ -58,9 +61,13 @@ Run these SQL files in the Supabase SQL Editor in order:
 ```txt
 supabase/migrations/001_create_profiles.sql
 supabase/migrations/002_create_academic_core.sql
+supabase/migrations/003_add_graduation_credit_target.sql
 supabase/migrations/004_create_goal_milestones.sql
 supabase/migrations/005_add_academic_year_target.sql
 supabase/migrations/006_create_skills.sql
+supabase/migrations/007_create_clubs.sql
+supabase/migrations/008_create_portfolio_items.sql
+supabase/migrations/009_create_career_readiness.sql
 ```
 
 The migrations create user-owned tables and enable Row Level Security so users can only access their own records.
@@ -77,6 +84,9 @@ The migrations create user-owned tables and enable Row Level Security so users c
 - `/goals` - Goal management
 - `/roadmap` - Dynamic academic roadmap
 - `/skills` - Skill Tree
+- `/clubs` - Club and leadership tracker
+- `/portfolio` - Achievement portfolio
+- `/career` - Career readiness and opportunity pipeline
 
 ## Production Build
 
@@ -87,7 +97,7 @@ npm run start
 
 ## Current Product Phase
 
-The project is currently moving through Phase 4: Study OS Experience.
+The core Study OS experience is complete and ready for production deployment.
 
 Completed foundations:
 
@@ -98,14 +108,31 @@ Completed foundations:
 - Goal milestones
 - Dynamic roadmap
 - Skill Tree
+- Club tracker
+- Portfolio item system
+- Career readiness and opportunity pipeline
 
 Next recommended modules:
 
 - Research workspace
-- Club tracker
-- Portfolio item system
-- Career readiness calculation
 - Analytics and AI recommendations
+
+## Vercel Deployment
+
+Add these environment variables to the Vercel project:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+In Supabase Authentication URL Configuration, add the Vercel production URL as the Site URL and allow:
+
+```txt
+https://your-domain.vercel.app/auth/callback
+```
+
+Run all migrations through `009_create_career_readiness.sql` before testing the production app.
 
 ## Notes
 

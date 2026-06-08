@@ -24,3 +24,10 @@
  ✓ Compiled /login in 413ms (391 modules)
  GET /login?next=%2Fportfolio 200 in 1822ms
  GET /login?next=%2Fdashboard 200 in 1847ms
+ ✓ Compiled in 3.4s (686 modules)
+ ✓ Compiled in 1157ms (686 modules)
+ ✓ Compiled in 2.6s (801 modules)
+ ✓ Compiled in 1263ms (801 modules)
+ ✓ Compiled /login in 316ms (391 modules)
+ GET /login?next=%2Fdashboard 200 in 1329ms
+ GET /login?next=%2Fcareer 200 in 1349ms
