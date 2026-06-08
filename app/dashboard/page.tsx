@@ -12,7 +12,8 @@ import {
   LineChart,
   Map as MapIcon,
   Target,
-  Trophy
+  Trophy,
+  UsersRound
 } from "lucide-react";
 
 import { SignOutButton } from "@/components/dashboard/sign-out-button";
@@ -59,6 +60,12 @@ type Skill = {
   level: number;
   target_level: number;
   status: string;
+};
+
+type Club = {
+  id: string;
+  status: string;
+  is_leadership: boolean;
 };
 
 const dashboardCopy = {
@@ -269,7 +276,7 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
-  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }, { data: skills }] = await Promise.all([
+  const [{ data: semesters }, { data: courses }, { data: goals }, { data: milestones }, { data: skills }, { data: clubs }] = await Promise.all([
     supabase
       .from("semesters")
       .select("id, name, year_index, term")
@@ -296,6 +303,10 @@ export default async function DashboardPage() {
     supabase
       .from("skills")
       .select("id, level, target_level, status")
+      .eq("user_id", user.id),
+    supabase
+      .from("clubs")
+      .select("id, status, is_leadership")
       .eq("user_id", user.id)
   ]);
 
@@ -312,6 +323,7 @@ export default async function DashboardPage() {
     level: Number(skill.level || 0),
     target_level: Number(skill.target_level || 1)
   })) as Skill[];
+  const safeClubs = (clubs || []) as Club[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
@@ -332,6 +344,14 @@ export default async function DashboardPage() {
           safeSkills.length
       )
     : 0;
+  const activeClubs = safeClubs.filter((club) => club.status === "active");
+  const leadershipClubs = safeClubs.filter((club) => club.is_leadership);
+  const clubsLabel = language === "vi" ? "CLB" : "Clubs";
+  const clubsTitle = language === "vi" ? "Theo dõi câu lạc bộ" : "Club Tracker";
+  const clubsText =
+    language === "vi"
+      ? `${activeClubs.length} CLB đang tham gia / ${leadershipClubs.length} vai trò lãnh đạo.`
+      : `${activeClubs.length} active clubs / ${leadershipClubs.length} leadership roles.`;
   const goalProgress = safeGoals.length
     ? Math.round(safeGoals.reduce((total, goal) => total + Number(goal.progress || 0), 0) / safeGoals.length)
     : 0;
@@ -378,6 +398,9 @@ export default async function DashboardPage() {
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/skills">
               {t.skills}
+            </a>
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/clubs">
+              {clubsLabel}
             </a>
             <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/profile">
               {t.profile}
@@ -454,7 +477,7 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
           <NextModule
             icon={MapIcon}
             title={
@@ -482,6 +505,12 @@ export default async function DashboardPage() {
             title={t.modules.skillsTitle}
             text={`${t.modules.skillsText} ${safeSkills.length} ${t.skills.toLowerCase()} / ${skillProgress}%.`}
             href="/skills"
+          />
+          <NextModule
+            icon={UsersRound}
+            title={clubsTitle}
+            text={clubsText}
+            href="/clubs"
           />
         </section>
 

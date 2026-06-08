@@ -1,7 +1,4 @@
-import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
-
-import { getSupabaseConfig } from "@/lib/supabase/env";
 
 const protectedPrefixes = [
   "/dashboard",
@@ -19,54 +16,33 @@ const protectedPrefixes = [
 
 const authPrefixes = ["/login", "/register", "/forgot-password"];
 
-export async function middleware(request: NextRequest) {
-  const { url, key } = getSupabaseConfig();
-  let response = NextResponse.next({
-    request
-  });
+function hasSupabaseSessionCookie(request: NextRequest) {
+  return request.cookies
+    .getAll()
+    .some((cookie) => cookie.name.startsWith("sb-") && cookie.name.includes("auth-token"));
+}
 
-  const supabase = createServerClient(
-    url,
-    key,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          response = NextResponse.next({ request });
-          cookiesToSet.forEach(({ name, value, options }) => {
-            response.cookies.set(name, value, options);
-          });
-        }
-      }
-    }
-  );
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
+export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const isProtectedRoute = protectedPrefixes.some((prefix) => pathname.startsWith(prefix));
   const isAuthRoute = authPrefixes.some((prefix) => pathname.startsWith(prefix));
+  const hasSession = hasSupabaseSessionCookie(request);
 
-  if (isProtectedRoute && !user) {
+  if (isProtectedRoute && !hasSession) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/login";
     redirectUrl.searchParams.set("next", `${pathname}${request.nextUrl.search}`);
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (isAuthRoute && user) {
+  if (isAuthRoute && hasSession) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = "/dashboard";
     redirectUrl.search = "";
     return NextResponse.redirect(redirectUrl);
   }
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {

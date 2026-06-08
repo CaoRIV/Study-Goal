@@ -1,5 +1,19 @@
+
+> study-goal-landing@0.1.0 dev
+> next dev
+
    ▲ Next.js 15.5.19
    - Local:        http://localhost:3000
    - Network:      http://192.168.48.1:3000
+   - Environments: .env.local
 
  ✓ Starting...
+ ✓ Ready in 4.5s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 1146ms (115 modules)
+ ○ Compiling /login ...
+ ✓ Compiled /login in 9s (700 modules)
+ GET /login?next=%2Fdashboard 200 in 10004ms
+ GET /login?next=%2Fclubs 200 in 10062ms
+ ○ Compiling / ...
+ ✓ Compiled / in 9.6s (1391 modules)
