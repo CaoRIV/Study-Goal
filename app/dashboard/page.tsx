@@ -489,7 +489,7 @@ export default async function DashboardPage() {
             </div>
           </div>
 
-          <div className="glass rounded-[2rem] p-6">
+          <div className="glass glass-elevated rounded-[2rem] p-6">
             <div className="mb-6 flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">{t.readiness}</p>

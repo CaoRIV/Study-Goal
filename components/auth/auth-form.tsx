@@ -250,7 +250,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             </div>
           </div>
 
-          <div className="glass mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8">
+          <div className="glass glass-elevated mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8">
             <div className="mb-7">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">{text.eyebrow}</p>
               <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-white">
@@ -376,7 +376,7 @@ function AuthField({
         minLength={minLength}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
+        className="form-input mt-2"
         placeholder={placeholder}
       />
     </label>

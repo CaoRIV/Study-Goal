@@ -614,7 +614,7 @@ function Hero({ t }: { t: Content }) {
     <section className="relative px-4 pb-20 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-40">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div
-          initial="hidden"
+          initial={false}
           animate="visible"
           variants={fadeIn}
           transition={{ duration: 0.65, ease: "easeOut" }}
@@ -651,7 +651,7 @@ function Hero({ t }: { t: Content }) {
           </div>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 34, scale: 0.97 }}
+          initial={false}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
           className="relative"
@@ -666,7 +666,7 @@ function Hero({ t }: { t: Content }) {
 
 function DashboardVisual({ t }: { t: Content }) {
   return (
-    <div className="glass relative overflow-hidden rounded-[2rem] p-3 shadow-glow-blue">
+    <div className="glass glass-elevated relative overflow-hidden rounded-[2rem] p-3 shadow-glow-blue">
       <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-sky-400/18 to-transparent" />
       <div className="relative rounded-[1.5rem] border border-white/10 bg-slate-950/68 p-4 sm:p-5">
         <div className="mb-5 flex items-center justify-between">
@@ -1215,7 +1215,7 @@ function FinalCta({ t }: { t: Content }) {
   return (
     <section id="start" className="px-4 pb-10 pt-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="glass relative overflow-hidden rounded-[2rem] px-6 py-16 text-center sm:px-10 lg:py-24">
+        <div className="glass glass-elevated relative overflow-hidden rounded-[2rem] px-6 py-16 text-center sm:px-10 lg:py-24">
           <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-emerald-300/16 to-transparent" />
           <div className="relative mx-auto max-w-4xl">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">{t.finalCta.eyebrow}</p>
