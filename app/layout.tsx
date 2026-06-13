@@ -5,7 +5,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Study Goal | Turn Your University Journey Into a Master Plan",
   description:
-    "Study Goal is a premium student operating system for planning courses, research, goals, skills, clubs, internships, and graduate school readiness."
+    "Study Goal is a premium student operating system for planning courses, research, goals, skills, clubs, internships, and graduate school readiness.",
+  icons: {
+    icon: "/study-goal-logo.png",
+    apple: "/study-goal-logo.png"
+  }
 };
 
 export default function RootLayout({

@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
 import { LANGUAGE_COOKIE } from "@/lib/language";
 import { cn } from "@/lib/utils";
 
@@ -549,9 +550,7 @@ function Nav({
     <header className="fixed left-3 right-3 top-3 z-50 mx-auto max-w-7xl rounded-full border border-white/12 bg-slate-950/64 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl sm:left-6 sm:right-6">
       <nav className="flex items-center justify-between gap-4">
         <a href="#" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-sky-300 via-indigo-400 to-emerald-300 text-slate-950 shadow-glow-blue">
-            <Sparkles className="h-4 w-4" aria-hidden="true" />
-          </span>
+          <StudyGoalLogo className="h-10 w-10" priority />
           <span className="font-display text-base font-semibold tracking-normal">Study Goal</span>
         </a>
         <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">

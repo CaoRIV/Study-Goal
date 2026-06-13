@@ -10,6 +10,7 @@ import {
   Target
 } from "lucide-react";
 
+import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
 import { SignOutButton } from "@/components/dashboard/sign-out-button";
 import { LanguageSwitcher } from "@/components/language/language-switcher";
 import { calculateCompletedCredits, calculateGpa } from "@/lib/calculations/academic";
@@ -227,9 +228,7 @@ export default async function RoadmapPage() {
       <div className="mx-auto max-w-7xl">
         <header className="mb-8 flex flex-col gap-4 rounded-[2rem] border border-white/12 bg-slate-950/64 p-5 shadow-2xl shadow-black/35 backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
           <a href="/dashboard" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-300 via-indigo-400 to-emerald-300 text-slate-950 shadow-glow-blue">
-              <Map className="h-5 w-5" aria-hidden="true" />
-            </span>
+            <StudyGoalLogo priority />
             <div>
               <p className="font-display text-lg font-semibold text-white">Study Goal</p>
               <p className="text-sm text-slate-400">{t.subtitle}</p>
