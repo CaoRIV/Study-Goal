@@ -10,11 +10,11 @@ import {
   GraduationCap,
   Loader2,
   ShieldCheck,
-  Sparkles,
   Target
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
 import { createClient } from "@/lib/supabase/client";
 
 type AuthMode = "login" | "register" | "forgot-password";
@@ -179,9 +179,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
       <div className="mx-auto max-w-7xl">
         <header className="flex items-center justify-between rounded-full border border-white/12 bg-slate-950/64 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl">
           <a href="/" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300">
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-300 via-indigo-400 to-emerald-300 text-slate-950 shadow-glow-blue">
-              <Sparkles className="h-4 w-4" aria-hidden="true" />
-            </span>
+            <StudyGoalLogo priority />
             <span className="font-display text-base font-semibold text-white">Study Goal</span>
           </a>
           <Button asChild variant="secondary">
