@@ -240,28 +240,28 @@ export default async function PortfolioPage() {
           <a href="/dashboard" className="flex items-center gap-3">
             <StudyGoalLogo priority />
             <div>
-              <p className="font-display text-lg font-semibold text-white">Study Goal</p>
+              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
               <p className="text-sm text-slate-400">{t.subtitle}</p>
             </div>
           </a>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <LanguageSwitcher language={language} label={t.languageLabel} />
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/dashboard">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/dashboard">
               {t.dashboard}
             </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/roadmap">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/roadmap">
               {t.roadmap}
             </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/grades">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/grades">
               {t.grades}
             </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/goals">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/goals">
               {t.goals}
             </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/skills">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/skills">
               {t.skills}
             </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/clubs">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/clubs">
               {t.clubs}
             </a>
             <SignOutButton label={t.signOut} />
@@ -270,17 +270,17 @@ export default async function PortfolioPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber-200">{t.eyebrow}</p>
-            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-white">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-200">{t.eyebrow}</p>
+            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">
               {t.title}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
           </div>
-          <div className="rounded-[2rem] border border-amber-300/14 bg-amber-300/8 p-6 shadow-glow-emerald backdrop-blur-2xl">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-300/12 text-amber-100 ring-1 ring-amber-200/20">
+          <div className="rounded-[2rem] border border-orange-300/14 bg-orange-300/8 p-6 shadow-glow-blue backdrop-blur-2xl">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-300/12 text-orange-100 ring-1 ring-orange-200/20">
               <Trophy className="h-6 w-6" aria-hidden="true" />
             </div>
-            <p className="text-sm leading-6 text-amber-50/82">
+            <p className="text-sm leading-6 text-orange-50/82">
               {language === "en"
                 ? "Every strong application needs evidence. This is where Study Goal turns scattered work into a story."
                 : "Mọi hồ sơ mạnh đều cần minh chứng. Đây là nơi Study Goal biến thành quả rời rạc thành một câu chuyện rõ ràng."}

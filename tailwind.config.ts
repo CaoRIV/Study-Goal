@@ -10,6 +10,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        brand: {
+          navy: "#0F172A",
+          cyan: "#0891B2",
+          bright: "#06B6D4",
+          orange: "#F97316",
+          paper: "#F9FAFB"
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -41,8 +48,8 @@ const config: Config = {
         display: ["var(--font-display)", "Space Grotesk", "Inter", "ui-sans-serif"]
       },
       boxShadow: {
-        "glow-blue": "0 0 60px rgba(14, 165, 233, 0.26)",
-        "glow-emerald": "0 0 44px rgba(16, 185, 129, 0.22)"
+        "glow-blue": "0 0 60px rgba(6, 182, 212, 0.22)",
+        "glow-orange": "0 0 52px rgba(249, 115, 22, 0.2)"
       },
       animation: {
         "marquee-slow": "marquee 32s linear infinite",

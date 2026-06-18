@@ -356,21 +356,21 @@ export function AcademicPlanner({
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm text-slate-400">{copy.intelligence.creditProgress}</p>
-              <p className="mt-2 font-display text-3xl font-semibold text-white">{creditProgress}%</p>
+              <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">{creditProgress}%</p>
             </div>
-            <span className="rounded-full bg-emerald-300/10 px-3 py-1 text-sm font-semibold text-emerald-100 ring-1 ring-emerald-200/16">
+            <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-sm font-semibold text-cyan-100 ring-1 ring-cyan-200/16">
               {completedCredits}/{targetCredits}
             </span>
           </div>
           <div className="mt-5 h-2 rounded-full bg-slate-800">
-            <div className="h-full rounded-full bg-gradient-to-r from-sky-300 to-emerald-300" style={{ width: `${creditProgress}%` }} />
+            <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${creditProgress}%` }} />
           </div>
           <p className="mt-3 text-sm text-slate-500">{copy.intelligence.graduationTarget}</p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
           <p className="text-sm text-slate-400">{copy.intelligence.projectedGpa}</p>
-          <p className="mt-2 font-display text-3xl font-semibold text-white">
+          <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">
             {projectedGpa === null ? copy.summary.unavailable : projectedGpa}
           </p>
           <p className="mt-3 text-sm text-slate-500">{copy.intelligence.targetGpa}: {targetGpa || copy.summary.unavailable}</p>
@@ -380,7 +380,7 @@ export function AcademicPlanner({
           <p className="text-sm text-slate-400">{copy.intelligence.simulator}</p>
           <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
             <Input label={copy.intelligence.simulatorLabel} type="number" step="0.01" min="0" max="4.3" value={simulatedGrade} onChange={setSimulatedGrade} placeholder="3.70" />
-            <p className="pb-2 font-display text-3xl font-semibold text-white">
+            <p className="pb-2 font-display text-3xl font-semibold text-brand-paper">
               {simulatedGpa === null ? copy.summary.unavailable : simulatedGpa}
             </p>
           </div>
@@ -390,14 +390,14 @@ export function AcademicPlanner({
       <section className="rounded-2xl border border-white/10 bg-slate-950/52 p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-emerald-200">{copy.intelligence.requiredAverage}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-cyan-200">{copy.intelligence.requiredAverage}</p>
             <p className="mt-2 text-lg text-slate-200">
               {remainingCredits > 0 && requiredAverage !== null
                 ? `${requiredAverage} / ${copy.intelligence.remainingCredits}: ${remainingCredits}`
                 : copy.intelligence.noRemainingCourses}
             </p>
           </div>
-          <span className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${isOnTrack ? "bg-emerald-300/10 text-emerald-100 ring-emerald-200/16" : "bg-amber-300/10 text-amber-100 ring-amber-200/16"}`}>
+          <span className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${isOnTrack ? "bg-cyan-300/10 text-cyan-100 ring-cyan-200/16" : "bg-orange-300/10 text-orange-100 ring-orange-200/16"}`}>
             {isOnTrack ? copy.intelligence.onTrack : copy.intelligence.needsFocus}
           </span>
         </div>
@@ -413,10 +413,10 @@ export function AcademicPlanner({
         <div className="space-y-6">
           <form className="glass rounded-[2rem] p-5" onSubmit={createSemester}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-300/10 text-sky-200 ring-1 ring-sky-200/16">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/16">
                 <CalendarDays className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h2 className="font-display text-xl font-semibold text-white">{copy.semesterForm.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.semesterForm.title}</h2>
             </div>
             <div className="space-y-3">
               <Input label={copy.semesterForm.name} value={semesterName} onChange={setSemesterName} placeholder={copy.semesterForm.namePlaceholder} />
@@ -431,10 +431,10 @@ export function AcademicPlanner({
 
           <form className="glass rounded-[2rem] p-5" onSubmit={createCourse}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-300/10 text-emerald-200 ring-1 ring-emerald-200/16">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/16">
                 <BookOpenCheck className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h2 className="font-display text-xl font-semibold text-white">{copy.courseForm.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.courseForm.title}</h2>
             </div>
             <div className="space-y-3">
               <Select label={copy.courseForm.semester} value={selectedSemesterId} onChange={setSelectedSemesterId} options={initialSemesters.map((semester) => semester.id)} labels={Object.fromEntries(initialSemesters.map((semester) => [semester.id, semester.name]))} placeholder={copy.courseForm.semesterEmpty} required />
@@ -455,7 +455,7 @@ export function AcademicPlanner({
         <div className="space-y-4">
           {initialSemesters.length === 0 ? (
             <div className="glass rounded-[2rem] p-8 text-center">
-              <h2 className="font-display text-2xl font-semibold text-white">{copy.empty.title}</h2>
+              <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.empty.title}</h2>
               <p className="mt-3 text-slate-400">{copy.empty.description}</p>
             </div>
           ) : null}
@@ -475,8 +475,8 @@ export function AcademicPlanner({
                     </div>
                   ) : (
                     <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{copy.table.year} {semester.year_index} / {copy.terms[semester.term] || semester.term}</p>
-                      <h2 className="mt-1 font-display text-2xl font-semibold text-white">{semester.name}</h2>
+                      <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">{copy.table.year} {semester.year_index} / {copy.terms[semester.term] || semester.term}</p>
+                      <h2 className="mt-1 font-display text-2xl font-semibold text-brand-paper">{semester.name}</h2>
                     </div>
                   )}
                   <div className="flex gap-2">
@@ -529,7 +529,7 @@ export function AcademicPlanner({
                         ) : (
                           <>
                             <div>
-                              <div className="font-semibold text-white">{course.name}</div>
+                              <div className="font-semibold text-brand-paper">{course.name}</div>
                               <div className="mt-1 text-xs text-slate-500">{course.code || copy.table.noCode}</div>
                             </div>
                             <span>{course.credits}</span>
@@ -559,7 +559,7 @@ function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
       <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-3 font-display text-3xl font-semibold text-white">{value}</p>
+      <p className="mt-3 font-display text-3xl font-semibold text-brand-paper">{value}</p>
     </div>
   );
 }
@@ -596,7 +596,7 @@ function Input({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
+        className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>
@@ -623,7 +623,7 @@ function Select({
   return (
     <label className="block">
       <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
-      <select required={required} className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-white outline-none focus:border-sky-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
+      <select required={required} className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-brand-paper outline-none focus:border-cyan-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
         {placeholder ? <option value="" disabled>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option} value={option}>{labels[option] || option}</option>
@@ -652,7 +652,7 @@ function IconButton({
       onClick={onClick}
       disabled={disabled}
       className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50 ${
-        danger ? "text-slate-500 hover:bg-red-400/10 hover:text-red-100" : "text-slate-400 hover:bg-white/8 hover:text-white"
+        danger ? "text-slate-500 hover:bg-red-400/10 hover:text-red-100" : "text-slate-400 hover:bg-white/8 hover:text-brand-paper"
       }`}
       aria-label={label}
       title={label}

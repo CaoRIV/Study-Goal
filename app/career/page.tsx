@@ -224,7 +224,7 @@ export default async function CareerPage() {
           <a href="/dashboard" className="flex items-center gap-3">
             <StudyGoalLogo priority />
             <div>
-              <p className="font-display text-lg font-semibold text-white">Study Goal</p>
+              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
               <p className="text-sm text-slate-400">{t.subtitle}</p>
             </div>
           </a>
@@ -237,7 +237,7 @@ export default async function CareerPage() {
               ["/goals", t.goals],
               ["/portfolio", t.portfolio]
             ].map(([href, label]) => (
-              <a key={href} href={href} className="inline-flex h-11 items-center justify-center rounded-full px-4 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white">
+              <a key={href} href={href} className="inline-flex h-11 items-center justify-center rounded-full px-4 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper">
                 {label}
               </a>
             ))}
@@ -247,13 +247,13 @@ export default async function CareerPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">{t.eyebrow}</p>
-            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-white">{t.title}</h1>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
+            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">{t.title}</h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
           </div>
-          <aside className="rounded-[2rem] border border-emerald-300/16 bg-emerald-300/8 p-6 backdrop-blur-2xl">
-            <BriefcaseBusiness className="h-7 w-7 text-emerald-200" aria-hidden="true" />
-            <p className="mt-4 text-sm leading-6 text-emerald-50/85">{t.insight}</p>
+          <aside className="rounded-[2rem] border border-cyan-300/16 bg-cyan-300/8 p-6 backdrop-blur-2xl">
+            <BriefcaseBusiness className="h-7 w-7 text-cyan-200" aria-hidden="true" />
+            <p className="mt-4 text-sm leading-6 text-cyan-50/85">{t.insight}</p>
           </aside>
         </section>
 

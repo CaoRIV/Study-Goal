@@ -106,11 +106,11 @@ export function OnboardingForm({
     <div className="min-h-screen px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-300/18 bg-emerald-300/8 px-4 py-2 text-sm font-medium text-emerald-100 shadow-glow-emerald">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-cyan-100 shadow-glow-blue">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
             {copy.badge}
           </div>
-          <h1 className="font-display text-5xl font-semibold leading-tight text-white">
+          <h1 className="font-display text-5xl font-semibold leading-tight text-brand-paper">
             {copy.title}
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
@@ -134,7 +134,7 @@ export function OnboardingForm({
               required
               value={careerGoal}
               onChange={(event) => setCareerGoal(event.target.value)}
-              className="mt-2 min-h-28 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
+              className="mt-2 min-h-28 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-300/50"
               placeholder={copy.placeholders.careerGoal}
             />
           </label>
@@ -185,7 +185,7 @@ function Field({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-sky-300/50"
+        className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>
