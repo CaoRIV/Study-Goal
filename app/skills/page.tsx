@@ -229,17 +229,17 @@ export default async function SkillsPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">{t.eyebrow}</p>
             <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">
               {t.title}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
           </div>
-          <div className="rounded-[2rem] border border-cyan-300/14 bg-cyan-300/8 p-6 shadow-glow-blue backdrop-blur-2xl">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/12 text-cyan-100 ring-1 ring-cyan-200/20">
+          <div className="rounded-[2rem] border border-brand-green/14 bg-brand-green/8 p-6 shadow-glow-blue backdrop-blur-2xl">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-green/12 text-brand-green ring-1 ring-brand-green/20">
               <BrainCircuit className="h-6 w-6" aria-hidden="true" />
             </div>
-            <p className="text-sm leading-6 text-cyan-50/82">
+            <p className="text-sm leading-6 text-brand-cream/82">
               {language === "en"
                 ? "Designed for AI, CS, research, and career-ready students who want proof of growth."
                 : "Thiết kế cho sinh viên AI, CS, nghiên cứu và định hướng nghề nghiệp cần minh chứng phát triển rõ ràng."}

@@ -270,17 +270,17 @@ export default async function PortfolioPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-orange-200">{t.eyebrow}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral-soft">{t.eyebrow}</p>
             <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">
               {t.title}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
           </div>
-          <div className="rounded-[2rem] border border-orange-300/14 bg-orange-300/8 p-6 shadow-glow-blue backdrop-blur-2xl">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-300/12 text-orange-100 ring-1 ring-orange-200/20">
+          <div className="rounded-[2rem] border border-brand-coral/14 bg-brand-coral/8 p-6 shadow-glow-blue backdrop-blur-2xl">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/12 text-brand-coral-soft ring-1 ring-brand-coral-soft/20">
               <Trophy className="h-6 w-6" aria-hidden="true" />
             </div>
-            <p className="text-sm leading-6 text-orange-50/82">
+            <p className="text-sm leading-6 text-brand-cream/82">
               {language === "en"
                 ? "Every strong application needs evidence. This is where Study Goal turns scattered work into a story."
                 : "Mọi hồ sơ mạnh đều cần minh chứng. Đây là nơi Study Goal biến thành quả rời rạc thành một câu chuyện rõ ràng."}

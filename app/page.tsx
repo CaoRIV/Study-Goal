@@ -718,7 +718,7 @@ function DashboardVisual({ t }: { t: Content }) {
                 {t.skillNodes.slice(0, 6).map((node) => (
                   <div
                     key={node.name}
-                    className="absolute flex h-12 w-12 items-center justify-center rounded-full border border-white/18 bg-gradient-to-br from-slate-800 to-slate-950 text-[10px] font-semibold text-brand-paper shadow-glow-blue"
+                  className="absolute flex h-12 w-12 items-center justify-center rounded-full border border-white/18 bg-gradient-to-br from-brand-cyan/25 to-brand-coral-soft/55 text-[10px] font-semibold text-brand-paper shadow-glow-blue"
                     style={{ left: node.x, top: node.y }}
                   >
                     {node.name.split(" ")[0]}
@@ -807,9 +807,9 @@ function Problem({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.45 }}
-              className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors duration-200 hover:border-cyan-300/30 hover:bg-white/[0.085]"
+              className="group rounded-2xl border border-brand-coral/16 bg-brand-coral/[0.04] p-5 transition-colors duration-200 hover:border-brand-coral/38 hover:bg-brand-coral/[0.075]"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-cyan-200 ring-1 ring-white/10 transition-colors group-hover:text-cyan-200">
+              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-coral/12 text-brand-coral-soft ring-1 ring-brand-coral/20 transition-colors group-hover:text-brand-cream">
                 <problem.icon className="h-5 w-5" aria-hidden="true" />
               </div>
               <h3 className="font-display text-lg font-semibold text-brand-paper">{problem.title}</h3>
@@ -839,12 +839,32 @@ function Solution({ t }: { t: Content }) {
                 className="glass-soft flex items-center justify-between rounded-2xl p-4"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/16">
+                  <div
+                    className={cn(
+                      "flex h-11 w-11 items-center justify-center rounded-xl ring-1",
+                      index === 0 && "bg-brand-cyan/14 text-cyan-100 ring-brand-bright/22",
+                      index === 1 && "bg-brand-green/14 text-emerald-100 ring-brand-green/24",
+                      index === 2 && "bg-brand-coral/14 text-brand-coral-soft ring-brand-coral/24",
+                      index === 3 && "bg-brand-orange/14 text-orange-100 ring-brand-orange/24",
+                      index === 4 && "bg-brand-cream text-brand-deep-red ring-brand-coral-soft/44"
+                    )}
+                  >
                     <item.icon className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <span className="font-medium text-brand-paper">{item.label}</span>
                 </div>
-                <span className="text-sm text-cyan-200">{item.value}</span>
+                <span
+                  className={cn(
+                    "text-sm font-medium",
+                    index === 0 && "text-cyan-200",
+                    index === 1 && "text-emerald-200",
+                    index === 2 && "text-brand-coral-soft",
+                    index === 3 && "text-orange-200",
+                    index === 4 && "text-brand-cream"
+                  )}
+                >
+                  {item.value}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -863,7 +883,7 @@ function Solution({ t }: { t: Content }) {
                 {t.solution.miniCards.map((label, index) => (
                   <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
                     <div className="text-sm text-slate-400">{label}</div>
-                    <div className="mt-3 h-28 rounded-xl bg-gradient-to-b from-slate-800 to-slate-950 p-3">
+              <div className="mt-3 h-28 rounded-xl bg-gradient-to-b from-brand-cyan/18 to-brand-coral-soft/38 p-3">
                       <div className="flex h-full items-end gap-2">
                         {[42, 68, 54, 83, 72].map((height, bar) => (
                           <div
@@ -872,7 +892,7 @@ function Solution({ t }: { t: Content }) {
                               "flex-1 rounded-t-md",
                               index === 0 && "bg-brand-cyan",
                               index === 1 && "bg-brand-bright",
-                              index === 2 && "bg-cyan-300"
+                              index === 2 && "bg-brand-green"
                             )}
                             style={{ height: `${height}%`, opacity: 0.56 + bar * 0.08 }}
                           />
@@ -894,8 +914,8 @@ function Solution({ t }: { t: Content }) {
                       className={cn(
                         "h-7 rounded-md border border-white/8",
                         index % 3 === 0 && "bg-brand-cyan/45",
-                        index % 3 === 1 && "bg-cyan-300/40",
-                        index % 3 === 2 && "bg-brand-orange/35"
+                        index % 3 === 1 && "bg-brand-green/40",
+                        index % 3 === 2 && "bg-brand-coral/40"
                       )}
                     />
                   ))}
@@ -1001,9 +1021,9 @@ function AiMode({ t }: { t: Content }) {
         <SectionTitle eyebrow={t.aiMode.eyebrow} title={t.aiMode.title} copy={t.aiMode.copy} />
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="glass relative min-h-[460px] overflow-hidden rounded-[2rem] p-5">
-            <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-cyan-300/35" />
-            <div className="absolute left-[15%] top-[60%] h-px w-[66%] rotate-[18deg] bg-cyan-300/28" />
-            <div className="absolute left-[28%] top-[52%] h-px w-[48%] rotate-[-49deg] bg-cyan-300/24" />
+            <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-brand-green/38" />
+            <div className="absolute left-[15%] top-[60%] h-px w-[66%] rotate-[18deg] bg-brand-cyan/28" />
+            <div className="absolute left-[28%] top-[52%] h-px w-[48%] rotate-[-49deg] bg-brand-coral/24" />
             {t.skillNodes.map((node, index) => (
               <motion.div
                 key={node.name}
@@ -1014,13 +1034,13 @@ function AiMode({ t }: { t: Content }) {
                 className="absolute w-28 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: node.x, top: node.y }}
               >
-                <div className="rounded-2xl border border-white/14 bg-slate-950/82 p-3 text-center shadow-glow-blue backdrop-blur">
-                  <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-300/20 to-cyan-300/20 text-cyan-100 ring-1 ring-white/12">
+                <div className="rounded-2xl border border-brand-green/16 bg-slate-950/82 p-3 text-center shadow-glow-green backdrop-blur">
+                  <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-green/14 text-emerald-100 ring-1 ring-brand-green/22">
                     <Network className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div className="text-sm font-semibold text-brand-paper">{node.name}</div>
                   <div className="mt-2 h-1.5 rounded-full bg-slate-800">
-                    <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${node.level}%` }} />
+                    <div className="h-full rounded-full bg-gradient-to-r from-brand-green to-emerald-300" style={{ width: `${node.level}%` }} />
                   </div>
                 </div>
               </motion.div>
@@ -1030,7 +1050,7 @@ function AiMode({ t }: { t: Content }) {
             {t.aiMode.skills.map((item, index) => (
               <div key={item} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.055] p-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 text-cyan-200 ring-1 ring-white/10">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-green/10 text-emerald-200 ring-1 ring-brand-green/18">
                     <Code2 className="h-4 w-4" aria-hidden="true" />
                   </div>
                   <span className="font-medium text-brand-paper">{item}</span>
@@ -1058,9 +1078,23 @@ function Features({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.04, duration: 0.42 }}
-              className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors duration-200 hover:border-cyan-300/30 hover:bg-white/[0.085]"
+              className={cn(
+                "group rounded-2xl border p-5 transition-colors duration-200",
+                index % 4 === 0 && "border-brand-cyan/18 bg-brand-cyan/[0.045] hover:border-brand-bright/38",
+                index % 4 === 1 && "border-brand-coral/18 bg-brand-coral/[0.045] hover:border-brand-coral/38",
+                index % 4 === 2 && "border-brand-green/18 bg-brand-green/[0.045] hover:border-brand-green/38",
+                index % 4 === 3 && "border-brand-orange/18 bg-brand-orange/[0.045] hover:border-brand-orange/38"
+              )}
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-cyan/20 to-brand-bright/12 text-cyan-100 ring-1 ring-cyan-200/16 transition-colors group-hover:text-cyan-50">
+              <div
+                className={cn(
+                  "mb-6 flex h-12 w-12 items-center justify-center rounded-xl ring-1 transition-colors",
+                  index % 4 === 0 && "bg-brand-cyan/16 text-cyan-100 ring-brand-bright/22",
+                  index % 4 === 1 && "bg-brand-coral/16 text-brand-coral-soft ring-brand-coral/22",
+                  index % 4 === 2 && "bg-brand-green/16 text-emerald-100 ring-brand-green/22",
+                  index % 4 === 3 && "bg-brand-orange/16 text-orange-100 ring-brand-orange/22"
+                )}
+              >
                 <feature.icon className="h-5 w-5" aria-hidden="true" />
               </div>
               <h3 className="font-display text-lg font-semibold text-brand-paper">{feature.title}</h3>
@@ -1094,7 +1128,7 @@ function Analytics({ t }: { t: Content }) {
               {[
                 [t.analytics.progressLabels[0], 86, "from-brand-cyan to-brand-bright"],
                 [t.analytics.progressLabels[1], 72, "from-brand-orange to-orange-300"],
-                [t.analytics.progressLabels[2], 94, "from-cyan-400 to-brand-bright"]
+                [t.analytics.progressLabels[2], 94, "from-brand-green to-emerald-300"]
               ].map(([label, value, color]) => (
                 <div key={label as string} className="rounded-2xl bg-slate-950/60 p-4 ring-1 ring-white/10">
                   <div className="flex items-center justify-between text-sm">
@@ -1107,9 +1141,9 @@ function Analytics({ t }: { t: Content }) {
                 </div>
               ))}
             </div>
-            <div className="mt-5 rounded-2xl bg-cyan-300/10 p-4 ring-1 ring-cyan-200/18">
+            <div className="mt-5 rounded-2xl bg-brand-green/10 p-4 ring-1 ring-brand-green/20">
               <div className="flex items-center justify-between gap-4">
-                <span className="text-sm text-cyan-100">{t.analytics.careerReadiness}</span>
+                <span className="text-sm text-emerald-100">{t.analytics.careerReadiness}</span>
                 <span className="font-display text-3xl font-semibold text-brand-paper">91</span>
               </div>
             </div>
@@ -1149,7 +1183,7 @@ function ChartCard({
               key={index}
               className={cn(
                 "aspect-square rounded-md",
-                index % 5 === 0 ? "bg-cyan-300/80" : index % 3 === 0 ? "bg-cyan-300/60" : "bg-white/8"
+                index % 5 === 0 ? "bg-brand-coral/80" : index % 3 === 0 ? "bg-brand-green/65" : "bg-brand-cyan/24"
               )}
             />
           ))}
@@ -1186,20 +1220,20 @@ function Testimonials({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.07, duration: 0.45 }}
-              className="glass-soft rounded-2xl p-6"
+              className="cream-panel rounded-2xl p-6"
             >
-              <div className="mb-6 flex items-center gap-1 text-orange-300">
+              <div className="mb-6 flex items-center gap-1 text-brand-coral">
                 {Array.from({ length: 5 }).map((_, star) => (
                   <Sparkles key={star} className="h-4 w-4" aria-hidden="true" />
                 ))}
               </div>
-              <blockquote className="text-lg leading-8 text-slate-200 text-pretty">&quot;{testimonial.quote}&quot;</blockquote>
+              <blockquote className="text-lg leading-8 text-brand-deep-red/90 text-pretty">&quot;{testimonial.quote}&quot;</blockquote>
               <figcaption className="mt-7 flex items-center justify-between gap-4">
                 <div>
-                  <div className="font-semibold text-brand-paper">{testimonial.name}</div>
-                  <div className="mt-1 text-sm text-slate-400">{testimonial.role}</div>
+                  <div className="font-semibold text-brand-deep-red">{testimonial.name}</div>
+                  <div className="mt-1 text-sm text-brand-deep-red/70">{testimonial.role}</div>
                 </div>
-                <div className="rounded-full bg-cyan-300/10 px-3 py-1.5 text-xs font-semibold text-cyan-100 ring-1 ring-cyan-200/16">
+                <div className="rounded-full bg-brand-coral-soft px-3 py-1.5 text-xs font-semibold text-brand-deep-red ring-1 ring-brand-coral/30">
                   {testimonial.result}
                 </div>
               </figcaption>

@@ -262,7 +262,7 @@ export function ClubsManager({
       <section className="grid gap-6 xl:grid-cols-[430px_minmax(0,1fr)]">
         <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createClub}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/24 bg-cyan-300/12 text-cyan-100 shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-brand-coral-soft shadow-glow-blue">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
             <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.form.title}</h2>
@@ -291,7 +291,7 @@ export function ClubsManager({
               </select>
             </Field>
             <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200">
-              <input type="checkbox" checked={isLeadership} onChange={(event) => setIsLeadership(event.target.checked)} className="h-4 w-4 accent-cyan-300" />
+              <input type="checkbox" checked={isLeadership} onChange={(event) => setIsLeadership(event.target.checked)} className="h-4 w-4 accent-brand-coral" />
               {copy.form.leadershipLabel}
             </label>
             <Field label={copy.form.impactLabel}>
@@ -315,7 +315,7 @@ export function ClubsManager({
         <div className="space-y-5">
           <div className="rounded-[2rem] border border-white/10 bg-slate-950/56 p-5 backdrop-blur-2xl">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-100">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-brand-coral-soft">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
               <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
@@ -332,7 +332,7 @@ export function ClubsManager({
                 ))}
               </select>
               <label className="flex h-12 cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm font-semibold text-slate-200">
-                <input type="checkbox" checked={leadershipOnly} onChange={(event) => setLeadershipOnly(event.target.checked)} className="h-4 w-4 accent-cyan-300" />
+                <input type="checkbox" checked={leadershipOnly} onChange={(event) => setLeadershipOnly(event.target.checked)} className="h-4 w-4 accent-brand-coral" />
                 {copy.filters.leadershipOnly}
               </label>
             </div>
@@ -340,7 +340,7 @@ export function ClubsManager({
 
           <section className="rounded-[2rem] border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-purple-300/20 bg-purple-300/10 text-purple-100">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-brand-coral-soft">
                 <UsersRound className="h-5 w-5" aria-hidden="true" />
               </span>
               <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.list.title}</h2>
@@ -387,7 +387,7 @@ function SummaryCard({
 }) {
   return (
     <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/18 bg-cyan-300/10 text-cyan-100">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/18 bg-brand-coral/10 text-brand-coral-soft">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <p className="text-sm text-slate-400">{label}</p>
@@ -421,7 +421,7 @@ function ClubCard({
 }) {
   if (isEditing) {
     return (
-      <article className="rounded-[1.5rem] border border-cyan-300/22 bg-slate-950/76 p-4">
+      <article className="rounded-[1.5rem] border border-brand-coral/22 bg-slate-950/76 p-4">
         <div className="space-y-3">
           <input required value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <input required value={draft.role} onChange={(event) => setDraft({ ...draft, role: event.target.value })} className="form-input" />
@@ -435,7 +435,7 @@ function ClubCard({
             ))}
           </select>
           <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200">
-            <input type="checkbox" checked={draft.isLeadership} onChange={(event) => setDraft({ ...draft, isLeadership: event.target.checked })} className="h-4 w-4 accent-cyan-300" />
+            <input type="checkbox" checked={draft.isLeadership} onChange={(event) => setDraft({ ...draft, isLeadership: event.target.checked })} className="h-4 w-4 accent-brand-coral" />
             {copy.form.leadershipLabel}
           </label>
           <textarea value={draft.impactNotes} onChange={(event) => setDraft({ ...draft, impactNotes: event.target.value })} className="form-input min-h-24 py-3" />
@@ -456,11 +456,11 @@ function ClubCard({
   }
 
   return (
-    <article className="rounded-[1.5rem] border border-white/10 bg-slate-950/64 p-5 transition-colors duration-200 hover:border-cyan-300/24 hover:bg-slate-900/72">
+    <article className="rounded-[1.5rem] border border-white/10 bg-slate-950/64 p-5 transition-colors duration-200 hover:border-brand-coral/24 hover:bg-slate-900/72">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100 ring-1 ring-cyan-200/16">
+            <span className="rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-brand-coral-soft ring-1 ring-brand-coral-soft/16">
               {copy.labels.statuses[club.status]}
             </span>
             {club.is_leadership ? (
@@ -471,7 +471,7 @@ function ClubCard({
             ) : null}
           </div>
           <h3 className="break-words font-display text-2xl font-semibold leading-tight text-brand-paper">{club.name}</h3>
-          <p className="mt-2 text-sm font-semibold text-cyan-100">{club.role}</p>
+          <p className="mt-2 text-sm font-semibold text-brand-coral-soft">{club.role}</p>
         </div>
         <div className="flex shrink-0 gap-1">
           <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-brand-paper" aria-label={copy.actions.edit}>

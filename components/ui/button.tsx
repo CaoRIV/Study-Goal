@@ -5,15 +5,15 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-[background-color,border-color,color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-[background-color,border-color,color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
           "bg-brand-orange text-slate-950 shadow-[0_18px_54px_rgba(249,115,22,0.2)] hover:bg-orange-400 active:bg-orange-600",
         secondary:
-          "border border-cyan-300/20 bg-cyan-400/8 text-cyan-50 backdrop-blur-xl hover:border-cyan-300/36 hover:bg-cyan-400/14",
-        ghost: "text-slate-200 hover:bg-cyan-400/10 hover:text-cyan-50"
+          "border border-brand-cyan/25 bg-brand-cyan/10 text-cyan-800 backdrop-blur-xl hover:border-brand-cyan/40 hover:bg-brand-cyan/16",
+        ghost: "text-slate-700 hover:bg-brand-coral-soft/45 hover:text-brand-deep-red"
       },
       size: {
         default: "h-11 px-6",

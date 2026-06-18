@@ -15,7 +15,12 @@ const config: Config = {
           cyan: "#0891B2",
           bright: "#06B6D4",
           orange: "#F97316",
-          paper: "#F9FAFB"
+          paper: "#F9FAFB",
+          coral: "#FB7185",
+          "coral-soft": "#FECACA",
+          green: "#10B981",
+          cream: "#FFFBEB",
+          "deep-red": "#991B1B"
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -49,7 +54,9 @@ const config: Config = {
       },
       boxShadow: {
         "glow-blue": "0 0 60px rgba(6, 182, 212, 0.22)",
-        "glow-orange": "0 0 52px rgba(249, 115, 22, 0.2)"
+        "glow-orange": "0 0 52px rgba(249, 115, 22, 0.2)",
+        "glow-coral": "0 0 52px rgba(251, 113, 133, 0.18)",
+        "glow-green": "0 0 48px rgba(16, 185, 129, 0.18)"
       },
       animation: {
         "marquee-slow": "marquee 32s linear infinite",
