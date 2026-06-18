@@ -112,16 +112,16 @@ const categoryOptions = [
 const statusOptions = ["planned", "learning", "practicing", "mastered"];
 
 const categoryAccent: Record<string, string> = {
-  programming: "from-cyan-300 to-blue-500",
-  machine_learning: "from-cyan-300 to-cyan-500",
-  deep_learning: "from-orange-300 to-purple-500",
-  nlp: "from-cyan-300 to-cyan-500",
-  computer_vision: "from-cyan-300 to-cyan-500",
-  research: "from-orange-200 to-orange-400",
-  github_portfolio: "from-slate-200 to-slate-500",
-  kaggle_projects: "from-blue-200 to-cyan-500",
-  career: "from-lime-200 to-cyan-500",
-  communication: "from-orange-200 to-pink-500"
+  programming: "from-brand-green to-brand-bright",
+  machine_learning: "from-brand-green to-brand-cyan",
+  deep_learning: "from-brand-coral to-brand-orange",
+  nlp: "from-brand-coral to-brand-bright",
+  computer_vision: "from-brand-green to-brand-coral",
+  research: "from-brand-coral-soft to-brand-coral",
+  github_portfolio: "from-brand-cream to-brand-cyan",
+  kaggle_projects: "from-brand-orange to-brand-green",
+  career: "from-brand-orange to-brand-green",
+  communication: "from-brand-coral to-brand-orange"
 };
 
 export function SkillsManager({
@@ -300,7 +300,7 @@ export function SkillsManager({
       <section className="grid gap-6 xl:grid-cols-[440px_minmax(0,1fr)]">
         <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createSkill}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/24 bg-cyan-300/12 text-cyan-100 shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-green/24 bg-brand-green/12 text-brand-green shadow-glow-blue">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
             <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.form.title}</h2>
@@ -368,7 +368,7 @@ export function SkillsManager({
         <div className="space-y-5">
           <div className="rounded-[2rem] border border-white/10 bg-slate-950/56 p-5 backdrop-blur-2xl">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-100">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-brand-green">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
               <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
@@ -401,13 +401,13 @@ export function SkillsManager({
           <section className="rounded-[2rem] border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
             <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-purple-300/20 bg-purple-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-purple-100">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand-green/24 bg-brand-green/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-100">
                   <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
                   {copy.tree.title}
                 </div>
                 <p className="max-w-2xl text-sm leading-6 text-slate-400">{copy.tree.description}</p>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm font-semibold text-cyan-100">
+              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm font-semibold text-brand-green">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
                 {averageProgress}%
               </div>
@@ -465,7 +465,7 @@ function SummaryCard({
 }) {
   return (
     <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/18 bg-cyan-300/10 text-cyan-100">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/18 bg-brand-green/10 text-brand-green">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <p className="text-sm text-slate-400">{label}</p>
@@ -501,7 +501,7 @@ function SkillNode({
 
   if (isEditing) {
     return (
-      <div className="rounded-[1.35rem] border border-cyan-300/22 bg-slate-950/76 p-4">
+      <div className="rounded-[1.35rem] border border-brand-green/22 bg-slate-950/76 p-4">
         <div className="space-y-3">
           <input value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <div className="grid gap-3 sm:grid-cols-2">
@@ -538,7 +538,7 @@ function SkillNode({
   }
 
   return (
-    <article className="group relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-slate-950/64 p-4 transition-colors duration-200 hover:border-cyan-300/24 hover:bg-slate-900/72">
+    <article className="group relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-slate-950/64 p-4 transition-colors duration-200 hover:border-brand-green/24 hover:bg-slate-900/72">
       <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r", categoryAccent[skill.category])} />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -560,7 +560,7 @@ function SkillNode({
       <div className="mt-4">
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="text-slate-400">{copy.tree.progress}</span>
-          <span className="font-semibold text-cyan-100">{skill.level}/{skill.target_level}</span>
+          <span className="font-semibold text-brand-green">{skill.level}/{skill.target_level}</span>
         </div>
         <div className="h-2 rounded-full bg-slate-800">
           <div className={cn("h-full rounded-full bg-gradient-to-r", categoryAccent[skill.category])} style={{ width: `${progress}%` }} />
@@ -572,7 +572,7 @@ function SkillNode({
           {progress}%
         </span>
         {skill.evidence_url ? (
-          <a href={skill.evidence_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-cyan-100 transition-colors hover:bg-cyan-300/10">
+          <a href={skill.evidence_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-brand-green transition-colors hover:bg-brand-green/10">
             {copy.tree.evidence}
             <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           </a>

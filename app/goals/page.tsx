@@ -264,7 +264,7 @@ export default async function GoalsPage() {
         </header>
 
         <section className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral-soft">{t.eyebrow}</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-brand-paper">
             {t.title}
           </h1>

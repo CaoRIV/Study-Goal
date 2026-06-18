@@ -247,13 +247,13 @@ export default async function CareerPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">{t.eyebrow}</p>
             <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">{t.title}</h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
           </div>
-          <aside className="rounded-[2rem] border border-cyan-300/16 bg-cyan-300/8 p-6 backdrop-blur-2xl">
-            <BriefcaseBusiness className="h-7 w-7 text-cyan-200" aria-hidden="true" />
-            <p className="mt-4 text-sm leading-6 text-cyan-50/85">{t.insight}</p>
+          <aside className="rounded-[2rem] border border-brand-green/16 bg-brand-green/8 p-6 backdrop-blur-2xl">
+            <BriefcaseBusiness className="h-7 w-7 text-brand-green" aria-hidden="true" />
+            <p className="mt-4 text-sm leading-6 text-brand-cream/85">{t.insight}</p>
           </aside>
         </section>
 

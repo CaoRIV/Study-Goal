@@ -214,17 +214,17 @@ export default async function ClubsPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral-soft">{t.eyebrow}</p>
             <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">
               {t.title}
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
           </div>
-          <div className="rounded-[2rem] border border-cyan-300/14 bg-cyan-300/8 p-6 shadow-glow-blue backdrop-blur-2xl">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/12 text-cyan-100 ring-1 ring-cyan-200/20">
+          <div className="rounded-[2rem] border border-brand-coral/14 bg-brand-coral/8 p-6 shadow-glow-blue backdrop-blur-2xl">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/12 text-brand-coral-soft ring-1 ring-brand-coral-soft/20">
               <UsersRound className="h-6 w-6" aria-hidden="true" />
             </div>
-            <p className="text-sm leading-6 text-cyan-50/82">
+            <p className="text-sm leading-6 text-brand-cream/82">
               {language === "en"
                 ? "Designed for students who want leadership, contribution, and campus impact to become visible career evidence."
                 : "Thiết kế cho sinh viên muốn biến lãnh đạo, đóng góp và tác động trong trường thành minh chứng nghề nghiệp rõ ràng."}

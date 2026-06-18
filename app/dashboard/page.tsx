@@ -629,13 +629,13 @@ export default async function DashboardPage() {
                   icon={GraduationCap}
                   label={profile.university || t.notSet}
                   value={profile.major || t.notSet}
-                  tone="sky"
+                  tone="cyan"
                 />
                 <StudyContext
                   icon={CalendarRange}
                   label={`${t.year} ${profile.current_year || 1}`}
                   value={`${safeSemesters.length}/${expectedSemesters} ${t.metricLabels.semesters.toLowerCase()}`}
-                  tone="violet"
+                  tone="coral"
                 />
               </div>
             </div>
@@ -682,7 +682,7 @@ export default async function DashboardPage() {
               }
               text={t.roadmapModule.text}
               href="/roadmap"
-              tone="violet"
+              tone="coral"
               span="feature"
               metric={`${roadmapCompletion}%`}
               progress={roadmapCompletion}
@@ -692,7 +692,7 @@ export default async function DashboardPage() {
               title={t.modules.academicTitle}
               text={`${t.modules.academicText} ${safeCourses.length} ${t.units.courses} / ${completedCredits} ${t.units.credits}.`}
               href="/grades"
-              tone="sky"
+              tone="cyan"
               span="primary"
               metric={`${completedCredits}/${targetCredits}`}
               progress={creditProgress}
@@ -702,7 +702,7 @@ export default async function DashboardPage() {
               title={t.modules.goalsTitle}
               text={`${t.modules.goalsText} ${activeGoals.length} ${t.units.active} / ${completedGoals.length} ${t.units.completed}.`}
               href="/goals"
-              tone="amber"
+              tone="coral"
               span="default"
               metric={`${goalProgress}%`}
               progress={goalProgress}
@@ -712,7 +712,7 @@ export default async function DashboardPage() {
               title={t.modules.skillsTitle}
               text={`${t.modules.skillsText} ${safeSkills.length} ${t.skills.toLowerCase()} / ${skillProgress}%.`}
               href="/skills"
-              tone="emerald"
+              tone="green"
               span="default"
               metric={`${skillProgress}%`}
               progress={skillProgress}
@@ -742,7 +742,7 @@ export default async function DashboardPage() {
               title={portfolioTitle}
               text={portfolioText}
               href="/portfolio"
-              tone="rose"
+              tone="cream"
               span="half"
               metric={String(readyPortfolioItems.length)}
               progress={portfolioProgress}
@@ -773,7 +773,7 @@ export default async function DashboardPage() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-2">
-              <ListPanel title={t.weeklyFocus} empty={t.noFocus} icon={Clock3} tone="violet">
+              <ListPanel title={t.weeklyFocus} empty={t.noFocus} icon={Clock3} tone="coral">
                 {safeMilestones.slice(0, 4).map((milestone) => (
                   <div key={milestone.id} className="study-list-item">
                     <p className="font-semibold text-brand-paper">{milestone.title}</p>
@@ -784,7 +784,7 @@ export default async function DashboardPage() {
                 ))}
               </ListPanel>
 
-              <ListPanel title={t.recentCourses} empty={t.noCourses} icon={BookOpenCheck} tone="sky">
+              <ListPanel title={t.recentCourses} empty={t.noCourses} icon={BookOpenCheck} tone="cyan">
                 {safeCourses.slice(0, 4).map((course) => (
                   <div key={course.id} className="study-list-item flex items-center justify-between gap-4">
                     <div>
@@ -799,7 +799,7 @@ export default async function DashboardPage() {
               </ListPanel>
 
               <div className="md:col-span-2">
-                <ListPanel title={t.activeGoalsTitle} empty={t.noGoals} icon={Flag} tone="amber">
+                <ListPanel title={t.activeGoalsTitle} empty={t.noGoals} icon={Flag} tone="coral">
                   {activeGoals.slice(0, 4).map((goal) => (
                     <div key={goal.id} className="study-list-item">
                       <div className="flex items-center justify-between gap-4">
@@ -901,7 +901,7 @@ function getNextAction({
   };
 }
 
-type AccentTone = "sky" | "violet" | "amber" | "emerald" | "orange" | "cyan" | "rose";
+type AccentTone = "cyan" | "coral" | "green" | "orange" | "cream";
 
 const accentStyles: Record<
   AccentTone,
@@ -912,29 +912,23 @@ const accentStyles: Record<
     bar: string;
   }
 > = {
-  sky: {
+  cyan: {
     card: "border-brand-bright/20 bg-brand-cyan/[0.055] hover:border-brand-bright/42",
     icon: "bg-brand-cyan/16 text-cyan-50 ring-brand-bright/24",
     text: "text-cyan-200",
     bar: "bg-brand-cyan"
   },
-  violet: {
-    card: "border-brand-bright/18 bg-brand-bright/[0.045] hover:border-brand-bright/38",
-    icon: "bg-brand-bright/12 text-cyan-50 ring-brand-bright/22",
-    text: "text-cyan-100",
-    bar: "bg-brand-bright"
+  coral: {
+    card: "border-brand-coral/22 bg-brand-coral/[0.055] hover:border-brand-coral/44",
+    icon: "bg-brand-coral/14 text-brand-coral-soft ring-brand-coral/26",
+    text: "text-brand-coral-soft",
+    bar: "bg-brand-coral"
   },
-  amber: {
-    card: "border-brand-orange/20 bg-brand-orange/[0.055] hover:border-brand-orange/42",
-    icon: "bg-brand-orange/14 text-orange-100 ring-brand-orange/24",
-    text: "text-orange-200",
-    bar: "bg-brand-orange"
-  },
-  emerald: {
-    card: "border-brand-bright/18 bg-brand-bright/[0.045] hover:border-brand-bright/38",
-    icon: "bg-brand-bright/12 text-cyan-50 ring-brand-bright/22",
-    text: "text-cyan-100",
-    bar: "bg-brand-bright"
+  green: {
+    card: "border-brand-green/20 bg-brand-green/[0.05] hover:border-brand-green/42",
+    icon: "bg-brand-green/14 text-emerald-100 ring-brand-green/24",
+    text: "text-emerald-200",
+    bar: "bg-brand-green"
   },
   orange: {
     card: "border-brand-orange/20 bg-brand-orange/[0.055] hover:border-brand-orange/42",
@@ -942,17 +936,11 @@ const accentStyles: Record<
     text: "text-orange-200",
     bar: "bg-brand-orange"
   },
-  cyan: {
-    card: "border-brand-bright/20 bg-brand-cyan/[0.055] hover:border-brand-bright/42",
-    icon: "bg-brand-cyan/16 text-cyan-50 ring-brand-bright/24",
-    text: "text-cyan-200",
-    bar: "bg-brand-cyan"
-  },
-  rose: {
-    card: "border-brand-orange/18 bg-brand-orange/[0.045] hover:border-brand-orange/38",
-    icon: "bg-brand-orange/12 text-orange-100 ring-brand-orange/22",
-    text: "text-orange-200",
-    bar: "bg-brand-orange"
+  cream: {
+    card: "border-brand-coral-soft/24 bg-brand-cream/[0.055] hover:border-brand-coral-soft/42",
+    icon: "bg-brand-cream text-brand-deep-red ring-brand-coral-soft/44",
+    text: "text-brand-coral-soft",
+    bar: "bg-brand-coral"
   }
 };
 
@@ -965,7 +953,7 @@ function StudyContext({
   label: string;
   value: string;
   icon: typeof GraduationCap;
-  tone: "sky" | "violet";
+  tone: "cyan" | "coral";
 }) {
   const styles = accentStyles[tone];
 
@@ -1100,8 +1088,8 @@ function AcademicPulse({
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <PulseMetric icon={Target} label={labels.activeGoals} value={String(activeGoals)} tone="amber" />
-        <PulseMetric icon={BrainCircuit} label={labels.skillMomentum} value={`${skillProgress}%`} tone="emerald" />
+        <PulseMetric icon={Target} label={labels.activeGoals} value={String(activeGoals)} tone="coral" />
+        <PulseMetric icon={BrainCircuit} label={labels.skillMomentum} value={`${skillProgress}%`} tone="green" />
         <PulseMetric icon={BriefcaseBusiness} label={labels.careerReady} value={`${readinessScore}/100`} tone="orange" />
       </div>
     </div>
