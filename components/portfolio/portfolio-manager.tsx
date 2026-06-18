@@ -320,10 +320,10 @@ export function PortfolioManager({
       <section className="grid gap-6 xl:grid-cols-[440px_minmax(0,1fr)]">
         <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createItem}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-amber-300/24 bg-amber-300/12 text-amber-100 shadow-glow-emerald">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-orange-300/24 bg-orange-300/12 text-orange-100 shadow-glow-blue">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
-            <h2 className="font-display text-2xl font-semibold text-white">{copy.form.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.form.title}</h2>
           </div>
 
           <div className="space-y-4">
@@ -380,10 +380,10 @@ export function PortfolioManager({
         <div className="space-y-5">
           <div className="rounded-[2rem] border border-white/10 bg-slate-950/56 p-5 backdrop-blur-2xl">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-300/10 text-sky-100">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-100">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-xl font-semibold text-white">{copy.filters.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
             </div>
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_200px]">
               <label className="relative block">
@@ -407,10 +407,10 @@ export function PortfolioManager({
 
           <section className="rounded-[2rem] border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-amber-300/20 bg-amber-300/10 text-amber-100">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-orange-300/20 bg-orange-300/10 text-orange-100">
                 <Trophy className="h-5 w-5" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-2xl font-semibold text-white">{copy.list.title}</h2>
+              <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.list.title}</h2>
             </div>
 
             {filteredItems.length === 0 ? (
@@ -458,11 +458,11 @@ function SummaryCard({
 }) {
   return (
     <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-amber-300/18 bg-amber-300/10 text-amber-100">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-orange-300/18 bg-orange-300/10 text-orange-100">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-2 font-display text-3xl font-semibold text-white">{value}</p>
+      <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">{value}</p>
     </div>
   );
 }
@@ -502,7 +502,7 @@ function PortfolioCard({
 
   if (isEditing) {
     return (
-      <article className="rounded-[1.5rem] border border-sky-300/22 bg-slate-950/76 p-4">
+      <article className="rounded-[1.5rem] border border-cyan-300/22 bg-slate-950/76 p-4">
         <div className="space-y-3">
           <input required value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} className="form-input" />
           <div className="grid gap-3 sm:grid-cols-2">
@@ -540,22 +540,22 @@ function PortfolioCard({
   }
 
   return (
-    <article className="rounded-[1.5rem] border border-white/10 bg-slate-950/64 p-5 transition-colors duration-200 hover:border-amber-300/24 hover:bg-slate-900/72">
+    <article className="rounded-[1.5rem] border border-white/10 bg-slate-950/64 p-5 transition-colors duration-200 hover:border-orange-300/24 hover:bg-slate-900/72">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1 rounded-full bg-amber-300/10 px-3 py-1 text-xs font-semibold text-amber-100 ring-1 ring-amber-200/16">
+            <span className="inline-flex items-center gap-1 rounded-full bg-orange-300/10 px-3 py-1 text-xs font-semibold text-orange-100 ring-1 ring-orange-200/16">
               <StatusIcon className="h-3.5 w-3.5" aria-hidden="true" />
               {copy.labels.statuses[item.status]}
             </span>
-            <span className="rounded-full bg-sky-300/10 px-3 py-1 text-xs font-semibold text-sky-100 ring-1 ring-sky-200/16">
+            <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-xs font-semibold text-cyan-100 ring-1 ring-cyan-200/16">
               {copy.labels.types[item.type]}
             </span>
           </div>
-          <h3 className="break-words font-display text-2xl font-semibold leading-tight text-white">{item.title}</h3>
+          <h3 className="break-words font-display text-2xl font-semibold leading-tight text-brand-paper">{item.title}</h3>
         </div>
         <div className="flex shrink-0 gap-1">
-          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-white" aria-label={copy.actions.edit}>
+          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-brand-paper" aria-label={copy.actions.edit}>
             <Pencil className="h-4 w-4" aria-hidden="true" />
           </button>
           <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-red-400/12 hover:text-red-100" aria-label={copy.actions.delete}>
@@ -576,7 +576,7 @@ function PortfolioCard({
 
       <div className="mt-4 flex justify-end">
         {item.url ? (
-          <a href={item.url} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-sky-100">
+          <a href={item.url} target="_blank" rel="noreferrer" className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-100">
             {copy.list.open}
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>

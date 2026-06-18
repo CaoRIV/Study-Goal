@@ -273,19 +273,19 @@ export function CareerReadinessManager({
   return (
     <div className="space-y-6">
       <section className="grid gap-5 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="rounded-[2rem] border border-emerald-300/18 bg-slate-950/68 p-6 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+        <div className="rounded-[2rem] border border-cyan-300/18 bg-slate-950/68 p-6 shadow-2xl shadow-black/30 backdrop-blur-2xl">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">{copy.score.label}</p>
-              <p className="mt-3 font-display text-6xl font-semibold text-white">{score}</p>
-              <p className="mt-2 text-sm font-semibold text-emerald-100">{scoreMessage}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">{copy.score.label}</p>
+              <p className="mt-3 font-display text-6xl font-semibold text-brand-paper">{score}</p>
+              <p className="mt-2 text-sm font-semibold text-cyan-100">{scoreMessage}</p>
             </div>
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-emerald-300/24 bg-emerald-300/10 text-emerald-100">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-cyan-300/24 bg-cyan-300/10 text-cyan-100">
               <Trophy className="h-7 w-7" aria-hidden="true" />
             </div>
           </div>
           <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-800">
-            <div className="h-full rounded-full bg-gradient-to-r from-sky-300 via-emerald-300 to-amber-200 transition-[width] duration-300" style={{ width: `${score}%` }} />
+            <div className="h-full rounded-full bg-gradient-to-r from-cyan-300 via-cyan-300 to-orange-200 transition-[width] duration-300" style={{ width: `${score}%` }} />
           </div>
         </div>
 
@@ -298,12 +298,12 @@ export function CareerReadinessManager({
       </section>
 
       {error ? <div role="alert" className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">{error}</div> : null}
-      {success ? <div role="status" className="rounded-2xl border border-emerald-300/20 bg-emerald-300/10 px-4 py-3 text-sm text-emerald-100">{success}</div> : null}
+      {success ? <div role="status" className="rounded-2xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-3 text-sm text-cyan-100">{success}</div> : null}
 
       <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <form onSubmit={saveProfile} className="glass rounded-[2rem] p-6">
           <div className="mb-6">
-            <h2 className="font-display text-2xl font-semibold text-white">{copy.profile.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.profile.title}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-400">{copy.profile.description}</p>
           </div>
 
@@ -342,10 +342,10 @@ export function CareerReadinessManager({
 
         <form onSubmit={createTarget} className="rounded-[2rem] border border-white/10 bg-slate-950/58 p-6 backdrop-blur-2xl">
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-sky-300/20 bg-sky-300/10 text-sky-100">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-100">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
-            <h2 className="font-display text-2xl font-semibold text-white">{copy.target.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.target.title}</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={copy.target.company}>
@@ -378,22 +378,22 @@ export function CareerReadinessManager({
 
       <section className="rounded-[2rem] border border-white/10 bg-slate-950/54 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-6">
         <div className="mb-5 flex items-center gap-3">
-          <BriefcaseBusiness className="h-5 w-5 text-emerald-200" aria-hidden="true" />
-          <h2 className="font-display text-2xl font-semibold text-white">{copy.pipeline.title}</h2>
+          <BriefcaseBusiness className="h-5 w-5 text-cyan-200" aria-hidden="true" />
+          <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.pipeline.title}</h2>
         </div>
         {initialTargets.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-white/14 bg-white/[0.03] p-8 text-center text-slate-400">{copy.pipeline.empty}</div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {initialTargets.map((target) => (
-              <article key={target.id} className="rounded-2xl border border-white/10 bg-slate-950/66 p-5 transition-colors hover:border-sky-300/24">
+              <article key={target.id} className="rounded-2xl border border-white/10 bg-slate-950/66 p-5 transition-colors hover:border-cyan-300/24">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="flex items-center gap-2 text-sm text-slate-400">
                       <Building2 className="h-4 w-4 shrink-0" aria-hidden="true" />
                       <span className="truncate">{target.company}</span>
                     </p>
-                    <h3 className="mt-2 break-words font-display text-xl font-semibold text-white">{target.role}</h3>
+                    <h3 className="mt-2 break-words font-display text-xl font-semibold text-brand-paper">{target.role}</h3>
                   </div>
                   <button type="button" onClick={() => deleteTarget(target.id)} aria-label={copy.pipeline.delete} className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-red-400/10 hover:text-red-100">
                     {pending === `delete-${target.id}` ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
@@ -411,7 +411,7 @@ export function CareerReadinessManager({
                 <p className="mt-4 text-sm text-slate-400">{copy.pipeline.deadline}: <span className="text-slate-200">{target.deadline || "-"}</span></p>
                 {target.notes ? <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-300">{target.notes}</p> : null}
                 {target.job_url ? (
-                  <a href={target.job_url} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-sky-100">
+                  <a href={target.job_url} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-cyan-100">
                     {copy.pipeline.open}
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </a>
@@ -428,9 +428,9 @@ export function CareerReadinessManager({
 function ScoreSignal({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
-      <Icon className="h-5 w-5 text-sky-200" aria-hidden="true" />
+      <Icon className="h-5 w-5 text-cyan-200" aria-hidden="true" />
       <p className="mt-5 text-sm leading-5 text-slate-400">{label}</p>
-      <p className="mt-2 font-display text-2xl font-semibold text-white">{value}</p>
+      <p className="mt-2 font-display text-2xl font-semibold text-brand-paper">{value}</p>
     </div>
   );
 }
@@ -453,10 +453,10 @@ function StatusField({
     <label className="rounded-2xl border border-white/10 bg-slate-950/52 p-4">
       <span className="mb-3 flex items-center justify-between gap-3">
         <span className="flex items-center gap-2 text-sm font-semibold text-slate-200">
-          <Icon className="h-4 w-4 text-sky-200" aria-hidden="true" />
+          <Icon className="h-4 w-4 text-cyan-200" aria-hidden="true" />
           {label}
         </span>
-        <StatusIcon className={`h-4 w-4 ${value === "ready" ? "text-emerald-200" : "text-slate-500"}`} aria-hidden="true" />
+        <StatusIcon className={`h-4 w-4 ${value === "ready" ? "text-cyan-200" : "text-slate-500"}`} aria-hidden="true" />
       </span>
       <select className="form-input" value={value} onChange={(event) => onChange(event.target.value)}>
         {statusOptions.map((option) => <option key={option} value={option}>{copy[option]}</option>)}

@@ -12,7 +12,7 @@ export function StudyGoalLogo({
   return (
     <span
       className={cn(
-        "relative block h-11 w-11 shrink-0 overflow-hidden rounded-full bg-white shadow-lg shadow-black/25 ring-1 ring-white/20",
+        "relative block h-11 w-11 shrink-0 overflow-hidden rounded-full bg-brand-paper shadow-lg shadow-cyan-950/35 ring-1 ring-cyan-300/28",
         className
       )}
     >

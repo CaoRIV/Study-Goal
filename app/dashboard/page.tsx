@@ -569,7 +569,7 @@ export default async function DashboardPage() {
           <a href="/" className="flex items-center gap-3">
             <StudyGoalLogo priority />
             <div>
-              <p className="font-display text-lg font-semibold text-white">Study Goal</p>
+              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
               <p className="text-sm text-slate-400">{t.appSubtitle}</p>
             </div>
           </a>
@@ -609,17 +609,17 @@ export default async function DashboardPage() {
         </header>
 
         <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-white/12 bg-slate-950/48 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.28)] lg:p-8">
-          <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-sky-400/10 blur-3xl" />
-          <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-violet-400/10 blur-3xl" />
+          <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
+          <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl" />
           <div className="relative grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
             <div className="flex flex-col justify-between">
               <div>
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/18 bg-sky-300/8 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-sky-100">
+                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-bright/20 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-50">
                   <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                   {t.eyebrow}
                 </div>
-                <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-white sm:text-5xl">
-                  {t.welcome}, <span className="text-sky-100">{displayName}</span>.
+                <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-brand-paper sm:text-5xl">
+                  {t.welcome}, <span className="text-cyan-100">{displayName}</span>.
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">{t.description}</p>
               </div>
@@ -753,18 +753,18 @@ export default async function DashboardPage() {
         <section className="mt-10">
           <SectionHeading eyebrow={t.focusBoard.eyebrow} title={t.focusBoard.title} />
           <div className="grid gap-5 xl:grid-cols-[0.72fr_1.28fr]">
-            <div className="relative overflow-hidden rounded-[2rem] border border-amber-300/20 bg-amber-300/[0.055] p-6">
-              <div className="pointer-events-none absolute -right-8 -top-8 h-36 w-36 rounded-full bg-amber-300/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-orange-300/20 bg-orange-300/[0.055] p-6">
+              <div className="pointer-events-none absolute -right-8 -top-8 h-36 w-36 rounded-full bg-orange-300/10 blur-3xl" />
               <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-300/12 text-amber-100 ring-1 ring-amber-200/20">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-300/12 text-orange-100 ring-1 ring-orange-200/20">
                   <Lightbulb className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-amber-200">{t.nextActions.title}</p>
-                <h2 className="mt-3 font-display text-3xl font-semibold text-white">{nextAction.title}</h2>
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-orange-200">{t.nextActions.title}</p>
+                <h2 className="mt-3 font-display text-3xl font-semibold text-brand-paper">{nextAction.title}</h2>
                 <p className="mt-3 max-w-xl leading-7 text-slate-300">{nextAction.copy}</p>
                 <a
                   href={nextAction.href}
-                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-amber-100 px-5 text-sm font-semibold text-amber-950 transition-colors duration-200 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
+                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-orange px-5 text-sm font-semibold text-slate-950 shadow-glow-orange transition-colors duration-200 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
                 >
                   {nextAction.cta}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -776,7 +776,7 @@ export default async function DashboardPage() {
               <ListPanel title={t.weeklyFocus} empty={t.noFocus} icon={Clock3} tone="violet">
                 {safeMilestones.slice(0, 4).map((milestone) => (
                   <div key={milestone.id} className="study-list-item">
-                    <p className="font-semibold text-white">{milestone.title}</p>
+                    <p className="font-semibold text-brand-paper">{milestone.title}</p>
                     <p className="mt-1 text-xs text-slate-400">
                       {t.sourceGoal}: {goalTitleById.get(milestone.goal_id) || t.goals}
                     </p>
@@ -788,12 +788,12 @@ export default async function DashboardPage() {
                 {safeCourses.slice(0, 4).map((course) => (
                   <div key={course.id} className="study-list-item flex items-center justify-between gap-4">
                     <div>
-                      <p className="font-semibold text-white">{course.name}</p>
+                      <p className="font-semibold text-brand-paper">{course.name}</p>
                       <p className="mt-1 text-xs text-slate-400">
                         {course.code || t.courseFallback} / {t.statusLabels[course.status as keyof typeof t.statusLabels] || course.status}
                       </p>
                     </div>
-                    <span className="text-sm font-semibold text-sky-100">{course.final_grade ?? "-"}</span>
+                    <span className="text-sm font-semibold text-cyan-100">{course.final_grade ?? "-"}</span>
                   </div>
                 ))}
               </ListPanel>
@@ -803,11 +803,11 @@ export default async function DashboardPage() {
                   {activeGoals.slice(0, 4).map((goal) => (
                     <div key={goal.id} className="study-list-item">
                       <div className="flex items-center justify-between gap-4">
-                        <p className="font-semibold text-white">{goal.title}</p>
-                        <span className="text-sm font-semibold text-amber-100">{goal.progress}%</span>
+                        <p className="font-semibold text-brand-paper">{goal.title}</p>
+                        <span className="text-sm font-semibold text-orange-100">{goal.progress}%</span>
                       </div>
                       <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-800">
-                        <div className="h-full rounded-full bg-amber-300" style={{ width: `${goal.progress}%` }} />
+                        <div className="h-full rounded-full bg-orange-300" style={{ width: `${goal.progress}%` }} />
                       </div>
                     </div>
                   ))}
@@ -913,46 +913,46 @@ const accentStyles: Record<
   }
 > = {
   sky: {
-    card: "border-sky-300/16 bg-sky-300/[0.045] hover:border-sky-300/34",
-    icon: "bg-sky-300/10 text-sky-100 ring-sky-200/20",
-    text: "text-sky-200",
-    bar: "bg-sky-300"
+    card: "border-brand-bright/20 bg-brand-cyan/[0.055] hover:border-brand-bright/42",
+    icon: "bg-brand-cyan/16 text-cyan-50 ring-brand-bright/24",
+    text: "text-cyan-200",
+    bar: "bg-brand-cyan"
   },
   violet: {
-    card: "border-violet-300/16 bg-violet-300/[0.045] hover:border-violet-300/34",
-    icon: "bg-violet-300/10 text-violet-100 ring-violet-200/20",
-    text: "text-violet-200",
-    bar: "bg-violet-300"
+    card: "border-brand-bright/18 bg-brand-bright/[0.045] hover:border-brand-bright/38",
+    icon: "bg-brand-bright/12 text-cyan-50 ring-brand-bright/22",
+    text: "text-cyan-100",
+    bar: "bg-brand-bright"
   },
   amber: {
-    card: "border-amber-300/16 bg-amber-300/[0.045] hover:border-amber-300/34",
-    icon: "bg-amber-300/10 text-amber-100 ring-amber-200/20",
-    text: "text-amber-200",
-    bar: "bg-amber-300"
+    card: "border-brand-orange/20 bg-brand-orange/[0.055] hover:border-brand-orange/42",
+    icon: "bg-brand-orange/14 text-orange-100 ring-brand-orange/24",
+    text: "text-orange-200",
+    bar: "bg-brand-orange"
   },
   emerald: {
-    card: "border-emerald-300/16 bg-emerald-300/[0.045] hover:border-emerald-300/34",
-    icon: "bg-emerald-300/10 text-emerald-100 ring-emerald-200/20",
-    text: "text-emerald-200",
-    bar: "bg-emerald-300"
+    card: "border-brand-bright/18 bg-brand-bright/[0.045] hover:border-brand-bright/38",
+    icon: "bg-brand-bright/12 text-cyan-50 ring-brand-bright/22",
+    text: "text-cyan-100",
+    bar: "bg-brand-bright"
   },
   orange: {
-    card: "border-orange-300/16 bg-orange-300/[0.045] hover:border-orange-300/34",
-    icon: "bg-orange-300/10 text-orange-100 ring-orange-200/20",
+    card: "border-brand-orange/20 bg-brand-orange/[0.055] hover:border-brand-orange/42",
+    icon: "bg-brand-orange/14 text-orange-100 ring-brand-orange/24",
     text: "text-orange-200",
-    bar: "bg-orange-300"
+    bar: "bg-brand-orange"
   },
   cyan: {
-    card: "border-cyan-300/16 bg-cyan-300/[0.045] hover:border-cyan-300/34",
-    icon: "bg-cyan-300/10 text-cyan-100 ring-cyan-200/20",
+    card: "border-brand-bright/20 bg-brand-cyan/[0.055] hover:border-brand-bright/42",
+    icon: "bg-brand-cyan/16 text-cyan-50 ring-brand-bright/24",
     text: "text-cyan-200",
-    bar: "bg-cyan-300"
+    bar: "bg-brand-cyan"
   },
   rose: {
-    card: "border-rose-300/16 bg-rose-300/[0.045] hover:border-rose-300/34",
-    icon: "bg-rose-300/10 text-rose-100 ring-rose-200/20",
-    text: "text-rose-200",
-    bar: "bg-rose-300"
+    card: "border-brand-orange/18 bg-brand-orange/[0.045] hover:border-brand-orange/38",
+    icon: "bg-brand-orange/12 text-orange-100 ring-brand-orange/22",
+    text: "text-orange-200",
+    bar: "bg-brand-orange"
   }
 };
 
@@ -977,7 +977,7 @@ function StudyContext({
         </div>
         <div className="min-w-0">
           <p className="truncate text-xs uppercase tracking-[0.12em] text-slate-400">{label}</p>
-          <p className="mt-1 truncate font-semibold text-white">{value}</p>
+          <p className="mt-1 truncate font-semibold text-brand-paper">{value}</p>
         </div>
       </div>
     </div>
@@ -1033,16 +1033,16 @@ function AcademicPulse({
     <div className="glass glass-elevated rounded-[2rem] p-5 sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">{labels.eyebrow}</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-white">{labels.title}</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">{labels.eyebrow}</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold text-brand-paper">{labels.title}</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">{labels.description}</p>
         </div>
         <div
           className={cn(
             "inline-flex shrink-0 items-center gap-2 self-start rounded-full px-3 py-1.5 text-xs font-semibold ring-1",
             healthy
-              ? "bg-emerald-300/10 text-emerald-100 ring-emerald-200/20"
-              : "bg-amber-300/10 text-amber-100 ring-amber-200/20"
+              ? "bg-cyan-300/10 text-cyan-100 ring-cyan-200/20"
+              : "bg-orange-300/10 text-orange-100 ring-orange-200/20"
           )}
         >
           <Activity className="h-3.5 w-3.5" aria-hidden="true" />
@@ -1051,23 +1051,23 @@ function AcademicPulse({
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="flex items-center gap-5 rounded-[1.5rem] border border-sky-300/14 bg-slate-950/52 p-4">
+        <div className="flex items-center gap-5 rounded-[1.5rem] border border-cyan-300/14 bg-slate-950/52 p-4">
           <div
             className="relative flex h-32 w-32 shrink-0 items-center justify-center rounded-full p-3"
             style={{
-              background: `conic-gradient(rgb(125 211 252) ${creditProgress * 3.6}deg, rgba(51, 65, 85, 0.72) 0deg)`
+              background: `conic-gradient(rgb(6 182 212) ${creditProgress * 3.6}deg, rgba(51, 65, 85, 0.72) 0deg)`
             }}
             role="img"
             aria-label={`${creditProgress}%`}
           >
             <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-white/8 bg-slate-950">
-              <span className="font-display text-3xl font-semibold text-white">{creditProgress}%</span>
+              <span className="font-display text-3xl font-semibold text-brand-paper">{creditProgress}%</span>
               <span className="mt-1 text-[11px] uppercase tracking-[0.12em] text-slate-500">{creditsLabel}</span>
             </div>
           </div>
           <div>
             <p className="text-sm text-slate-400">{completedCredits}/{targetCredits}</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-white">{completedCredits} {creditsLabel}</p>
+            <p className="mt-2 font-display text-2xl font-semibold text-brand-paper">{completedCredits} {creditsLabel}</p>
             <p className="mt-2 text-xs leading-5 text-slate-500">
               {targetCredits - completedCredits > 0 ? targetCredits - completedCredits : 0} {labels.remaining}
             </p>
@@ -1079,13 +1079,13 @@ function AcademicPulse({
             <div>
               <p className="text-sm font-medium text-slate-300">{labels.gpaTrend}</p>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="font-display text-3xl font-semibold text-white">{currentGpa ?? unavailable}</span>
+                <span className="font-display text-3xl font-semibold text-brand-paper">{currentGpa ?? unavailable}</span>
                 <span className="text-xs text-slate-500">
                   {projectedGpa ?? unavailable} {labels.projected} / {targetGpa ?? unavailable} {labels.target}
                 </span>
               </div>
             </div>
-            <BarChart3 className="h-5 w-5 text-violet-200" aria-hidden="true" />
+            <BarChart3 className="h-5 w-5 text-cyan-200" aria-hidden="true" />
           </div>
           <div className="mt-4">
             {gpaTrend.length > 0 ? (
@@ -1122,8 +1122,8 @@ function GpaSparkline({ values, label }: { values: number[]; label: string }) {
     <svg viewBox="0 0 240 72" className="h-20 w-full overflow-visible" role="img" aria-label={label}>
       <defs>
         <linearGradient id="gpa-line" x1="0" x2="1">
-          <stop offset="0%" stopColor="#7dd3fc" />
-          <stop offset="100%" stopColor="#c4b5fd" />
+          <stop offset="0%" stopColor="#0891B2" />
+          <stop offset="100%" stopColor="#06B6D4" />
         </linearGradient>
       </defs>
       {[18, 36, 54].map((y) => (
@@ -1157,7 +1157,7 @@ function PulseMetric({
         <span className="text-xs font-medium text-slate-400">{label}</span>
         <Icon className={cn("h-4 w-4", styles.text)} aria-hidden="true" />
       </div>
-      <p className="mt-3 font-display text-2xl font-semibold text-white">{value}</p>
+      <p className="mt-3 font-display text-2xl font-semibold text-brand-paper">{value}</p>
     </div>
   );
 }
@@ -1173,8 +1173,8 @@ function SectionHeading({
 }) {
   return (
     <div className="mb-5 max-w-3xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sky-200">{eyebrow}</p>
-      <h2 className="mt-2 font-display text-3xl font-semibold text-white sm:text-4xl">{title}</h2>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">{eyebrow}</p>
+      <h2 className="mt-2 font-display text-3xl font-semibold text-brand-paper sm:text-4xl">{title}</h2>
       {description ? <p className="mt-3 text-base leading-7 text-slate-400">{description}</p> : null}
     </div>
   );
@@ -1209,15 +1209,15 @@ function SemesterJourney({
   const statusStyles = {
     completed: {
       label: labels.completed,
-      badge: "bg-emerald-300/10 text-emerald-100 ring-emerald-200/18",
-      dot: "bg-emerald-300",
-      line: "bg-emerald-300"
+      badge: "bg-brand-cyan/16 text-cyan-50 ring-brand-cyan/30",
+      dot: "bg-brand-cyan",
+      line: "bg-brand-cyan"
     },
     current: {
       label: labels.current,
-      badge: "bg-sky-300/10 text-sky-100 ring-sky-200/18",
-      dot: "bg-sky-300",
-      line: "bg-sky-300"
+      badge: "bg-brand-bright/14 text-cyan-50 ring-brand-bright/30",
+      dot: "bg-brand-bright",
+      line: "bg-brand-bright"
     },
     planned: {
       label: labels.planned,
@@ -1233,7 +1233,7 @@ function SemesterJourney({
         <SectionHeading eyebrow={labels.eyebrow} title={labels.title} description={labels.description} />
         <a
           href="/roadmap"
-          className="mb-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-sky-200 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 sm:self-auto"
+          className="mb-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-cyan-200 transition-colors duration-200 hover:text-brand-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:self-auto"
         >
           <MapIcon className="h-4 w-4" aria-hidden="true" />
           {labels.eyebrow}
@@ -1252,21 +1252,21 @@ function SemesterJourney({
                   key={semester.id}
                   href="/grades"
                   className={cn(
-                    "group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300",
+                    "group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
                     semester.status === "current"
-                      ? "border-sky-300/28 bg-sky-300/[0.075] shadow-[0_20px_60px_rgba(14,165,233,0.08)]"
+                      ? "border-cyan-300/28 bg-cyan-300/[0.075] shadow-[0_20px_60px_rgba(6,182,212,0.08)]"
                       : "border-white/10 bg-slate-950/62 hover:border-white/20 hover:bg-slate-900/72"
                   )}
                 >
                   <div className={cn("absolute left-0 top-0 h-1", styles.line)} style={{ width: `${Math.max(8, semester.progress)}%` }} />
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-slate-950 font-display text-sm font-semibold text-white">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-slate-950 font-display text-sm font-semibold text-brand-paper">
                         {index + 1}
                       </span>
                       <div>
                         <p className="text-xs uppercase tracking-[0.14em] text-slate-500">{yearLabel} {semester.year_index}</p>
-                        <h3 className="mt-1 font-display text-lg font-semibold text-white">{semester.name}</h3>
+                        <h3 className="mt-1 font-display text-lg font-semibold text-brand-paper">{semester.name}</h3>
                       </div>
                     </div>
                     <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1", styles.badge)}>
@@ -1290,7 +1290,7 @@ function SemesterJourney({
                         className="flex items-center gap-2 rounded-xl border border-white/8 bg-white/[0.035] px-3 py-2 text-xs text-slate-300"
                         title={statusLabels[course.status] || course.status}
                       >
-                        <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", course.status === "completed" ? "bg-emerald-300" : course.status === "in_progress" ? "bg-sky-300" : "bg-slate-600")} />
+                        <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", course.status === "completed" ? "bg-cyan-300" : course.status === "in_progress" ? "bg-cyan-300" : "bg-slate-600")} />
                         <span className="truncate">{course.code || course.name}</span>
                       </div>
                     ))}
@@ -1306,10 +1306,10 @@ function SemesterJourney({
       ) : (
         <a
           href="/grades"
-          className="academic-grid flex min-h-48 items-center justify-center rounded-[2rem] border border-dashed border-sky-300/20 bg-sky-300/[0.035] p-6 text-center text-slate-400 transition-colors duration-200 hover:border-sky-300/38 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+          className="academic-grid flex min-h-48 items-center justify-center rounded-[2rem] border border-dashed border-cyan-300/20 bg-cyan-300/[0.035] p-6 text-center text-slate-400 transition-colors duration-200 hover:border-cyan-300/38 hover:text-brand-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
         >
           <span>
-            <CalendarDays className="mx-auto mb-3 h-6 w-6 text-sky-200" aria-hidden="true" />
+            <CalendarDays className="mx-auto mb-3 h-6 w-6 text-cyan-200" aria-hidden="true" />
             {labels.empty}
           </span>
         </a>
@@ -1350,7 +1350,7 @@ function NextModule({
     <a
       href={href}
       className={cn(
-        "group relative flex min-h-56 flex-col overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300",
+        "group relative flex min-h-56 flex-col overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
         styles.card,
         moduleSpanStyles[span]
       )}
@@ -1365,7 +1365,7 @@ function NextModule({
         </div>
       </div>
       <div className="mt-auto pt-8">
-        <h3 className="font-display text-xl font-semibold text-white">{title}</h3>
+        <h3 className="font-display text-xl font-semibold text-brand-paper">{title}</h3>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">{text}</p>
         <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-slate-800/80">
           <div className={cn("h-full rounded-full", styles.bar)} style={{ width: `${Math.max(0, Math.min(100, progress))}%` }} />
@@ -1397,7 +1397,7 @@ function ListPanel({
         <div className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
           <Icon className="h-4 w-4" aria-hidden="true" />
         </div>
-        <h3 className="font-display text-lg font-semibold text-white">{title}</h3>
+        <h3 className="font-display text-lg font-semibold text-brand-paper">{title}</h3>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
         {hasItems ? children : <p className="study-list-item text-sm text-slate-400">{empty}</p>}

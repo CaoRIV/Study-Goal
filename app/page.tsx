@@ -549,15 +549,15 @@ function Nav({
   return (
     <header className="fixed left-3 right-3 top-3 z-50 mx-auto max-w-7xl rounded-full border border-white/12 bg-slate-950/64 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl sm:left-6 sm:right-6">
       <nav className="flex items-center justify-between gap-4">
-        <a href="#" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300">
+        <a href="#" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
           <StudyGoalLogo className="h-10 w-10" priority />
           <span className="font-display text-base font-semibold tracking-normal">Study Goal</span>
         </a>
         <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-          <a className="transition-colors hover:text-white" href="#roadmap">{t.nav.roadmap}</a>
-          <a className="transition-colors hover:text-white" href="#ai-mode">{t.nav.aiMode}</a>
-          <a className="transition-colors hover:text-white" href="#features">{t.nav.features}</a>
-          <a className="transition-colors hover:text-white" href="#analytics">{t.nav.analytics}</a>
+          <a className="transition-colors hover:text-brand-paper" href="#roadmap">{t.nav.roadmap}</a>
+          <a className="transition-colors hover:text-brand-paper" href="#ai-mode">{t.nav.aiMode}</a>
+          <a className="transition-colors hover:text-brand-paper" href="#features">{t.nav.features}</a>
+          <a className="transition-colors hover:text-brand-paper" href="#analytics">{t.nav.analytics}</a>
         </div>
         <div className="flex items-center gap-2">
           <LanguageToggle language={language} setLanguage={setLanguage} t={t} />
@@ -588,7 +588,7 @@ function LanguageToggle({
       className="flex items-center rounded-full border border-white/12 bg-white/8 p-1 text-xs font-semibold text-slate-300 backdrop-blur-xl"
       role="group"
     >
-      <Globe2 className="mx-2 hidden h-4 w-4 text-sky-100 sm:block" aria-hidden="true" />
+      <Globe2 className="mx-2 hidden h-4 w-4 text-cyan-100 sm:block" aria-hidden="true" />
       {(["en", "vi"] as const).map((item) => (
         <button
           key={item}
@@ -596,10 +596,10 @@ function LanguageToggle({
           aria-pressed={language === item}
           onClick={() => setLanguage(item)}
           className={cn(
-            "h-8 min-w-9 cursor-pointer rounded-full px-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300",
+            "h-8 min-w-9 cursor-pointer rounded-full px-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
             language === item
-              ? "bg-white text-slate-950 shadow-[0_10px_30px_rgba(255,255,255,0.18)]"
-              : "text-slate-300 hover:bg-white/10 hover:text-white"
+              ? "bg-brand-bright text-slate-950 shadow-[0_10px_30px_rgba(6,182,212,0.2)]"
+              : "text-slate-300 hover:bg-cyan-400/10 hover:text-brand-paper"
           )}
         >
           {item === "en" ? t.nav.english : t.nav.vietnamese}
@@ -619,11 +619,11 @@ function Hero({ t }: { t: Content }) {
           variants={fadeIn}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-300/18 bg-emerald-300/8 px-4 py-2 text-sm font-medium text-emerald-100 shadow-glow-emerald">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-brand-cyan/10 px-4 py-2 text-sm font-medium text-cyan-50 shadow-glow-blue">
             <Zap className="h-4 w-4 shrink-0" aria-hidden="true" />
             {t.hero.tagline}
           </div>
-          <h1 className="max-w-5xl font-display text-5xl font-semibold leading-[1.02] tracking-normal text-balance text-white sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-5xl font-display text-5xl font-semibold leading-[1.02] tracking-normal text-balance text-brand-paper sm:text-6xl lg:text-7xl">
             {t.hero.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 text-pretty">
@@ -644,7 +644,7 @@ function Hero({ t }: { t: Content }) {
           <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
             {t.hero.stats.map(([value, label]) => (
               <div key={label} className="glass-soft rounded-lg px-4 py-3">
-                <div className="font-display text-2xl font-semibold text-white">{value}</div>
+                <div className="font-display text-2xl font-semibold text-brand-paper">{value}</div>
                 <div className="mt-1 text-xs uppercase tracking-[0.16em] text-slate-400">{label}</div>
               </div>
             ))}
@@ -667,14 +667,14 @@ function Hero({ t }: { t: Content }) {
 function DashboardVisual({ t }: { t: Content }) {
   return (
     <div className="glass glass-elevated relative overflow-hidden rounded-[2rem] p-3 shadow-glow-blue">
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-sky-400/18 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-400/18 to-transparent" />
       <div className="relative rounded-[1.5rem] border border-white/10 bg-slate-950/68 p-4 sm:p-5">
         <div className="mb-5 flex items-center justify-between">
           <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-sky-200">{t.dashboard.eyebrow}</p>
-            <h2 className="font-display text-xl font-semibold text-white">{t.dashboard.title}</h2>
+            <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">{t.dashboard.eyebrow}</p>
+            <h2 className="font-display text-xl font-semibold text-brand-paper">{t.dashboard.title}</h2>
           </div>
-          <div className="rounded-full border border-emerald-300/24 bg-emerald-300/10 px-3 py-1.5 text-sm text-emerald-100">
+          <div className="rounded-full border border-cyan-300/24 bg-cyan-300/10 px-3 py-1.5 text-sm text-cyan-100">
             {t.dashboard.status}
           </div>
         </div>
@@ -691,34 +691,34 @@ function DashboardVisual({ t }: { t: Content }) {
                   <div key={item.year} className="rounded-xl bg-slate-900/80 p-3">
                     <div className="mb-3 h-1.5 rounded-full bg-slate-700">
                       <div
-                        className="h-full rounded-full bg-gradient-to-r from-sky-300 to-emerald-300"
+                        className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright"
                         style={{ width: `${42 + index * 15}%` }}
                       />
                     </div>
                     <div className="text-xs text-slate-400">{item.year}</div>
-                    <div className="mt-1 text-sm font-semibold text-white">{item.title}</div>
+                    <div className="mt-1 text-sm font-semibold text-brand-paper">{item.title}</div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              <MetricPanel title={t.dashboard.gpaTracker} value="3.82" accent="from-sky-300 to-indigo-300" />
-              <MetricPanel title={t.dashboard.careerReadiness} value="86" accent="from-emerald-300 to-teal-200" />
+              <MetricPanel title={t.dashboard.gpaTracker} value="3.82" accent="from-brand-cyan to-brand-bright" />
+              <MetricPanel title={t.dashboard.careerReadiness} value="86" accent="from-brand-orange to-orange-300" />
             </div>
           </div>
           <div className="space-y-4">
             <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-sm font-medium text-slate-200">{t.dashboard.skillTree}</span>
-                <Code2 className="h-4 w-4 text-sky-200" aria-hidden="true" />
+                <Code2 className="h-4 w-4 text-cyan-200" aria-hidden="true" />
               </div>
               <div className="relative h-44 overflow-hidden rounded-xl bg-slate-950/70">
-                <div className="absolute left-[16%] top-[52%] h-px w-[66%] rotate-[-18deg] bg-sky-300/30" />
-                <div className="absolute left-[22%] top-[50%] h-px w-[58%] rotate-[26deg] bg-emerald-300/30" />
+                <div className="absolute left-[16%] top-[52%] h-px w-[66%] rotate-[-18deg] bg-cyan-300/30" />
+                <div className="absolute left-[22%] top-[50%] h-px w-[58%] rotate-[26deg] bg-cyan-300/30" />
                 {t.skillNodes.slice(0, 6).map((node) => (
                   <div
                     key={node.name}
-                    className="absolute flex h-12 w-12 items-center justify-center rounded-full border border-white/18 bg-gradient-to-br from-slate-800 to-slate-950 text-[10px] font-semibold text-white shadow-glow-blue"
+                    className="absolute flex h-12 w-12 items-center justify-center rounded-full border border-white/18 bg-gradient-to-br from-slate-800 to-slate-950 text-[10px] font-semibold text-brand-paper shadow-glow-blue"
                     style={{ left: node.x, top: node.y }}
                   >
                     {node.name.split(" ")[0]}
@@ -729,10 +729,10 @@ function DashboardVisual({ t }: { t: Content }) {
             <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
               <div className="mb-3 flex items-center justify-between text-sm">
                 <span className="font-medium text-slate-200">{t.dashboard.researchProgress}</span>
-                <span className="text-emerald-200">72%</span>
+                <span className="text-cyan-200">72%</span>
               </div>
               <div className="h-2 rounded-full bg-slate-800">
-                <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-emerald-300 to-sky-300" />
+                <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" />
               </div>
               <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs text-slate-300">
                 {t.dashboard.researchSteps.map((step) => (
@@ -752,7 +752,7 @@ function MetricPanel({ title, value, accent }: { title: string; value: string; a
     <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
       <div className="text-sm text-slate-300">{title}</div>
       <div className="mt-2 flex items-end justify-between">
-        <div className="font-display text-4xl font-semibold text-white">{value}</div>
+        <div className="font-display text-4xl font-semibold text-brand-paper">{value}</div>
         <div className="flex h-16 items-end gap-1">
           {[42, 52, 48, 65, 74, 86].map((height, index) => (
             <div
@@ -785,8 +785,8 @@ function SectionTitle({
       transition={{ duration: 0.55 }}
       className="mx-auto mb-12 max-w-3xl text-center"
     >
-      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">{eyebrow}</p>
-      <h2 className="font-display text-4xl font-semibold tracking-normal text-balance text-white sm:text-5xl">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{eyebrow}</p>
+      <h2 className="font-display text-4xl font-semibold tracking-normal text-balance text-brand-paper sm:text-5xl">
         {title}
       </h2>
       {copy ? <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300 text-pretty">{copy}</p> : null}
@@ -807,12 +807,12 @@ function Problem({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.45 }}
-              className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors duration-200 hover:border-sky-300/30 hover:bg-white/[0.085]"
+              className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors duration-200 hover:border-cyan-300/30 hover:bg-white/[0.085]"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-sky-200 ring-1 ring-white/10 transition-colors group-hover:text-emerald-200">
+              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-cyan-200 ring-1 ring-white/10 transition-colors group-hover:text-cyan-200">
                 <problem.icon className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h3 className="font-display text-lg font-semibold text-white">{problem.title}</h3>
+              <h3 className="font-display text-lg font-semibold text-brand-paper">{problem.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-400">{problem.copy}</p>
             </motion.div>
           ))}
@@ -839,12 +839,12 @@ function Solution({ t }: { t: Content }) {
                 className="glass-soft flex items-center justify-between rounded-2xl p-4"
               >
                 <div className="flex items-center gap-4">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-300/10 text-sky-200 ring-1 ring-sky-200/16">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/16">
                     <item.icon className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <span className="font-medium text-white">{item.label}</span>
+                  <span className="font-medium text-brand-paper">{item.label}</span>
                 </div>
-                <span className="text-sm text-emerald-200">{item.value}</span>
+                <span className="text-sm text-cyan-200">{item.value}</span>
               </motion.div>
             ))}
           </div>
@@ -853,9 +853,9 @@ function Solution({ t }: { t: Content }) {
               <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{t.solution.commandCenter}</p>
-                  <h3 className="font-display text-2xl font-semibold text-white">{t.solution.sprint}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-brand-paper">{t.solution.sprint}</h3>
                 </div>
-                <div className="rounded-full bg-emerald-300/10 px-3 py-1.5 text-sm text-emerald-100 ring-1 ring-emerald-200/18">
+                <div className="rounded-full bg-cyan-300/10 px-3 py-1.5 text-sm text-cyan-100 ring-1 ring-cyan-200/18">
                   {t.solution.aligned}
                 </div>
               </div>
@@ -870,9 +870,9 @@ function Solution({ t }: { t: Content }) {
                             key={bar}
                             className={cn(
                               "flex-1 rounded-t-md",
-                              index === 0 && "bg-sky-300",
-                              index === 1 && "bg-violet-300",
-                              index === 2 && "bg-emerald-300"
+                              index === 0 && "bg-brand-cyan",
+                              index === 1 && "bg-brand-bright",
+                              index === 2 && "bg-cyan-300"
                             )}
                             style={{ height: `${height}%`, opacity: 0.56 + bar * 0.08 }}
                           />
@@ -885,7 +885,7 @@ function Solution({ t }: { t: Content }) {
               <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.055] p-4">
                 <div className="mb-3 flex items-center justify-between text-sm">
                   <span className="text-slate-300">{t.solution.portfolioEvidence}</span>
-                  <span className="text-white">{t.solution.artifacts}</span>
+                  <span className="text-brand-paper">{t.solution.artifacts}</span>
                 </div>
                 <div className="grid grid-cols-6 gap-2">
                   {Array.from({ length: 18 }).map((_, index) => (
@@ -893,9 +893,9 @@ function Solution({ t }: { t: Content }) {
                       key={index}
                       className={cn(
                         "h-7 rounded-md border border-white/8",
-                        index % 3 === 0 && "bg-sky-300/40",
-                        index % 3 === 1 && "bg-emerald-300/40",
-                        index % 3 === 2 && "bg-violet-300/40"
+                        index % 3 === 0 && "bg-brand-cyan/45",
+                        index % 3 === 1 && "bg-cyan-300/40",
+                        index % 3 === 2 && "bg-brand-orange/35"
                       )}
                     />
                   ))}
@@ -927,7 +927,7 @@ function Roadmap({
         <div className="glass rounded-[2rem] p-4 sm:p-6">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/62 p-5">
-              <div className="absolute left-8 right-8 top-1/2 h-px bg-gradient-to-r from-sky-300/20 via-emerald-300/55 to-violet-300/20" />
+              <div className="absolute left-8 right-8 top-1/2 h-px bg-gradient-to-r from-cyan-300/20 via-cyan-300/55 to-cyan-300/20" />
               <div className="relative grid h-full gap-4 sm:grid-cols-4">
                 {t.roadmap.years.map((item, index) => (
                   <button
@@ -935,26 +935,26 @@ function Roadmap({
                     type="button"
                     onClick={() => setActiveYear(index)}
                     className={cn(
-                      "group flex min-h-72 cursor-pointer flex-col justify-between rounded-2xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300",
+                      "group flex min-h-72 cursor-pointer flex-col justify-between rounded-2xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
                       activeYear === index
-                        ? "border-sky-200/34 bg-sky-300/10 shadow-glow-blue"
+                        ? "border-cyan-200/34 bg-cyan-300/10 shadow-glow-blue"
                         : "border-white/10 bg-white/[0.045] hover:border-white/20 hover:bg-white/[0.075]"
                     )}
                   >
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold text-sky-100">{item.year}</span>
+                        <span className="text-sm font-semibold text-cyan-100">{item.year}</span>
                         <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 ring-1 ring-white/12">
                           {index + 1}
                         </span>
                       </div>
-                      <h3 className="mt-8 font-display text-2xl font-semibold text-white">{item.title}</h3>
+                      <h3 className="mt-8 font-display text-2xl font-semibold text-brand-paper">{item.title}</h3>
                       <p className="mt-3 text-sm leading-6 text-slate-400">{item.focus}</p>
                     </div>
                     <div className="space-y-2">
                       {item.stats.map((stat) => (
                         <div key={stat} className="flex items-center gap-2 text-sm text-slate-300">
-                          <CircleCheck className="h-4 w-4 text-emerald-200" aria-hidden="true" />
+                          <CircleCheck className="h-4 w-4 text-cyan-200" aria-hidden="true" />
                           {stat}
                         </div>
                       ))}
@@ -970,8 +970,8 @@ function Roadmap({
               transition={{ duration: 0.3 }}
               className="rounded-[1.5rem] border border-white/10 bg-white/[0.06] p-6"
             >
-              <p className="text-sm uppercase tracking-[0.18em] text-emerald-200">{t.roadmap.selected}</p>
-              <h3 className="mt-3 font-display text-4xl font-semibold text-white">{active.year}: {active.title}</h3>
+              <p className="text-sm uppercase tracking-[0.18em] text-cyan-200">{t.roadmap.selected}</p>
+              <h3 className="mt-3 font-display text-4xl font-semibold text-brand-paper">{active.year}: {active.title}</h3>
               <p className="mt-4 leading-7 text-slate-300">{active.focus}</p>
               <div className="mt-8 grid grid-cols-2 gap-3">
                 {[
@@ -982,7 +982,7 @@ function Roadmap({
                 ].map(([label, value]) => (
                   <div key={label} className="rounded-2xl bg-slate-950/52 p-4 ring-1 ring-white/10">
                     <div className="text-xs uppercase tracking-[0.16em] text-slate-500">{label}</div>
-                    <div className="mt-2 font-display text-2xl font-semibold text-white">{value}</div>
+                    <div className="mt-2 font-display text-2xl font-semibold text-brand-paper">{value}</div>
                   </div>
                 ))}
               </div>
@@ -1001,9 +1001,9 @@ function AiMode({ t }: { t: Content }) {
         <SectionTitle eyebrow={t.aiMode.eyebrow} title={t.aiMode.title} copy={t.aiMode.copy} />
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="glass relative min-h-[460px] overflow-hidden rounded-[2rem] p-5">
-            <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-sky-300/35" />
-            <div className="absolute left-[15%] top-[60%] h-px w-[66%] rotate-[18deg] bg-emerald-300/28" />
-            <div className="absolute left-[28%] top-[52%] h-px w-[48%] rotate-[-49deg] bg-violet-300/24" />
+            <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-cyan-300/35" />
+            <div className="absolute left-[15%] top-[60%] h-px w-[66%] rotate-[18deg] bg-cyan-300/28" />
+            <div className="absolute left-[28%] top-[52%] h-px w-[48%] rotate-[-49deg] bg-cyan-300/24" />
             {t.skillNodes.map((node, index) => (
               <motion.div
                 key={node.name}
@@ -1015,12 +1015,12 @@ function AiMode({ t }: { t: Content }) {
                 style={{ left: node.x, top: node.y }}
               >
                 <div className="rounded-2xl border border-white/14 bg-slate-950/82 p-3 text-center shadow-glow-blue backdrop-blur">
-                  <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-300/20 to-emerald-300/20 text-sky-100 ring-1 ring-white/12">
+                  <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-300/20 to-cyan-300/20 text-cyan-100 ring-1 ring-white/12">
                     <Network className="h-5 w-5" aria-hidden="true" />
                   </div>
-                  <div className="text-sm font-semibold text-white">{node.name}</div>
+                  <div className="text-sm font-semibold text-brand-paper">{node.name}</div>
                   <div className="mt-2 h-1.5 rounded-full bg-slate-800">
-                    <div className="h-full rounded-full bg-gradient-to-r from-sky-300 to-emerald-300" style={{ width: `${node.level}%` }} />
+                    <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${node.level}%` }} />
                   </div>
                 </div>
               </motion.div>
@@ -1030,10 +1030,10 @@ function AiMode({ t }: { t: Content }) {
             {t.aiMode.skills.map((item, index) => (
               <div key={item} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.055] p-4">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 text-emerald-200 ring-1 ring-white/10">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-950 text-cyan-200 ring-1 ring-white/10">
                     <Code2 className="h-4 w-4" aria-hidden="true" />
                   </div>
-                  <span className="font-medium text-white">{item}</span>
+                  <span className="font-medium text-brand-paper">{item}</span>
                 </div>
                 <span className="text-sm text-slate-400">{t.aiMode.level} {index + 4}</span>
               </div>
@@ -1058,12 +1058,12 @@ function Features({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.04, duration: 0.42 }}
-              className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors duration-200 hover:border-emerald-200/28 hover:bg-white/[0.085]"
+              className="group rounded-2xl border border-white/10 bg-white/[0.055] p-5 transition-colors duration-200 hover:border-cyan-300/30 hover:bg-white/[0.085]"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-sky-300/16 to-violet-300/14 text-sky-100 ring-1 ring-white/12 transition-colors group-hover:text-emerald-100">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-brand-cyan/20 to-brand-bright/12 text-cyan-100 ring-1 ring-cyan-200/16 transition-colors group-hover:text-cyan-50">
                 <feature.icon className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h3 className="font-display text-lg font-semibold text-white">{feature.title}</h3>
+              <h3 className="font-display text-lg font-semibold text-brand-paper">{feature.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-400">{feature.text}</p>
             </motion.div>
           ))}
@@ -1085,21 +1085,21 @@ function Analytics({ t }: { t: Content }) {
           <div className="glass rounded-2xl p-5 lg:col-span-3">
             <div className="mb-5 flex items-center justify-between">
               <div>
-                <h3 className="font-display text-xl font-semibold text-white">{t.analytics.goalProgress}</h3>
+                <h3 className="font-display text-xl font-semibold text-brand-paper">{t.analytics.goalProgress}</h3>
                 <p className="mt-1 text-sm text-slate-400">{t.analytics.goalCopy}</p>
               </div>
-              <LineChart className="h-5 w-5 text-emerald-200" aria-hidden="true" />
+              <LineChart className="h-5 w-5 text-cyan-200" aria-hidden="true" />
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
               {[
-                [t.analytics.progressLabels[0], 86, "from-sky-300 to-indigo-300"],
-                [t.analytics.progressLabels[1], 72, "from-violet-300 to-fuchsia-300"],
-                [t.analytics.progressLabels[2], 94, "from-emerald-300 to-teal-200"]
+                [t.analytics.progressLabels[0], 86, "from-brand-cyan to-brand-bright"],
+                [t.analytics.progressLabels[1], 72, "from-brand-orange to-orange-300"],
+                [t.analytics.progressLabels[2], 94, "from-cyan-400 to-brand-bright"]
               ].map(([label, value, color]) => (
                 <div key={label as string} className="rounded-2xl bg-slate-950/60 p-4 ring-1 ring-white/10">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-slate-300">{label}</span>
-                    <span className="text-white">{value}%</span>
+                    <span className="text-brand-paper">{value}%</span>
                   </div>
                   <div className="mt-4 h-2 rounded-full bg-slate-800">
                     <div className={cn("h-full rounded-full bg-gradient-to-r", color as string)} style={{ width: `${value}%` }} />
@@ -1107,10 +1107,10 @@ function Analytics({ t }: { t: Content }) {
                 </div>
               ))}
             </div>
-            <div className="mt-5 rounded-2xl bg-emerald-300/10 p-4 ring-1 ring-emerald-200/18">
+            <div className="mt-5 rounded-2xl bg-cyan-300/10 p-4 ring-1 ring-cyan-200/18">
               <div className="flex items-center justify-between gap-4">
-                <span className="text-sm text-emerald-100">{t.analytics.careerReadiness}</span>
-                <span className="font-display text-3xl font-semibold text-white">91</span>
+                <span className="text-sm text-cyan-100">{t.analytics.careerReadiness}</span>
+                <span className="font-display text-3xl font-semibold text-brand-paper">91</span>
               </div>
             </div>
           </div>
@@ -1137,10 +1137,10 @@ function ChartCard({
     <div className={cn("glass min-h-64 rounded-2xl p-5", className)}>
       <div className="mb-5 flex items-center justify-between">
         <div>
-          <h3 className="font-display text-xl font-semibold text-white">{title}</h3>
+          <h3 className="font-display text-xl font-semibold text-brand-paper">{title}</h3>
           <p className="mt-1 text-sm text-slate-400">{liveSignal}</p>
         </div>
-        <span className="font-display text-2xl font-semibold text-emerald-100">{value}</span>
+        <span className="font-display text-2xl font-semibold text-cyan-100">{value}</span>
       </div>
       {variant === "dots" ? (
         <div className="grid grid-cols-9 gap-2">
@@ -1149,7 +1149,7 @@ function ChartCard({
               key={index}
               className={cn(
                 "aspect-square rounded-md",
-                index % 5 === 0 ? "bg-emerald-300/80" : index % 3 === 0 ? "bg-sky-300/60" : "bg-white/8"
+                index % 5 === 0 ? "bg-cyan-300/80" : index % 3 === 0 ? "bg-cyan-300/60" : "bg-white/8"
               )}
             />
           ))}
@@ -1161,7 +1161,7 @@ function ChartCard({
               <div
                 className={cn(
                   "rounded-t-lg bg-gradient-to-t",
-                  variant === "wide" ? "from-indigo-400 to-sky-300" : "from-emerald-300 to-sky-300"
+                  variant === "wide" ? "from-brand-cyan to-brand-bright" : "from-cyan-400 to-brand-bright"
                 )}
                 style={{ height: `${height}%` }}
               />
@@ -1188,7 +1188,7 @@ function Testimonials({ t }: { t: Content }) {
               transition={{ delay: index * 0.07, duration: 0.45 }}
               className="glass-soft rounded-2xl p-6"
             >
-              <div className="mb-6 flex items-center gap-1 text-emerald-200">
+              <div className="mb-6 flex items-center gap-1 text-orange-300">
                 {Array.from({ length: 5 }).map((_, star) => (
                   <Sparkles key={star} className="h-4 w-4" aria-hidden="true" />
                 ))}
@@ -1196,10 +1196,10 @@ function Testimonials({ t }: { t: Content }) {
               <blockquote className="text-lg leading-8 text-slate-200 text-pretty">&quot;{testimonial.quote}&quot;</blockquote>
               <figcaption className="mt-7 flex items-center justify-between gap-4">
                 <div>
-                  <div className="font-semibold text-white">{testimonial.name}</div>
+                  <div className="font-semibold text-brand-paper">{testimonial.name}</div>
                   <div className="mt-1 text-sm text-slate-400">{testimonial.role}</div>
                 </div>
-                <div className="rounded-full bg-sky-300/10 px-3 py-1.5 text-xs font-semibold text-sky-100 ring-1 ring-sky-200/16">
+                <div className="rounded-full bg-cyan-300/10 px-3 py-1.5 text-xs font-semibold text-cyan-100 ring-1 ring-cyan-200/16">
                   {testimonial.result}
                 </div>
               </figcaption>
@@ -1216,12 +1216,12 @@ function FinalCta({ t }: { t: Content }) {
     <section id="start" className="px-4 pb-10 pt-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="glass glass-elevated relative overflow-hidden rounded-[2rem] px-6 py-16 text-center sm:px-10 lg:py-24">
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-emerald-300/16 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand-orange/18 to-transparent" />
           <div className="relative mx-auto max-w-4xl">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-200">{t.finalCta.eyebrow}</p>
-            <h2 className="font-display text-5xl font-semibold leading-tight tracking-normal text-balance text-white sm:text-6xl">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-orange-300">{t.finalCta.eyebrow}</p>
+            <h2 className="font-display text-5xl font-semibold leading-tight tracking-normal text-balance text-brand-paper sm:text-6xl">
               {t.finalCta.titleLine1}
-              <span className="block text-sky-100">{t.finalCta.titleLine2}</span>
+              <span className="block text-cyan-100">{t.finalCta.titleLine2}</span>
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
               {t.finalCta.copy}

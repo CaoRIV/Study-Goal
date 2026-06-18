@@ -247,16 +247,16 @@ export default async function GoalsPage() {
           <a href="/dashboard" className="flex items-center gap-3">
             <StudyGoalLogo priority />
             <div>
-              <p className="font-display text-lg font-semibold text-white">Study Goal</p>
+              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
               <p className="text-sm text-slate-400">{t.subtitle}</p>
             </div>
           </a>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <LanguageSwitcher language={language} label={t.languageLabel} />
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/dashboard">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/dashboard">
               {t.dashboard}
             </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-white" href="/grades">
+            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/grades">
               {t.grades}
             </a>
             <SignOutButton label={t.signOut} />
@@ -264,8 +264,8 @@ export default async function GoalsPage() {
         </header>
 
         <section className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-sky-200">{t.eyebrow}</p>
-          <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-white">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
+          <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-brand-paper">
             {t.title}
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>

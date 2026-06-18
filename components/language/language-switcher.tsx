@@ -28,7 +28,7 @@ export function LanguageSwitcher({
       className="flex items-center rounded-full border border-white/12 bg-white/8 p-1 text-xs font-semibold text-slate-300 backdrop-blur-xl"
       role="group"
     >
-      <Globe2 className="mx-2 hidden h-4 w-4 text-sky-100 sm:block" aria-hidden="true" />
+      <Globe2 className="mx-2 hidden h-4 w-4 text-cyan-100 sm:block" aria-hidden="true" />
       {(["en", "vi"] as const).map((item) => (
         <button
           key={item}
@@ -36,10 +36,10 @@ export function LanguageSwitcher({
           aria-pressed={language === item}
           onClick={() => setLanguage(item)}
           className={cn(
-            "h-8 min-w-9 cursor-pointer rounded-full px-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300",
+            "h-8 min-w-9 cursor-pointer rounded-full px-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
             language === item
-              ? "bg-white text-slate-950 shadow-[0_10px_30px_rgba(255,255,255,0.18)]"
-              : "text-slate-300 hover:bg-white/10 hover:text-white"
+              ? "bg-brand-bright text-slate-950 shadow-[0_10px_30px_rgba(6,182,212,0.2)]"
+              : "text-slate-300 hover:bg-cyan-400/10 hover:text-cyan-50"
           )}
         >
           {item.toUpperCase()}
