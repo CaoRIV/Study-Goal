@@ -252,7 +252,12 @@ body::after {
   color: #0f172a !important;
 }
 
-:where([class~="text-slate-300"]) {
+:where(
+  [class~="text-slate-300"],
+  [class~="text-slate-400"],
+  [class~="text-slate-500"],
+  [class~="text-slate-600"]
+) {
   color: #334155 !important;
 }
 
@@ -268,8 +273,41 @@ body::after {
   color: #047857 !important;
 }
 
+:where(
+  [class~="text-red-100"],
+  [class~="text-red-200"],
+  [class~="text-rose-100"],
+  [class~="text-rose-200"]
+) {
+  color: #b91c1c !important;
+}
+
 :where([class~="text-brand-coral-soft"]) {
   color: var(--brand-deep-red) !important;
+}
+
+:where([class~="text-brand-cyan"], [class~="text-brand-bright"]) {
+  color: #0e7490 !important;
+}
+
+:where([class~="text-brand-green"]) {
+  color: #047857 !important;
+}
+
+:where([class~="text-brand-coral"]) {
+  color: #be123c !important;
+}
+
+:where([class~="text-brand-orange"]) {
+  color: #c2410c !important;
+}
+
+:where(
+  [class~="text-brand-cream"],
+  [class~="text-brand-cream/82"],
+  [class~="text-brand-cream/85"]
+) {
+  color: #334155 !important;
 }
 
 :where(
@@ -292,6 +330,14 @@ body::after {
   [class~="hover:text-brand-paper"]
 ):hover {
   color: #0e7490 !important;
+}
+
+:where([class~="hover:text-red-100"]):hover {
+  color: #991b1b !important;
+}
+
+:where([class~="group-hover:text-brand-cream"]):is(:hover *) {
+  color: #334155 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
