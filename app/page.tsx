@@ -44,7 +44,7 @@ const content = {
   en: {
     nav: {
       roadmap: "Roadmap",
-      aiMode: "AI Mode",
+      skills: "Skills",
       features: "Features",
       analytics: "Analytics",
       cta: "Get Started",
@@ -58,7 +58,7 @@ const content = {
       tagline: "Turn Your University Journey Into a Master Plan.",
       title: "Your Entire University Journey, Visualized.",
       copy:
-        "Plan your courses, track your GPA, manage research projects, join clubs, build skills, and prepare for your dream career-all in one place.",
+        "Plan courses, track progress, manage projects and activities, build transferable skills, and prepare for your future—all in one place.",
       primaryCta: "Get Started",
       secondaryCta: "Watch Demo",
       stats: [
@@ -75,9 +75,9 @@ const content = {
       credits: "128 credits",
       gpaTracker: "GPA tracker",
       careerReadiness: "Career readiness",
-      skillTree: "AI skill tree",
-      researchProgress: "Research progress",
-      researchSteps: ["Dataset", "Draft", "Submit"]
+      skillTree: "Personal skill map",
+      researchProgress: "Project progress",
+      researchSteps: ["Plan", "Build", "Present"]
     },
     problems: {
       eyebrow: "The hidden cost",
@@ -87,7 +87,7 @@ const content = {
       items: [
         {
           title: "Missed opportunities",
-          copy: "Scholarships, assistant roles, competitions, and research windows vanish without a living plan.",
+          copy: "Scholarships, placements, competitions, exchanges, and campus opportunities vanish without a living plan.",
           icon: Compass
         },
         {
@@ -102,7 +102,7 @@ const content = {
         },
         {
           title: "Weak portfolios",
-          copy: "Projects, clubs, leadership, and papers stay scattered instead of becoming a coherent story.",
+          copy: "Projects, clubs, leadership, practical work, and achievements stay scattered instead of becoming a coherent story.",
           icon: FolderKanban
         },
         {
@@ -119,12 +119,12 @@ const content = {
       commandCenter: "Command center",
       sprint: "Spring 2027 Sprint",
       aligned: "91% aligned",
-      miniCards: ["Courses", "Research", "Career"],
+      miniCards: ["Courses", "Projects", "Career"],
       portfolioEvidence: "Portfolio evidence collected",
       artifacts: "38 artifacts",
       items: [
         { label: "Academic Planning", value: "126 credits mapped", icon: BookOpenCheck },
-        { label: "Research Tracking", value: "3 papers in motion", icon: FlaskConical },
+        { label: "Project Tracking", value: "3 projects in motion", icon: FlaskConical },
         { label: "Club Participation", value: "2 leadership arcs", icon: UsersRound },
         { label: "Skill Development", value: "41 skills leveled", icon: BrainCircuit },
         { label: "Career Preparation", value: "86 readiness score", icon: Medal }
@@ -134,12 +134,12 @@ const content = {
       eyebrow: "Four-year roadmap",
       title: "See Every Semester Before It Happens.",
       copy:
-        "A long-range timeline for courses, GPA, research, leadership, internships, and the graduation story you are building.",
+        "A long-range timeline for courses, GPA, projects, activities, internships, and the graduation story you are building.",
       selected: "Selected chapter",
       metricLabels: {
         courses: "Courses",
         gpa: "GPA",
-        research: "Research",
+          research: "Projects",
         career: "Career"
       },
       years: [
@@ -154,15 +154,15 @@ const content = {
           year: "Year 2",
           title: "Direction",
           gpa: "3.71",
-          focus: "Research lab, skill stacks, first projects",
-          stats: ["64 credits", "1 lab", "8 GitHub builds"]
+          focus: "Core expertise, practical skills, first projects",
+          stats: ["64 credits", "3 projects", "6 skill proofs"]
         },
         {
           year: "Year 3",
           title: "Evidence",
           gpa: "3.82",
-          focus: "Leadership, internships, papers",
-          stats: ["96 credits", "2 internships", "1 publication"]
+          focus: "Leadership, internships, major milestones",
+          stats: ["96 credits", "2 internships", "1 capstone"]
         },
         {
           year: "Year 4",
@@ -173,32 +173,32 @@ const content = {
         }
       ]
     },
-    aiMode: {
-      eyebrow: "AI student mode",
-      title: "Build Your Technical Arc Like a Skill Tree.",
+    skills: {
+      eyebrow: "Skills for every major",
+      title: "Build a Skill Map That Reflects Your Own Path.",
       copy:
-        "For AI and Computer Science students, Study Goal tracks the path from fundamentals to publishable research and career-grade proof.",
+        "Whether you study business, health, engineering, arts, education, law, or technology, track the expertise and transferable skills that move you forward.",
       level: "Level",
       skills: [
-        "Programming Skills",
-        "Machine Learning",
-        "Deep Learning",
-        "NLP",
-        "Computer Vision",
-        "Research Papers",
-        "Kaggle Projects",
-        "GitHub Portfolio"
+        "Subject Expertise",
+        "Communication",
+        "Research & Analysis",
+        "Digital Tools",
+        "Creative Problem Solving",
+        "Teamwork & Leadership",
+        "Project Management",
+        "Career Readiness"
       ]
     },
     skillNodes: [
-      { name: "Python", level: 96, x: "8%", y: "52%" },
-      { name: "ML", level: 78, x: "29%", y: "24%" },
-      { name: "Deep Learning", level: 64, x: "52%", y: "18%" },
-      { name: "NLP", level: 58, x: "76%", y: "34%" },
-      { name: "Vision", level: 46, x: "69%", y: "70%" },
-      { name: "Papers", level: 72, x: "42%", y: "72%" },
-      { name: "Kaggle", level: 61, x: "19%", y: "78%" },
-      { name: "GitHub", level: 88, x: "88%", y: "58%" }
+      { name: "Expertise", level: 88, x: "8%", y: "52%" },
+      { name: "Writing", level: 78, x: "29%", y: "24%" },
+      { name: "Analysis", level: 72, x: "52%", y: "18%" },
+      { name: "Presentation", level: 68, x: "76%", y: "34%" },
+      { name: "Digital", level: 61, x: "69%", y: "70%" },
+      { name: "Projects", level: 74, x: "42%", y: "72%" },
+      { name: "Leadership", level: 65, x: "19%", y: "78%" },
+      { name: "Career", level: 82, x: "88%", y: "58%" }
     ],
     features: {
       eyebrow: "Feature system",
@@ -206,10 +206,10 @@ const content = {
       items: [
         { title: "Academic Dashboard", icon: GraduationCap, text: "Courses, credits, GPA, prerequisites, and semester load in one command center." },
         { title: "Goal Management", icon: Target, text: "Turn graduation targets into weekly milestones with visible momentum." },
-        { title: "Research Workspace", icon: FlaskConical, text: "Track papers, advisors, datasets, experiments, and submission deadlines." },
+        { title: "Project Workspace", icon: FlaskConical, text: "Track assignments, research, creative work, field practice, and major project deadlines." },
         { title: "Club Tracker", icon: UsersRound, text: "Map participation, leadership roles, events, and portfolio-worthy impact." },
-        { title: "Skill Tree", icon: BrainCircuit, text: "Level up technical, academic, and career skills with evidence attached." },
-        { title: "Achievement Portfolio", icon: Trophy, text: "Collect proof across courses, projects, research, and leadership." },
+        { title: "Skill Map", icon: BrainCircuit, text: "Grow subject, digital, communication, leadership, and career skills with evidence attached." },
+        { title: "Achievement Portfolio", icon: Trophy, text: "Collect proof across courses, projects, placements, activities, and leadership." },
         { title: "Career Planner", icon: BriefcaseBusiness, text: "Prepare internship targets, resumes, interviews, and application sprints." },
         { title: "Analytics Dashboard", icon: BarChart3, text: "Spot trends before they become risks with clear progress intelligence." }
       ]
@@ -218,12 +218,12 @@ const content = {
       eyebrow: "Analytics",
       title: "Beautiful Charts for the Decisions That Shape Your Future.",
       copy:
-        "Study Goal transforms scattered student activity into clear academic, research, goal, and career signals.",
+        "Study Goal transforms scattered student activity into clear academic, project, goal, and career signals.",
       liveSignal: "Live university signal",
       cards: {
         gpa: "GPA Growth",
         credits: "Credit Completion",
-        research: "Research Activity"
+        research: "Project Activity"
       },
       goalProgress: "Goal Progress",
       goalCopy: "Academic, portfolio, and career milestones",
@@ -236,23 +236,23 @@ const content = {
       items: [
         {
           quote:
-            "Study Goal turned my semester planning from guesswork into a clear roadmap. I finally saw which courses, projects, and research moves supported my transfer plan.",
+            "Study Goal turned my semester planning from guesswork into a clear roadmap. I can connect courses, campus activities, and projects to the career I want.",
           name: "Maya Tran",
-          role: "Computer Science, sophomore",
+          role: "Business Administration, sophomore",
           result: "GPA from 3.42 to 3.78"
         },
         {
           quote:
-            "I used to keep research notes, club work, and internship prep in separate apps. Now my portfolio is building itself as I go.",
+            "I used to keep clinical practice, volunteer work, and internship preparation in separate apps. Now my portfolio grows as I learn.",
           name: "Jordan Ellis",
-          role: "Data Science, junior",
+          role: "Nursing, junior",
           result: "2 internship offers"
         },
         {
           quote:
             "The four-year view changed how I think. I stopped reacting to deadlines and started designing the university story I wanted admissions teams to see.",
           name: "Ari Chen",
-          role: "AI research track, senior",
+          role: "Architecture, senior",
           result: "Graduate applications ready 6 weeks early"
         }
       ]
@@ -262,14 +262,14 @@ const content = {
       titleLine1: "Don't Just Survive University.",
       titleLine2: "Master It.",
       copy:
-        "Build the four-year operating system that turns classes, goals, skills, research, and career preparation into one extraordinary portfolio.",
+        "Build the four-year operating system that turns classes, goals, skills, projects, and career preparation into one extraordinary portfolio.",
       cta: "Start Building Your Future"
     }
   },
   vi: {
     nav: {
       roadmap: "Lộ trình",
-      aiMode: "Chế độ AI",
+      skills: "Kỹ năng",
       features: "Tính năng",
       analytics: "Phân tích",
       cta: "Bắt đầu",
@@ -283,7 +283,7 @@ const content = {
       tagline: "Biến hành trình đại học của bạn thành một bản kế hoạch tổng thể.",
       title: "Toàn bộ hành trình đại học của bạn, được trực quan hóa.",
       copy:
-        "Lập kế hoạch môn học, theo dõi GPA, quản lý dự án nghiên cứu, tham gia câu lạc bộ, xây dựng kỹ năng và chuẩn bị cho sự nghiệp mơ ước - tất cả trong một nơi.",
+        "Lập kế hoạch môn học, theo dõi tiến độ, quản lý dự án và hoạt động, xây dựng kỹ năng chuyển đổi và chuẩn bị cho tương lai — tất cả trong một nơi.",
       primaryCta: "Bắt đầu",
       secondaryCta: "Xem demo",
       stats: [
@@ -300,9 +300,9 @@ const content = {
       credits: "128 tín chỉ",
       gpaTracker: "Theo dõi GPA",
       careerReadiness: "Sẵn sàng nghề nghiệp",
-      skillTree: "Cây kỹ năng AI",
-      researchProgress: "Tiến độ nghiên cứu",
-      researchSteps: ["Dữ liệu", "Bản nháp", "Nộp bài"]
+      skillTree: "Bản đồ kỹ năng cá nhân",
+      researchProgress: "Tiến độ dự án",
+      researchSteps: ["Lập kế hoạch", "Thực hiện", "Trình bày"]
     },
     problems: {
       eyebrow: "Chi phí ẩn",
@@ -312,7 +312,7 @@ const content = {
       items: [
         {
           title: "Bỏ lỡ cơ hội",
-          copy: "Học bổng, vai trò trợ giảng, cuộc thi và cơ hội nghiên cứu dễ biến mất nếu không có một kế hoạch sống.",
+          copy: "Học bổng, thực tập, cuộc thi, trao đổi và cơ hội trong trường dễ biến mất nếu không có một kế hoạch sống.",
           icon: Compass
         },
         {
@@ -327,7 +327,7 @@ const content = {
         },
         {
           title: "Portfolio yếu",
-          copy: "Dự án, câu lạc bộ, vai trò lãnh đạo và bài nghiên cứu bị phân tán thay vì tạo thành một câu chuyện nhất quán.",
+          copy: "Dự án, câu lạc bộ, vai trò lãnh đạo, thực hành và thành tựu bị phân tán thay vì tạo thành một câu chuyện nhất quán.",
           icon: FolderKanban
         },
         {
@@ -344,12 +344,12 @@ const content = {
       commandCenter: "Trung tâm điều khiển",
       sprint: "Sprint Xuân 2027",
       aligned: "91% đồng bộ mục tiêu",
-      miniCards: ["Môn học", "Nghiên cứu", "Sự nghiệp"],
+      miniCards: ["Môn học", "Dự án", "Sự nghiệp"],
       portfolioEvidence: "Minh chứng portfolio đã thu thập",
       artifacts: "38 minh chứng",
       items: [
         { label: "Lập kế hoạch học tập", value: "126 tín chỉ đã map", icon: BookOpenCheck },
-        { label: "Theo dõi nghiên cứu", value: "3 bài đang triển khai", icon: FlaskConical },
+        { label: "Theo dõi dự án", value: "3 dự án đang triển khai", icon: FlaskConical },
         { label: "Tham gia câu lạc bộ", value: "2 lộ trình lãnh đạo", icon: UsersRound },
         { label: "Phát triển kỹ năng", value: "41 kỹ năng đã nâng cấp", icon: BrainCircuit },
         { label: "Chuẩn bị sự nghiệp", value: "86 điểm sẵn sàng", icon: Medal }
@@ -359,12 +359,12 @@ const content = {
       eyebrow: "Lộ trình bốn năm",
       title: "Nhìn thấy từng học kỳ trước khi nó diễn ra.",
       copy:
-        "Một timeline dài hạn cho môn học, GPA, nghiên cứu, lãnh đạo, thực tập và câu chuyện tốt nghiệp bạn đang xây dựng.",
+        "Một timeline dài hạn cho môn học, GPA, dự án, hoạt động, thực tập và câu chuyện tốt nghiệp bạn đang xây dựng.",
       selected: "Chặng đang chọn",
       metricLabels: {
         courses: "Môn học",
         gpa: "GPA",
-        research: "Nghiên cứu",
+          research: "Dự án",
         career: "Sự nghiệp"
       },
       years: [
@@ -379,15 +379,15 @@ const content = {
           year: "Năm 2",
           title: "Định hướng",
           gpa: "3.71",
-          focus: "Phòng lab nghiên cứu, bộ kỹ năng, dự án đầu tiên",
-          stats: ["64 tín chỉ", "1 phòng lab", "8 dự án GitHub"]
+          focus: "Chuyên môn cốt lõi, kỹ năng thực hành, dự án đầu tiên",
+          stats: ["64 tín chỉ", "3 dự án", "6 minh chứng kỹ năng"]
         },
         {
           year: "Năm 3",
           title: "Minh chứng",
           gpa: "3.82",
-          focus: "Lãnh đạo, thực tập, bài nghiên cứu",
-          stats: ["96 tín chỉ", "2 kỳ thực tập", "1 công bố"]
+          focus: "Lãnh đạo, thực tập, cột mốc chuyên ngành",
+          stats: ["96 tín chỉ", "2 kỳ thực tập", "1 đồ án lớn"]
         },
         {
           year: "Năm 4",
@@ -398,32 +398,32 @@ const content = {
         }
       ]
     },
-    aiMode: {
-      eyebrow: "Chế độ sinh viên AI",
-      title: "Xây dựng lộ trình kỹ thuật như một cây kỹ năng.",
+    skills: {
+      eyebrow: "Kỹ năng cho mọi ngành học",
+      title: "Xây dựng bản đồ kỹ năng phản ánh con đường riêng của bạn.",
       copy:
-        "Dành cho sinh viên AI và Khoa học Máy tính, Study Goal theo dõi hành trình từ nền tảng đến nghiên cứu có thể công bố và minh chứng nghề nghiệp.",
+        "Dù học kinh tế, sức khỏe, kỹ thuật, nghệ thuật, giáo dục, luật hay công nghệ, bạn đều có thể theo dõi chuyên môn và kỹ năng chuyển đổi cần cho tương lai.",
       level: "Cấp",
       skills: [
-        "Kỹ năng lập trình",
-        "Machine Learning",
-        "Deep Learning",
-        "NLP",
-        "Computer Vision",
-        "Bài nghiên cứu",
-        "Dự án Kaggle",
-        "Portfolio GitHub"
+        "Chuyên môn ngành học",
+        "Giao tiếp",
+        "Nghiên cứu & phân tích",
+        "Công cụ số",
+        "Giải quyết vấn đề sáng tạo",
+        "Làm việc nhóm & lãnh đạo",
+        "Quản lý dự án",
+        "Sẵn sàng nghề nghiệp"
       ]
     },
     skillNodes: [
-      { name: "Python", level: 96, x: "8%", y: "52%" },
-      { name: "ML", level: 78, x: "29%", y: "24%" },
-      { name: "Deep Learning", level: 64, x: "52%", y: "18%" },
-      { name: "NLP", level: 58, x: "76%", y: "34%" },
-      { name: "Vision", level: 46, x: "69%", y: "70%" },
-      { name: "Papers", level: 72, x: "42%", y: "72%" },
-      { name: "Kaggle", level: 61, x: "19%", y: "78%" },
-      { name: "GitHub", level: 88, x: "88%", y: "58%" }
+      { name: "Chuyên môn", level: 88, x: "8%", y: "52%" },
+      { name: "Viết", level: 78, x: "29%", y: "24%" },
+      { name: "Phân tích", level: 72, x: "52%", y: "18%" },
+      { name: "Thuyết trình", level: 68, x: "76%", y: "34%" },
+      { name: "Công cụ số", level: 61, x: "69%", y: "70%" },
+      { name: "Dự án", level: 74, x: "42%", y: "72%" },
+      { name: "Lãnh đạo", level: 65, x: "19%", y: "78%" },
+      { name: "Nghề nghiệp", level: 82, x: "88%", y: "58%" }
     ],
     features: {
       eyebrow: "Hệ thống tính năng",
@@ -431,10 +431,10 @@ const content = {
       items: [
         { title: "Dashboard học tập", icon: GraduationCap, text: "Môn học, tín chỉ, GPA, môn tiên quyết và tải học kỳ trong một trung tâm điều khiển." },
         { title: "Quản lý mục tiêu", icon: Target, text: "Biến mục tiêu tốt nghiệp thành các cột mốc hằng tuần với tiến độ rõ ràng." },
-        { title: "Không gian nghiên cứu", icon: FlaskConical, text: "Theo dõi bài báo, giảng viên hướng dẫn, dữ liệu, thí nghiệm và hạn nộp." },
+        { title: "Không gian dự án", icon: FlaskConical, text: "Theo dõi bài tập lớn, nghiên cứu, sản phẩm sáng tạo, thực hành thực địa và hạn hoàn thành." },
         { title: "Theo dõi câu lạc bộ", icon: UsersRound, text: "Ghi lại mức độ tham gia, vai trò lãnh đạo, sự kiện và tác động đáng đưa vào portfolio." },
-        { title: "Cây kỹ năng", icon: BrainCircuit, text: "Nâng cấp kỹ năng kỹ thuật, học thuật và nghề nghiệp với minh chứng đi kèm." },
-        { title: "Portfolio thành tựu", icon: Trophy, text: "Thu thập minh chứng từ môn học, dự án, nghiên cứu và hoạt động lãnh đạo." },
+        { title: "Bản đồ kỹ năng", icon: BrainCircuit, text: "Phát triển chuyên môn, công cụ số, giao tiếp, lãnh đạo và kỹ năng nghề nghiệp với minh chứng đi kèm." },
+        { title: "Portfolio thành tựu", icon: Trophy, text: "Thu thập minh chứng từ môn học, dự án, thực tập, hoạt động và vai trò lãnh đạo." },
         { title: "Kế hoạch sự nghiệp", icon: BriefcaseBusiness, text: "Chuẩn bị mục tiêu thực tập, CV, phỏng vấn và các đợt ứng tuyển." },
         { title: "Dashboard phân tích", icon: BarChart3, text: "Nhìn thấy xu hướng trước khi chúng trở thành rủi ro bằng dữ liệu tiến độ rõ ràng." }
       ]
@@ -443,12 +443,12 @@ const content = {
       eyebrow: "Phân tích",
       title: "Biểu đồ đẹp cho những quyết định định hình tương lai.",
       copy:
-        "Study Goal biến hoạt động sinh viên rời rạc thành tín hiệu rõ ràng về học tập, nghiên cứu, mục tiêu và sự nghiệp.",
+        "Study Goal biến hoạt động sinh viên rời rạc thành tín hiệu rõ ràng về học tập, dự án, mục tiêu và sự nghiệp.",
       liveSignal: "Tín hiệu đại học trực tiếp",
       cards: {
         gpa: "Tăng trưởng GPA",
         credits: "Hoàn thành tín chỉ",
-        research: "Hoạt động nghiên cứu"
+        research: "Hoạt động dự án"
       },
       goalProgress: "Tiến độ mục tiêu",
       goalCopy: "Các cột mốc học tập, portfolio và sự nghiệp",
@@ -461,23 +461,23 @@ const content = {
       items: [
         {
           quote:
-            "Study Goal biến việc lập kế hoạch học kỳ của mình từ phỏng đoán thành một lộ trình rõ ràng. Mình cuối cùng cũng thấy môn học, dự án và nghiên cứu nào hỗ trợ kế hoạch chuyển tiếp.",
+            "Study Goal biến việc lập kế hoạch học kỳ của mình từ phỏng đoán thành một lộ trình rõ ràng. Mình có thể kết nối môn học, hoạt động và dự án với nghề nghiệp mong muốn.",
           name: "Maya Tran",
-          role: "Khoa học Máy tính, sinh viên năm hai",
+          role: "Quản trị Kinh doanh, sinh viên năm hai",
           result: "GPA từ 3.42 lên 3.78"
         },
         {
           quote:
-            "Trước đây mình để ghi chú nghiên cứu, hoạt động câu lạc bộ và chuẩn bị thực tập ở nhiều app khác nhau. Bây giờ portfolio của mình được xây dần trong quá trình học.",
+            "Trước đây mình để ghi chép thực hành, hoạt động tình nguyện và chuẩn bị thực tập ở nhiều app khác nhau. Bây giờ portfolio được xây dần trong quá trình học.",
           name: "Jordan Ellis",
-          role: "Khoa học Dữ liệu, sinh viên năm ba",
+          role: "Điều dưỡng, sinh viên năm ba",
           result: "2 offer thực tập"
         },
         {
           quote:
             "Góc nhìn bốn năm thay đổi cách mình suy nghĩ. Mình ngừng chạy theo deadline và bắt đầu thiết kế câu chuyện đại học mà hội đồng tuyển sinh muốn thấy.",
           name: "Ari Chen",
-          role: "Định hướng nghiên cứu AI, sinh viên năm cuối",
+          role: "Kiến trúc, sinh viên năm cuối",
           result: "Hồ sơ cao học sẵn sàng sớm 6 tuần"
         }
       ]
@@ -487,7 +487,7 @@ const content = {
       titleLine1: "Đừng chỉ cố sống sót qua đại học.",
       titleLine2: "Hãy làm chủ nó.",
       copy:
-        "Xây dựng hệ điều hành bốn năm biến môn học, mục tiêu, kỹ năng, nghiên cứu và chuẩn bị nghề nghiệp thành một portfolio xuất sắc.",
+        "Xây dựng hệ điều hành bốn năm biến môn học, mục tiêu, kỹ năng, dự án và chuẩn bị nghề nghiệp thành một portfolio xuất sắc.",
       cta: "Bắt đầu xây dựng tương lai"
     }
   }
@@ -528,7 +528,7 @@ export default function Home() {
       <Problem t={t} />
       <Solution t={t} />
       <Roadmap activeYear={activeYear} setActiveYear={setActiveYear} t={t} />
-      <AiMode t={t} />
+      <SkillsShowcase t={t} />
       <Features t={t} />
       <Analytics t={t} />
       <Testimonials t={t} />
@@ -555,7 +555,7 @@ function Nav({
         </a>
         <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
           <a className="transition-colors hover:text-brand-paper" href="#roadmap">{t.nav.roadmap}</a>
-          <a className="transition-colors hover:text-brand-paper" href="#ai-mode">{t.nav.aiMode}</a>
+          <a className="transition-colors hover:text-brand-paper" href="#skills">{t.nav.skills}</a>
           <a className="transition-colors hover:text-brand-paper" href="#features">{t.nav.features}</a>
           <a className="transition-colors hover:text-brand-paper" href="#analytics">{t.nav.analytics}</a>
         </div>
@@ -1014,11 +1014,11 @@ function Roadmap({
   );
 }
 
-function AiMode({ t }: { t: Content }) {
+function SkillsShowcase({ t }: { t: Content }) {
   return (
-    <section id="ai-mode" className="px-4 py-20 sm:px-6 lg:px-8">
+    <section id="skills" className="px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <SectionTitle eyebrow={t.aiMode.eyebrow} title={t.aiMode.title} copy={t.aiMode.copy} />
+        <SectionTitle eyebrow={t.skills.eyebrow} title={t.skills.title} copy={t.skills.copy} />
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="glass relative min-h-[460px] overflow-hidden rounded-[2rem] p-5">
             <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-brand-green/38" />
@@ -1047,7 +1047,7 @@ function AiMode({ t }: { t: Content }) {
             ))}
           </div>
           <div className="space-y-3">
-            {t.aiMode.skills.map((item, index) => (
+            {t.skills.skills.map((item, index) => (
               <div key={item} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.055] p-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-green/10 text-emerald-200 ring-1 ring-brand-green/18">
@@ -1055,7 +1055,7 @@ function AiMode({ t }: { t: Content }) {
                   </div>
                   <span className="font-medium text-brand-paper">{item}</span>
                 </div>
-                <span className="text-sm text-slate-400">{t.aiMode.level} {index + 4}</span>
+                <span className="text-sm text-slate-400">{t.skills.level} {index + 4}</span>
               </div>
             ))}
           </div>
