@@ -11,17 +11,17 @@ import { createClient } from "@/lib/supabase/server";
 
 const skillsCopy = {
   en: {
-    subtitle: "Skill tree",
+    subtitle: "Personal skill map",
     dashboard: "Dashboard",
     roadmap: "Roadmap",
     grades: "Academic planner",
     goals: "Goals",
     signOut: "Sign out",
     languageLabel: "Change language",
-    eyebrow: "AI Student Mode",
-    title: "Build a visible skill tree for your university portfolio.",
+    eyebrow: "Skills for every major",
+    title: "Build a skill map for your studies, projects, and future career.",
     description:
-      "Track programming, machine learning, research, Kaggle, GitHub, and career skills with levels, evidence links, and notes.",
+      "Track subject expertise, communication, research, digital tools, creativity, leadership, and career skills with levels, evidence, and notes.",
     manager: {
       summary: {
         tracked: "Skills tracked",
@@ -30,15 +30,15 @@ const skillsCopy = {
         evidence: "Evidence links"
       },
       form: {
-        title: "Add skill node",
+        title: "Add a skill",
         nameLabel: "Skill name",
-        namePlaceholder: "PyTorch, NLP paper reading, Kaggle notebooks",
+        namePlaceholder: "Public speaking, financial analysis, illustration, patient care",
         categoryLabel: "Category",
         levelLabel: "Current level",
         targetLevelLabel: "Target level",
         statusLabel: "Status",
         evidenceLabel: "Evidence URL",
-        evidencePlaceholder: "GitHub, Kaggle, certificate, paper, portfolio link",
+        evidencePlaceholder: "Project, certificate, presentation, report, portfolio link",
         notesLabel: "Notes",
         notesPlaceholder: "What are you building, practicing, or using as proof?",
         submit: "Add skill"
@@ -51,10 +51,10 @@ const skillsCopy = {
         noMatches: "No skills match this view."
       },
       tree: {
-        title: "Skill tree",
+        title: "Personal skill map",
         description:
-          "Each node shows current level, target level, status, and portfolio evidence. Keep it updated weekly to reveal your growth path.",
-        empty: "No skills yet. Add your first node to start building the tree.",
+          "Each skill shows your current level, target, learning status, and supporting evidence. Update it regularly to make growth visible.",
+        empty: "No skills yet. Add your first skill to start building your map.",
         progress: "Progress",
         evidence: "Evidence",
         noEvidence: "No evidence yet"
@@ -68,6 +68,13 @@ const skillsCopy = {
       },
       labels: {
         categories: {
+          subject_expertise: "Subject Expertise",
+          digital_tools: "Digital Tools",
+          research_analysis: "Research & Analysis",
+          teamwork_leadership: "Teamwork & Leadership",
+          creative_design: "Creativity & Design",
+          project_management: "Project Management",
+          language: "Language",
           programming: "Programming",
           machine_learning: "Machine Learning",
           deep_learning: "Deep Learning",
@@ -89,17 +96,17 @@ const skillsCopy = {
     }
   },
   vi: {
-    subtitle: "Cây kỹ năng",
+    subtitle: "Bản đồ kỹ năng cá nhân",
     dashboard: "Bảng điều khiển",
     roadmap: "Lộ trình",
     grades: "Kế hoạch học tập",
     goals: "Mục tiêu",
     signOut: "Đăng xuất",
     languageLabel: "Đổi ngôn ngữ",
-    eyebrow: "Chế độ sinh viên AI",
-    title: "Xây dựng cây kỹ năng rõ ràng cho hồ sơ năng lực đại học.",
+    eyebrow: "Kỹ năng cho mọi ngành học",
+    title: "Xây dựng bản đồ kỹ năng cho học tập, dự án và sự nghiệp tương lai.",
     description:
-      "Theo dõi lập trình, machine learning, nghiên cứu, Kaggle, GitHub và kỹ năng nghề nghiệp bằng cấp độ, minh chứng và ghi chú.",
+      "Theo dõi chuyên môn ngành học, giao tiếp, nghiên cứu, công cụ số, sáng tạo, lãnh đạo và kỹ năng nghề nghiệp bằng cấp độ, minh chứng và ghi chú.",
     manager: {
       summary: {
         tracked: "Kỹ năng đã theo dõi",
@@ -108,15 +115,15 @@ const skillsCopy = {
         evidence: "Minh chứng"
       },
       form: {
-        title: "Thêm nút kỹ năng",
+        title: "Thêm kỹ năng",
         nameLabel: "Tên kỹ năng",
-        namePlaceholder: "PyTorch, đọc paper NLP, notebook Kaggle",
+        namePlaceholder: "Thuyết trình, phân tích tài chính, minh họa, chăm sóc người bệnh",
         categoryLabel: "Danh mục",
         levelLabel: "Cấp độ hiện tại",
         targetLevelLabel: "Cấp độ mục tiêu",
         statusLabel: "Trạng thái",
         evidenceLabel: "Đường dẫn minh chứng",
-        evidencePlaceholder: "GitHub, Kaggle, chứng chỉ, paper, portfolio",
+        evidencePlaceholder: "Dự án, chứng chỉ, bài thuyết trình, báo cáo, portfolio",
         notesLabel: "Ghi chú",
         notesPlaceholder: "Bạn đang xây gì, luyện gì, hoặc dùng gì làm minh chứng?",
         submit: "Thêm kỹ năng"
@@ -129,10 +136,10 @@ const skillsCopy = {
         noMatches: "Không có kỹ năng nào khớp với chế độ xem này."
       },
       tree: {
-        title: "Cây kỹ năng",
+        title: "Bản đồ kỹ năng cá nhân",
         description:
-          "Mỗi nút hiển thị cấp độ hiện tại, cấp độ mục tiêu, trạng thái và minh chứng portfolio. Cập nhật hằng tuần để thấy đường phát triển của bạn.",
-        empty: "Chưa có kỹ năng. Hãy thêm nút đầu tiên để bắt đầu xây cây.",
+          "Mỗi kỹ năng hiển thị cấp độ hiện tại, mục tiêu, trạng thái học tập và minh chứng đi kèm. Cập nhật thường xuyên để thấy rõ sự phát triển.",
+        empty: "Chưa có kỹ năng. Hãy thêm kỹ năng đầu tiên để bắt đầu xây bản đồ.",
         progress: "Tiến độ",
         evidence: "Minh chứng",
         noEvidence: "Chưa có minh chứng"
@@ -146,6 +153,13 @@ const skillsCopy = {
       },
       labels: {
         categories: {
+          subject_expertise: "Chuyên môn ngành học",
+          digital_tools: "Công cụ số",
+          research_analysis: "Nghiên cứu & phân tích",
+          teamwork_leadership: "Làm việc nhóm & lãnh đạo",
+          creative_design: "Sáng tạo & thiết kế",
+          project_management: "Quản lý dự án",
+          language: "Ngoại ngữ",
           programming: "Lập trình",
           machine_learning: "Machine Learning",
           deep_learning: "Deep Learning",
@@ -241,8 +255,8 @@ export default async function SkillsPage() {
             </div>
             <p className="text-sm leading-6 text-brand-cream/82">
               {language === "en"
-                ? "Designed for AI, CS, research, and career-ready students who want proof of growth."
-                : "Thiết kế cho sinh viên AI, CS, nghiên cứu và định hướng nghề nghiệp cần minh chứng phát triển rõ ràng."}
+                ? "Designed for students in every field—from business and health to arts, education, engineering, law, and technology."
+                : "Dành cho sinh viên mọi lĩnh vực — từ kinh tế, sức khỏe, nghệ thuật, giáo dục đến kỹ thuật, luật và công nghệ."}
             </p>
           </div>
         </section>

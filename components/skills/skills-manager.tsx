@@ -97,21 +97,31 @@ type SkillsManagerCopy = {
 };
 
 const categoryOptions = [
-  "programming",
-  "machine_learning",
-  "deep_learning",
-  "nlp",
-  "computer_vision",
-  "research",
-  "github_portfolio",
-  "kaggle_projects",
-  "career",
-  "communication"
+  "subject_expertise",
+  "digital_tools",
+  "research_analysis",
+  "communication",
+  "teamwork_leadership",
+  "creative_design",
+  "project_management",
+  "language",
+  "career"
 ];
+
+const defaultCategory = "subject_expertise";
 
 const statusOptions = ["planned", "learning", "practicing", "mastered"];
 
 const categoryAccent: Record<string, string> = {
+  subject_expertise: "from-brand-cyan to-brand-bright",
+  digital_tools: "from-brand-green to-brand-cyan",
+  research_analysis: "from-brand-coral to-brand-bright",
+  communication: "from-brand-coral to-brand-orange",
+  teamwork_leadership: "from-brand-orange to-brand-green",
+  creative_design: "from-brand-coral-soft to-brand-coral",
+  project_management: "from-brand-cyan to-brand-orange",
+  language: "from-brand-green to-brand-coral",
+  career: "from-brand-orange to-brand-green",
   programming: "from-brand-green to-brand-bright",
   machine_learning: "from-brand-green to-brand-cyan",
   deep_learning: "from-brand-coral to-brand-orange",
@@ -119,9 +129,7 @@ const categoryAccent: Record<string, string> = {
   computer_vision: "from-brand-green to-brand-coral",
   research: "from-brand-coral-soft to-brand-coral",
   github_portfolio: "from-brand-cream to-brand-cyan",
-  kaggle_projects: "from-brand-orange to-brand-green",
-  career: "from-brand-orange to-brand-green",
-  communication: "from-brand-coral to-brand-orange"
+  kaggle_projects: "from-brand-orange to-brand-green"
 };
 
 export function SkillsManager({
@@ -136,7 +144,7 @@ export function SkillsManager({
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [name, setName] = useState("");
-  const [category, setCategory] = useState("programming");
+  const [category, setCategory] = useState(defaultCategory);
   const [level, setLevel] = useState("1");
   const [targetLevel, setTargetLevel] = useState("5");
   const [status, setStatus] = useState("learning");
@@ -148,7 +156,7 @@ export function SkillsManager({
   const [editingSkillId, setEditingSkillId] = useState("");
   const [draft, setDraft] = useState<SkillDraft>({
     name: "",
-    category: "programming",
+    category: defaultCategory,
     level: "1",
     targetLevel: "5",
     evidenceUrl: "",
@@ -177,7 +185,10 @@ export function SkillsManager({
       const searchText = `${skill.name} ${skill.notes || ""}`.toLowerCase();
       return searchText.includes(query.toLowerCase());
     });
-  const skillsByCategory = categoryOptions
+  const visibleCategoryOptions = Array.from(
+    new Set([...categoryOptions, ...normalizedSkills.map((skill) => skill.category)])
+  );
+  const skillsByCategory = visibleCategoryOptions
     .map((option) => ({
       category: option,
       skills: filteredSkills.filter((skill) => skill.category === option)
@@ -210,7 +221,7 @@ export function SkillsManager({
     }
 
     setName("");
-    setCategory("programming");
+    setCategory(defaultCategory);
     setLevel("1");
     setTargetLevel("5");
     setStatus("learning");
@@ -385,7 +396,7 @@ export function SkillsManager({
               </label>
               <select value={categoryFilter} onChange={(event) => setCategoryFilter(event.target.value)} className="form-input">
                 <option value="all">{copy.filters.allCategories}</option>
-                {categoryOptions.map((option) => (
+                {visibleCategoryOptions.map((option) => (
                   <option key={option} value={option}>{copy.labels.categories[option]}</option>
                 ))}
               </select>
@@ -422,7 +433,7 @@ export function SkillsManager({
                 {skillsByCategory.map((group) => (
                   <div key={group.category} className="relative rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-4">
                     <div className="mb-4 flex items-center gap-3">
-                      <span className={cn("h-3 w-3 rounded-full bg-gradient-to-br", categoryAccent[group.category])} />
+                      <span className={cn("h-3 w-3 rounded-full bg-gradient-to-br", categoryAccent[group.category] || "from-brand-cyan to-brand-coral")} />
                       <h3 className="font-display text-lg font-semibold text-brand-paper">{copy.labels.categories[group.category]}</h3>
                       <span className="rounded-full bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-slate-300">{group.skills.length}</span>
                     </div>
@@ -498,6 +509,7 @@ function SkillNode({
   isBusy: boolean;
 }) {
   const progress = getSkillProgress(skill);
+  const editCategoryOptions = Array.from(new Set([...categoryOptions, draft.category]));
 
   if (isEditing) {
     return (
@@ -506,7 +518,7 @@ function SkillNode({
           <input value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <div className="grid gap-3 sm:grid-cols-2">
             <select value={draft.category} onChange={(event) => setDraft({ ...draft, category: event.target.value })} className="form-input">
-              {categoryOptions.map((option) => (
+              {editCategoryOptions.map((option) => (
                 <option key={option} value={option}>{copy.labels.categories[option]}</option>
               ))}
             </select>
@@ -539,7 +551,7 @@ function SkillNode({
 
   return (
     <article className="group relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-slate-950/64 p-4 transition-colors duration-200 hover:border-brand-green/24 hover:bg-slate-900/72">
-      <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r", categoryAccent[skill.category])} />
+      <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r", categoryAccent[skill.category] || "from-brand-cyan to-brand-coral")} />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{copy.labels.statuses[skill.status]}</p>
@@ -563,7 +575,7 @@ function SkillNode({
           <span className="font-semibold text-brand-green">{skill.level}/{skill.target_level}</span>
         </div>
         <div className="h-2 rounded-full bg-slate-800">
-          <div className={cn("h-full rounded-full bg-gradient-to-r", categoryAccent[skill.category])} style={{ width: `${progress}%` }} />
+          <div className={cn("h-full rounded-full bg-gradient-to-r", categoryAccent[skill.category] || "from-brand-cyan to-brand-coral")} style={{ width: `${progress}%` }} />
         </div>
       </div>
 
