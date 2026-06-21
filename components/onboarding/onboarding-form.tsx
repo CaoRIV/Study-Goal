@@ -103,7 +103,7 @@ export function OnboardingForm({
   }
 
   return (
-    <div className="min-h-screen px-4 py-28 sm:px-6 lg:px-8">
+    <div id="main-content" className="min-h-screen px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-cyan-100 shadow-glow-blue">

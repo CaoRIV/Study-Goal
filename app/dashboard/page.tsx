@@ -23,9 +23,7 @@ import {
   UsersRound
 } from "lucide-react";
 
-import { SignOutButton } from "@/components/dashboard/sign-out-button";
-import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
-import { LanguageSwitcher } from "@/components/language/language-switcher";
+import { WorkspaceHeader } from "@/components/navigation/workspace-header";
 import {
   calculateCompletedCredits,
   calculateCreditProgress,
@@ -563,50 +561,14 @@ export default async function DashboardPage() {
     .slice(-7);
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
-        <header className="flex flex-col gap-4 rounded-[2rem] border border-white/12 bg-slate-950/72 p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl xl:flex-row xl:items-center">
-          <a href="/" className="flex items-center gap-3">
-            <StudyGoalLogo priority />
-            <div>
-              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
-              <p className="text-sm text-slate-400">{t.appSubtitle}</p>
-            </div>
-          </a>
-          <nav
-            aria-label={language === "vi" ? "Điều hướng không gian học tập" : "Study workspace navigation"}
-            className="flex flex-1 flex-wrap items-center gap-1 xl:justify-center"
-          >
-            <a className="workspace-nav-link" href="/grades">
-              {t.grades}
-            </a>
-            <a className="workspace-nav-link" href="/roadmap">
-              {t.roadmap}
-            </a>
-            <a className="workspace-nav-link" href="/goals">
-              {t.goals}
-            </a>
-            <a className="workspace-nav-link" href="/skills">
-              {t.skills}
-            </a>
-            <a className="workspace-nav-link" href="/clubs">
-              {clubsLabel}
-            </a>
-            <a className="workspace-nav-link" href="/portfolio">
-              {portfolioLabel}
-            </a>
-            <a className="workspace-nav-link" href="/career">
-              {careerLabel}
-            </a>
-            <a className="workspace-nav-link" href="/profile">
-              {t.profile}
-            </a>
-          </nav>
-          <div className="flex flex-wrap items-center gap-2">
-            <LanguageSwitcher language={language} label={t.languageLabel} />
-            <SignOutButton label={t.signOut} />
-          </div>
-        </header>
+        <WorkspaceHeader
+          language={language}
+          subtitle={t.appSubtitle}
+          languageLabel={t.languageLabel}
+          signOutLabel={t.signOut}
+        />
 
         <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-white/12 bg-slate-950/48 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.28)] lg:p-8">
           <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
