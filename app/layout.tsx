@@ -1,24 +1,60 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { cookies } from "next/headers";
+import { GeistSans } from "geist/font/sans";
+
+import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
+
 import "./globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Study Goal | Turn Your University Journey Into a Master Plan",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Study Goal | Plan your university journey",
+    template: "%s | Study Goal"
+  },
   description:
-    "Study Goal is a premium student operating system for planning courses, research, goals, skills, clubs, internships, and graduate school readiness.",
+    "Study Goal helps students in every major plan courses, goals, projects, skills, campus activities, portfolios, and career preparation in one place.",
+  keywords: [
+    "student planner",
+    "university roadmap",
+    "academic goals",
+    "student skills",
+    "career readiness",
+    "student portfolio"
+  ],
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Study Goal",
+    title: "Study Goal | Plan your university journey",
+    description:
+      "Connect courses, goals, projects, skills, activities, and career preparation in one clear university plan."
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Study Goal | Plan your university journey",
+    description:
+      "Connect courses, goals, projects, skills, activities, and career preparation in one clear university plan."
+  },
   icons: {
     icon: "/study-goal-logo.png",
     apple: "/study-goal-logo.png"
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const language = normalizeLanguage(cookieStore.get(LANGUAGE_COOKIE)?.value);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={language} className={GeistSans.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

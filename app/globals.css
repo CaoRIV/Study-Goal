@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", ui-sans-serif;
-  --font-body: "Segoe UI Variable Text", "Segoe UI", "Helvetica Neue", Arial, ui-sans-serif;
+  --font-display: var(--font-geist-sans);
+  --font-body: var(--font-geist-sans);
   --brand-navy: #0f172a;
   --brand-cyan: #0891b2;
   --brand-cyan-bright: #06b6d4;
@@ -43,6 +43,7 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  font-variant-numeric: tabular-nums;
   background:
     radial-gradient(circle at 12% 2%, rgba(254, 202, 202, 0.72), transparent 29rem),
     radial-gradient(circle at 88% 9%, rgba(6, 182, 212, 0.18), transparent 30rem),
