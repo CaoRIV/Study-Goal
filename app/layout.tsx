@@ -55,7 +55,15 @@ export default async function RootLayout({
 
   return (
     <html lang={language} className={GeistSans.variable} suppressHydrationWarning>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-brand-navy px-4 py-2 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0"
+        >
+          {language === "vi" ? "Bỏ qua đến nội dung chính" : "Skip to main content"}
+        </a>
+        {children}
+      </body>
     </html>
   );
 }

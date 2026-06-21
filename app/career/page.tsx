@@ -2,10 +2,8 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { BriefcaseBusiness } from "lucide-react";
 
-import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
 import { CareerReadinessManager } from "@/components/career/career-readiness-manager";
-import { SignOutButton } from "@/components/dashboard/sign-out-button";
-import { LanguageSwitcher } from "@/components/language/language-switcher";
+import { WorkspaceHeader } from "@/components/navigation/workspace-header";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
 import { createClient } from "@/lib/supabase/server";
 
@@ -218,32 +216,16 @@ export default async function CareerPage() {
   ]);
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
-        <header className="mb-8 flex flex-col gap-4 rounded-[2rem] border border-white/12 bg-slate-950/64 p-5 shadow-2xl shadow-black/35 backdrop-blur-2xl lg:flex-row lg:items-center lg:justify-between">
-          <a href="/dashboard" className="flex items-center gap-3">
-            <StudyGoalLogo priority />
-            <div>
-              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
-              <p className="text-sm text-slate-400">{t.subtitle}</p>
-            </div>
-          </a>
-          <nav className="flex flex-wrap items-center gap-1" aria-label="Career navigation">
-            <LanguageSwitcher language={language} label={t.languageLabel} />
-            {[
-              ["/dashboard", t.dashboard],
-              ["/roadmap", t.roadmap],
-              ["/grades", t.grades],
-              ["/goals", t.goals],
-              ["/portfolio", t.portfolio]
-            ].map(([href, label]) => (
-              <a key={href} href={href} className="inline-flex h-11 items-center justify-center rounded-full px-4 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper">
-                {label}
-              </a>
-            ))}
-            <SignOutButton label={t.signOut} />
-          </nav>
-        </header>
+        <div className="mb-8">
+          <WorkspaceHeader
+            language={language}
+            subtitle={t.subtitle}
+            languageLabel={t.languageLabel}
+            signOutLabel={t.signOut}
+          />
+        </div>
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div>

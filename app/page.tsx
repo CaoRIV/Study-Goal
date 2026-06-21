@@ -15,7 +15,6 @@ import {
   Compass,
   FlaskConical,
   FolderKanban,
-  Globe2,
   GraduationCap,
   LineChart,
   Medal,
@@ -29,7 +28,8 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
+import { PublicFooter } from "@/components/navigation/public-footer";
+import { PublicHeader } from "@/components/navigation/public-header";
 import { LANGUAGE_COOKIE } from "@/lib/language";
 import { cn } from "@/lib/utils";
 
@@ -522,8 +522,8 @@ export default function Home() {
   const t = content[language];
 
   return (
-    <main className="relative overflow-hidden">
-      <Nav language={language} setLanguage={setLanguage} t={t} />
+    <main id="main-content" className="relative overflow-hidden">
+      <PublicHeader language={language} setLanguage={setLanguage} labels={t.nav} />
       <Hero t={t} />
       <Problem t={t} />
       <Solution t={t} />
@@ -533,79 +533,8 @@ export default function Home() {
       <Analytics t={t} />
       <Testimonials t={t} />
       <FinalCta t={t} />
+      <PublicFooter language={language} />
     </main>
-  );
-}
-
-function Nav({
-  language,
-  setLanguage,
-  t
-}: {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  t: Content;
-}) {
-  return (
-    <header className="fixed left-3 right-3 top-3 z-50 mx-auto max-w-7xl rounded-full border border-white/12 bg-slate-950/64 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl sm:left-6 sm:right-6">
-      <nav className="flex items-center justify-between gap-4">
-        <a href="#" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
-          <StudyGoalLogo className="h-10 w-10" priority />
-          <span className="font-display text-base font-semibold tracking-normal">Study Goal</span>
-        </a>
-        <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-          <a className="transition-colors hover:text-brand-paper" href="#roadmap">{t.nav.roadmap}</a>
-          <a className="transition-colors hover:text-brand-paper" href="#skills">{t.nav.skills}</a>
-          <a className="transition-colors hover:text-brand-paper" href="#features">{t.nav.features}</a>
-          <a className="transition-colors hover:text-brand-paper" href="#analytics">{t.nav.analytics}</a>
-        </div>
-        <div className="flex items-center gap-2">
-          <LanguageToggle language={language} setLanguage={setLanguage} t={t} />
-          <Button asChild size="default" variant="ghost" className="hidden lg:inline-flex">
-            <a href="/login">{t.nav.login}</a>
-          </Button>
-          <Button asChild size="default" className="hidden sm:inline-flex">
-            <a href="/register">{t.nav.register}</a>
-          </Button>
-        </div>
-      </nav>
-    </header>
-  );
-}
-
-function LanguageToggle({
-  language,
-  setLanguage,
-  t
-}: {
-  language: Language;
-  setLanguage: (language: Language) => void;
-  t: Content;
-}) {
-  return (
-    <div
-      aria-label={t.nav.languageLabel}
-      className="flex items-center rounded-full border border-white/12 bg-white/8 p-1 text-xs font-semibold text-slate-300 backdrop-blur-xl"
-      role="group"
-    >
-      <Globe2 className="mx-2 hidden h-4 w-4 text-cyan-100 sm:block" aria-hidden="true" />
-      {(["en", "vi"] as const).map((item) => (
-        <button
-          key={item}
-          type="button"
-          aria-pressed={language === item}
-          onClick={() => setLanguage(item)}
-          className={cn(
-            "h-8 min-w-9 cursor-pointer rounded-full px-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
-            language === item
-              ? "bg-brand-bright text-slate-950 shadow-[0_10px_30px_rgba(6,182,212,0.2)]"
-              : "text-slate-300 hover:bg-cyan-400/10 hover:text-brand-paper"
-          )}
-        >
-          {item === "en" ? t.nav.english : t.nav.vietnamese}
-        </button>
-      ))}
-    </div>
   );
 }
 

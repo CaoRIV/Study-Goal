@@ -1,9 +1,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
-import { SignOutButton } from "@/components/dashboard/sign-out-button";
 import { AcademicPlanner } from "@/components/grades/academic-planner";
-import { LanguageSwitcher } from "@/components/language/language-switcher";
+import { WorkspaceHeader } from "@/components/navigation/workspace-header";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
 import { createClient } from "@/lib/supabase/server";
 
@@ -225,27 +223,11 @@ export default async function GradesPage() {
     .order("created_at", { ascending: true });
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-8 flex flex-col gap-4 rounded-[2rem] border border-white/12 bg-slate-950/64 p-5 shadow-2xl shadow-black/35 backdrop-blur-2xl sm:flex-row sm:items-center sm:justify-between">
-          <a href="/dashboard" className="flex items-center gap-3">
-            <StudyGoalLogo priority />
-            <div>
-              <p className="font-display text-lg font-semibold text-brand-paper">Study Goal</p>
-              <p className="text-sm text-slate-400">{t.subtitle}</p>
-            </div>
-          </a>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <LanguageSwitcher language={language} label={t.languageLabel} />
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/dashboard">
-              {t.dashboard}
-            </a>
-            <a className="inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-semibold text-slate-200 transition-colors hover:bg-white/8 hover:text-brand-paper" href="/goals">
-              {t.goals}
-            </a>
-            <SignOutButton label={t.signOut} />
-          </div>
-        </header>
+        <div className="mb-8">
+          <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />
+        </div>
 
         <section className="mb-8">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>

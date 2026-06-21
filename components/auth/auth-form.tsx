@@ -15,6 +15,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { StudyGoalLogo } from "@/components/brand/study-goal-logo";
+import { PublicFooter } from "@/components/navigation/public-footer";
 import { createClient } from "@/lib/supabase/client";
 
 type AuthMode = "login" | "register" | "forgot-password";
@@ -175,7 +176,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   }
 
   return (
-    <main className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="min-h-screen px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <header className="flex items-center justify-between rounded-full border border-white/12 bg-slate-950/64 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl">
           <a href="/" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
@@ -190,20 +191,20 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
           </Button>
         </header>
 
-        <section className="grid min-h-[calc(100vh-104px)] items-center gap-8 py-10 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.055] p-6 shadow-glow-blue backdrop-blur-xl sm:p-8 lg:min-h-[640px]">
+        <section className="grid items-start gap-8 py-8 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-10">
+          <div className="order-2 relative overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.055] p-6 shadow-glow-blue backdrop-blur-xl sm:p-8 lg:order-1 lg:min-h-[640px]">
             <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-cyan-300/18 to-transparent" />
             <div className="relative">
               <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-cyan-100">
                 <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                 Không gian học tập an toàn
               </div>
-              <h1 className="max-w-2xl font-display text-5xl font-semibold leading-tight text-brand-paper lg:text-6xl">
+              <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-brand-paper sm:text-5xl lg:text-6xl">
                 {text.sideTitle}
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">{text.sideCopy}</p>
 
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              <div className="mt-10 hidden gap-4 sm:grid sm:grid-cols-3">
                 {[
                   ["GPA", "3.82", BookOpenCheck],
                   ["Mục tiêu", "18", Target],
@@ -219,7 +220,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-[1.5rem] border border-white/10 bg-slate-950/68 p-5">
+              <div className="mt-6 hidden rounded-[1.5rem] border border-white/10 bg-slate-950/68 p-5 sm:block">
                 <div className="mb-5 flex items-center justify-between">
                   <div>
                     <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Kế hoạch tổng thể</p>
@@ -250,7 +251,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             </div>
           </div>
 
-          <div className="glass glass-elevated mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8">
+          <div className="glass glass-elevated order-1 mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8 lg:order-2">
             <div className="mb-7">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{text.eyebrow}</p>
               <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-brand-paper">
@@ -348,6 +349,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
           </div>
         </section>
       </div>
+      <PublicFooter language="vi" />
     </main>
   );
 }
