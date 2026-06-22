@@ -22,6 +22,25 @@ const config: Config = {
           cream: "#FFFBEB",
           "deep-red": "#991B1B"
         },
+        surface: {
+          canvas: "#F9FAFB",
+          panel: "#FFFFFF",
+          warm: "#FFFBEB",
+          coral: "#FDE8E8",
+          cyan: "#DDEFF2"
+        },
+        ink: {
+          DEFAULT: "#0F172A",
+          muted: "#334155",
+          subtle: "#475569"
+        },
+        signal: {
+          cyan: "#0E7490",
+          orange: "#C2410C",
+          green: "#047857",
+          red: "#B91C1C"
+        },
+        outline: "#C9E2E7",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

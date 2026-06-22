@@ -262,10 +262,10 @@ export function ClubsManager({
       <section className="grid gap-6 xl:grid-cols-[430px_minmax(0,1fr)]">
         <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createClub}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-brand-coral-soft shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-signal-red shadow-glow-blue">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
-            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.form.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-ink">{copy.form.title}</h2>
           </div>
 
           <div className="space-y-4">
@@ -290,7 +290,7 @@ export function ClubsManager({
                 ))}
               </select>
             </Field>
-            <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200">
+            <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-sm font-semibold text-ink">
               <input type="checkbox" checked={isLeadership} onChange={(event) => setIsLeadership(event.target.checked)} className="h-4 w-4 accent-brand-coral" />
               {copy.form.leadershipLabel}
             </label>
@@ -302,7 +302,7 @@ export function ClubsManager({
             </Field>
 
             {error ? (
-              <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">{error}</div>
+              <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">{error}</div>
             ) : null}
 
             <Button type="submit" className="w-full" disabled={isBusy}>
@@ -313,16 +313,16 @@ export function ClubsManager({
         </form>
 
         <div className="space-y-5">
-          <div className="rounded-[2rem] border border-white/10 bg-slate-950/56 p-5 backdrop-blur-2xl">
+          <div className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 backdrop-blur-2xl">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-brand-coral-soft">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-signal-red">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
             </div>
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_190px]">
               <label className="relative block">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" aria-hidden="true" />
                 <input value={query} onChange={(event) => setQuery(event.target.value)} className="form-input pl-11" placeholder={copy.filters.search} />
               </label>
               <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value)} className="form-input">
@@ -331,23 +331,23 @@ export function ClubsManager({
                   <option key={option} value={option}>{copy.labels.statuses[option]}</option>
                 ))}
               </select>
-              <label className="flex h-12 cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm font-semibold text-slate-200">
+              <label className="flex h-12 cursor-pointer items-center gap-3 rounded-2xl border border-outline bg-surface-panel/90 px-4 text-sm font-semibold text-ink">
                 <input type="checkbox" checked={leadershipOnly} onChange={(event) => setLeadershipOnly(event.target.checked)} className="h-4 w-4 accent-brand-coral" />
                 {copy.filters.leadershipOnly}
               </label>
             </div>
           </div>
 
-          <section className="rounded-[2rem] border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
+          <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-brand-coral-soft">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-signal-red">
                 <UsersRound className="h-5 w-5" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.list.title}</h2>
+              <h2 className="font-display text-2xl font-semibold text-ink">{copy.list.title}</h2>
             </div>
 
             {filteredClubs.length === 0 ? (
-              <div className="rounded-[1.5rem] border border-dashed border-white/14 bg-white/[0.035] p-8 text-center text-slate-400">
+              <div className="rounded-[1.5rem] border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">
                 {query || statusFilter !== "all" || leadershipOnly ? copy.filters.noMatches : copy.list.empty}
               </div>
             ) : (
@@ -386,12 +386,12 @@ function SummaryCard({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/18 bg-brand-coral/10 text-brand-coral-soft">
+    <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/18 bg-brand-coral/10 text-signal-red">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
-      <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">{value}</p>
+      <p className="text-sm text-ink-muted">{label}</p>
+      <p className="mt-2 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -421,7 +421,7 @@ function ClubCard({
 }) {
   if (isEditing) {
     return (
-      <article className="rounded-[1.5rem] border border-brand-coral/22 bg-slate-950/76 p-4">
+      <article className="rounded-[1.5rem] border border-brand-coral/22 bg-surface-panel/90 p-4">
         <div className="space-y-3">
           <input required value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <input required value={draft.role} onChange={(event) => setDraft({ ...draft, role: event.target.value })} className="form-input" />
@@ -434,7 +434,7 @@ function ClubCard({
               <option key={option} value={option}>{copy.labels.statuses[option]}</option>
             ))}
           </select>
-          <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-white/10 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200">
+          <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-sm font-semibold text-ink">
             <input type="checkbox" checked={draft.isLeadership} onChange={(event) => setDraft({ ...draft, isLeadership: event.target.checked })} className="h-4 w-4 accent-brand-coral" />
             {copy.form.leadershipLabel}
           </label>
@@ -456,36 +456,36 @@ function ClubCard({
   }
 
   return (
-    <article className="rounded-[1.5rem] border border-white/10 bg-slate-950/64 p-5 transition-colors duration-200 hover:border-brand-coral/24 hover:bg-slate-900/72">
+    <article className="rounded-[1.5rem] border border-outline bg-surface-panel/90 p-5 transition-colors duration-200 hover:border-brand-coral/24 hover:bg-surface-coral">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-brand-coral-soft ring-1 ring-brand-coral-soft/16">
+            <span className="rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">
               {copy.labels.statuses[club.status]}
             </span>
             {club.is_leadership ? (
-              <span className="inline-flex items-center gap-1 rounded-full bg-orange-300/10 px-3 py-1 text-xs font-semibold text-orange-100 ring-1 ring-orange-200/16">
+              <span className="inline-flex items-center gap-1 rounded-full bg-orange-300/10 px-3 py-1 text-xs font-semibold text-signal-orange ring-1 ring-orange-200/16">
                 <Crown className="h-3.5 w-3.5" aria-hidden="true" />
                 {copy.list.leadership}
               </span>
             ) : null}
           </div>
-          <h3 className="break-words font-display text-2xl font-semibold leading-tight text-brand-paper">{club.name}</h3>
-          <p className="mt-2 text-sm font-semibold text-brand-coral-soft">{club.role}</p>
+          <h3 className="break-words font-display text-2xl font-semibold leading-tight text-ink">{club.name}</h3>
+          <p className="mt-2 text-sm font-semibold text-signal-red">{club.role}</p>
         </div>
         <div className="flex shrink-0 gap-1">
-          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-brand-paper" aria-label={copy.actions.edit}>
+          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-warm hover:text-ink" aria-label={copy.actions.edit}>
             <Pencil className="h-4 w-4" aria-hidden="true" />
           </button>
-          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-red-400/12 hover:text-red-100" aria-label={copy.actions.delete}>
+          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-red-400/12 hover:text-signal-red" aria-label={copy.actions.delete}>
             {isBusy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
           </button>
         </div>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.035] p-4">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{copy.list.period}</p>
-        <p className="mt-2 text-sm text-slate-300">{formatPeriod(club.start_date, club.end_date, copy.list.present)}</p>
+      <div className="mt-5 rounded-2xl border border-outline bg-surface-warm p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{copy.list.period}</p>
+        <p className="mt-2 text-sm text-ink-muted">{formatPeriod(club.start_date, club.end_date, copy.list.present)}</p>
       </div>
 
       <div className="mt-4 grid gap-3">
@@ -499,8 +499,8 @@ function ClubCard({
 function InfoBlock({ title, value }: { title: string; value: string | null }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{title}</p>
-      <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-300">{value || "-"}</p>
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{title}</p>
+      <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink-muted">{value || "-"}</p>
     </div>
   );
 }
@@ -514,7 +514,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{label}</span>
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</span>
       {children}
     </label>
   );

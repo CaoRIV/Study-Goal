@@ -178,10 +178,10 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   return (
     <main id="main-content" className="min-h-screen px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <header className="flex items-center justify-between rounded-full border border-white/12 bg-slate-950/64 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl">
+        <header className="flex items-center justify-between rounded-full border border-outline bg-surface-panel/90 px-4 py-3 shadow-2xl shadow-black/35 backdrop-blur-2xl">
           <a href="/" className="flex items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300">
             <StudyGoalLogo priority />
-            <span className="font-display text-base font-semibold text-brand-paper">Study Goal</span>
+            <span className="font-display text-base font-semibold text-ink">Study Goal</span>
           </a>
           <Button asChild variant="secondary">
             <a href="/">
@@ -192,17 +192,17 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         </header>
 
         <section className="grid items-start gap-8 py-8 lg:min-h-[calc(100vh-104px)] lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-10">
-          <div className="order-2 relative overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.055] p-6 shadow-glow-blue backdrop-blur-xl sm:p-8 lg:order-1 lg:min-h-[640px]">
+          <div className="order-2 relative overflow-hidden rounded-[2rem] border border-outline bg-surface-warm p-6 shadow-glow-blue backdrop-blur-xl sm:p-8 lg:order-1 lg:min-h-[640px]">
             <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-cyan-300/18 to-transparent" />
             <div className="relative">
-              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-cyan-100">
+              <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-signal-cyan">
                 <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                 Không gian học tập an toàn
               </div>
-              <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-brand-paper sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl lg:text-6xl">
                 {text.sideTitle}
               </h1>
-              <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">{text.sideCopy}</p>
+              <p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">{text.sideCopy}</p>
 
               <div className="mt-10 hidden gap-4 sm:grid sm:grid-cols-3">
                 {[
@@ -210,23 +210,23 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
                   ["Mục tiêu", "18", Target],
                   ["Hồ sơ năng lực", "38", FolderKanban]
                 ].map(([label, value, Icon]) => (
-                  <div key={label as string} className="rounded-2xl border border-white/10 bg-slate-950/62 p-4">
+                  <div key={label as string} className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-slate-400">{label as string}</span>
-                      <Icon className="h-4 w-4 text-cyan-200" aria-hidden="true" />
+                      <span className="text-sm text-ink-muted">{label as string}</span>
+                      <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
                     </div>
-                    <div className="mt-4 font-display text-3xl font-semibold text-brand-paper">{value as string}</div>
+                    <div className="mt-4 font-display text-3xl font-semibold text-ink">{value as string}</div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 hidden rounded-[1.5rem] border border-white/10 bg-slate-950/68 p-5 sm:block">
+              <div className="mt-6 hidden rounded-[1.5rem] border border-outline bg-surface-panel/90 p-5 sm:block">
                 <div className="mb-5 flex items-center justify-between">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.18em] text-slate-500">Kế hoạch tổng thể</p>
-                    <h2 className="mt-1 font-display text-2xl font-semibold text-brand-paper">Học kỳ xuân 2027</h2>
+                    <p className="text-xs uppercase tracking-[0.18em] text-ink-muted">Kế hoạch tổng thể</p>
+                    <h2 className="mt-1 font-display text-2xl font-semibold text-ink">Học kỳ xuân 2027</h2>
                   </div>
-                  <span className="rounded-full bg-cyan-300/10 px-3 py-1.5 text-sm text-cyan-100 ring-1 ring-cyan-200/18">
+                  <span className="rounded-full bg-cyan-300/10 px-3 py-1.5 text-sm text-signal-cyan ring-1 ring-cyan-200/18">
                     Sẵn sàng 91%
                   </span>
                 </div>
@@ -238,10 +238,10 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
                   ].map(([label, value]) => (
                     <div key={label as string}>
                       <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="text-slate-300">{label as string}</span>
-                        <span className="text-brand-paper">{value as number}%</span>
+                        <span className="text-ink-muted">{label as string}</span>
+                        <span className="text-ink">{value as number}%</span>
                       </div>
-                      <div className="h-2 rounded-full bg-slate-800">
+                      <div className="h-2 rounded-full bg-surface-cyan">
                         <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${value}%` }} />
                       </div>
                     </div>
@@ -253,11 +253,11 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
 
           <div className="glass glass-elevated order-1 mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8 lg:order-2">
             <div className="mb-7">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{text.eyebrow}</p>
-              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-brand-paper">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{text.eyebrow}</p>
+              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">
                 {text.title}
               </h2>
-              <p className="mt-3 leading-7 text-slate-400">{text.description}</p>
+              <p className="mt-3 leading-7 text-ink-muted">{text.description}</p>
             </div>
 
             {mode !== "forgot-password" ? (
@@ -277,10 +277,10 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             ) : null}
 
             {mode !== "forgot-password" ? (
-              <div className="my-6 flex items-center gap-4 text-xs uppercase tracking-[0.16em] text-slate-500">
-                <div className="h-px flex-1 bg-white/10" />
+              <div className="my-6 flex items-center gap-4 text-xs uppercase tracking-[0.16em] text-ink-muted">
+                <div className="h-px flex-1 bg-surface-warm" />
                 hoặc dùng email
-                <div className="h-px flex-1 bg-white/10" />
+                <div className="h-px flex-1 bg-surface-warm" />
               </div>
             ) : null}
 
@@ -315,20 +315,20 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
 
               {mode === "login" ? (
                 <div className="text-right">
-                  <a href="/forgot-password" className="text-sm text-cyan-200 transition-colors hover:text-brand-paper">
+                  <a href="/forgot-password" className="text-sm text-signal-cyan transition-colors hover:text-ink">
                     Quên mật khẩu?
                   </a>
                 </div>
               ) : null}
 
               {error ? (
-                <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
+                <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">
                   {error}
                 </div>
               ) : null}
 
               {message ? (
-                <div className="flex gap-3 rounded-2xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
+                <div className="flex gap-3 rounded-2xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-sm text-signal-cyan">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
                   {message}
                 </div>
@@ -340,9 +340,9 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
               </Button>
             </form>
 
-            <p className="mt-6 text-center text-sm text-slate-400">
+            <p className="mt-6 text-center text-sm text-ink-muted">
               {text.footer}{" "}
-              <a href={text.footerHref} className="font-semibold text-cyan-200 transition-colors hover:text-brand-paper">
+              <a href={text.footerHref} className="font-semibold text-signal-cyan transition-colors hover:text-ink">
                 {text.footerLink}
               </a>
             </p>
@@ -371,7 +371,7 @@ function AuthField({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-slate-200">{label}</span>
+      <span className="text-sm font-medium text-ink">{label}</span>
       <input
         required
         type={type}

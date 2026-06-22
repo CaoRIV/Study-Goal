@@ -311,10 +311,10 @@ export function SkillsManager({
       <section className="grid gap-6 xl:grid-cols-[440px_minmax(0,1fr)]">
         <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createSkill}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-green/24 bg-brand-green/12 text-brand-green shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-green/24 bg-brand-green/12 text-signal-green shadow-glow-blue">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
-            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.form.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-ink">{copy.form.title}</h2>
           </div>
 
           <div className="space-y-4">
@@ -364,7 +364,7 @@ export function SkillsManager({
             </Field>
 
             {error ? (
-              <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
+              <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">
                 {error}
               </div>
             ) : null}
@@ -377,16 +377,16 @@ export function SkillsManager({
         </form>
 
         <div className="space-y-5">
-          <div className="rounded-[2rem] border border-white/10 bg-slate-950/56 p-5 backdrop-blur-2xl">
+          <div className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 backdrop-blur-2xl">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-brand-green">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-signal-green">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
             </div>
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_200px]">
               <label className="relative block">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" aria-hidden="true" />
                 <input
                   value={query}
                   onChange={(event) => setQuery(event.target.value)}
@@ -409,33 +409,33 @@ export function SkillsManager({
             </div>
           </div>
 
-          <section className="rounded-[2rem] border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
+          <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
             <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand-green/24 bg-brand-green/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-emerald-100">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand-green/24 bg-brand-green/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-signal-green">
                   <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
                   {copy.tree.title}
                 </div>
-                <p className="max-w-2xl text-sm leading-6 text-slate-400">{copy.tree.description}</p>
+                <p className="max-w-2xl text-sm leading-6 text-ink-muted">{copy.tree.description}</p>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm font-semibold text-brand-green">
+              <div className="flex items-center gap-2 rounded-full border border-outline bg-surface-warm px-4 py-2 text-sm font-semibold text-signal-green">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
                 {averageProgress}%
               </div>
             </div>
 
             {skillsByCategory.length === 0 ? (
-              <div className="rounded-[1.5rem] border border-dashed border-white/14 bg-white/[0.035] p-8 text-center text-slate-400">
+              <div className="rounded-[1.5rem] border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">
                 {query || categoryFilter !== "all" || statusFilter !== "all" ? copy.filters.noMatches : copy.tree.empty}
               </div>
             ) : (
               <div className="space-y-5">
                 {skillsByCategory.map((group) => (
-                  <div key={group.category} className="relative rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-4">
+                  <div key={group.category} className="relative rounded-[1.5rem] border border-outline bg-surface-warm p-4">
                     <div className="mb-4 flex items-center gap-3">
                       <span className={cn("h-3 w-3 rounded-full bg-gradient-to-br", categoryAccent[group.category] || "from-brand-cyan to-brand-coral")} />
-                      <h3 className="font-display text-lg font-semibold text-brand-paper">{copy.labels.categories[group.category]}</h3>
-                      <span className="rounded-full bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-slate-300">{group.skills.length}</span>
+                      <h3 className="font-display text-lg font-semibold text-ink">{copy.labels.categories[group.category]}</h3>
+                      <span className="rounded-full bg-surface-panel/90 px-2.5 py-1 text-xs font-semibold text-ink-muted">{group.skills.length}</span>
                     </div>
                     <div className="grid gap-4 lg:grid-cols-2 2xl:grid-cols-3">
                       {group.skills.map((skill) => (
@@ -475,12 +475,12 @@ function SummaryCard({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/18 bg-brand-green/10 text-brand-green">
+    <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/18 bg-brand-green/10 text-signal-green">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
-      <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">{value}</p>
+      <p className="text-sm text-ink-muted">{label}</p>
+      <p className="mt-2 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -513,7 +513,7 @@ function SkillNode({
 
   if (isEditing) {
     return (
-      <div className="rounded-[1.35rem] border border-brand-green/22 bg-slate-950/76 p-4">
+      <div className="rounded-[1.35rem] border border-brand-green/22 bg-surface-panel/90 p-4">
         <div className="space-y-3">
           <input value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <div className="grid gap-3 sm:grid-cols-2">
@@ -550,46 +550,46 @@ function SkillNode({
   }
 
   return (
-    <article className="group relative overflow-hidden rounded-[1.35rem] border border-white/10 bg-slate-950/64 p-4 transition-colors duration-200 hover:border-brand-green/24 hover:bg-slate-900/72">
+    <article className="group relative overflow-hidden rounded-[1.35rem] border border-outline bg-surface-panel/90 p-4 transition-colors duration-200 hover:border-brand-green/24 hover:bg-surface-coral">
       <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r", categoryAccent[skill.category] || "from-brand-cyan to-brand-coral")} />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{copy.labels.statuses[skill.status]}</p>
-          <h4 className="mt-2 break-words font-display text-xl font-semibold leading-tight text-brand-paper">{skill.name}</h4>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">{copy.labels.statuses[skill.status]}</p>
+          <h4 className="mt-2 break-words font-display text-xl font-semibold leading-tight text-ink">{skill.name}</h4>
         </div>
         <div className="flex shrink-0 gap-1">
-          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-brand-paper" aria-label={copy.actions.edit}>
+          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-warm hover:text-ink" aria-label={copy.actions.edit}>
             <Pencil className="h-4 w-4" aria-hidden="true" />
           </button>
-          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-red-400/12 hover:text-red-100" aria-label={copy.actions.delete}>
+          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-red-400/12 hover:text-signal-red" aria-label={copy.actions.delete}>
             {isBusy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
           </button>
         </div>
       </div>
 
-      <p className="mt-4 line-clamp-3 min-h-[4.5rem] text-sm leading-6 text-slate-400">{skill.notes || copy.tree.noEvidence}</p>
+      <p className="mt-4 line-clamp-3 min-h-[4.5rem] text-sm leading-6 text-ink-muted">{skill.notes || copy.tree.noEvidence}</p>
 
       <div className="mt-4">
         <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="text-slate-400">{copy.tree.progress}</span>
-          <span className="font-semibold text-brand-green">{skill.level}/{skill.target_level}</span>
+          <span className="text-ink-muted">{copy.tree.progress}</span>
+          <span className="font-semibold text-signal-green">{skill.level}/{skill.target_level}</span>
         </div>
-        <div className="h-2 rounded-full bg-slate-800">
+        <div className="h-2 rounded-full bg-surface-cyan">
           <div className={cn("h-full rounded-full bg-gradient-to-r", categoryAccent[skill.category] || "from-brand-cyan to-brand-coral")} style={{ width: `${progress}%` }} />
         </div>
       </div>
 
-      <div className="mt-4 flex items-center justify-between gap-3 border-t border-white/10 pt-4">
-        <span className="rounded-full bg-white/8 px-3 py-1 text-xs font-semibold text-slate-300">
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-outline pt-4">
+        <span className="rounded-full bg-surface-warm px-3 py-1 text-xs font-semibold text-ink-muted">
           {progress}%
         </span>
         {skill.evidence_url ? (
-          <a href={skill.evidence_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-brand-green transition-colors hover:bg-brand-green/10">
+          <a href={skill.evidence_url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-signal-green transition-colors hover:bg-brand-green/10">
             {copy.tree.evidence}
             <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           </a>
         ) : (
-          <span className="text-xs text-slate-500">{copy.tree.noEvidence}</span>
+          <span className="text-xs text-ink-muted">{copy.tree.noEvidence}</span>
         )}
       </div>
     </article>
@@ -605,7 +605,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{label}</span>
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</span>
       {children}
     </label>
   );

@@ -352,59 +352,59 @@ export function AcademicPlanner({
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
-        <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
+        <div className="rounded-2xl border border-outline bg-surface-warm p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm text-slate-400">{copy.intelligence.creditProgress}</p>
-              <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">{creditProgress}%</p>
+              <p className="text-sm text-ink-muted">{copy.intelligence.creditProgress}</p>
+              <p className="mt-2 font-display text-3xl font-semibold text-ink">{creditProgress}%</p>
             </div>
-            <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-sm font-semibold text-cyan-100 ring-1 ring-cyan-200/16">
+            <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-sm font-semibold text-signal-cyan ring-1 ring-cyan-200/16">
               {completedCredits}/{targetCredits}
             </span>
           </div>
-          <div className="mt-5 h-2 rounded-full bg-slate-800">
+          <div className="mt-5 h-2 rounded-full bg-surface-cyan">
             <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${creditProgress}%` }} />
           </div>
-          <p className="mt-3 text-sm text-slate-500">{copy.intelligence.graduationTarget}</p>
+          <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.graduationTarget}</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
-          <p className="text-sm text-slate-400">{copy.intelligence.projectedGpa}</p>
-          <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">
+        <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+          <p className="text-sm text-ink-muted">{copy.intelligence.projectedGpa}</p>
+          <p className="mt-2 font-display text-3xl font-semibold text-ink">
             {projectedGpa === null ? copy.summary.unavailable : projectedGpa}
           </p>
-          <p className="mt-3 text-sm text-slate-500">{copy.intelligence.targetGpa}: {targetGpa || copy.summary.unavailable}</p>
+          <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.targetGpa}: {targetGpa || copy.summary.unavailable}</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
-          <p className="text-sm text-slate-400">{copy.intelligence.simulator}</p>
+        <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+          <p className="text-sm text-ink-muted">{copy.intelligence.simulator}</p>
           <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
             <Input label={copy.intelligence.simulatorLabel} type="number" step="0.01" min="0" max="4.3" value={simulatedGrade} onChange={setSimulatedGrade} placeholder="3.70" />
-            <p className="pb-2 font-display text-3xl font-semibold text-brand-paper">
+            <p className="pb-2 font-display text-3xl font-semibold text-ink">
               {simulatedGpa === null ? copy.summary.unavailable : simulatedGpa}
             </p>
           </div>
         </div>
       </section>
 
-      <section className="rounded-2xl border border-white/10 bg-slate-950/52 p-5">
+      <section className="rounded-2xl border border-outline bg-surface-panel/90 p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-cyan-200">{copy.intelligence.requiredAverage}</p>
-            <p className="mt-2 text-lg text-slate-200">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-signal-cyan">{copy.intelligence.requiredAverage}</p>
+            <p className="mt-2 text-lg text-ink">
               {remainingCredits > 0 && requiredAverage !== null
                 ? `${requiredAverage} / ${copy.intelligence.remainingCredits}: ${remainingCredits}`
                 : copy.intelligence.noRemainingCourses}
             </p>
           </div>
-          <span className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${isOnTrack ? "bg-cyan-300/10 text-cyan-100 ring-cyan-200/16" : "bg-orange-300/10 text-orange-100 ring-orange-200/16"}`}>
+          <span className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${isOnTrack ? "bg-cyan-300/10 text-signal-cyan ring-cyan-200/16" : "bg-orange-300/10 text-signal-orange ring-orange-200/16"}`}>
             {isOnTrack ? copy.intelligence.onTrack : copy.intelligence.needsFocus}
           </span>
         </div>
       </section>
 
       {error ? (
-        <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
+        <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">
           {error}
         </div>
       ) : null}
@@ -413,10 +413,10 @@ export function AcademicPlanner({
         <div className="space-y-6">
           <form className="glass rounded-[2rem] p-5" onSubmit={createSemester}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/16">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/16">
                 <CalendarDays className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.semesterForm.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">{copy.semesterForm.title}</h2>
             </div>
             <div className="space-y-3">
               <Input label={copy.semesterForm.name} value={semesterName} onChange={setSemesterName} placeholder={copy.semesterForm.namePlaceholder} />
@@ -431,10 +431,10 @@ export function AcademicPlanner({
 
           <form className="glass rounded-[2rem] p-5" onSubmit={createCourse}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/16">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/16">
                 <BookOpenCheck className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.courseForm.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">{copy.courseForm.title}</h2>
             </div>
             <div className="space-y-3">
               <Select label={copy.courseForm.semester} value={selectedSemesterId} onChange={setSelectedSemesterId} options={initialSemesters.map((semester) => semester.id)} labels={Object.fromEntries(initialSemesters.map((semester) => [semester.id, semester.name]))} placeholder={copy.courseForm.semesterEmpty} required />
@@ -455,8 +455,8 @@ export function AcademicPlanner({
         <div className="space-y-4">
           {initialSemesters.length === 0 ? (
             <div className="glass rounded-[2rem] p-8 text-center">
-              <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.empty.title}</h2>
-              <p className="mt-3 text-slate-400">{copy.empty.description}</p>
+              <h2 className="font-display text-2xl font-semibold text-ink">{copy.empty.title}</h2>
+              <p className="mt-3 text-ink-muted">{copy.empty.description}</p>
             </div>
           ) : null}
 
@@ -475,8 +475,8 @@ export function AcademicPlanner({
                     </div>
                   ) : (
                     <div>
-                      <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">{copy.table.year} {semester.year_index} / {copy.terms[semester.term] || semester.term}</p>
-                      <h2 className="mt-1 font-display text-2xl font-semibold text-brand-paper">{semester.name}</h2>
+                      <p className="text-xs uppercase tracking-[0.18em] text-signal-cyan">{copy.table.year} {semester.year_index} / {copy.terms[semester.term] || semester.term}</p>
+                      <h2 className="mt-1 font-display text-2xl font-semibold text-ink">{semester.name}</h2>
                     </div>
                   )}
                   <div className="flex gap-2">
@@ -493,8 +493,8 @@ export function AcademicPlanner({
                     )}
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-white/10">
-                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 bg-white/8 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">
+                <div className="overflow-hidden rounded-2xl border border-outline">
+                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 bg-surface-warm px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">
                     <span>{copy.table.course}</span>
                     <span>{copy.table.credits}</span>
                     <span>{copy.table.target}</span>
@@ -503,13 +503,13 @@ export function AcademicPlanner({
                     <span />
                   </div>
                   {courses.length === 0 ? (
-                    <div className="px-4 py-6 text-sm text-slate-400">{copy.table.noCourses}</div>
+                    <div className="px-4 py-6 text-sm text-ink-muted">{copy.table.noCourses}</div>
                   ) : null}
                   {courses.map((course) => {
                     const isEditingCourse = editingCourseId === course.id;
 
                     return (
-                      <div key={course.id} className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 border-t border-white/10 px-4 py-4 text-sm text-slate-200">
+                      <div key={course.id} className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 border-t border-outline px-4 py-4 text-sm text-ink">
                         {isEditingCourse ? (
                           <>
                             <div className="space-y-2">
@@ -529,8 +529,8 @@ export function AcademicPlanner({
                         ) : (
                           <>
                             <div>
-                              <div className="font-semibold text-brand-paper">{course.name}</div>
-                              <div className="mt-1 text-xs text-slate-500">{course.code || copy.table.noCode}</div>
+                              <div className="font-semibold text-ink">{course.name}</div>
+                              <div className="mt-1 text-xs text-ink-muted">{course.code || copy.table.noCode}</div>
                             </div>
                             <span>{course.credits}</span>
                             <span>{course.target_grade ?? "-"}</span>
@@ -557,9 +557,9 @@ export function AcademicPlanner({
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
-      <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-3 font-display text-3xl font-semibold text-brand-paper">{value}</p>
+    <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+      <p className="text-sm text-ink-muted">{label}</p>
+      <p className="mt-3 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -587,7 +587,7 @@ function Input({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
       <input
         required={required}
         type={type}
@@ -596,7 +596,7 @@ function Input({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-300/50"
+        className="mt-2 h-11 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>
@@ -622,8 +622,8 @@ function Select({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
-      <select required={required} className="mt-2 h-11 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-sm text-brand-paper outline-none focus:border-cyan-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
+      <select required={required} className="mt-2 h-11 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none focus:border-cyan-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
         {placeholder ? <option value="" disabled>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option} value={option}>{labels[option] || option}</option>
@@ -652,7 +652,7 @@ function IconButton({
       onClick={onClick}
       disabled={disabled}
       className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50 ${
-        danger ? "text-slate-500 hover:bg-red-400/10 hover:text-red-100" : "text-slate-400 hover:bg-white/8 hover:text-brand-paper"
+        danger ? "text-ink-muted hover:bg-red-400/10 hover:text-signal-red" : "text-ink-muted hover:bg-surface-warm hover:text-ink"
       }`}
       aria-label={label}
       title={label}

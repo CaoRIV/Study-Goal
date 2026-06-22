@@ -112,17 +112,17 @@ export function ProfileForm({
 
   return (
     <form className="glass rounded-[2rem] p-6 sm:p-8" onSubmit={handleSubmit}>
-      <div className="mb-8 flex flex-col gap-5 border-b border-white/10 pb-8 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mb-8 flex flex-col gap-5 border-b border-outline pb-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 via-cyan-400 to-cyan-300 text-slate-950 shadow-glow-blue">
             <UserRound className="h-7 w-7" aria-hidden="true" />
           </div>
           <div>
-            <p className="font-display text-2xl font-semibold text-brand-paper">{fullName || copy.fallbackName}</p>
-            <p className="mt-1 text-sm text-slate-400">{email}</p>
+            <p className="font-display text-2xl font-semibold text-ink">{fullName || copy.fallbackName}</p>
+            <p className="mt-1 text-sm text-ink-muted">{email}</p>
           </div>
         </div>
-        <div className="rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-cyan-100">
+        <div className="rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-signal-cyan">
           {copy.active}
         </div>
       </div>
@@ -138,25 +138,25 @@ export function ProfileForm({
         <Field label={copy.fields.graduationCreditTarget} value={graduationCreditTarget} onChange={setGraduationCreditTarget} type="number" placeholder={copy.placeholders.graduationCreditTarget} />
 
         <label className="block sm:col-span-2">
-          <span className="text-sm font-medium text-slate-200">{copy.fields.careerGoal}</span>
+          <span className="text-sm font-medium text-ink">{copy.fields.careerGoal}</span>
           <textarea
             required
             value={careerGoal}
             onChange={(event) => setCareerGoal(event.target.value)}
-            className="mt-2 min-h-32 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-300/50"
+            className="mt-2 min-h-32 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
             placeholder={copy.placeholders.careerGoal}
           />
         </label>
       </div>
 
       {error ? (
-        <div className="mt-5 rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
+        <div className="mt-5 rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">
           {error}
         </div>
       ) : null}
 
       {message ? (
-        <div className="mt-5 flex gap-3 rounded-2xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
+        <div className="mt-5 flex gap-3 rounded-2xl border border-cyan-300/20 bg-cyan-400/10 px-4 py-3 text-sm text-signal-cyan">
           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
           {message}
         </div>
@@ -196,7 +196,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-slate-200">{label}</span>
+      <span className="text-sm font-medium text-ink">{label}</span>
       <input
         required
         type={type}
@@ -205,7 +205,7 @@ function Field({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-cyan-300/50"
+        className="mt-2 h-12 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>

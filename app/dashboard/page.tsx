@@ -570,20 +570,20 @@ export default async function DashboardPage() {
           signOutLabel={t.signOut}
         />
 
-        <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-white/12 bg-slate-950/48 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.28)] lg:p-8">
+        <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-outline bg-surface-panel/90 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.28)] lg:p-8">
           <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
           <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl" />
           <div className="relative grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
             <div className="flex flex-col justify-between">
               <div>
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-bright/20 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-50">
+                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-bright/20 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-signal-cyan">
                   <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                   {t.eyebrow}
                 </div>
-                <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-brand-paper sm:text-5xl">
-                  {t.welcome}, <span className="text-cyan-100">{displayName}</span>.
+                <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl">
+                  {t.welcome}, <span className="text-signal-cyan">{displayName}</span>.
                 </h1>
-                <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">{t.description}</p>
+                <p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">{t.description}</p>
               </div>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -718,12 +718,12 @@ export default async function DashboardPage() {
             <div className="relative overflow-hidden rounded-[2rem] border border-orange-300/20 bg-orange-300/[0.055] p-6">
               <div className="pointer-events-none absolute -right-8 -top-8 h-36 w-36 rounded-full bg-orange-300/10 blur-3xl" />
               <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-300/12 text-orange-100 ring-1 ring-orange-200/20">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-300/12 text-signal-orange ring-1 ring-orange-200/20">
                   <Lightbulb className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-orange-200">{t.nextActions.title}</p>
-                <h2 className="mt-3 font-display text-3xl font-semibold text-brand-paper">{nextAction.title}</h2>
-                <p className="mt-3 max-w-xl leading-7 text-slate-300">{nextAction.copy}</p>
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-orange">{t.nextActions.title}</p>
+                <h2 className="mt-3 font-display text-3xl font-semibold text-ink">{nextAction.title}</h2>
+                <p className="mt-3 max-w-xl leading-7 text-ink-muted">{nextAction.copy}</p>
                 <a
                   href={nextAction.href}
                   className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-orange px-5 text-sm font-semibold text-slate-950 shadow-glow-orange transition-colors duration-200 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
@@ -738,8 +738,8 @@ export default async function DashboardPage() {
               <ListPanel title={t.weeklyFocus} empty={t.noFocus} icon={Clock3} tone="coral">
                 {safeMilestones.slice(0, 4).map((milestone) => (
                   <div key={milestone.id} className="study-list-item">
-                    <p className="font-semibold text-brand-paper">{milestone.title}</p>
-                    <p className="mt-1 text-xs text-slate-400">
+                    <p className="font-semibold text-ink">{milestone.title}</p>
+                    <p className="mt-1 text-xs text-ink-muted">
                       {t.sourceGoal}: {goalTitleById.get(milestone.goal_id) || t.goals}
                     </p>
                   </div>
@@ -750,12 +750,12 @@ export default async function DashboardPage() {
                 {safeCourses.slice(0, 4).map((course) => (
                   <div key={course.id} className="study-list-item flex items-center justify-between gap-4">
                     <div>
-                      <p className="font-semibold text-brand-paper">{course.name}</p>
-                      <p className="mt-1 text-xs text-slate-400">
+                      <p className="font-semibold text-ink">{course.name}</p>
+                      <p className="mt-1 text-xs text-ink-muted">
                         {course.code || t.courseFallback} / {t.statusLabels[course.status as keyof typeof t.statusLabels] || course.status}
                       </p>
                     </div>
-                    <span className="text-sm font-semibold text-cyan-100">{course.final_grade ?? "-"}</span>
+                    <span className="text-sm font-semibold text-signal-cyan">{course.final_grade ?? "-"}</span>
                   </div>
                 ))}
               </ListPanel>
@@ -765,10 +765,10 @@ export default async function DashboardPage() {
                   {activeGoals.slice(0, 4).map((goal) => (
                     <div key={goal.id} className="study-list-item">
                       <div className="flex items-center justify-between gap-4">
-                        <p className="font-semibold text-brand-paper">{goal.title}</p>
-                        <span className="text-sm font-semibold text-orange-100">{goal.progress}%</span>
+                        <p className="font-semibold text-ink">{goal.title}</p>
+                        <span className="text-sm font-semibold text-signal-orange">{goal.progress}%</span>
                       </div>
-                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-slate-800">
+                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-surface-cyan">
                         <div className="h-full rounded-full bg-orange-300" style={{ width: `${goal.progress}%` }} />
                       </div>
                     </div>
@@ -782,19 +782,19 @@ export default async function DashboardPage() {
         <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-orange-300/18 bg-orange-300/[0.045] p-6">
           <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-300/12 text-orange-100 ring-1 ring-orange-200/20">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-300/12 text-signal-orange ring-1 ring-orange-200/20">
                 <BriefcaseBusiness className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-orange-200">{t.northStar}</p>
-                <p className="mt-2 max-w-4xl text-lg leading-8 text-slate-200">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-orange">{t.northStar}</p>
+                <p className="mt-2 max-w-4xl text-lg leading-8 text-ink">
                   {profile.career_goal || t.emptyCareerGoal}
                 </p>
               </div>
             </div>
             <a
               href="/career"
-              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-orange-200/20 bg-orange-200/10 px-5 text-sm font-semibold text-orange-100 transition-colors duration-200 hover:bg-orange-200/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-orange-200/20 bg-orange-200/10 px-5 text-sm font-semibold text-signal-orange transition-colors duration-200 hover:bg-orange-200/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
             >
               {careerLabel}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -875,33 +875,33 @@ const accentStyles: Record<
   }
 > = {
   cyan: {
-    card: "border-brand-bright/20 bg-brand-cyan/[0.055] hover:border-brand-bright/42",
-    icon: "bg-brand-cyan/16 text-cyan-50 ring-brand-bright/24",
-    text: "text-cyan-200",
+    card: "border-brand-bright/20 bg-brand-cyan/10 hover:border-brand-bright/42",
+    icon: "bg-brand-cyan/16 text-signal-cyan ring-brand-bright/24",
+    text: "text-signal-cyan",
     bar: "bg-brand-cyan"
   },
   coral: {
-    card: "border-brand-coral/22 bg-brand-coral/[0.055] hover:border-brand-coral/44",
-    icon: "bg-brand-coral/14 text-brand-coral-soft ring-brand-coral/26",
-    text: "text-brand-coral-soft",
+    card: "border-brand-coral/22 bg-brand-coral/15 hover:border-brand-coral/44",
+    icon: "bg-brand-coral/14 text-signal-red ring-brand-coral/26",
+    text: "text-signal-red",
     bar: "bg-brand-coral"
   },
   green: {
-    card: "border-brand-green/20 bg-brand-green/[0.05] hover:border-brand-green/42",
-    icon: "bg-brand-green/14 text-emerald-100 ring-brand-green/24",
-    text: "text-emerald-200",
+    card: "border-brand-green/20 bg-brand-green/15 hover:border-brand-green/42",
+    icon: "bg-brand-green/14 text-signal-green ring-brand-green/24",
+    text: "text-signal-green",
     bar: "bg-brand-green"
   },
   orange: {
-    card: "border-brand-orange/20 bg-brand-orange/[0.055] hover:border-brand-orange/42",
-    icon: "bg-brand-orange/14 text-orange-100 ring-brand-orange/24",
-    text: "text-orange-200",
+    card: "border-brand-orange/20 bg-brand-orange/15 hover:border-brand-orange/42",
+    icon: "bg-brand-orange/14 text-signal-orange ring-brand-orange/24",
+    text: "text-signal-orange",
     bar: "bg-brand-orange"
   },
   cream: {
-    card: "border-brand-coral-soft/24 bg-brand-cream/[0.055] hover:border-brand-coral-soft/42",
+    card: "border-brand-coral-soft/24 bg-surface-warm hover:border-brand-coral-soft/42",
     icon: "bg-brand-cream text-brand-deep-red ring-brand-coral-soft/44",
-    text: "text-brand-coral-soft",
+    text: "text-signal-red",
     bar: "bg-brand-coral"
   }
 };
@@ -926,8 +926,8 @@ function StudyContext({
           <Icon className="h-4 w-4" aria-hidden="true" />
         </div>
         <div className="min-w-0">
-          <p className="truncate text-xs uppercase tracking-[0.12em] text-slate-400">{label}</p>
-          <p className="mt-1 truncate font-semibold text-brand-paper">{value}</p>
+          <p className="truncate text-xs uppercase tracking-[0.12em] text-ink-muted">{label}</p>
+          <p className="mt-1 truncate font-semibold text-ink">{value}</p>
         </div>
       </div>
     </div>
@@ -983,16 +983,16 @@ function AcademicPulse({
     <div className="glass glass-elevated rounded-[2rem] p-5 sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">{labels.eyebrow}</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-brand-paper">{labels.title}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">{labels.description}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{labels.eyebrow}</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold text-ink">{labels.title}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">{labels.description}</p>
         </div>
         <div
           className={cn(
             "inline-flex shrink-0 items-center gap-2 self-start rounded-full px-3 py-1.5 text-xs font-semibold ring-1",
             healthy
-              ? "bg-cyan-300/10 text-cyan-100 ring-cyan-200/20"
-              : "bg-orange-300/10 text-orange-100 ring-orange-200/20"
+              ? "bg-cyan-300/10 text-signal-cyan ring-cyan-200/20"
+              : "bg-orange-300/10 text-signal-orange ring-orange-200/20"
           )}
         >
           <Activity className="h-3.5 w-3.5" aria-hidden="true" />
@@ -1001,7 +1001,7 @@ function AcademicPulse({
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="flex items-center gap-5 rounded-[1.5rem] border border-cyan-300/14 bg-slate-950/52 p-4">
+        <div className="flex items-center gap-5 rounded-[1.5rem] border border-cyan-300/14 bg-surface-panel/90 p-4">
           <div
             className="relative flex h-32 w-32 shrink-0 items-center justify-center rounded-full p-3"
             style={{
@@ -1010,38 +1010,38 @@ function AcademicPulse({
             role="img"
             aria-label={`${creditProgress}%`}
           >
-            <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-white/8 bg-slate-950">
-              <span className="font-display text-3xl font-semibold text-brand-paper">{creditProgress}%</span>
-              <span className="mt-1 text-[11px] uppercase tracking-[0.12em] text-slate-500">{creditsLabel}</span>
+            <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-outline bg-surface-panel/90">
+              <span className="font-display text-3xl font-semibold text-ink">{creditProgress}%</span>
+              <span className="mt-1 text-[11px] uppercase tracking-[0.12em] text-ink-muted">{creditsLabel}</span>
             </div>
           </div>
           <div>
-            <p className="text-sm text-slate-400">{completedCredits}/{targetCredits}</p>
-            <p className="mt-2 font-display text-2xl font-semibold text-brand-paper">{completedCredits} {creditsLabel}</p>
-            <p className="mt-2 text-xs leading-5 text-slate-500">
+            <p className="text-sm text-ink-muted">{completedCredits}/{targetCredits}</p>
+            <p className="mt-2 font-display text-2xl font-semibold text-ink">{completedCredits} {creditsLabel}</p>
+            <p className="mt-2 text-xs leading-5 text-ink-muted">
               {targetCredits - completedCredits > 0 ? targetCredits - completedCredits : 0} {labels.remaining}
             </p>
           </div>
         </div>
 
-        <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/52 p-4">
+        <div className="rounded-[1.5rem] border border-outline bg-surface-panel/90 p-4">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-slate-300">{labels.gpaTrend}</p>
+              <p className="text-sm font-medium text-ink-muted">{labels.gpaTrend}</p>
               <div className="mt-2 flex items-baseline gap-2">
-                <span className="font-display text-3xl font-semibold text-brand-paper">{currentGpa ?? unavailable}</span>
-                <span className="text-xs text-slate-500">
+                <span className="font-display text-3xl font-semibold text-ink">{currentGpa ?? unavailable}</span>
+                <span className="text-xs text-ink-muted">
                   {projectedGpa ?? unavailable} {labels.projected} / {targetGpa ?? unavailable} {labels.target}
                 </span>
               </div>
             </div>
-            <BarChart3 className="h-5 w-5 text-cyan-200" aria-hidden="true" />
+            <BarChart3 className="h-5 w-5 text-signal-cyan" aria-hidden="true" />
           </div>
           <div className="mt-4">
             {gpaTrend.length > 0 ? (
               <GpaSparkline values={gpaTrend} label={labels.gpaTrend} />
             ) : (
-              <div className="flex h-20 items-center justify-center rounded-xl border border-dashed border-white/10 text-center text-xs text-slate-500">
+              <div className="flex h-20 items-center justify-center rounded-xl border border-dashed border-outline text-center text-xs text-ink-muted">
                 {labels.noTrend}
               </div>
             )}
@@ -1104,10 +1104,10 @@ function PulseMetric({
   return (
     <div className={cn("rounded-2xl border p-4", styles.card)}>
       <div className="flex items-center justify-between gap-3">
-        <span className="text-xs font-medium text-slate-400">{label}</span>
+        <span className="text-xs font-medium text-ink-muted">{label}</span>
         <Icon className={cn("h-4 w-4", styles.text)} aria-hidden="true" />
       </div>
-      <p className="mt-3 font-display text-2xl font-semibold text-brand-paper">{value}</p>
+      <p className="mt-3 font-display text-2xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -1123,9 +1123,9 @@ function SectionHeading({
 }) {
   return (
     <div className="mb-5 max-w-3xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">{eyebrow}</p>
-      <h2 className="mt-2 font-display text-3xl font-semibold text-brand-paper sm:text-4xl">{title}</h2>
-      {description ? <p className="mt-3 text-base leading-7 text-slate-400">{description}</p> : null}
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{eyebrow}</p>
+      <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">{title}</h2>
+      {description ? <p className="mt-3 text-base leading-7 text-ink-muted">{description}</p> : null}
     </div>
   );
 }
@@ -1159,21 +1159,21 @@ function SemesterJourney({
   const statusStyles = {
     completed: {
       label: labels.completed,
-      badge: "bg-brand-cyan/16 text-cyan-50 ring-brand-cyan/30",
+      badge: "bg-brand-cyan/16 text-signal-cyan ring-brand-cyan/30",
       dot: "bg-brand-cyan",
       line: "bg-brand-cyan"
     },
     current: {
       label: labels.current,
-      badge: "bg-brand-bright/14 text-cyan-50 ring-brand-bright/30",
+      badge: "bg-brand-bright/14 text-signal-cyan ring-brand-bright/30",
       dot: "bg-brand-bright",
       line: "bg-brand-bright"
     },
     planned: {
       label: labels.planned,
-      badge: "bg-slate-300/8 text-slate-300 ring-white/10",
-      dot: "bg-slate-600",
-      line: "bg-slate-600"
+      badge: "bg-slate-300/8 text-ink-muted ring-outline",
+      dot: "bg-surface-cyan",
+      line: "bg-surface-cyan"
     }
   } as const;
 
@@ -1183,7 +1183,7 @@ function SemesterJourney({
         <SectionHeading eyebrow={labels.eyebrow} title={labels.title} description={labels.description} />
         <a
           href="/roadmap"
-          className="mb-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-cyan-200 transition-colors duration-200 hover:text-brand-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:self-auto"
+          className="mb-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-signal-cyan transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:self-auto"
         >
           <MapIcon className="h-4 w-4" aria-hidden="true" />
           {labels.eyebrow}
@@ -1192,7 +1192,7 @@ function SemesterJourney({
       </div>
 
       {semesters.length > 0 ? (
-        <div className="academic-grid rounded-[2rem] border border-white/10 bg-slate-950/46 p-4 sm:p-5">
+        <div className="academic-grid rounded-[2rem] border border-outline bg-surface-panel/90 p-4 sm:p-5">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {semesters.map((semester, index) => {
               const styles = statusStyles[semester.status];
@@ -1205,18 +1205,18 @@ function SemesterJourney({
                     "group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
                     semester.status === "current"
                       ? "border-cyan-300/28 bg-cyan-300/[0.075] shadow-[0_20px_60px_rgba(6,182,212,0.08)]"
-                      : "border-white/10 bg-slate-950/62 hover:border-white/20 hover:bg-slate-900/72"
+                      : "border-outline bg-surface-panel/90 hover:border-outline hover:bg-surface-coral"
                   )}
                 >
                   <div className={cn("absolute left-0 top-0 h-1", styles.line)} style={{ width: `${Math.max(8, semester.progress)}%` }} />
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-slate-950 font-display text-sm font-semibold text-brand-paper">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-outline bg-surface-panel/90 font-display text-sm font-semibold text-ink">
                         {index + 1}
                       </span>
                       <div>
-                        <p className="text-xs uppercase tracking-[0.14em] text-slate-500">{yearLabel} {semester.year_index}</p>
-                        <h3 className="mt-1 font-display text-lg font-semibold text-brand-paper">{semester.name}</h3>
+                        <p className="text-xs uppercase tracking-[0.14em] text-ink-muted">{yearLabel} {semester.year_index}</p>
+                        <h3 className="mt-1 font-display text-lg font-semibold text-ink">{semester.name}</h3>
                       </div>
                     </div>
                     <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1", styles.badge)}>
@@ -1225,11 +1225,11 @@ function SemesterJourney({
                     </span>
                   </div>
 
-                  <div className="mt-5 flex items-center justify-between text-xs text-slate-400">
+                  <div className="mt-5 flex items-center justify-between text-xs text-ink-muted">
                     <span>{semester.courses.length} {labels.courses}</span>
                     <span>{semester.progress}%</span>
                   </div>
-                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-800">
+                  <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-cyan">
                     <div className={cn("h-full rounded-full", styles.line)} style={{ width: `${semester.progress}%` }} />
                   </div>
 
@@ -1237,15 +1237,15 @@ function SemesterJourney({
                     {semester.courses.slice(0, 3).map((course) => (
                       <div
                         key={course.id}
-                        className="flex items-center gap-2 rounded-xl border border-white/8 bg-white/[0.035] px-3 py-2 text-xs text-slate-300"
+                        className="flex items-center gap-2 rounded-xl border border-outline bg-surface-warm px-3 py-2 text-xs text-ink-muted"
                         title={statusLabels[course.status] || course.status}
                       >
-                        <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", course.status === "completed" ? "bg-cyan-300" : course.status === "in_progress" ? "bg-cyan-300" : "bg-slate-600")} />
+                        <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", course.status === "completed" ? "bg-cyan-300" : course.status === "in_progress" ? "bg-cyan-300" : "bg-surface-cyan")} />
                         <span className="truncate">{course.code || course.name}</span>
                       </div>
                     ))}
                     {semester.courses.length > 3 ? (
-                      <p className="px-1 text-xs text-slate-500">+{semester.courses.length - 3} {labels.courses}</p>
+                      <p className="px-1 text-xs text-ink-muted">+{semester.courses.length - 3} {labels.courses}</p>
                     ) : null}
                   </div>
                 </a>
@@ -1256,10 +1256,10 @@ function SemesterJourney({
       ) : (
         <a
           href="/grades"
-          className="academic-grid flex min-h-48 items-center justify-center rounded-[2rem] border border-dashed border-cyan-300/20 bg-cyan-300/[0.035] p-6 text-center text-slate-400 transition-colors duration-200 hover:border-cyan-300/38 hover:text-brand-paper focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+          className="academic-grid flex min-h-48 items-center justify-center rounded-[2rem] border border-dashed border-cyan-300/20 bg-cyan-300/[0.035] p-6 text-center text-ink-muted transition-colors duration-200 hover:border-cyan-300/38 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
         >
           <span>
-            <CalendarDays className="mx-auto mb-3 h-6 w-6 text-cyan-200" aria-hidden="true" />
+            <CalendarDays className="mx-auto mb-3 h-6 w-6 text-signal-cyan" aria-hidden="true" />
             {labels.empty}
           </span>
         </a>
@@ -1315,9 +1315,9 @@ function NextModule({
         </div>
       </div>
       <div className="mt-auto pt-8">
-        <h3 className="font-display text-xl font-semibold text-brand-paper">{title}</h3>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">{text}</p>
-        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-slate-800/80">
+        <h3 className="font-display text-xl font-semibold text-ink">{title}</h3>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">{text}</p>
+        <div className="mt-5 h-1.5 overflow-hidden rounded-full bg-surface-cyan">
           <div className={cn("h-full rounded-full", styles.bar)} style={{ width: `${Math.max(0, Math.min(100, progress))}%` }} />
         </div>
       </div>
@@ -1347,10 +1347,10 @@ function ListPanel({
         <div className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
           <Icon className="h-4 w-4" aria-hidden="true" />
         </div>
-        <h3 className="font-display text-lg font-semibold text-brand-paper">{title}</h3>
+        <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
-        {hasItems ? children : <p className="study-list-item text-sm text-slate-400">{empty}</p>}
+        {hasItems ? children : <p className="study-list-item text-sm text-ink-muted">{empty}</p>}
       </div>
     </div>
   );

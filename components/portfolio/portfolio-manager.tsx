@@ -320,10 +320,10 @@ export function PortfolioManager({
       <section className="grid gap-6 xl:grid-cols-[440px_minmax(0,1fr)]">
         <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createItem}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-brand-coral-soft shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-signal-red shadow-glow-blue">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
-            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.form.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-ink">{copy.form.title}</h2>
           </div>
 
           <div className="space-y-4">
@@ -356,8 +356,8 @@ export function PortfolioManager({
               <textarea value={description} onChange={(event) => setDescription(event.target.value)} className="form-input min-h-28 resize-y py-3" placeholder={copy.form.descriptionPlaceholder} />
             </Field>
 
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-4">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{copy.form.relationsTitle}</p>
+            <div className="rounded-[1.5rem] border border-outline bg-surface-warm p-4">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{copy.form.relationsTitle}</p>
               <div className="grid gap-3">
                 <RelationSelect label={copy.form.courseLabel} value={relatedCourseId} onChange={setRelatedCourseId} options={courses} empty={copy.form.noRelation} />
                 <RelationSelect label={copy.form.goalLabel} value={relatedGoalId} onChange={setRelatedGoalId} options={goals} empty={copy.form.noRelation} />
@@ -367,7 +367,7 @@ export function PortfolioManager({
             </div>
 
             {error ? (
-              <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">{error}</div>
+              <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">{error}</div>
             ) : null}
 
             <Button type="submit" className="w-full" disabled={isBusy}>
@@ -378,16 +378,16 @@ export function PortfolioManager({
         </form>
 
         <div className="space-y-5">
-          <div className="rounded-[2rem] border border-white/10 bg-slate-950/56 p-5 backdrop-blur-2xl">
+          <div className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 backdrop-blur-2xl">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-brand-coral-soft">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-signal-red">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
             </div>
             <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_200px]">
               <label className="relative block">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" aria-hidden="true" />
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" aria-hidden="true" />
                 <input value={query} onChange={(event) => setQuery(event.target.value)} className="form-input pl-11" placeholder={copy.filters.search} />
               </label>
               <select value={typeFilter} onChange={(event) => setTypeFilter(event.target.value)} className="form-input">
@@ -405,16 +405,16 @@ export function PortfolioManager({
             </div>
           </div>
 
-          <section className="rounded-[2rem] border border-white/10 bg-slate-950/50 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
+          <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-brand-coral-soft">
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-signal-red">
                 <Trophy className="h-5 w-5" aria-hidden="true" />
               </span>
-              <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.list.title}</h2>
+              <h2 className="font-display text-2xl font-semibold text-ink">{copy.list.title}</h2>
             </div>
 
             {filteredItems.length === 0 ? (
-              <div className="rounded-[1.5rem] border border-dashed border-white/14 bg-white/[0.035] p-8 text-center text-slate-400">
+              <div className="rounded-[1.5rem] border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">
                 {query || typeFilter !== "all" || statusFilter !== "all" ? copy.filters.noMatches : copy.list.empty}
               </div>
             ) : (
@@ -457,12 +457,12 @@ function SummaryCard({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/18 bg-brand-coral/10 text-brand-coral-soft">
+    <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/18 bg-brand-coral/10 text-signal-red">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
-      <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-2 font-display text-3xl font-semibold text-brand-paper">{value}</p>
+      <p className="text-sm text-ink-muted">{label}</p>
+      <p className="mt-2 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -502,7 +502,7 @@ function PortfolioCard({
 
   if (isEditing) {
     return (
-      <article className="rounded-[1.5rem] border border-brand-coral/22 bg-slate-950/76 p-4">
+      <article className="rounded-[1.5rem] border border-brand-coral/22 bg-surface-panel/90 p-4">
         <div className="space-y-3">
           <input required value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} className="form-input" />
           <div className="grid gap-3 sm:grid-cols-2">
@@ -540,38 +540,38 @@ function PortfolioCard({
   }
 
   return (
-    <article className="rounded-[1.5rem] border border-white/10 bg-slate-950/64 p-5 transition-colors duration-200 hover:border-brand-coral/24 hover:bg-slate-900/72">
+    <article className="rounded-[1.5rem] border border-outline bg-surface-panel/90 p-5 transition-colors duration-200 hover:border-brand-coral/24 hover:bg-surface-coral">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1 rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-brand-coral-soft ring-1 ring-brand-coral-soft/16">
+            <span className="inline-flex items-center gap-1 rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">
               <StatusIcon className="h-3.5 w-3.5" aria-hidden="true" />
               {copy.labels.statuses[item.status]}
             </span>
-            <span className="rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-brand-coral-soft ring-1 ring-brand-coral-soft/16">
+            <span className="rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">
               {copy.labels.types[item.type]}
             </span>
           </div>
-          <h3 className="break-words font-display text-2xl font-semibold leading-tight text-brand-paper">{item.title}</h3>
+          <h3 className="break-words font-display text-2xl font-semibold leading-tight text-ink">{item.title}</h3>
         </div>
         <div className="flex shrink-0 gap-1">
-          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/10 hover:text-brand-paper" aria-label={copy.actions.edit}>
+          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-warm hover:text-ink" aria-label={copy.actions.edit}>
             <Pencil className="h-4 w-4" aria-hidden="true" />
           </button>
-          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-red-400/12 hover:text-red-100" aria-label={copy.actions.delete}>
+          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-red-400/12 hover:text-signal-red" aria-label={copy.actions.delete}>
             {isBusy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
           </button>
         </div>
       </div>
 
       <div className="mt-5">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">{copy.list.description}</p>
-        <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-300">{item.description || "-"}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{copy.list.description}</p>
+        <p className="mt-2 line-clamp-3 text-sm leading-6 text-ink-muted">{item.description || "-"}</p>
       </div>
 
-      <div className="mt-5 grid gap-3 rounded-2xl border border-white/10 bg-white/[0.035] p-4 text-sm text-slate-300">
-        <p><span className="text-slate-500">{copy.list.evidenceDate}:</span> {item.evidence_date || "-"}</p>
-        <p><span className="text-slate-500">{copy.list.links}:</span> {getRelationLabels(item, courses, goals, skills, clubs).join(" / ") || "-"}</p>
+      <div className="mt-5 grid gap-3 rounded-2xl border border-outline bg-surface-warm p-4 text-sm text-ink-muted">
+        <p><span className="text-ink-muted">{copy.list.evidenceDate}:</span> {item.evidence_date || "-"}</p>
+        <p><span className="text-ink-muted">{copy.list.links}:</span> {getRelationLabels(item, courses, goals, skills, clubs).join(" / ") || "-"}</p>
       </div>
 
       <div className="mt-4 flex justify-end">
@@ -581,7 +581,7 @@ function PortfolioCard({
             <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>
         ) : (
-          <span className="text-sm text-slate-500">{copy.list.noUrl}</span>
+          <span className="text-sm text-ink-muted">{copy.list.noUrl}</span>
         )}
       </div>
     </article>
@@ -603,7 +603,7 @@ function RelationSelect({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{label}</span>
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</span>
       <select value={value} onChange={(event) => onChange(event.target.value)} className="form-input">
         <option value="">{empty}</option>
         {options.map((option) => (
@@ -623,7 +623,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">{label}</span>
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</span>
       {children}
     </label>
   );
