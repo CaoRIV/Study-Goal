@@ -273,18 +273,18 @@ export function CareerReadinessManager({
   return (
     <div className="space-y-6">
       <section className="grid gap-5 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="rounded-[2rem] border border-brand-green/18 bg-slate-950/68 p-6 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+        <div className="rounded-[2rem] border border-brand-green/18 bg-surface-panel/90 p-6 shadow-2xl shadow-black/30 backdrop-blur-2xl">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-green">{copy.score.label}</p>
-              <p className="mt-3 font-display text-6xl font-semibold text-brand-paper">{score}</p>
-              <p className="mt-2 text-sm font-semibold text-brand-green">{scoreMessage}</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-green">{copy.score.label}</p>
+              <p className="mt-3 font-display text-6xl font-semibold text-ink">{score}</p>
+              <p className="mt-2 text-sm font-semibold text-signal-green">{scoreMessage}</p>
             </div>
-            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-brand-green/24 bg-brand-green/10 text-brand-green">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full border border-brand-green/24 bg-brand-green/10 text-signal-green">
               <Trophy className="h-7 w-7" aria-hidden="true" />
             </div>
           </div>
-          <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-800">
+          <div className="mt-6 h-2 overflow-hidden rounded-full bg-surface-cyan">
             <div className="h-full rounded-full bg-gradient-to-r from-brand-green via-brand-green to-orange-200 transition-[width] duration-300" style={{ width: `${score}%` }} />
           </div>
         </div>
@@ -297,14 +297,14 @@ export function CareerReadinessManager({
         </div>
       </section>
 
-      {error ? <div role="alert" className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">{error}</div> : null}
-      {success ? <div role="status" className="rounded-2xl border border-brand-green/20 bg-brand-green/10 px-4 py-3 text-sm text-brand-green">{success}</div> : null}
+      {error ? <div role="alert" className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">{error}</div> : null}
+      {success ? <div role="status" className="rounded-2xl border border-brand-green/20 bg-brand-green/10 px-4 py-3 text-sm text-signal-green">{success}</div> : null}
 
       <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
         <form onSubmit={saveProfile} className="glass rounded-[2rem] p-6">
           <div className="mb-6">
-            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.profile.title}</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-400">{copy.profile.description}</p>
+            <h2 className="font-display text-2xl font-semibold text-ink">{copy.profile.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-ink-muted">{copy.profile.description}</p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -340,12 +340,12 @@ export function CareerReadinessManager({
           </Button>
         </form>
 
-        <form onSubmit={createTarget} className="rounded-[2rem] border border-white/10 bg-slate-950/58 p-6 backdrop-blur-2xl">
+        <form onSubmit={createTarget} className="rounded-[2rem] border border-outline bg-surface-panel/90 p-6 backdrop-blur-2xl">
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-brand-green">
+            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-signal-green">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
-            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.target.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-ink">{copy.target.title}</h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label={copy.target.company}>
@@ -376,26 +376,26 @@ export function CareerReadinessManager({
         </form>
       </section>
 
-      <section className="rounded-[2rem] border border-white/10 bg-slate-950/54 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-6">
+      <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-6">
         <div className="mb-5 flex items-center gap-3">
-          <BriefcaseBusiness className="h-5 w-5 text-brand-green" aria-hidden="true" />
-          <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.pipeline.title}</h2>
+          <BriefcaseBusiness className="h-5 w-5 text-signal-green" aria-hidden="true" />
+          <h2 className="font-display text-2xl font-semibold text-ink">{copy.pipeline.title}</h2>
         </div>
         {initialTargets.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-white/14 bg-white/[0.03] p-8 text-center text-slate-400">{copy.pipeline.empty}</div>
+          <div className="rounded-2xl border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">{copy.pipeline.empty}</div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {initialTargets.map((target) => (
-              <article key={target.id} className="rounded-2xl border border-white/10 bg-slate-950/66 p-5 transition-colors hover:border-brand-green/24">
+              <article key={target.id} className="rounded-2xl border border-outline bg-surface-panel/90 p-5 transition-colors hover:border-brand-green/24">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
-                    <p className="flex items-center gap-2 text-sm text-slate-400">
+                    <p className="flex items-center gap-2 text-sm text-ink-muted">
                       <Building2 className="h-4 w-4 shrink-0" aria-hidden="true" />
                       <span className="truncate">{target.company}</span>
                     </p>
-                    <h3 className="mt-2 break-words font-display text-xl font-semibold text-brand-paper">{target.role}</h3>
+                    <h3 className="mt-2 break-words font-display text-xl font-semibold text-ink">{target.role}</h3>
                   </div>
-                  <button type="button" onClick={() => deleteTarget(target.id)} aria-label={copy.pipeline.delete} className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-red-400/10 hover:text-red-100">
+                  <button type="button" onClick={() => deleteTarget(target.id)} aria-label={copy.pipeline.delete} className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-red-400/10 hover:text-signal-red">
                     {pending === `delete-${target.id}` ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
                   </button>
                 </div>
@@ -408,8 +408,8 @@ export function CareerReadinessManager({
                 >
                   {stageOptions.map((option) => <option key={option} value={option}>{copy.stages[option]}</option>)}
                 </select>
-                <p className="mt-4 text-sm text-slate-400">{copy.pipeline.deadline}: <span className="text-slate-200">{target.deadline || "-"}</span></p>
-                {target.notes ? <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-300">{target.notes}</p> : null}
+                <p className="mt-4 text-sm text-ink-muted">{copy.pipeline.deadline}: <span className="text-ink">{target.deadline || "-"}</span></p>
+                {target.notes ? <p className="mt-3 line-clamp-3 text-sm leading-6 text-ink-muted">{target.notes}</p> : null}
                 {target.job_url ? (
                   <a href={target.job_url} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-green">
                     {copy.pipeline.open}
@@ -427,10 +427,10 @@ export function CareerReadinessManager({
 
 function ScoreSignal({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
-      <Icon className="h-5 w-5 text-brand-green" aria-hidden="true" />
-      <p className="mt-5 text-sm leading-5 text-slate-400">{label}</p>
-      <p className="mt-2 font-display text-2xl font-semibold text-brand-paper">{value}</p>
+    <div className="rounded-2xl border border-outline bg-surface-warm p-4">
+      <Icon className="h-5 w-5 text-signal-green" aria-hidden="true" />
+      <p className="mt-5 text-sm leading-5 text-ink-muted">{label}</p>
+      <p className="mt-2 font-display text-2xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -450,13 +450,13 @@ function StatusField({
 }) {
   const StatusIcon = value === "ready" ? CheckCircle2 : CircleDashed;
   return (
-    <label className="rounded-2xl border border-white/10 bg-slate-950/52 p-4">
+    <label className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
       <span className="mb-3 flex items-center justify-between gap-3">
-        <span className="flex items-center gap-2 text-sm font-semibold text-slate-200">
-          <Icon className="h-4 w-4 text-brand-green" aria-hidden="true" />
+        <span className="flex items-center gap-2 text-sm font-semibold text-ink">
+          <Icon className="h-4 w-4 text-signal-green" aria-hidden="true" />
           {label}
         </span>
-        <StatusIcon className={`h-4 w-4 ${value === "ready" ? "text-brand-green" : "text-slate-500"}`} aria-hidden="true" />
+        <StatusIcon className={`h-4 w-4 ${value === "ready" ? "text-signal-green" : "text-ink-muted"}`} aria-hidden="true" />
       </span>
       <select className="form-input" value={value} onChange={(event) => onChange(event.target.value)}>
         {statusOptions.map((option) => <option key={option} value={option}>{copy[option]}</option>)}
@@ -468,7 +468,7 @@ function StatusField({
 function Field({ label, children, className = "" }: { label: string; children: ReactNode; className?: string }) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">{label}</span>
+      <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">{label}</span>
       {children}
     </label>
   );

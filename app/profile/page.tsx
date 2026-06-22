@@ -109,8 +109,8 @@ export default async function ProfilePage() {
         </div>
 
         <section className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
-          <h1 className="mt-4 max-w-3xl font-display text-5xl font-semibold leading-tight text-brand-paper">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.eyebrow}</p>
+          <h1 className="mt-4 max-w-3xl font-display text-5xl font-semibold leading-tight text-ink">
             {t.title}
           </h1>
         </section>

@@ -224,17 +224,17 @@ export default async function SkillsPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_0.55fr] lg:items-end">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-green">{t.eyebrow}</p>
-            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-brand-paper">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-green">{t.eyebrow}</p>
+            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-ink">
               {t.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-ink-muted">{t.description}</p>
           </div>
           <div className="rounded-[2rem] border border-brand-green/14 bg-brand-green/8 p-6 shadow-glow-blue backdrop-blur-2xl">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-green/12 text-brand-green ring-1 ring-brand-green/20">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-green/12 text-signal-green ring-1 ring-brand-green/20">
               <BrainCircuit className="h-6 w-6" aria-hidden="true" />
             </div>
-            <p className="text-sm leading-6 text-brand-cream/82">
+            <p className="text-sm leading-6 text-ink-muted">
               {language === "en"
                 ? "Designed for students in every field—from business and health to arts, education, engineering, law, and technology."
                 : "Dành cho sinh viên mọi lĩnh vực — từ kinh tế, sức khỏe, nghệ thuật, giáo dục đến kỹ thuật, luật và công nghệ."}

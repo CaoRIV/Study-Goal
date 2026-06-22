@@ -49,23 +49,23 @@ export function PublicHeader({
   }
 
   return (
-    <header className="fixed left-3 right-3 top-3 z-50 mx-auto max-w-7xl rounded-full border border-white/12 bg-slate-950/72 px-3 py-2.5 shadow-2xl shadow-black/30 backdrop-blur-2xl sm:left-6 sm:right-6 sm:px-4">
+    <header className="fixed left-3 right-3 top-3 z-50 mx-auto max-w-7xl rounded-full border border-outline bg-surface-panel/90 px-3 py-2.5 shadow-2xl shadow-black/30 backdrop-blur-2xl sm:left-6 sm:right-6 sm:px-4">
       <nav className="flex items-center justify-between gap-3">
         <a
           href="/"
           className="flex min-w-0 items-center gap-2 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:gap-3"
         >
           <StudyGoalLogo className="h-10 w-10" priority />
-          <span className="truncate font-display text-sm font-semibold text-brand-paper sm:text-base">
+          <span className="truncate font-display text-sm font-semibold text-ink sm:text-base">
             Study Goal
           </span>
         </a>
 
-        <div className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+        <div className="hidden items-center gap-6 text-sm text-ink-muted md:flex">
           {sectionLinks.map(([href, label]) => (
             <a
               key={href}
-              className="transition-colors hover:text-brand-paper"
+              className="transition-colors hover:text-ink"
               href={href}
             >
               {label}
@@ -139,7 +139,7 @@ export function PublicHeader({
           </nav>
 
           <div className="mt-6">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-slate-600">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted">
               {labels.languageLabel}
             </p>
             <div className="flex gap-2">

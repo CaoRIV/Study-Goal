@@ -49,7 +49,7 @@ export function WorkspaceHeader({
   }
 
   return (
-    <header className="rounded-[2rem] border border-white/12 bg-slate-950/72 p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+    <header className="rounded-[2rem] border border-outline bg-surface-panel/90 p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl">
       <div className="flex items-center justify-between gap-4">
         <a
           href="/dashboard"
@@ -57,10 +57,10 @@ export function WorkspaceHeader({
         >
           <StudyGoalLogo priority />
           <div className="min-w-0">
-            <p className="font-display text-lg font-semibold text-brand-paper">
+            <p className="font-display text-lg font-semibold text-ink">
               Study Goal
             </p>
-            <p className="truncate text-sm text-slate-400">{subtitle}</p>
+            <p className="truncate text-sm text-ink-muted">{subtitle}</p>
           </div>
         </a>
 
@@ -82,7 +82,7 @@ export function WorkspaceHeader({
                 className={cn(
                   "workspace-nav-link",
                   active &&
-                    "bg-cyan-400/12 text-cyan-50 ring-1 ring-cyan-300/20"
+                    "bg-cyan-400/12 text-signal-cyan ring-1 ring-cyan-300/20"
                 )}
               >
                 {labels[item.labelKey]}

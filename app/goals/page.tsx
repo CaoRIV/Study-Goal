@@ -246,11 +246,11 @@ export default async function GoalsPage() {
         </div>
 
         <section className="mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand-coral-soft">{t.eyebrow}</p>
-          <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-brand-paper">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-red">{t.eyebrow}</p>
+          <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-ink">
             {t.title}
           </h1>
-          <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
+          <p className="mt-5 max-w-3xl text-lg leading-8 text-ink-muted">{t.description}</p>
         </section>
 
         <GoalsManager userId={user.id} initialGoals={goals || []} initialMilestones={milestones || []} copy={t.manager} />

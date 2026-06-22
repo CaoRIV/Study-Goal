@@ -444,19 +444,19 @@ export function GoalsManager({
       </section>
 
       {error ? (
-        <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-red-100">
+        <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">
           {error}
         </div>
       ) : null}
 
       <section className="grid gap-6 lg:grid-cols-[380px_minmax(0,1fr)]">
         <div className="space-y-4 lg:sticky lg:top-6 lg:self-start">
-          <form className="rounded-[1.5rem] border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-black/25 backdrop-blur-xl" onSubmit={createGoal}>
+          <form className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/25 backdrop-blur-xl" onSubmit={createGoal}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-coral/12 text-brand-coral-soft ring-1 ring-brand-coral-soft/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-coral/12 text-signal-red ring-1 ring-brand-coral-soft/20">
                 <Target className="h-5 w-5" aria-hidden="true" />
               </div>
-              <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.form.title}</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">{copy.form.title}</h2>
             </div>
             <div className="space-y-3">
               <Input label={copy.form.titleLabel} value={title} onChange={setTitle} placeholder={copy.form.titlePlaceholder} />
@@ -474,12 +474,12 @@ export function GoalsManager({
           </form>
 
           {initialGoals.length > 0 ? (
-            <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/80 p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
+            <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/8 text-brand-coral-soft ring-1 ring-white/10">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-warm text-signal-red ring-1 ring-outline">
                   <Filter className="h-4 w-4" aria-hidden="true" />
                 </div>
-                <h2 className="font-display text-xl font-semibold text-brand-paper">{copy.filters.title}</h2>
+                <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
               </div>
               <div className="space-y-3">
                 <Select label={copy.form.statusLabel} value={statusFilter} onChange={setStatusFilter} options={["all", ...statusOptions]} labels={{ all: copy.filters.allStatuses, ...copy.labels.statuses }} />
@@ -493,21 +493,21 @@ export function GoalsManager({
 
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-coral/10 text-brand-coral-soft ring-1 ring-brand-coral-soft/16">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-coral/10 text-signal-red ring-1 ring-brand-coral-soft/16">
               <Flag className="h-5 w-5" aria-hidden="true" />
             </div>
-            <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.board.title}</h2>
+            <h2 className="font-display text-2xl font-semibold text-ink">{copy.board.title}</h2>
           </div>
 
           {initialGoals.length === 0 ? (
             <div className="glass rounded-[2rem] p-8 text-center">
-              <h2 className="font-display text-2xl font-semibold text-brand-paper">{copy.empty.title}</h2>
-              <p className="mt-3 text-slate-400">{copy.empty.description}</p>
+              <h2 className="font-display text-2xl font-semibold text-ink">{copy.empty.title}</h2>
+              <p className="mt-3 text-ink-muted">{copy.empty.description}</p>
             </div>
           ) : null}
 
           {initialGoals.length > 0 && filteredGoals.length === 0 ? (
-            <div className="glass rounded-[2rem] p-8 text-center text-slate-400">{copy.filters.noMatches}</div>
+            <div className="glass rounded-[2rem] p-8 text-center text-ink-muted">{copy.filters.noMatches}</div>
           ) : null}
 
           <div className="grid gap-4 xl:grid-cols-2">
@@ -515,14 +515,14 @@ export function GoalsManager({
               const goals = filteredGoals.filter((goal) => goal.status === columnStatus);
 
               return (
-                <section key={columnStatus} className="min-h-[280px] rounded-[1.5rem] border border-white/10 bg-slate-900/55 p-4 shadow-2xl shadow-black/20">
+                <section key={columnStatus} className="min-h-[280px] rounded-[1.5rem] border border-outline bg-surface-coral p-4 shadow-2xl shadow-black/20">
                   <div className="mb-3 flex items-center justify-between gap-3 px-1">
-                    <h3 className="text-base font-semibold text-brand-paper">{copy.labels.statuses[columnStatus]}</h3>
-                    <span className="rounded-full bg-slate-950/70 px-2.5 py-1 text-xs font-semibold text-slate-300 ring-1 ring-white/10">{goals.length}</span>
+                    <h3 className="text-base font-semibold text-ink">{copy.labels.statuses[columnStatus]}</h3>
+                    <span className="rounded-full bg-surface-panel/90 px-2.5 py-1 text-xs font-semibold text-ink-muted ring-1 ring-outline">{goals.length}</span>
                   </div>
                   <div className="space-y-3">
                     {goals.length === 0 ? (
-                      <p className="rounded-2xl border border-dashed border-white/12 bg-slate-950/40 p-4 text-sm text-slate-500">{copy.board.emptyColumn}</p>
+                      <p className="rounded-2xl border border-dashed border-outline bg-surface-panel/90 p-4 text-sm text-ink-muted">{copy.board.emptyColumn}</p>
                     ) : null}
                     {goals.map((goal) => (
                       <GoalCard
@@ -600,7 +600,7 @@ function GoalCard({
   const nextMilestone = milestones.find((milestone) => milestone.status !== "completed");
 
   return (
-    <article className="rounded-[1.25rem] border border-white/10 bg-slate-950/78 p-4 shadow-lg shadow-black/15 transition-colors hover:border-brand-coral/25">
+    <article className="rounded-[1.25rem] border border-outline bg-surface-panel/90 p-4 shadow-lg shadow-black/15 transition-colors hover:border-brand-coral/25">
       {isEditing ? (
         <div className="space-y-3">
           <Input label={copy.form.titleLabel} value={draft.title} onChange={(value) => setDraft((current) => ({ ...current, title: value }))} placeholder={copy.form.titlePlaceholder} />
@@ -619,10 +619,10 @@ function GoalCard({
         <>
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <h3 className="text-base font-semibold leading-6 text-brand-paper">{goal.title}</h3>
+              <h3 className="text-base font-semibold leading-6 text-ink">{goal.title}</h3>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="rounded-full bg-brand-coral/10 px-2.5 py-1 text-[11px] font-semibold text-brand-coral-soft ring-1 ring-brand-coral-soft/16">{copy.labels.categories[goal.category] || goal.category}</span>
-                <span className="rounded-full bg-brand-coral/10 px-2.5 py-1 text-[11px] font-semibold text-brand-coral-soft ring-1 ring-brand-coral-soft/16">{copy.labels.priorities[goal.priority] || goal.priority}</span>
+                <span className="rounded-full bg-brand-coral/10 px-2.5 py-1 text-[11px] font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">{copy.labels.categories[goal.category] || goal.category}</span>
+                <span className="rounded-full bg-brand-coral/10 px-2.5 py-1 text-[11px] font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">{copy.labels.priorities[goal.priority] || goal.priority}</span>
               </div>
             </div>
             <div className="flex shrink-0 gap-1">
@@ -631,14 +631,14 @@ function GoalCard({
             </div>
           </div>
 
-          {goal.description ? <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-400">{goal.description}</p> : null}
-          {goal.target_date ? <p className="mt-3 text-xs text-slate-500">{copy.card.targetDate}: {goal.target_date}</p> : null}
+          {goal.description ? <p className="mt-3 line-clamp-2 text-sm leading-6 text-ink-muted">{goal.description}</p> : null}
+          {goal.target_date ? <p className="mt-3 text-xs text-ink-muted">{copy.card.targetDate}: {goal.target_date}</p> : null}
 
           <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_150px] sm:items-end">
             <div>
               <div className="mb-2 flex items-center justify-between text-xs">
-                <span className="text-slate-400">{copy.card.progress}</span>
-                <span className="text-brand-paper">{goal.progress}%</span>
+                <span className="text-ink-muted">{copy.card.progress}</span>
+                <span className="text-ink">{goal.progress}%</span>
               </div>
               <input
                 type="range"
@@ -651,8 +651,8 @@ function GoalCard({
             </div>
 
             <label className="block">
-              <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.board.moveTo}</span>
-              <select className="mt-2 h-10 w-full rounded-full border border-white/10 bg-slate-950/80 px-3 text-sm text-brand-paper outline-none focus:border-brand-coral/50" value={goal.status} onChange={(event) => onMove(event.target.value)} disabled={isBusy}>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-muted">{copy.board.moveTo}</span>
+              <select className="mt-2 h-10 w-full rounded-full border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none focus:border-brand-coral/50" value={goal.status} onChange={(event) => onMove(event.target.value)} disabled={isBusy}>
                 {statusOptions.map((status) => (
                   <option key={status} value={status}>{copy.labels.statuses[status]}</option>
                 ))}
@@ -660,23 +660,23 @@ function GoalCard({
             </label>
           </div>
 
-          <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+          <div className="mt-5 rounded-2xl border border-outline bg-surface-warm p-3">
             <div className="mb-3 flex items-center justify-between gap-3">
-              <h4 className="text-sm font-semibold text-brand-paper">{copy.milestones.title}</h4>
-              <span className="text-xs text-slate-500">{milestones.filter((milestone) => milestone.status === "completed").length}/{milestones.length}</span>
+              <h4 className="text-sm font-semibold text-ink">{copy.milestones.title}</h4>
+              <span className="text-xs text-ink-muted">{milestones.filter((milestone) => milestone.status === "completed").length}/{milestones.length}</span>
             </div>
             {nextMilestone ? (
-              <p className="mb-3 rounded-xl bg-brand-coral/8 px-3 py-2 text-xs leading-5 text-brand-coral-soft ring-1 ring-brand-coral-soft/12">
+              <p className="mb-3 rounded-xl bg-brand-coral/8 px-3 py-2 text-xs leading-5 text-signal-red ring-1 ring-brand-coral-soft/12">
                 {copy.milestones.next}: {nextMilestone.title}
               </p>
             ) : null}
             <div className="space-y-2">
-              {milestones.length === 0 ? <p className="text-sm text-slate-500">{copy.milestones.empty}</p> : null}
+              {milestones.length === 0 ? <p className="text-sm text-ink-muted">{copy.milestones.empty}</p> : null}
               {milestones.map((milestone) => (
-                <div key={milestone.id} className="flex items-start gap-2 rounded-xl border border-white/8 bg-slate-950/50 p-3">
+                <div key={milestone.id} className="flex items-start gap-2 rounded-xl border border-outline bg-surface-panel/90 p-3">
                   <button
                     type="button"
-                    className="mt-0.5 text-brand-coral-soft"
+                    className="mt-0.5 text-signal-red"
                     onClick={() => onMilestoneStatus(milestone.id, milestone.status === "completed" ? "todo" : "completed")}
                     disabled={isBusy}
                     aria-label={copy.milestones.completed}
@@ -684,8 +684,8 @@ function GoalCard({
                     {milestone.status === "completed" ? <CheckCircle2 className="h-4 w-4" /> : <Circle className="h-4 w-4" />}
                   </button>
                   <div className="min-w-0 flex-1">
-                    <p className={`text-sm ${milestone.status === "completed" ? "text-slate-500 line-through" : "text-slate-200"}`}>{milestone.title}</p>
-                    <select className="mt-2 h-8 rounded-full border border-white/10 bg-slate-950/80 px-2 text-xs text-slate-300 outline-none focus:border-brand-coral/50" value={milestone.status} onChange={(event) => onMilestoneStatus(milestone.id, event.target.value)} disabled={isBusy}>
+                    <p className={`text-sm ${milestone.status === "completed" ? "text-ink-muted line-through" : "text-ink"}`}>{milestone.title}</p>
+                    <select className="mt-2 h-8 rounded-full border border-outline bg-surface-panel/90 px-2 text-xs text-ink-muted outline-none focus:border-brand-coral/50" value={milestone.status} onChange={(event) => onMilestoneStatus(milestone.id, event.target.value)} disabled={isBusy}>
                       <option value="todo">{copy.milestones.todo}</option>
                       <option value="in_progress">{copy.milestones.inProgress}</option>
                       <option value="completed">{copy.milestones.completed}</option>
@@ -699,7 +699,7 @@ function GoalCard({
               <input
                 value={milestoneTitle}
                 onChange={(event) => setMilestoneTitle(event.target.value)}
-                className="h-10 min-w-0 flex-1 rounded-full border border-white/10 bg-slate-950/80 px-3 text-sm text-brand-paper outline-none placeholder:text-slate-600 focus:border-brand-coral/50"
+                className="h-10 min-w-0 flex-1 rounded-full border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none placeholder:text-ink-muted focus:border-brand-coral/50"
                 placeholder={copy.milestones.placeholder}
               />
               <button type="button" onClick={onCreateMilestone} disabled={isBusy || !milestoneTitle.trim()} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-orange text-slate-950 transition-colors hover:bg-orange-400 disabled:pointer-events-none disabled:opacity-50" aria-label={copy.milestones.add}>
@@ -715,9 +715,9 @@ function GoalCard({
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
-      <p className="text-sm text-slate-400">{label}</p>
-      <p className="mt-3 font-display text-3xl font-semibold text-brand-paper">{value}</p>
+    <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+      <p className="text-sm text-ink-muted">{label}</p>
+      <p className="mt-3 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -743,7 +743,7 @@ function Input({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
       <input
         required={required}
         type={type}
@@ -751,7 +751,7 @@ function Input({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-11 w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 text-sm text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-brand-coral/50"
+        className="mt-2 h-11 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-brand-coral/50"
         placeholder={placeholder}
       />
     </label>
@@ -771,11 +771,11 @@ function TextArea({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
       <textarea
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 min-h-24 w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 py-3 text-sm text-brand-paper outline-none transition-colors placeholder:text-slate-600 focus:border-brand-coral/50"
+        className="mt-2 min-h-24 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-brand-coral/50"
         placeholder={placeholder}
       />
     </label>
@@ -797,8 +797,8 @@ function Select({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-400">{label}</span>
-      <select className="mt-2 h-11 w-full rounded-xl border border-white/10 bg-slate-950/80 px-4 text-sm text-brand-paper outline-none focus:border-brand-coral/50" value={value} onChange={(event) => onChange(event.target.value)}>
+      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
+      <select className="mt-2 h-11 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none focus:border-brand-coral/50" value={value} onChange={(event) => onChange(event.target.value)}>
         {options.map((option) => (
           <option key={option} value={option}>{labels[option] || option}</option>
         ))}
@@ -826,7 +826,7 @@ function IconButton({
       onClick={onClick}
       disabled={disabled}
       className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50 ${
-        danger ? "text-slate-500 hover:bg-red-400/10 hover:text-red-100" : "text-slate-400 hover:bg-white/8 hover:text-brand-paper"
+        danger ? "text-ink-muted hover:bg-red-400/10 hover:text-signal-red" : "text-ink-muted hover:bg-surface-warm hover:text-ink"
       }`}
       aria-label={label}
       title={label}

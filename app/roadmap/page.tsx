@@ -230,11 +230,11 @@ export default async function RoadmapPage() {
 
         <section className="mb-8 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-cyan-200">{t.eyebrow}</p>
-            <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-brand-paper">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.eyebrow}</p>
+            <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-ink">
               {t.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.description}</p>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-ink-muted">{t.description}</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <Metric label={t.currentYear} value={`${t.year} ${profile.current_year || 1}`} icon={CalendarDays} />
@@ -246,14 +246,14 @@ export default async function RoadmapPage() {
 
         <section className="space-y-5">
           {years.map((year) => (
-            <article key={year.yearIndex} className="rounded-[2rem] border border-white/10 bg-slate-900/60 p-5 shadow-2xl shadow-black/20">
+            <article key={year.yearIndex} className="rounded-[2rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20">
               <div className="grid gap-5 lg:grid-cols-[220px_minmax(0,1fr)]">
-                <div className="lg:border-r lg:border-white/10 lg:pr-5">
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200 ring-1 ring-cyan-200/18">
+                <div className="lg:border-r lg:border-outline lg:pr-5">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/18">
                     <span className="font-display text-2xl font-semibold">{year.yearIndex}</span>
                   </div>
-                  <h2 className="mt-4 font-display text-3xl font-semibold text-brand-paper">{t.year} {year.yearIndex}</h2>
-                  <div className="mt-5 space-y-3 text-sm text-slate-400">
+                  <h2 className="mt-4 font-display text-3xl font-semibold text-ink">{t.year} {year.yearIndex}</h2>
+                  <div className="mt-5 space-y-3 text-sm text-ink-muted">
                     <StatLine label={t.plannedTerms} value={String(year.semesters.length)} />
                     <StatLine label={t.courses} value={String(year.courses.length)} />
                     <StatLine label={t.credits} value={String(year.credits)} />
@@ -264,31 +264,31 @@ export default async function RoadmapPage() {
                 <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
                   <div className="space-y-3">
                     {year.semesters.length === 0 ? (
-                      <p className="rounded-2xl border border-dashed border-white/10 bg-slate-950/45 p-4 text-sm text-slate-500">{t.noSemesters}</p>
+                      <p className="rounded-2xl border border-dashed border-outline bg-surface-panel/90 p-4 text-sm text-ink-muted">{t.noSemesters}</p>
                     ) : null}
                     {year.semesters.map((semester) => {
                       const semesterCourses = safeCourses.filter((course) => course.semester_id === semester.id);
 
                       return (
-                        <section key={semester.id} className="rounded-2xl border border-white/10 bg-slate-950/62 p-4">
+                        <section key={semester.id} className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
                           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                             <div>
-                              <p className="text-xs uppercase tracking-[0.16em] text-cyan-200">{t.terms[semester.term as keyof typeof t.terms] || semester.term}</p>
-                              <h3 className="mt-1 text-lg font-semibold text-brand-paper">{semester.name}</h3>
+                              <p className="text-xs uppercase tracking-[0.16em] text-signal-cyan">{t.terms[semester.term as keyof typeof t.terms] || semester.term}</p>
+                              <h3 className="mt-1 text-lg font-semibold text-ink">{semester.name}</h3>
                             </div>
-                            <span className="rounded-full bg-white/8 px-3 py-1 text-xs font-semibold text-slate-300 ring-1 ring-white/10">
+                            <span className="rounded-full bg-surface-warm px-3 py-1 text-xs font-semibold text-ink-muted ring-1 ring-outline">
                               {semesterCourses.length} {t.courses}
                             </span>
                           </div>
                           <div className="mt-4 space-y-2">
-                            {semesterCourses.length === 0 ? <p className="text-sm text-slate-500">{t.noCourses}</p> : null}
+                            {semesterCourses.length === 0 ? <p className="text-sm text-ink-muted">{t.noCourses}</p> : null}
                             {semesterCourses.slice(0, 5).map((course) => (
-                              <div key={course.id} className="flex items-center justify-between gap-3 rounded-xl bg-white/[0.035] px-3 py-2 text-sm">
+                              <div key={course.id} className="flex items-center justify-between gap-3 rounded-xl bg-surface-warm px-3 py-2 text-sm">
                                 <div className="min-w-0">
-                                  <p className="truncate font-medium text-slate-100">{course.name}</p>
-                                  <p className="text-xs text-slate-500">{course.code || t.courses} / {t.statuses[course.status as keyof typeof t.statuses] || course.status}</p>
+                                  <p className="truncate font-medium text-ink">{course.name}</p>
+                                  <p className="text-xs text-ink-muted">{course.code || t.courses} / {t.statuses[course.status as keyof typeof t.statuses] || course.status}</p>
                                 </div>
-                                <span className="shrink-0 text-xs font-semibold text-cyan-100">{course.credits} {t.credits}</span>
+                                <span className="shrink-0 text-xs font-semibold text-signal-cyan">{course.credits} {t.credits}</span>
                               </div>
                             ))}
                           </div>
@@ -297,27 +297,27 @@ export default async function RoadmapPage() {
                     })}
                   </div>
 
-                  <div className="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+                  <div className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
                     <div className="mb-4 flex items-center gap-3">
-                      <Target className="h-5 w-5 text-cyan-200" aria-hidden="true" />
-                      <h3 className="font-semibold text-brand-paper">{t.activeGoals}</h3>
+                      <Target className="h-5 w-5 text-signal-cyan" aria-hidden="true" />
+                      <h3 className="font-semibold text-ink">{t.activeGoals}</h3>
                     </div>
                     <div className="space-y-3">
-                      {year.goals.length === 0 ? <p className="text-sm text-slate-500">{t.noGoals}</p> : null}
+                      {year.goals.length === 0 ? <p className="text-sm text-ink-muted">{t.noGoals}</p> : null}
                       {year.goals.slice(0, 4).map((goal) => {
                         const goalMilestones = safeMilestones.filter((milestone) => milestone.goal_id === goal.id);
                         const completedMilestones = goalMilestones.filter((milestone) => milestone.status === "completed").length;
 
                         return (
-                          <div key={goal.id} className="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+                          <div key={goal.id} className="rounded-2xl border border-outline bg-surface-warm p-3">
                             <div className="flex items-start justify-between gap-3">
-                              <p className="font-medium leading-6 text-brand-paper">{goal.title}</p>
-                              <span className="shrink-0 text-sm font-semibold text-cyan-100">{goal.progress}%</span>
+                              <p className="font-medium leading-6 text-ink">{goal.title}</p>
+                              <span className="shrink-0 text-sm font-semibold text-signal-cyan">{goal.progress}%</span>
                             </div>
-                            <div className="mt-3 h-2 rounded-full bg-slate-800">
+                            <div className="mt-3 h-2 rounded-full bg-surface-cyan">
                               <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${goal.progress}%` }} />
                             </div>
-                            <p className="mt-2 text-xs text-slate-500">{t.milestones}: {completedMilestones}/{goalMilestones.length}</p>
+                            <p className="mt-2 text-xs text-ink-muted">{t.milestones}: {completedMilestones}/{goalMilestones.length}</p>
                           </div>
                         );
                       })}
@@ -343,12 +343,12 @@ function Metric({
   icon: typeof GraduationCap;
 }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-4">
+    <div className="rounded-2xl border border-outline bg-surface-warm p-4">
       <div className="flex items-center justify-between gap-3">
-        <span className="text-sm text-slate-400">{label}</span>
-        <Icon className="h-4 w-4 text-cyan-200" aria-hidden="true" />
+        <span className="text-sm text-ink-muted">{label}</span>
+        <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
       </div>
-      <p className="mt-3 font-display text-2xl font-semibold text-brand-paper">{value}</p>
+      <p className="mt-3 font-display text-2xl font-semibold text-ink">{value}</p>
     </div>
   );
 }
@@ -357,7 +357,7 @@ function StatLine({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-3">
       <span>{label}</span>
-      <span className="font-semibold text-slate-100">{value}</span>
+      <span className="font-semibold text-ink">{value}</span>
     </div>
   );
 }
