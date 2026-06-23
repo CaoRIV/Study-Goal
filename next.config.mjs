@@ -3,14 +3,8 @@ const isDevelopment = process.env.NODE_ENV === "development";
 
 const nextConfig = {
   reactStrictMode: true,
-  distDir: isDevelopment ? ".next-dev" : ".next-build",
-  webpack(config, { dev }) {
-    if (dev) {
-      config.cache = false;
-    }
-
-    return config;
-  }
+  // Keep the developer-owned cache separate from caches created by tools or CI.
+  distDir: isDevelopment ? ".next-local" : ".next-build"
 };
 
 export default nextConfig;

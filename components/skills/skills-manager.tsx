@@ -416,7 +416,6 @@ export function SkillsManager({
                   <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
                   {copy.tree.title}
                 </div>
-                <p className="max-w-2xl text-sm leading-6 text-ink-muted">{copy.tree.description}</p>
               </div>
               <div className="flex items-center gap-2 rounded-full border border-outline bg-surface-warm px-4 py-2 text-sm font-semibold text-signal-green">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />

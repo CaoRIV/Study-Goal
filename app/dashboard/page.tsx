@@ -583,7 +583,6 @@ export default async function DashboardPage() {
                 <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl">
                   {t.welcome}, <span className="text-signal-cyan">{displayName}</span>.
                 </h1>
-                <p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">{t.description}</p>
               </div>
 
               <div className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -632,7 +631,6 @@ export default async function DashboardPage() {
           <SectionHeading
             eyebrow={t.workspace.eyebrow}
             title={t.workspace.title}
-            description={t.workspace.description}
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-12">
             <NextModule
@@ -642,7 +640,7 @@ export default async function DashboardPage() {
                   ? `${targetYears}-${t.roadmapModule.yearUnit} ${t.roadmapModule.title}`
                   : `${t.roadmapModule.title} ${targetYears} ${t.roadmapModule.yearUnit}`
               }
-              text={t.roadmapModule.text}
+              text={`${safeSemesters.length}/${expectedSemesters} ${t.metricLabels.semesters.toLowerCase()} / ${safeCourses.length} ${t.units.courses}.`}
               href="/roadmap"
               tone="coral"
               span="feature"
@@ -652,7 +650,7 @@ export default async function DashboardPage() {
             <NextModule
               icon={BookOpenCheck}
               title={t.modules.academicTitle}
-              text={`${t.modules.academicText} ${safeCourses.length} ${t.units.courses} / ${completedCredits} ${t.units.credits}.`}
+              text={`${safeCourses.length} ${t.units.courses} / ${completedCredits}/${targetCredits} ${t.units.credits}.`}
               href="/grades"
               tone="cyan"
               span="primary"
@@ -662,7 +660,7 @@ export default async function DashboardPage() {
             <NextModule
               icon={Target}
               title={t.modules.goalsTitle}
-              text={`${t.modules.goalsText} ${activeGoals.length} ${t.units.active} / ${completedGoals.length} ${t.units.completed}.`}
+              text={`${activeGoals.length} ${t.units.active} / ${completedGoals.length} ${t.units.completed}.`}
               href="/goals"
               tone="coral"
               span="default"
@@ -672,7 +670,7 @@ export default async function DashboardPage() {
             <NextModule
               icon={BrainCircuit}
               title={t.modules.skillsTitle}
-              text={`${t.modules.skillsText} ${safeSkills.length} ${t.skills.toLowerCase()} / ${skillProgress}%.`}
+              text={`${safeSkills.length} ${t.skills.toLowerCase()} / ${skillProgress}%.`}
               href="/skills"
               tone="green"
               span="default"
@@ -953,7 +951,6 @@ function AcademicPulse({
   labels: {
     eyebrow: string;
     title: string;
-    description: string;
     onTrack: string;
     attention: string;
     gpaTrend: string;
@@ -985,7 +982,6 @@ function AcademicPulse({
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{labels.eyebrow}</p>
           <h2 className="mt-2 font-display text-3xl font-semibold text-ink">{labels.title}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-ink-muted">{labels.description}</p>
         </div>
         <div
           className={cn(
@@ -1146,7 +1142,6 @@ function SemesterJourney({
   labels: {
     eyebrow: string;
     title: string;
-    description: string;
     completed: string;
     current: string;
     planned: string;
@@ -1180,7 +1175,7 @@ function SemesterJourney({
   return (
     <section className="mt-10">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <SectionHeading eyebrow={labels.eyebrow} title={labels.title} description={labels.description} />
+        <SectionHeading eyebrow={labels.eyebrow} title={labels.title} />
         <a
           href="/roadmap"
           className="mb-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-signal-cyan transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:self-auto"

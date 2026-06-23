@@ -234,7 +234,6 @@ export default async function RoadmapPage() {
             <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-ink">
               {t.title}
             </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-ink-muted">{t.description}</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <Metric label={t.currentYear} value={`${t.year} ${profile.current_year || 1}`} icon={CalendarDays} />

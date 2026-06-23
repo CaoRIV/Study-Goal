@@ -1,7 +1,5 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { UsersRound } from "lucide-react";
-
 import { ClubsManager } from "@/components/clubs/clubs-manager";
 import { WorkspaceHeader } from "@/components/navigation/workspace-header";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
@@ -185,24 +183,11 @@ export default async function ClubsPage() {
           <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />
         </div>
 
-        <section className="mb-8 grid gap-6 lg:grid-cols-[0.9fr_0.55fr] lg:items-end">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-red">{t.eyebrow}</p>
-            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-ink">
-              {t.title}
-            </h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-ink-muted">{t.description}</p>
-          </div>
-          <div className="rounded-[2rem] border border-brand-coral/14 bg-brand-coral/8 p-6 shadow-glow-blue backdrop-blur-2xl">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral/12 text-signal-red ring-1 ring-brand-coral-soft/20">
-              <UsersRound className="h-6 w-6" aria-hidden="true" />
-            </div>
-            <p className="text-sm leading-6 text-ink-muted">
-              {language === "en"
-                ? "Designed for students who want leadership, contribution, and campus impact to become visible career evidence."
-                : "Thiết kế cho sinh viên muốn biến lãnh đạo, đóng góp và tác động trong trường thành minh chứng nghề nghiệp rõ ràng."}
-            </p>
-          </div>
+        <section className="mb-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-red">{t.eyebrow}</p>
+          <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-ink">
+            {t.title}
+          </h1>
         </section>
 
         <ClubsManager userId={user.id} initialClubs={clubs || []} copy={t.manager} />
