@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useConfirmDialog } from "@/components/ui/confirm-dialog";
 import { createClient } from "@/lib/supabase/client";
 
 type Club = {
@@ -108,6 +109,7 @@ export function ClubsManager({
   initialClubs: Club[];
   copy: ClubsManagerCopy;
 }) {
+  const confirmDelete = useConfirmDialog();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [name, setName] = useState("");
@@ -227,7 +229,7 @@ export function ClubsManager({
   }
 
   async function deleteClub(clubId: string) {
-    if (!window.confirm(copy.actions.confirmDelete)) {
+    if (!(await confirmDelete({ description: copy.actions.confirmDelete }))) {
       return;
     }
 

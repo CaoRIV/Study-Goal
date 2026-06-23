@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useConfirmDialog } from "@/components/ui/confirm-dialog";
 import { createClient } from "@/lib/supabase/client";
 
 type Goal = {
@@ -139,6 +140,7 @@ export function GoalsManager({
   initialMilestones: Milestone[];
   copy: GoalsManagerCopy;
 }) {
+  const confirmDelete = useConfirmDialog();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [title, setTitle] = useState("");
@@ -304,7 +306,7 @@ export function GoalsManager({
   }
 
   async function deleteGoal(goalId: string) {
-    if (!window.confirm(copy.actions.confirmDelete)) {
+    if (!(await confirmDelete({ description: copy.actions.confirmDelete }))) {
       return;
     }
 
@@ -390,7 +392,7 @@ export function GoalsManager({
   }
 
   async function deleteMilestone(goalId: string, milestoneId: string) {
-    if (!window.confirm(copy.milestones.confirmDelete)) {
+    if (!(await confirmDelete({ description: copy.milestones.confirmDelete }))) {
       return;
     }
 

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BookOpenCheck, CalendarDays, Loader2, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useConfirmDialog } from "@/components/ui/confirm-dialog";
 import {
   calculateCompletedCredits,
   calculateCreditProgress,
@@ -136,6 +137,7 @@ export function AcademicPlanner({
   graduationCreditTarget: number;
   copy: AcademicPlannerCopy;
 }) {
+  const confirmDelete = useConfirmDialog();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [semesterName, setSemesterName] = useState("");
@@ -264,7 +266,7 @@ export function AcademicPlanner({
   }
 
   async function deleteSemester(semesterId: string) {
-    if (!window.confirm(copy.actions.confirmDeleteSemester)) {
+    if (!(await confirmDelete({ description: copy.actions.confirmDeleteSemester }))) {
       return;
     }
 
@@ -325,7 +327,7 @@ export function AcademicPlanner({
   }
 
   async function deleteCourse(courseId: string) {
-    if (!window.confirm(copy.actions.confirmDeleteCourse)) {
+    if (!(await confirmDelete({ description: copy.actions.confirmDeleteCourse }))) {
       return;
     }
 
