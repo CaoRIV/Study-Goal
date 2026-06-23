@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useConfirmDialog } from "@/components/ui/confirm-dialog";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 
@@ -141,6 +142,7 @@ export function SkillsManager({
   initialSkills: Skill[];
   copy: SkillsManagerCopy;
 }) {
+  const confirmDelete = useConfirmDialog();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [name, setName] = useState("");
@@ -276,7 +278,7 @@ export function SkillsManager({
   }
 
   async function deleteSkill(skillId: string) {
-    if (!window.confirm(copy.actions.confirmDelete)) {
+    if (!(await confirmDelete({ description: copy.actions.confirmDelete }))) {
       return;
     }
 

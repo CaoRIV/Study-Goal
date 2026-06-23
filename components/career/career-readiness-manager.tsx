@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useConfirmDialog } from "@/components/ui/confirm-dialog";
 import { calculateCareerReadiness } from "@/lib/calculations/career";
 import { createClient } from "@/lib/supabase/client";
 
@@ -137,6 +138,7 @@ export function CareerReadinessManager({
   initialTargets: CareerTarget[];
   copy: Copy;
 }) {
+  const confirmDelete = useConfirmDialog();
   const router = useRouter();
   const supabase = useMemo(() => createClient(), []);
   const [profile, setProfile] = useState({
@@ -251,7 +253,7 @@ export function CareerReadinessManager({
   }
 
   async function deleteTarget(targetId: string) {
-    if (!window.confirm(copy.pipeline.confirmDelete)) {
+    if (!(await confirmDelete({ description: copy.pipeline.confirmDelete }))) {
       return;
     }
     setPending(`delete-${targetId}`);

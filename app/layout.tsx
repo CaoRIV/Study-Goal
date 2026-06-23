@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { GeistSans } from "geist/font/sans";
 
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
+import { ConfirmDialogProvider } from "@/components/ui/confirm-dialog";
 
 import "./globals.css";
 
@@ -62,7 +63,7 @@ export default async function RootLayout({
         >
           {language === "vi" ? "Bỏ qua đến nội dung chính" : "Skip to main content"}
         </a>
-        {children}
+        <ConfirmDialogProvider>{children}</ConfirmDialogProvider>
       </body>
     </html>
   );
