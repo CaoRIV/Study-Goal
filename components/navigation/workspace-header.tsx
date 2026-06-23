@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import type { Language } from "@/lib/language";
 import {
   workspaceNavigation,
+  workspaceNavigationCompactLabels,
   workspaceNavigationLabels
 } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
@@ -28,6 +29,7 @@ export function WorkspaceHeader({
 }) {
   const pathname = usePathname();
   const labels = workspaceNavigationLabels[language];
+  const compactLabels = workspaceNavigationCompactLabels[language];
   const [menuOpen, setMenuOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -53,7 +55,7 @@ export function WorkspaceHeader({
       <div className="flex items-center justify-between gap-4">
         <a
           href="/dashboard"
-          className="flex min-w-0 items-center gap-3 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          className="flex min-w-0 shrink-0 items-center gap-3 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
         >
           <StudyGoalLogo priority />
           <div className="min-w-0">
@@ -70,7 +72,7 @@ export function WorkspaceHeader({
               ? "Điều hướng không gian học tập"
               : "Study workspace navigation"
           }
-          className="hidden flex-1 flex-wrap items-center justify-center gap-1 xl:flex"
+          className="hidden min-w-0 flex-1 flex-nowrap items-center justify-center gap-0.5 xl:flex"
         >
           {workspaceNavigation.map((item) => {
             const active = isActive(item.href, item.match);
@@ -85,13 +87,13 @@ export function WorkspaceHeader({
                     "bg-cyan-400/12 text-signal-cyan ring-1 ring-cyan-300/20"
                 )}
               >
-                {labels[item.labelKey]}
+                {compactLabels[item.labelKey]}
               </a>
             );
           })}
         </nav>
 
-        <div className="hidden items-center gap-2 xl:flex">
+        <div className="hidden shrink-0 items-center gap-2 xl:flex">
           <LanguageSwitcher language={language} label={languageLabel} />
           <SignOutButton label={signOutLabel} />
         </div>

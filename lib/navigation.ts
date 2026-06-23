@@ -54,3 +54,31 @@ export const workspaceNavigationLabels: Record<
     profile: "Hồ sơ"
   }
 };
+
+export const workspaceNavigationCompactLabels: Record<
+  Language,
+  Record<NavigationItem["labelKey"], string>
+> = {
+  en: {
+    dashboard: "Overview",
+    grades: "Academics",
+    roadmap: "Roadmap",
+    goals: "Goals",
+    skills: "Skills",
+    clubs: "Clubs",
+    portfolio: "Portfolio",
+    career: "Career",
+    profile: "Profile"
+  },
+  vi: {
+    dashboard: "Tổng quan",
+    grades: "Học tập",
+    roadmap: "Lộ trình",
+    goals: "Mục tiêu",
+    skills: "Kỹ năng",
+    clubs: "CLB",
+    portfolio: "Năng lực",
+    career: "Sự nghiệp",
+    profile: "Hồ sơ"
+  }
+};
