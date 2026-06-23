@@ -304,7 +304,6 @@ export function CareerReadinessManager({
         <form onSubmit={saveProfile} className="glass rounded-[2rem] p-6">
           <div className="mb-6">
             <h2 className="font-display text-2xl font-semibold text-ink">{copy.profile.title}</h2>
-            <p className="mt-2 text-sm leading-6 text-ink-muted">{copy.profile.description}</p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">

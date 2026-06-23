@@ -1,7 +1,5 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { BriefcaseBusiness } from "lucide-react";
-
 import { CareerReadinessManager } from "@/components/career/career-readiness-manager";
 import { WorkspaceHeader } from "@/components/navigation/workspace-header";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
@@ -227,16 +225,9 @@ export default async function CareerPage() {
           />
         </div>
 
-        <section className="mb-8 grid gap-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-green">{t.eyebrow}</p>
-            <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-ink">{t.title}</h1>
-            <p className="mt-5 max-w-3xl text-lg leading-8 text-ink-muted">{t.description}</p>
-          </div>
-          <aside className="rounded-[2rem] border border-brand-green/16 bg-brand-green/8 p-6 backdrop-blur-2xl">
-            <BriefcaseBusiness className="h-7 w-7 text-signal-green" aria-hidden="true" />
-            <p className="mt-4 text-sm leading-6 text-ink-muted">{t.insight}</p>
-          </aside>
+        <section className="mb-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-green">{t.eyebrow}</p>
+          <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-ink">{t.title}</h1>
         </section>
 
         <CareerReadinessManager
