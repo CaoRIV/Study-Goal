@@ -32,6 +32,7 @@ import {
 } from "@/lib/calculations/academic";
 import { calculateCareerReadiness } from "@/lib/calculations/career";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
+import { createRuleRecommendations } from "@/lib/recommendations/rules";
 import { createClient } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
@@ -53,6 +54,7 @@ type Goal = {
   progress: number;
   status: string;
   priority: string;
+  target_date: string | null;
 };
 
 type Milestone = {
@@ -65,8 +67,11 @@ type Milestone = {
 
 type Skill = {
   id: string;
+  name: string;
+  category: string;
   level: number;
   target_level: number;
+  evidence_url: string | null;
   status: string;
 };
 
@@ -86,6 +91,8 @@ type Club = {
 type PortfolioItem = {
   id: string;
   status: string;
+  type: string;
+  url: string | null;
   related_course_id: string | null;
   related_goal_id: string | null;
   related_skill_id: string | null;
@@ -99,10 +106,16 @@ type CareerReadiness = {
   portfolio_status: string;
   interview_practice_count: number;
   networking_contacts_count: number;
+  target_role: string | null;
+  target_industry: string | null;
+  next_review_date: string | null;
 };
 
 type CareerTarget = {
+  company: string;
+  role: string;
   stage: string;
+  deadline: string | null;
 };
 
 const dashboardCopy = {
@@ -407,7 +420,7 @@ export default async function DashboardPage() {
       .order("created_at", { ascending: false }),
     supabase
       .from("goals")
-      .select("id, title, category, progress, status, priority")
+      .select("id, title, category, progress, status, priority, target_date")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false }),
     supabase
@@ -419,7 +432,7 @@ export default async function DashboardPage() {
       .order("created_at", { ascending: true }),
     supabase
       .from("skills")
-      .select("id, level, target_level, status")
+      .select("id, name, category, level, target_level, evidence_url, status")
       .eq("user_id", user.id),
     supabase
       .from("clubs")
@@ -427,16 +440,16 @@ export default async function DashboardPage() {
       .eq("user_id", user.id),
     supabase
       .from("portfolio_items")
-      .select("id, status, related_course_id, related_goal_id, related_skill_id, related_club_id")
+      .select("id, status, type, url, related_course_id, related_goal_id, related_skill_id, related_club_id")
       .eq("user_id", user.id),
     supabase
       .from("career_readiness")
-      .select("resume_status, linkedin_status, github_status, portfolio_status, interview_practice_count, networking_contacts_count")
+      .select("resume_status, linkedin_status, github_status, portfolio_status, interview_practice_count, networking_contacts_count, target_role, target_industry, next_review_date")
       .eq("user_id", user.id)
       .maybeSingle(),
     supabase
       .from("career_targets")
-      .select("stage")
+      .select("company, role, stage, deadline")
       .eq("user_id", user.id)
   ]);
 
@@ -516,6 +529,35 @@ export default async function DashboardPage() {
     language === "vi"
       ? `${readinessScore}/100 điểm sẵn sàng / ${activeCareerTargets} cơ hội đang hoạt động.`
       : `${readinessScore}/100 readiness / ${activeCareerTargets} active opportunities.`;
+  const recommendations = createRuleRecommendations(
+    {
+      profile: {
+        full_name: profile.full_name,
+        major: profile.major,
+        current_year: profile.current_year === null ? null : Number(profile.current_year),
+        academic_year_target: profile.academic_year_target === null ? null : Number(profile.academic_year_target),
+        target_gpa: targetGpa,
+        graduation_credit_target: targetCredits,
+        career_goal: profile.career_goal
+      },
+      semesters: safeSemesters,
+      courses: safeCourses,
+      goals: safeGoals,
+      milestones: safeMilestones,
+      skills: safeSkills,
+      clubs: safeClubs,
+      portfolioItems: safePortfolioItems,
+      careerReadiness: safeCareerReadiness,
+      careerTargets: safeCareerTargets
+    },
+    language
+  );
+  const topRecommendation = recommendations[0];
+  const insightsTitle = language === "vi" ? "Gợi ý thông minh" : "Smart Insights";
+  const insightsText =
+    language === "vi"
+      ? `${recommendations.length} gợi ý ưu tiên từ học tập, mục tiêu, kỹ năng và sự nghiệp.`
+      : `${recommendations.length} prioritized recommendations across academics, goals, skills, and career.`;
   const nextAction = getNextAction({
     hasSemesters: safeSemesters.length > 0,
     hasCourses: safeCourses.length > 0,
@@ -523,6 +565,14 @@ export default async function DashboardPage() {
     hasGpa: gpa !== null,
     copy: t.nextActions
   });
+  const focusAction = topRecommendation
+    ? {
+        title: topRecommendation.title,
+        copy: topRecommendation.summary,
+        href: "/insights",
+        cta: language === "vi" ? "Mở gợi ý AI" : "Open insights"
+      }
+    : nextAction;
   const activeSemesterId = safeCourses.find((course) => course.status === "in_progress")?.semester_id;
   const currentSemester =
     safeSemesters.find((semester) => semester.id === activeSemesterId) ||
@@ -707,6 +757,16 @@ export default async function DashboardPage() {
               metric={String(readyPortfolioItems.length)}
               progress={portfolioProgress}
             />
+            <NextModule
+              icon={Sparkles}
+              title={insightsTitle}
+              text={insightsText}
+              href="/insights"
+              tone="green"
+              span="feature"
+              metric={String(recommendations.length)}
+              progress={Math.min(100, recommendations.length * 16)}
+            />
           </div>
         </section>
 
@@ -720,13 +780,13 @@ export default async function DashboardPage() {
                   <Lightbulb className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-orange">{t.nextActions.title}</p>
-                <h2 className="mt-3 font-display text-3xl font-semibold text-ink">{nextAction.title}</h2>
-                <p className="mt-3 max-w-xl leading-7 text-ink-muted">{nextAction.copy}</p>
+                <h2 className="mt-3 font-display text-3xl font-semibold text-ink">{focusAction.title}</h2>
+                <p className="mt-3 max-w-xl leading-7 text-ink-muted">{focusAction.copy}</p>
                 <a
-                  href={nextAction.href}
+                  href={focusAction.href}
                   className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-orange px-5 text-sm font-semibold text-slate-950 shadow-glow-orange transition-colors duration-200 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
                 >
-                  {nextAction.cta}
+                  {focusAction.cta}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
               </div>

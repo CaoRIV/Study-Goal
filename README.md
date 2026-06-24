@@ -15,6 +15,8 @@ Study Goal is a premium university operating system for ambitious students. It h
 - Club participation and leadership tracking.
 - Achievement portfolio with linked academic evidence.
 - Career readiness score and internship/job opportunity pipeline.
+- Smart Insights page with rule-based recommendations.
+- Local Ollama weekly AI review through a protected Next.js API route.
 
 ## Tech Stack
 
@@ -40,6 +42,8 @@ Create `.env.local`:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+OLLAMA_MODEL=qwen2.5:3b
 ```
 
 Run the development server:
@@ -53,6 +57,17 @@ Open:
 ```txt
 http://localhost:3000
 ```
+
+### Optional: Local Ollama AI
+
+Install and run Ollama locally, then pull a model:
+
+```bash
+ollama serve
+ollama pull qwen2.5:3b
+```
+
+The `/insights` page works without Ollama because the rule-based recommendations run inside the app. The Ollama button only powers the generated weekly review.
 
 ## Supabase Migrations
 
@@ -87,6 +102,7 @@ The migrations create user-owned tables and enable Row Level Security so users c
 - `/clubs` - Club and leadership tracker
 - `/portfolio` - Achievement portfolio
 - `/career` - Career readiness and opportunity pipeline
+- `/insights` - Smart recommendations and local Ollama weekly review
 
 ## Production Build
 
@@ -111,11 +127,13 @@ Completed foundations:
 - Club tracker
 - Portfolio item system
 - Career readiness and opportunity pipeline
+- Smart Insights with local Ollama support
 
 Next recommended modules:
 
 - Research workspace
-- Analytics and AI recommendations
+- Deeper analytics charts
+- Optional notification system for deadlines
 
 ## Vercel Deployment
 
@@ -125,6 +143,8 @@ Add these environment variables to the Vercel project:
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 ```
+
+Only set `OLLAMA_BASE_URL` on Vercel if you have a reachable hosted Ollama endpoint. A normal Vercel deployment cannot call `localhost` on your laptop.
 
 In Supabase Authentication URL Configuration, add the Vercel production URL as the Site URL and allow:
 

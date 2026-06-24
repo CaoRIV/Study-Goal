@@ -1,0 +1,20 @@
+
+> study-goal-landing@0.1.0 dev
+> next dev --port 3110
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3110
+   - Network:      http://192.168.48.1:3110
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 4.2s
+ ○ Compiling /middleware ...
+ ✓ Compiled /middleware in 1485ms (115 modules)
+ ○ Compiling /login ...
+ ✓ Compiled /login in 9.6s (794 modules)
+ GET /login?next=%2Fdashboard 200 in 1841ms
+ ✓ Compiled in 3.3s (436 modules)
+ ✓ Compiled in 554ms (436 modules)
+ ✓ Compiled in 382ms (335 modules)
+ ✓ Compiled in 384ms (335 modules)

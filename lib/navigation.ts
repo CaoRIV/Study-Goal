@@ -7,6 +7,7 @@ export type NavigationItem = {
     | "grades"
     | "roadmap"
     | "goals"
+    | "insights"
     | "skills"
     | "clubs"
     | "portfolio"
@@ -20,6 +21,7 @@ export const workspaceNavigation: NavigationItem[] = [
   { href: "/grades", labelKey: "grades", match: "prefix" },
   { href: "/roadmap", labelKey: "roadmap", match: "prefix" },
   { href: "/goals", labelKey: "goals", match: "prefix" },
+  { href: "/insights", labelKey: "insights", match: "prefix" },
   { href: "/skills", labelKey: "skills", match: "prefix" },
   { href: "/clubs", labelKey: "clubs", match: "prefix" },
   { href: "/portfolio", labelKey: "portfolio", match: "prefix" },
@@ -36,6 +38,7 @@ export const workspaceNavigationLabels: Record<
     grades: "Academic planner",
     roadmap: "Roadmap",
     goals: "Goals",
+    insights: "Insights",
     skills: "Skills",
     clubs: "Clubs",
     portfolio: "Portfolio",
@@ -47,6 +50,7 @@ export const workspaceNavigationLabels: Record<
     grades: "Kế hoạch học tập",
     roadmap: "Lộ trình",
     goals: "Mục tiêu",
+    insights: "Gợi ý",
     skills: "Kỹ năng",
     clubs: "Câu lạc bộ",
     portfolio: "Hồ sơ năng lực",
@@ -64,6 +68,7 @@ export const workspaceNavigationCompactLabels: Record<
     grades: "Academics",
     roadmap: "Roadmap",
     goals: "Goals",
+    insights: "Insights",
     skills: "Skills",
     clubs: "Clubs",
     portfolio: "Portfolio",
@@ -75,6 +80,7 @@ export const workspaceNavigationCompactLabels: Record<
     grades: "Học tập",
     roadmap: "Lộ trình",
     goals: "Mục tiêu",
+    insights: "Gợi ý",
     skills: "Kỹ năng",
     clubs: "CLB",
     portfolio: "Năng lực",
