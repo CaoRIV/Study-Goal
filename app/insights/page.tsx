@@ -28,9 +28,8 @@ const copy = {
     languageLabel: "Change language",
     signOut: "Sign out",
     eyebrow: "AI insights",
-    title: "Your next best academic moves.",
-    description:
-      "Study Goal reviews your courses, GPA, goals, skills, portfolio, clubs, and career pipeline to surface practical recommendations.",
+    title: "Your next best moves.",
+   
     primary: "Priority recommendations",
     secondary: "Opportunity map",
     ruleBased: "Rule engine",
@@ -59,13 +58,11 @@ const copy = {
     languageLabel: "Đổi ngôn ngữ",
     signOut: "Đăng xuất",
     eyebrow: "AI insights",
-    title: "Những bước đi học tập nên làm tiếp theo.",
-    description:
-      "Study Goal rà soát môn học, GPA, mục tiêu, kỹ năng, portfolio, CLB và pipeline sự nghiệp để đưa ra gợi ý thực tế.",
+    title: "Những bước đi nên làm tiếp theo.",
     primary: "Gợi ý ưu tiên",
     secondary: "Bản đồ cơ hội",
     ruleBased: "Rule engine",
-    localFirst: "Sẵn sàng Ollama local",
+    localFirst: "Sẵn sàng AI Review Insight",
     priority: {
       high: "Cao",
       medium: "Trung bình",
@@ -202,9 +199,6 @@ export default async function InsightsPage() {
             <h1 className="mt-4 max-w-4xl text-balance font-display text-5xl font-semibold leading-tight text-ink md:text-6xl">
               {t.title}
             </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-muted">
-              {t.description}
-            </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <SignalPill icon={BarChart3} label={t.ruleBased} />
               <SignalPill icon={Sparkles} label={t.localFirst} />
