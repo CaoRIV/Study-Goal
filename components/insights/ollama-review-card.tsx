@@ -70,21 +70,23 @@ export function OllamaReviewCard({ language }: { language: Language }) {
   }
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-emerald-300/20 bg-emerald-300/[0.055] p-6 shadow-2xl shadow-black/20">
-      <div className="pointer-events-none absolute -right-10 -top-12 h-44 w-44 rounded-full bg-emerald-300/10 blur-3xl" />
-      <div className="relative grid gap-6 lg:grid-cols-[0.72fr_1.28fr]">
+    <section className="relative overflow-hidden rounded-[2rem] border border-emerald-700/14 bg-white/90 p-6 shadow-[0_24px_80px_rgba(16,185,129,0.1)] backdrop-blur-xl">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-green via-brand-cyan to-brand-orange" />
+      <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-emerald-300/18 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-cyan-300/12 blur-3xl" />
+      <div className="relative grid gap-6 lg:grid-cols-[0.7fr_1.3fr]">
         <div>
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-300/12 text-emerald-200 ring-1 ring-emerald-200/20">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-700/10 text-signal-green ring-1 ring-emerald-700/16">
             <Sparkles className="h-5 w-5" aria-hidden="true" />
           </div>
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-green">
             {t.eyebrow}
           </p>
           <h2 className="mt-3 font-display text-3xl font-semibold text-ink">{t.title}</h2>
           <p className="mt-3 max-w-xl leading-7 text-ink-muted">{t.description}</p>
           <Button
             type="button"
-            className="mt-7 rounded-full bg-emerald-300 px-5 text-slate-950 hover:bg-emerald-200"
+            className="mt-7 rounded-full bg-brand-green px-5 text-white shadow-glow-green hover:bg-emerald-600"
             onClick={generateReview}
             disabled={loading}
           >
@@ -93,21 +95,21 @@ export function OllamaReviewCard({ language }: { language: Language }) {
           </Button>
         </div>
 
-        <div className="min-h-72 rounded-[1.5rem] border border-white/10 bg-slate-950/40 p-5">
+        <div className="min-h-72 rounded-[1.5rem] border border-slate-800 bg-brand-navy p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_22px_60px_rgba(15,23,42,0.18)]">
           {model ? (
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-emerald-200">
               {t.model}: {model}
             </p>
           ) : null}
           {error ? (
-            <div className="rounded-2xl border border-red-300/20 bg-red-300/10 p-4 text-sm leading-6 text-red-100">
-              <p>{error}</p>
-              <p className="mt-2 text-red-100/80">{t.errorHelp}</p>
+            <div className="rounded-2xl border border-red-300/25 bg-red-500/14 p-4 text-sm leading-6 text-red-50">
+              <p className="font-medium">{error}</p>
+              <p className="mt-2 text-red-50/76">{t.errorHelp}</p>
             </div>
           ) : review ? (
-            <div className="whitespace-pre-wrap text-sm leading-7 text-ink">{review}</div>
+            <div className="whitespace-pre-wrap text-sm leading-7 text-slate-100">{review}</div>
           ) : (
-            <div className="flex min-h-56 items-center justify-center rounded-2xl border border-dashed border-white/10 text-center text-sm text-ink-muted">
+            <div className="flex min-h-56 items-center justify-center rounded-2xl border border-dashed border-cyan-100/14 bg-white/[0.03] px-6 text-center text-sm leading-6 text-slate-300">
               {t.empty}
             </div>
           )}
