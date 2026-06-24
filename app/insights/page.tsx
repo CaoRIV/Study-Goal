@@ -97,18 +97,63 @@ const categoryIcons: Record<RecommendationCategory, typeof BookOpenCheck> = {
 };
 
 const priorityStyles: Record<RecommendationPriority, string> = {
-  high: "bg-orange-300/16 text-orange-100 ring-orange-200/25",
-  medium: "bg-cyan-300/12 text-cyan-100 ring-cyan-200/20",
-  low: "bg-emerald-300/12 text-emerald-100 ring-emerald-200/20"
+  high: "bg-brand-orange text-white shadow-[0_8px_24px_rgba(249,115,22,0.22)] ring-orange-600/10",
+  medium: "bg-brand-cyan text-white shadow-[0_8px_24px_rgba(8,145,178,0.18)] ring-cyan-700/10",
+  low: "bg-brand-green text-white shadow-[0_8px_24px_rgba(16,185,129,0.18)] ring-emerald-700/10"
 };
 
-const categoryStyles: Record<RecommendationCategory, string> = {
-  academic: "border-cyan-300/20 bg-cyan-300/[0.055]",
-  goals: "border-orange-300/20 bg-orange-300/[0.055]",
-  skills: "border-emerald-300/20 bg-emerald-300/[0.055]",
-  portfolio: "border-rose-200/20 bg-rose-200/[0.055]",
-  career: "border-amber-200/20 bg-amber-200/[0.055]",
-  clubs: "border-sky-300/20 bg-sky-300/[0.055]"
+const categoryStyles: Record<
+  RecommendationCategory,
+  {
+    card: string;
+    icon: string;
+    text: string;
+    bar: string;
+    row: string;
+  }
+> = {
+  academic: {
+    card: "border-cyan-700/14 bg-white shadow-[0_18px_50px_rgba(8,145,178,0.08)]",
+    icon: "bg-cyan-700/10 text-signal-cyan ring-cyan-700/16",
+    text: "text-signal-cyan",
+    bar: "bg-brand-cyan",
+    row: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/14"
+  },
+  goals: {
+    card: "border-orange-600/14 bg-white shadow-[0_18px_50px_rgba(249,115,22,0.08)]",
+    icon: "bg-orange-600/10 text-signal-orange ring-orange-600/16",
+    text: "text-signal-orange",
+    bar: "bg-brand-orange",
+    row: "bg-orange-600/8 text-signal-orange ring-orange-600/14"
+  },
+  skills: {
+    card: "border-emerald-700/14 bg-white shadow-[0_18px_50px_rgba(16,185,129,0.08)]",
+    icon: "bg-emerald-700/10 text-signal-green ring-emerald-700/16",
+    text: "text-signal-green",
+    bar: "bg-brand-green",
+    row: "bg-emerald-700/8 text-signal-green ring-emerald-700/14"
+  },
+  portfolio: {
+    card: "border-rose-700/14 bg-white shadow-[0_18px_50px_rgba(251,113,133,0.08)]",
+    icon: "bg-rose-700/10 text-signal-red ring-rose-700/16",
+    text: "text-signal-red",
+    bar: "bg-brand-coral",
+    row: "bg-rose-700/8 text-signal-red ring-rose-700/14"
+  },
+  career: {
+    card: "border-amber-700/14 bg-white shadow-[0_18px_50px_rgba(194,65,12,0.08)]",
+    icon: "bg-amber-700/10 text-signal-orange ring-amber-700/16",
+    text: "text-signal-orange",
+    bar: "bg-amber-500",
+    row: "bg-amber-700/8 text-signal-orange ring-amber-700/14"
+  },
+  clubs: {
+    card: "border-sky-700/14 bg-white shadow-[0_18px_50px_rgba(14,116,144,0.08)]",
+    icon: "bg-sky-700/10 text-signal-cyan ring-sky-700/16",
+    text: "text-signal-cyan",
+    bar: "bg-sky-500",
+    row: "bg-sky-700/8 text-signal-cyan ring-sky-700/14"
+  }
 };
 
 export default async function InsightsPage() {
@@ -149,12 +194,12 @@ export default async function InsightsPage() {
           signOutLabel={t.signOut}
         />
 
-        <section className="mt-12 grid gap-8 xl:grid-cols-[0.85fr_1.15fr]">
+        <section className="mt-12 grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal-cyan">
               {t.eyebrow}
             </p>
-            <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-ink md:text-6xl">
+            <h1 className="mt-4 max-w-4xl text-balance font-display text-5xl font-semibold leading-tight text-ink md:text-6xl">
               {t.title}
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-ink-muted">
@@ -192,28 +237,34 @@ export default async function InsightsPage() {
           </div>
         </section>
 
-        <section className="mt-10 grid gap-5 xl:grid-cols-[0.6fr_1.4fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-surface-panel/80 p-6">
+        <section className="mt-10 grid gap-5 xl:grid-cols-[0.58fr_1.42fr]">
+          <aside className="rounded-[2rem] border border-cyan-800/10 bg-white/86 p-6 shadow-[0_22px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">
               {t.secondary}
             </p>
             <div className="mt-6 grid gap-3">
               {visibleCategories.map((category) => {
                 const Icon = categoryIcons[category];
+                const styles = categoryStyles[category];
                 const count = recommendations.filter((recommendation) => recommendation.category === category).length;
 
                 return (
-                  <div key={category} className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-slate-950/30 px-4 py-3">
+                  <div
+                    key={category}
+                    className="flex items-center justify-between gap-4 rounded-2xl border border-cyan-900/8 bg-brand-paper/90 px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition-colors duration-200 hover:border-cyan-800/16 hover:bg-white"
+                  >
                     <div className="flex items-center gap-3">
-                      <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
+                      <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
+                        <Icon className="h-4 w-4" aria-hidden="true" />
+                      </span>
                       <span className="text-sm font-semibold text-ink">{t.categories[category]}</span>
                     </div>
-                    <span className="text-sm text-ink-muted">{count}</span>
+                    <span className={cn("rounded-full px-2.5 py-1 text-xs font-semibold ring-1", styles.row)}>{count}</span>
                   </div>
                 );
               })}
             </div>
-          </div>
+          </aside>
           <OllamaReviewCard language={language} />
         </section>
       </div>
@@ -223,7 +274,7 @@ export default async function InsightsPage() {
 
 function SignalPill({ icon: Icon, label }: { icon: typeof Sparkles; label: string }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-ink">
+    <span className="inline-flex items-center gap-2 rounded-full border border-cyan-800/10 bg-white/82 px-4 py-2 text-sm font-semibold text-ink shadow-[0_10px_30px_rgba(8,145,178,0.08)]">
       <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
       {label}
     </span>
@@ -232,7 +283,7 @@ function SignalPill({ icon: Icon, label }: { icon: typeof Sparkles; label: strin
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-surface-panel/80 p-5">
+    <div className="rounded-[1.5rem] border border-cyan-800/10 bg-white/86 p-5 shadow-[0_18px_55px_rgba(8,145,178,0.08)] backdrop-blur-xl">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</p>
       <p className="mt-4 font-display text-4xl font-semibold text-ink">{value}</p>
     </div>
@@ -249,16 +300,18 @@ function RecommendationCard({
   categoryLabel: string;
 }) {
   const Icon = categoryIcons[recommendation.category];
+  const styles = categoryStyles[recommendation.category];
 
   return (
-    <article className={cn("group rounded-[1.5rem] border p-5 transition-colors duration-200 hover:border-cyan-200/30", categoryStyles[recommendation.category])}>
+    <article className={cn("group relative overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_26px_70px_rgba(15,23,42,0.1)]", styles.card)}>
+      <div className={cn("absolute inset-x-0 top-0 h-1", styles.bar)} />
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-950/35 text-signal-cyan ring-1 ring-white/10">
+          <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl ring-1", styles.icon)}>
             <Icon className="h-5 w-5" aria-hidden="true" />
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{recommendation.signal}</p>
+            <p className={cn("text-xs font-semibold uppercase tracking-[0.16em]", styles.text)}>{recommendation.signal}</p>
             <p className="mt-1 text-sm text-ink-muted">{categoryLabel}</p>
           </div>
         </div>
@@ -273,7 +326,7 @@ function RecommendationCard({
       <p className="mt-3 leading-7 text-ink-muted">{recommendation.summary}</p>
       <a
         href={recommendation.href}
-        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-signal-cyan transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+        className={cn("mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300", styles.text)}
       >
         {recommendation.action}
         <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
