@@ -102,6 +102,7 @@ function createPrompt(context: string, language: "en" | "vi") {
 Yêu cầu:
 - Trả lời hoàn toàn bằng tiếng Việt.
 - Chia thành 3 phần: "Ưu tiên tuần này", "Lý do", "Kế hoạch 7 ngày".
+- Không dùng Markdown heading dạng ###. Có thể dùng gạch đầu dòng ngắn nếu cần.
 - Không bịa dữ liệu ngoài context.
 - Đưa ra 3 hành động cụ thể, có thể làm ngay.
 - Giọng văn chuyên nghiệp, rõ ràng, giống cố vấn sản phẩm Study Goal.
@@ -115,6 +116,7 @@ ${context}`;
 Requirements:
 - Answer fully in English.
 - Use 3 sections: "This week's priority", "Why it matters", "7-day plan".
+- Do not use Markdown headings such as ###. Short bullet points are fine.
 - Do not invent data outside the context.
 - Give 3 concrete actions the student can do now.
 - Keep the tone professional, clear, and product-advisor like.
