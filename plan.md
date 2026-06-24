@@ -723,6 +723,14 @@ Tasks:
 - AI-generated study plan.
 - AI next-best-action recommendations.
 
+Current status:
+
+- Smart Insights page: completed.
+- Rule-based next-best-action recommendations: completed.
+- Dashboard now surfaces the top recommendation from the Insights engine.
+- Local Ollama weekly review through `/api/insights/ollama`: completed.
+- Cloud AI provider integration: intentionally not used for now.
+
 Exit criteria:
 
 - User receives actionable insights.
@@ -820,3 +828,4 @@ The auth foundation code has been added. The next implementation milestone shoul
 6. Add semester/course editing, goal editing, status filters, and richer analytics charts.
 7. Run `supabase/migrations/009_create_career_readiness.sql`.
 8. Verify `/career`, then prepare the Vercel production deployment.
+9. For local AI, run Ollama locally and set `OLLAMA_BASE_URL` / `OLLAMA_MODEL` if the defaults are not suitable.

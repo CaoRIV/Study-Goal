@@ -6,6 +6,7 @@ const protectedPrefixes = [
   "/roadmap",
   "/grades",
   "/goals",
+  "/insights",
   "/skills",
   "/research",
   "/clubs",
