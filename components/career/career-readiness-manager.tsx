@@ -275,7 +275,7 @@ export function CareerReadinessManager({
   return (
     <div className="space-y-6">
       <section className="grid gap-5 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="rounded-[2rem] border border-brand-green/18 bg-surface-panel/90 p-6 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+        <div className="workspace-panel p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-green">{copy.score.label}</p>
@@ -303,7 +303,7 @@ export function CareerReadinessManager({
       {success ? <div role="status" className="rounded-2xl border border-brand-green/20 bg-brand-green/10 px-4 py-3 text-sm text-signal-green">{success}</div> : null}
 
       <section className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-        <form onSubmit={saveProfile} className="glass rounded-[2rem] p-6">
+        <form onSubmit={saveProfile} className="workspace-form p-6">
           <div className="mb-6">
             <h2 className="font-display text-2xl font-semibold text-ink">{copy.profile.title}</h2>
           </div>
@@ -341,9 +341,9 @@ export function CareerReadinessManager({
           </Button>
         </form>
 
-        <form onSubmit={createTarget} className="rounded-[2rem] border border-outline bg-surface-panel/90 p-6 backdrop-blur-2xl">
+        <form onSubmit={createTarget} className="workspace-form p-6">
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-signal-green">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
             <h2 className="font-display text-2xl font-semibold text-ink">{copy.target.title}</h2>
@@ -377,17 +377,17 @@ export function CareerReadinessManager({
         </form>
       </section>
 
-      <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-6">
+      <section className="workspace-panel p-5 sm:p-6">
         <div className="mb-5 flex items-center gap-3">
           <BriefcaseBusiness className="h-5 w-5 text-signal-green" aria-hidden="true" />
           <h2 className="font-display text-2xl font-semibold text-ink">{copy.pipeline.title}</h2>
         </div>
         {initialTargets.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">{copy.pipeline.empty}</div>
+          <div className="workspace-empty p-8 text-center text-ink-muted">{copy.pipeline.empty}</div>
         ) : (
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {initialTargets.map((target) => (
-              <article key={target.id} className="rounded-2xl border border-outline bg-surface-panel/90 p-5 transition-colors hover:border-brand-green/24">
+              <article key={target.id} className="workspace-card p-5 transition-colors hover:border-cyan-700/24">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="flex items-center gap-2 text-sm text-ink-muted">
@@ -412,7 +412,7 @@ export function CareerReadinessManager({
                 <p className="mt-4 text-sm text-ink-muted">{copy.pipeline.deadline}: <span className="text-ink">{target.deadline || "-"}</span></p>
                 {target.notes ? <p className="mt-3 line-clamp-3 text-sm leading-6 text-ink-muted">{target.notes}</p> : null}
                 {target.job_url ? (
-                  <a href={target.job_url} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-brand-green">
+                  <a href={target.job_url} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-10 items-center gap-2 rounded-full bg-white px-4 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-100">
                     {copy.pipeline.open}
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </a>
@@ -428,7 +428,7 @@ export function CareerReadinessManager({
 
 function ScoreSignal({ icon: Icon, label, value }: { icon: LucideIcon; label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-outline bg-surface-warm p-4">
+    <div className="workspace-card p-4">
       <Icon className="h-5 w-5 text-signal-green" aria-hidden="true" />
       <p className="mt-5 text-sm leading-5 text-ink-muted">{label}</p>
       <p className="mt-2 font-display text-2xl font-semibold text-ink">{value}</p>
@@ -451,7 +451,7 @@ function StatusField({
 }) {
   const StatusIcon = value === "ready" ? CheckCircle2 : CircleDashed;
   return (
-    <label className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
+    <label className="workspace-card block p-4">
       <span className="mb-3 flex items-center justify-between gap-3">
         <span className="flex items-center gap-2 text-sm font-semibold text-ink">
           <Icon className="h-4 w-4 text-signal-green" aria-hidden="true" />

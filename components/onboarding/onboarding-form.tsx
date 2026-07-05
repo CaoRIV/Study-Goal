@@ -106,7 +106,7 @@ export function OnboardingForm({
     <div id="main-content" className="min-h-screen px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-signal-cyan shadow-glow-blue">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-700/14 bg-cyan-700/8 px-4 py-2 text-sm font-medium text-signal-cyan">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
             {copy.badge}
           </div>
@@ -119,7 +119,7 @@ export function OnboardingForm({
           <p className="mt-6 text-sm text-ink-muted">{copy.signedInAs} {email}</p>
         </div>
 
-        <form className="glass grid gap-4 rounded-[2rem] p-6 sm:grid-cols-2 sm:p-8" onSubmit={handleSubmit}>
+        <form className="workspace-form grid gap-4 p-6 sm:grid-cols-2 sm:p-8" onSubmit={handleSubmit}>
           <Field label={copy.fields.fullName} value={fullName} onChange={setFullName} placeholder={copy.placeholders.fullName} />
           <Field label={copy.fields.university} value={university} onChange={setUniversity} placeholder={copy.placeholders.university} />
           <Field label={copy.fields.major} value={major} onChange={setMajor} placeholder={copy.placeholders.major} />
@@ -134,7 +134,7 @@ export function OnboardingForm({
               required
               value={careerGoal}
               onChange={(event) => setCareerGoal(event.target.value)}
-              className="mt-2 min-h-28 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+              className="mt-2 min-h-28 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
               placeholder={copy.placeholders.careerGoal}
             />
           </label>
@@ -185,7 +185,7 @@ function Field({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+        className="mt-2 h-12 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>

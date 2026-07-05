@@ -29,7 +29,6 @@ const copy = {
     signOut: "Sign out",
     eyebrow: "AI insights",
     title: "Your next best moves.",
-   
     primary: "Priority recommendations",
     secondary: "Opportunity map",
     ruleBased: "Rule engine",

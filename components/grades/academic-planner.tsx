@@ -354,13 +354,13 @@ export function AcademicPlanner({
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
-        <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+        <div className="workspace-panel-muted p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm text-ink-muted">{copy.intelligence.creditProgress}</p>
               <p className="mt-2 font-display text-3xl font-semibold text-ink">{creditProgress}%</p>
             </div>
-            <span className="rounded-full bg-cyan-300/10 px-3 py-1 text-sm font-semibold text-signal-cyan ring-1 ring-cyan-200/16">
+            <span className="workspace-status-pill px-3 py-1 text-sm font-semibold">
               {completedCredits}/{targetCredits}
             </span>
           </div>
@@ -370,7 +370,7 @@ export function AcademicPlanner({
           <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.graduationTarget}</p>
         </div>
 
-        <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+        <div className="workspace-panel-muted p-5">
           <p className="text-sm text-ink-muted">{copy.intelligence.projectedGpa}</p>
           <p className="mt-2 font-display text-3xl font-semibold text-ink">
             {projectedGpa === null ? copy.summary.unavailable : projectedGpa}
@@ -378,7 +378,7 @@ export function AcademicPlanner({
           <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.targetGpa}: {targetGpa || copy.summary.unavailable}</p>
         </div>
 
-        <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+        <div className="workspace-panel-muted p-5">
           <p className="text-sm text-ink-muted">{copy.intelligence.simulator}</p>
           <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
             <Input label={copy.intelligence.simulatorLabel} type="number" step="0.01" min="0" max="4.3" value={simulatedGrade} onChange={setSimulatedGrade} placeholder="3.70" />
@@ -389,7 +389,7 @@ export function AcademicPlanner({
         </div>
       </section>
 
-      <section className="rounded-2xl border border-outline bg-surface-panel/90 p-5">
+      <section className="workspace-panel p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-signal-cyan">{copy.intelligence.requiredAverage}</p>
@@ -413,7 +413,7 @@ export function AcademicPlanner({
 
       <section className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
         <div className="space-y-6">
-          <form className="glass rounded-[2rem] p-5" onSubmit={createSemester}>
+          <form className="workspace-form p-5" onSubmit={createSemester}>
             <div className="mb-5 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/16">
                 <CalendarDays className="h-5 w-5" aria-hidden="true" />
@@ -431,7 +431,7 @@ export function AcademicPlanner({
             </div>
           </form>
 
-          <form className="glass rounded-[2rem] p-5" onSubmit={createCourse}>
+          <form className="workspace-form p-5" onSubmit={createCourse}>
             <div className="mb-5 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/16">
                 <BookOpenCheck className="h-5 w-5" aria-hidden="true" />
@@ -456,7 +456,7 @@ export function AcademicPlanner({
 
         <div className="space-y-4">
           {initialSemesters.length === 0 ? (
-            <div className="glass rounded-[2rem] p-8 text-center">
+            <div className="workspace-empty p-8 text-center">
               <h2 className="font-display text-2xl font-semibold text-ink">{copy.empty.title}</h2>
               <p className="mt-3 text-ink-muted">{copy.empty.description}</p>
             </div>
@@ -467,7 +467,7 @@ export function AcademicPlanner({
             const isEditingSemester = editingSemesterId === semester.id;
 
             return (
-              <section key={semester.id} className="glass rounded-[2rem] p-5">
+              <section key={semester.id} className="workspace-panel p-5">
                 <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   {isEditingSemester ? (
                     <div className="grid w-full gap-3 sm:grid-cols-[1fr_120px_150px]">
@@ -496,7 +496,7 @@ export function AcademicPlanner({
                   </div>
                 </div>
                 <div className="overflow-hidden rounded-2xl border border-outline">
-                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 bg-surface-warm px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">
+                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">
                     <span>{copy.table.course}</span>
                     <span>{copy.table.credits}</span>
                     <span>{copy.table.target}</span>
@@ -559,7 +559,7 @@ export function AcademicPlanner({
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+    <div className="workspace-card p-5">
       <p className="text-sm text-ink-muted">{label}</p>
       <p className="mt-3 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>
@@ -598,7 +598,7 @@ function Input({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-11 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+        className="mt-2 h-11 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>
@@ -625,7 +625,7 @@ function Select({
   return (
     <label className="block">
       <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
-      <select required={required} className="mt-2 h-11 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none focus:border-cyan-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
+      <select required={required} className="mt-2 h-11 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none focus:border-cyan-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
         {placeholder ? <option value="" disabled>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option} value={option}>{labels[option] || option}</option>

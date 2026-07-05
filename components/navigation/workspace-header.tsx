@@ -51,7 +51,7 @@ export function WorkspaceHeader({
   }
 
   return (
-    <header className="rounded-[2rem] border border-outline bg-surface-panel/90 p-4 shadow-2xl shadow-black/30 backdrop-blur-2xl">
+    <header className="workspace-panel p-4">
       <div className="flex items-center justify-between gap-4">
         <a
           href="/dashboard"

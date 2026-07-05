@@ -111,10 +111,10 @@ export function ProfileForm({
   }
 
   return (
-    <form className="glass rounded-[2rem] p-6 sm:p-8" onSubmit={handleSubmit}>
+    <form className="workspace-form p-6 sm:p-8" onSubmit={handleSubmit}>
       <div className="mb-8 flex flex-col gap-5 border-b border-outline pb-8 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-300 via-cyan-400 to-cyan-300 text-slate-950 shadow-glow-blue">
+          <div className="flex h-16 w-16 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
             <UserRound className="h-7 w-7" aria-hidden="true" />
           </div>
           <div>
@@ -122,7 +122,7 @@ export function ProfileForm({
             <p className="mt-1 text-sm text-ink-muted">{email}</p>
           </div>
         </div>
-        <div className="rounded-full border border-cyan-300/18 bg-cyan-300/8 px-4 py-2 text-sm font-medium text-signal-cyan">
+        <div className="workspace-status-pill px-4 py-2 text-sm font-medium">
           {copy.active}
         </div>
       </div>
@@ -143,7 +143,7 @@ export function ProfileForm({
             required
             value={careerGoal}
             onChange={(event) => setCareerGoal(event.target.value)}
-            className="mt-2 min-h-32 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+            className="mt-2 min-h-32 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
             placeholder={copy.placeholders.careerGoal}
           />
         </label>
@@ -205,7 +205,7 @@ function Field({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-2xl border border-outline bg-surface-panel/90 px-4 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+        className="mt-2 h-12 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
         placeholder={placeholder}
       />
     </label>

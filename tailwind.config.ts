@@ -12,22 +12,22 @@ const config: Config = {
       colors: {
         brand: {
           navy: "#0F172A",
-          cyan: "#0891B2",
-          bright: "#06B6D4",
-          orange: "#F97316",
+          cyan: "#0E7490",
+          bright: "#0891B2",
+          orange: "#D97706",
           paper: "#F9FAFB",
-          coral: "#FB7185",
-          "coral-soft": "#FECACA",
-          green: "#10B981",
-          cream: "#FFFBEB",
-          "deep-red": "#991B1B"
+          coral: "#E11D48",
+          "coral-soft": "#FFE4E6",
+          green: "#059669",
+          cream: "#F8FAFC",
+          "deep-red": "#9F1239"
         },
         surface: {
           canvas: "#F9FAFB",
           panel: "#FFFFFF",
-          warm: "#FFFBEB",
-          coral: "#FDE8E8",
-          cyan: "#DDEFF2"
+          warm: "#F8FAFC",
+          coral: "#FFF1F2",
+          cyan: "#EAF6F8"
         },
         ink: {
           DEFAULT: "#0F172A",
@@ -36,11 +36,11 @@ const config: Config = {
         },
         signal: {
           cyan: "#0E7490",
-          orange: "#C2410C",
+          orange: "#B45309",
           green: "#047857",
-          red: "#B91C1C"
+          red: "#BE123C"
         },
-        outline: "#C9E2E7",
+        outline: "#D7E5EA",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -72,10 +72,10 @@ const config: Config = {
         display: ["var(--font-display)", "ui-sans-serif", "system-ui"]
       },
       boxShadow: {
-        "glow-blue": "0 0 60px rgba(6, 182, 212, 0.22)",
-        "glow-orange": "0 0 52px rgba(249, 115, 22, 0.2)",
-        "glow-coral": "0 0 52px rgba(251, 113, 133, 0.18)",
-        "glow-green": "0 0 48px rgba(16, 185, 129, 0.18)"
+        "glow-blue": "0 18px 54px rgba(14, 116, 144, 0.12)",
+        "glow-orange": "0 18px 48px rgba(180, 83, 9, 0.12)",
+        "glow-coral": "0 18px 48px rgba(190, 18, 60, 0.1)",
+        "glow-green": "0 18px 46px rgba(4, 120, 87, 0.1)"
       },
       animation: {
         "marquee-slow": "marquee 32s linear infinite",
