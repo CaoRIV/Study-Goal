@@ -453,9 +453,9 @@ export function GoalsManager({
 
       <section className="grid gap-6 lg:grid-cols-[380px_minmax(0,1fr)]">
         <div className="space-y-4 lg:sticky lg:top-6 lg:self-start">
-          <form className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/25 backdrop-blur-xl" onSubmit={createGoal}>
+          <form className="workspace-form p-5" onSubmit={createGoal}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-coral/12 text-signal-red ring-1 ring-brand-coral-soft/20">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
                 <Target className="h-5 w-5" aria-hidden="true" />
               </div>
               <h2 className="font-display text-xl font-semibold text-ink">{copy.form.title}</h2>
@@ -476,9 +476,9 @@ export function GoalsManager({
           </form>
 
           {initialGoals.length > 0 ? (
-            <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-xl">
+            <div className="workspace-panel p-5">
               <div className="mb-4 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface-warm text-signal-red ring-1 ring-outline">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
                   <Filter className="h-4 w-4" aria-hidden="true" />
                 </div>
                 <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
@@ -495,21 +495,21 @@ export function GoalsManager({
 
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-coral/10 text-signal-red ring-1 ring-brand-coral-soft/16">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
               <Flag className="h-5 w-5" aria-hidden="true" />
             </div>
             <h2 className="font-display text-2xl font-semibold text-ink">{copy.board.title}</h2>
           </div>
 
           {initialGoals.length === 0 ? (
-            <div className="glass rounded-[2rem] p-8 text-center">
+            <div className="workspace-empty p-8 text-center">
               <h2 className="font-display text-2xl font-semibold text-ink">{copy.empty.title}</h2>
               <p className="mt-3 text-ink-muted">{copy.empty.description}</p>
             </div>
           ) : null}
 
           {initialGoals.length > 0 && filteredGoals.length === 0 ? (
-            <div className="glass rounded-[2rem] p-8 text-center text-ink-muted">{copy.filters.noMatches}</div>
+            <div className="workspace-empty p-8 text-center text-ink-muted">{copy.filters.noMatches}</div>
           ) : null}
 
           <div className="grid gap-4 xl:grid-cols-2">
@@ -517,7 +517,7 @@ export function GoalsManager({
               const goals = filteredGoals.filter((goal) => goal.status === columnStatus);
 
               return (
-                <section key={columnStatus} className="min-h-[280px] rounded-[1.5rem] border border-outline bg-surface-coral p-4 shadow-2xl shadow-black/20">
+                <section key={columnStatus} className="min-h-[280px] rounded-2xl border border-outline bg-slate-50/80 p-4 shadow-[0_8px_22px_rgba(15,23,42,0.04)]">
                   <div className="mb-3 flex items-center justify-between gap-3 px-1">
                     <h3 className="text-base font-semibold text-ink">{copy.labels.statuses[columnStatus]}</h3>
                     <span className="rounded-full bg-surface-panel/90 px-2.5 py-1 text-xs font-semibold text-ink-muted ring-1 ring-outline">{goals.length}</span>
@@ -602,7 +602,7 @@ function GoalCard({
   const nextMilestone = milestones.find((milestone) => milestone.status !== "completed");
 
   return (
-    <article className="rounded-[1.25rem] border border-outline bg-surface-panel/90 p-4 shadow-lg shadow-black/15 transition-colors hover:border-brand-coral/25">
+    <article className="workspace-card p-4 transition-colors hover:border-cyan-700/24">
       {isEditing ? (
         <div className="space-y-3">
           <Input label={copy.form.titleLabel} value={draft.title} onChange={(value) => setDraft((current) => ({ ...current, title: value }))} placeholder={copy.form.titlePlaceholder} />
@@ -623,8 +623,8 @@ function GoalCard({
             <div className="min-w-0 flex-1">
               <h3 className="text-base font-semibold leading-6 text-ink">{goal.title}</h3>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="rounded-full bg-brand-coral/10 px-2.5 py-1 text-[11px] font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">{copy.labels.categories[goal.category] || goal.category}</span>
-                <span className="rounded-full bg-brand-coral/10 px-2.5 py-1 text-[11px] font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">{copy.labels.priorities[goal.priority] || goal.priority}</span>
+                <span className="rounded-full bg-cyan-700/8 px-2.5 py-1 text-[11px] font-semibold text-signal-cyan ring-1 ring-cyan-700/12">{copy.labels.categories[goal.category] || goal.category}</span>
+                <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-ink-muted ring-1 ring-outline">{copy.labels.priorities[goal.priority] || goal.priority}</span>
               </div>
             </div>
             <div className="flex shrink-0 gap-1">
@@ -648,13 +648,13 @@ function GoalCard({
                 max="100"
                 value={goal.progress}
                 onChange={(event) => onProgressChange(Number(event.target.value))}
-                className="w-full cursor-pointer accent-brand-coral"
+                className="w-full cursor-pointer accent-brand-cyan"
               />
             </div>
 
             <label className="block">
               <span className="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-muted">{copy.board.moveTo}</span>
-              <select className="mt-2 h-10 w-full rounded-full border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none focus:border-brand-coral/50" value={goal.status} onChange={(event) => onMove(event.target.value)} disabled={isBusy}>
+              <select className="mt-2 h-10 w-full rounded-xl border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none focus:border-cyan-500/50" value={goal.status} onChange={(event) => onMove(event.target.value)} disabled={isBusy}>
                 {statusOptions.map((status) => (
                   <option key={status} value={status}>{copy.labels.statuses[status]}</option>
                 ))}
@@ -662,13 +662,13 @@ function GoalCard({
             </label>
           </div>
 
-          <div className="mt-5 rounded-2xl border border-outline bg-surface-warm p-3">
+          <div className="mt-5 workspace-card-muted p-3">
             <div className="mb-3 flex items-center justify-between gap-3">
               <h4 className="text-sm font-semibold text-ink">{copy.milestones.title}</h4>
               <span className="text-xs text-ink-muted">{milestones.filter((milestone) => milestone.status === "completed").length}/{milestones.length}</span>
             </div>
             {nextMilestone ? (
-              <p className="mb-3 rounded-xl bg-brand-coral/8 px-3 py-2 text-xs leading-5 text-signal-red ring-1 ring-brand-coral-soft/12">
+              <p className="mb-3 rounded-xl bg-cyan-700/8 px-3 py-2 text-xs leading-5 text-signal-cyan ring-1 ring-cyan-700/12">
                 {copy.milestones.next}: {nextMilestone.title}
               </p>
             ) : null}
@@ -687,7 +687,7 @@ function GoalCard({
                   </button>
                   <div className="min-w-0 flex-1">
                     <p className={`text-sm ${milestone.status === "completed" ? "text-ink-muted line-through" : "text-ink"}`}>{milestone.title}</p>
-                    <select className="mt-2 h-8 rounded-full border border-outline bg-surface-panel/90 px-2 text-xs text-ink-muted outline-none focus:border-brand-coral/50" value={milestone.status} onChange={(event) => onMilestoneStatus(milestone.id, event.target.value)} disabled={isBusy}>
+                    <select className="mt-2 h-8 rounded-xl border border-outline bg-surface-panel/90 px-2 text-xs text-ink-muted outline-none focus:border-cyan-500/50" value={milestone.status} onChange={(event) => onMilestoneStatus(milestone.id, event.target.value)} disabled={isBusy}>
                       <option value="todo">{copy.milestones.todo}</option>
                       <option value="in_progress">{copy.milestones.inProgress}</option>
                       <option value="completed">{copy.milestones.completed}</option>
@@ -701,7 +701,7 @@ function GoalCard({
               <input
                 value={milestoneTitle}
                 onChange={(event) => setMilestoneTitle(event.target.value)}
-                className="h-10 min-w-0 flex-1 rounded-full border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none placeholder:text-ink-muted focus:border-brand-coral/50"
+                className="h-10 min-w-0 flex-1 rounded-xl border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none placeholder:text-ink-muted focus:border-cyan-500/50"
                 placeholder={copy.milestones.placeholder}
               />
               <button type="button" onClick={onCreateMilestone} disabled={isBusy || !milestoneTitle.trim()} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-orange text-slate-950 transition-colors hover:bg-orange-400 disabled:pointer-events-none disabled:opacity-50" aria-label={copy.milestones.add}>
@@ -717,7 +717,7 @@ function GoalCard({
 
 function SummaryCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-outline bg-surface-warm p-5">
+    <div className="workspace-card p-5">
       <p className="text-sm text-ink-muted">{label}</p>
       <p className="mt-3 font-display text-3xl font-semibold text-ink">{value}</p>
     </div>

@@ -262,9 +262,9 @@ export function ClubsManager({
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[430px_minmax(0,1fr)]">
-        <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createClub}>
+        <form className="workspace-form h-fit p-6" onSubmit={createClub}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-signal-red shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
             <h2 className="font-display text-2xl font-semibold text-ink">{copy.form.title}</h2>
@@ -293,7 +293,7 @@ export function ClubsManager({
               </select>
             </Field>
             <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-sm font-semibold text-ink">
-              <input type="checkbox" checked={isLeadership} onChange={(event) => setIsLeadership(event.target.checked)} className="h-4 w-4 accent-brand-coral" />
+              <input type="checkbox" checked={isLeadership} onChange={(event) => setIsLeadership(event.target.checked)} className="h-4 w-4 accent-brand-cyan" />
               {copy.form.leadershipLabel}
             </label>
             <Field label={copy.form.impactLabel}>
@@ -315,9 +315,9 @@ export function ClubsManager({
         </form>
 
         <div className="space-y-5">
-          <div className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 backdrop-blur-2xl">
+          <div className="workspace-panel p-5">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-coral/20 bg-brand-coral/10 text-signal-red">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
               <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
@@ -334,22 +334,22 @@ export function ClubsManager({
                 ))}
               </select>
               <label className="flex h-12 cursor-pointer items-center gap-3 rounded-2xl border border-outline bg-surface-panel/90 px-4 text-sm font-semibold text-ink">
-                <input type="checkbox" checked={leadershipOnly} onChange={(event) => setLeadershipOnly(event.target.checked)} className="h-4 w-4 accent-brand-coral" />
+                <input type="checkbox" checked={leadershipOnly} onChange={(event) => setLeadershipOnly(event.target.checked)} className="h-4 w-4 accent-brand-cyan" />
                 {copy.filters.leadershipOnly}
               </label>
             </div>
           </div>
 
-          <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
+          <section className="workspace-panel p-5">
             <div className="mb-5 flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/24 bg-brand-coral/12 text-signal-red">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
                 <UsersRound className="h-5 w-5" aria-hidden="true" />
               </span>
               <h2 className="font-display text-2xl font-semibold text-ink">{copy.list.title}</h2>
             </div>
 
             {filteredClubs.length === 0 ? (
-              <div className="rounded-[1.5rem] border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">
+              <div className="workspace-empty p-8 text-center text-ink-muted">
                 {query || statusFilter !== "all" || leadershipOnly ? copy.filters.noMatches : copy.list.empty}
               </div>
             ) : (
@@ -388,8 +388,8 @@ function SummaryCard({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-coral/18 bg-brand-coral/10 text-signal-red">
+    <div className="workspace-card p-5">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <p className="text-sm text-ink-muted">{label}</p>
@@ -423,7 +423,7 @@ function ClubCard({
 }) {
   if (isEditing) {
     return (
-      <article className="rounded-[1.5rem] border border-brand-coral/22 bg-surface-panel/90 p-4">
+      <article className="workspace-card p-4">
         <div className="space-y-3">
           <input required value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <input required value={draft.role} onChange={(event) => setDraft({ ...draft, role: event.target.value })} className="form-input" />
@@ -437,7 +437,7 @@ function ClubCard({
             ))}
           </select>
           <label className="flex cursor-pointer items-center gap-3 rounded-2xl border border-outline bg-surface-panel/90 px-4 py-3 text-sm font-semibold text-ink">
-            <input type="checkbox" checked={draft.isLeadership} onChange={(event) => setDraft({ ...draft, isLeadership: event.target.checked })} className="h-4 w-4 accent-brand-coral" />
+            <input type="checkbox" checked={draft.isLeadership} onChange={(event) => setDraft({ ...draft, isLeadership: event.target.checked })} className="h-4 w-4 accent-brand-cyan" />
             {copy.form.leadershipLabel}
           </label>
           <textarea value={draft.impactNotes} onChange={(event) => setDraft({ ...draft, impactNotes: event.target.value })} className="form-input min-h-24 py-3" />
@@ -458,11 +458,11 @@ function ClubCard({
   }
 
   return (
-    <article className="rounded-[1.5rem] border border-outline bg-surface-panel/90 p-5 transition-colors duration-200 hover:border-brand-coral/24 hover:bg-surface-coral">
+    <article className="workspace-card p-5 transition-colors duration-200 hover:border-cyan-700/24">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="rounded-full bg-brand-coral/10 px-3 py-1 text-xs font-semibold text-signal-red ring-1 ring-brand-coral-soft/16">
+            <span className="rounded-full bg-cyan-700/8 px-3 py-1 text-xs font-semibold text-signal-cyan ring-1 ring-cyan-700/12">
               {copy.labels.statuses[club.status]}
             </span>
             {club.is_leadership ? (
@@ -473,7 +473,7 @@ function ClubCard({
             ) : null}
           </div>
           <h3 className="break-words font-display text-2xl font-semibold leading-tight text-ink">{club.name}</h3>
-          <p className="mt-2 text-sm font-semibold text-signal-red">{club.role}</p>
+          <p className="mt-2 text-sm font-semibold text-signal-cyan">{club.role}</p>
         </div>
         <div className="flex shrink-0 gap-1">
           <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-warm hover:text-ink" aria-label={copy.actions.edit}>
@@ -485,7 +485,7 @@ function ClubCard({
         </div>
       </div>
 
-      <div className="mt-5 rounded-2xl border border-outline bg-surface-warm p-4">
+      <div className="mt-5 workspace-card-muted p-4">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{copy.list.period}</p>
         <p className="mt-2 text-sm text-ink-muted">{formatPeriod(club.start_date, club.end_date, copy.list.present)}</p>
       </div>

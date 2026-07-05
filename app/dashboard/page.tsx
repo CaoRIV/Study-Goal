@@ -620,9 +620,8 @@ export default async function DashboardPage() {
           signOutLabel={t.signOut}
         />
 
-        <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-outline bg-surface-panel/90 p-6 shadow-[0_24px_90px_rgba(0,0,0,0.28)] lg:p-8">
-          <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
-          <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-brand-orange/10 blur-3xl" />
+        <section className="academic-grid workspace-panel relative mt-6 overflow-hidden p-6 lg:p-8">
+          <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-700/7 blur-3xl" />
           <div className="relative grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
             <div className="flex flex-col justify-between">
               <div>
@@ -773,18 +772,17 @@ export default async function DashboardPage() {
         <section className="mt-10">
           <SectionHeading eyebrow={t.focusBoard.eyebrow} title={t.focusBoard.title} />
           <div className="grid gap-5 xl:grid-cols-[0.72fr_1.28fr]">
-            <div className="relative overflow-hidden rounded-[2rem] border border-orange-300/20 bg-orange-300/[0.055] p-6">
-              <div className="pointer-events-none absolute -right-8 -top-8 h-36 w-36 rounded-full bg-orange-300/10 blur-3xl" />
+            <div className="workspace-panel-muted relative overflow-hidden p-6">
               <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-orange-300/12 text-signal-orange ring-1 ring-orange-200/20">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
                   <Lightbulb className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-orange">{t.nextActions.title}</p>
+                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.nextActions.title}</p>
                 <h2 className="mt-3 font-display text-3xl font-semibold text-ink">{focusAction.title}</h2>
                 <p className="mt-3 max-w-xl leading-7 text-ink-muted">{focusAction.copy}</p>
                 <a
                   href={focusAction.href}
-                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-orange px-5 text-sm font-semibold text-slate-950 shadow-glow-orange transition-colors duration-200 hover:bg-orange-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
+                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-cyan px-5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,116,144,0.14)] transition-colors duration-200 hover:bg-brand-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
                 >
                   {focusAction.cta}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -837,14 +835,14 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="academic-grid relative mt-6 overflow-hidden rounded-[2rem] border border-orange-300/18 bg-orange-300/[0.045] p-6">
+        <section className="academic-grid workspace-panel-muted relative mt-6 overflow-hidden p-6">
           <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-orange-300/12 text-signal-orange ring-1 ring-orange-200/20">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
                 <BriefcaseBusiness className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-orange">{t.northStar}</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.northStar}</p>
                 <p className="mt-2 max-w-4xl text-lg leading-8 text-ink">
                   {profile.career_goal || t.emptyCareerGoal}
                 </p>
@@ -852,7 +850,7 @@ export default async function DashboardPage() {
             </div>
             <a
               href="/career"
-              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-orange-200/20 bg-orange-200/10 px-5 text-sm font-semibold text-signal-orange transition-colors duration-200 hover:bg-orange-200/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-cyan-700/14 bg-cyan-700/8 px-5 text-sm font-semibold text-signal-cyan transition-colors duration-200 hover:bg-cyan-700/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
             >
               {careerLabel}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -933,34 +931,34 @@ const accentStyles: Record<
   }
 > = {
   cyan: {
-    card: "border-brand-bright/20 bg-brand-cyan/10 hover:border-brand-bright/42",
-    icon: "bg-brand-cyan/16 text-signal-cyan ring-brand-bright/24",
+    card: "border-outline bg-white/90 hover:border-cyan-700/24",
+    icon: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/12",
     text: "text-signal-cyan",
     bar: "bg-brand-cyan"
   },
   coral: {
-    card: "border-brand-coral/22 bg-brand-coral/15 hover:border-brand-coral/44",
-    icon: "bg-brand-coral/14 text-signal-red ring-brand-coral/26",
-    text: "text-signal-red",
-    bar: "bg-brand-coral"
+    card: "border-outline bg-white/90 hover:border-cyan-700/24",
+    icon: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/12",
+    text: "text-signal-cyan",
+    bar: "bg-brand-cyan"
   },
   green: {
-    card: "border-brand-green/20 bg-brand-green/15 hover:border-brand-green/42",
-    icon: "bg-brand-green/14 text-signal-green ring-brand-green/24",
+    card: "border-outline bg-white/90 hover:border-cyan-700/24",
+    icon: "bg-brand-green/10 text-signal-green ring-brand-green/18",
     text: "text-signal-green",
     bar: "bg-brand-green"
   },
   orange: {
-    card: "border-brand-orange/20 bg-brand-orange/15 hover:border-brand-orange/42",
-    icon: "bg-brand-orange/14 text-signal-orange ring-brand-orange/24",
+    card: "border-outline bg-white/90 hover:border-cyan-700/24",
+    icon: "bg-brand-orange/10 text-signal-orange ring-brand-orange/18",
     text: "text-signal-orange",
     bar: "bg-brand-orange"
   },
   cream: {
-    card: "border-brand-coral-soft/24 bg-surface-warm hover:border-brand-coral-soft/42",
-    icon: "bg-brand-cream text-brand-deep-red ring-brand-coral-soft/44",
-    text: "text-signal-red",
-    bar: "bg-brand-coral"
+    card: "border-outline bg-white/90 hover:border-cyan-700/24",
+    icon: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/12",
+    text: "text-signal-cyan",
+    bar: "bg-brand-cyan"
   }
 };
 
@@ -1037,7 +1035,7 @@ function AcademicPulse({
   creditsLabel: string;
 }) {
   return (
-    <div className="glass glass-elevated rounded-[2rem] p-5 sm:p-6">
+    <div className="workspace-panel p-5 sm:p-6">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{labels.eyebrow}</p>
@@ -1247,7 +1245,7 @@ function SemesterJourney({
       </div>
 
       {semesters.length > 0 ? (
-        <div className="academic-grid rounded-[2rem] border border-outline bg-surface-panel/90 p-4 sm:p-5">
+        <div className="academic-grid workspace-panel p-4 sm:p-5">
           <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {semesters.map((semester, index) => {
               const styles = statusStyles[semester.status];
@@ -1260,7 +1258,7 @@ function SemesterJourney({
                     "group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
                     semester.status === "current"
                       ? "border-cyan-300/28 bg-cyan-300/[0.075] shadow-[0_20px_60px_rgba(6,182,212,0.08)]"
-                      : "border-outline bg-surface-panel/90 hover:border-outline hover:bg-surface-coral"
+                      : "border-outline bg-surface-panel/90 hover:border-cyan-700/18 hover:bg-slate-50"
                   )}
                 >
                   <div className={cn("absolute left-0 top-0 h-1", styles.line)} style={{ width: `${Math.max(8, semester.progress)}%` }} />
@@ -1292,7 +1290,7 @@ function SemesterJourney({
                     {semester.courses.slice(0, 3).map((course) => (
                       <div
                         key={course.id}
-                        className="flex items-center gap-2 rounded-xl border border-outline bg-surface-warm px-3 py-2 text-xs text-ink-muted"
+                        className="flex items-center gap-2 rounded-xl border border-outline bg-slate-50 px-3 py-2 text-xs text-ink-muted"
                         title={statusLabels[course.status] || course.status}
                       >
                         <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", course.status === "completed" ? "bg-cyan-300" : course.status === "in_progress" ? "bg-cyan-300" : "bg-surface-cyan")} />
@@ -1311,7 +1309,7 @@ function SemesterJourney({
       ) : (
         <a
           href="/grades"
-          className="academic-grid flex min-h-48 items-center justify-center rounded-[2rem] border border-dashed border-cyan-300/20 bg-cyan-300/[0.035] p-6 text-center text-ink-muted transition-colors duration-200 hover:border-cyan-300/38 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+          className="academic-grid workspace-empty flex min-h-48 items-center justify-center p-6 text-center text-ink-muted transition-colors duration-200 hover:border-cyan-300/38 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
         >
           <span>
             <CalendarDays className="mx-auto mb-3 h-6 w-6 text-signal-cyan" aria-hidden="true" />
@@ -1355,7 +1353,7 @@ function NextModule({
     <a
       href={href}
       className={cn(
-        "group relative flex min-h-56 flex-col overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
+        "workspace-card group relative flex min-h-56 flex-col overflow-hidden p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
         styles.card,
         moduleSpanStyles[span]
       )}
@@ -1397,7 +1395,7 @@ function ListPanel({
   const styles = accentStyles[tone];
 
   return (
-    <div className={cn("h-full rounded-[1.5rem] border p-5", styles.card)}>
+    <div className={cn("workspace-card h-full p-5", styles.card)}>
       <div className="mb-5 flex items-center gap-3">
         <div className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
           <Icon className="h-4 w-4" aria-hidden="true" />

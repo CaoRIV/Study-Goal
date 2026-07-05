@@ -251,7 +251,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
             </div>
           </div>
 
-          <div className="glass glass-elevated order-1 mx-auto w-full max-w-xl rounded-[2rem] p-6 sm:p-8 lg:order-2">
+          <div className="workspace-form order-1 mx-auto w-full max-w-xl p-6 sm:p-8 lg:order-2">
             <div className="mb-7">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{text.eyebrow}</p>
               <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-ink">

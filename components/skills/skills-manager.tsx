@@ -115,22 +115,22 @@ const statusOptions = ["planned", "learning", "practicing", "mastered"];
 
 const categoryAccent: Record<string, string> = {
   subject_expertise: "from-brand-cyan to-brand-bright",
-  digital_tools: "from-brand-green to-brand-cyan",
-  research_analysis: "from-brand-coral to-brand-bright",
-  communication: "from-brand-coral to-brand-orange",
-  teamwork_leadership: "from-brand-orange to-brand-green",
-  creative_design: "from-brand-coral-soft to-brand-coral",
-  project_management: "from-brand-cyan to-brand-orange",
-  language: "from-brand-green to-brand-coral",
-  career: "from-brand-orange to-brand-green",
-  programming: "from-brand-green to-brand-bright",
-  machine_learning: "from-brand-green to-brand-cyan",
-  deep_learning: "from-brand-coral to-brand-orange",
-  nlp: "from-brand-coral to-brand-bright",
-  computer_vision: "from-brand-green to-brand-coral",
-  research: "from-brand-coral-soft to-brand-coral",
+  digital_tools: "from-brand-cyan to-brand-bright",
+  research_analysis: "from-brand-cyan to-brand-bright",
+  communication: "from-slate-400 to-brand-cyan",
+  teamwork_leadership: "from-slate-400 to-brand-cyan",
+  creative_design: "from-slate-300 to-brand-cyan",
+  project_management: "from-brand-cyan to-brand-bright",
+  language: "from-slate-400 to-brand-cyan",
+  career: "from-brand-cyan to-brand-bright",
+  programming: "from-brand-cyan to-brand-bright",
+  machine_learning: "from-brand-cyan to-brand-bright",
+  deep_learning: "from-slate-400 to-brand-cyan",
+  nlp: "from-slate-400 to-brand-cyan",
+  computer_vision: "from-brand-cyan to-brand-bright",
+  research: "from-slate-300 to-brand-cyan",
   github_portfolio: "from-brand-cream to-brand-cyan",
-  kaggle_projects: "from-brand-orange to-brand-green"
+  kaggle_projects: "from-brand-cyan to-brand-bright"
 };
 
 export function SkillsManager({
@@ -311,9 +311,9 @@ export function SkillsManager({
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[440px_minmax(0,1fr)]">
-        <form className="glass h-fit rounded-[2rem] p-6" onSubmit={createSkill}>
+        <form className="workspace-form h-fit p-6" onSubmit={createSkill}>
           <div className="mb-6 flex items-center gap-3">
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-green/24 bg-brand-green/12 text-signal-green shadow-glow-blue">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
               <Plus className="h-5 w-5" aria-hidden="true" />
             </span>
             <h2 className="font-display text-2xl font-semibold text-ink">{copy.form.title}</h2>
@@ -379,9 +379,9 @@ export function SkillsManager({
         </form>
 
         <div className="space-y-5">
-          <div className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 backdrop-blur-2xl">
+          <div className="workspace-panel p-5">
             <div className="mb-4 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand-green/20 bg-brand-green/10 text-signal-green">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
                 <Filter className="h-4 w-4" aria-hidden="true" />
               </span>
               <h2 className="font-display text-xl font-semibold text-ink">{copy.filters.title}</h2>
@@ -411,28 +411,28 @@ export function SkillsManager({
             </div>
           </div>
 
-          <section className="rounded-[2rem] border border-outline bg-surface-panel/90 p-5 shadow-2xl shadow-black/25 backdrop-blur-2xl">
+          <section className="workspace-panel p-5">
             <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand-green/24 bg-brand-green/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-signal-green">
+                <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-700/14 bg-cyan-700/8 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-signal-cyan">
                   <GitBranch className="h-3.5 w-3.5" aria-hidden="true" />
                   {copy.tree.title}
                 </div>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-outline bg-surface-warm px-4 py-2 text-sm font-semibold text-signal-green">
+              <div className="flex items-center gap-2 rounded-full border border-outline bg-slate-50 px-4 py-2 text-sm font-semibold text-signal-cyan">
                 <Sparkles className="h-4 w-4" aria-hidden="true" />
                 {averageProgress}%
               </div>
             </div>
 
             {skillsByCategory.length === 0 ? (
-              <div className="rounded-[1.5rem] border border-dashed border-outline bg-surface-warm p-8 text-center text-ink-muted">
+              <div className="workspace-empty p-8 text-center text-ink-muted">
                 {query || categoryFilter !== "all" || statusFilter !== "all" ? copy.filters.noMatches : copy.tree.empty}
               </div>
             ) : (
               <div className="space-y-5">
                 {skillsByCategory.map((group) => (
-                  <div key={group.category} className="relative rounded-[1.5rem] border border-outline bg-surface-warm p-4">
+                  <div key={group.category} className="workspace-panel-muted relative p-4">
                     <div className="mb-4 flex items-center gap-3">
                       <span className={cn("h-3 w-3 rounded-full bg-gradient-to-br", categoryAccent[group.category] || "from-brand-cyan to-brand-coral")} />
                       <h3 className="font-display text-lg font-semibold text-ink">{copy.labels.categories[group.category]}</h3>
@@ -476,8 +476,8 @@ function SummaryCard({
   icon: LucideIcon;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-green/18 bg-brand-green/10 text-signal-green">
+    <div className="workspace-card p-5">
+      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>
       <p className="text-sm text-ink-muted">{label}</p>
@@ -514,7 +514,7 @@ function SkillNode({
 
   if (isEditing) {
     return (
-      <div className="rounded-[1.35rem] border border-brand-green/22 bg-surface-panel/90 p-4">
+      <div className="workspace-card p-4">
         <div className="space-y-3">
           <input value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} className="form-input" />
           <div className="grid gap-3 sm:grid-cols-2">
@@ -551,7 +551,7 @@ function SkillNode({
   }
 
   return (
-    <article className="group relative overflow-hidden rounded-[1.35rem] border border-outline bg-surface-panel/90 p-4 transition-colors duration-200 hover:border-brand-green/24 hover:bg-surface-coral">
+    <article className="workspace-card group relative overflow-hidden p-4 transition-colors duration-200 hover:border-cyan-700/24">
       <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r", categoryAccent[skill.category] || "from-brand-cyan to-brand-coral")} />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
