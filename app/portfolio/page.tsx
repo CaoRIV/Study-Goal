@@ -230,13 +230,13 @@ export default async function PortfolioPage() {
   ]);
 
   return (
-    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <div className="mb-8">
           <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />
         </div>
 
-        <section className="mb-8">
+        <section className="workspace-page-hero mb-8">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-red">{t.eyebrow}</p>
           <h1 className="mt-4 max-w-5xl font-display text-5xl font-semibold leading-tight text-ink">
             {t.title}

@@ -181,7 +181,7 @@ export default async function InsightsPage() {
   const visibleCategories = Array.from(new Set(recommendations.map((recommendation) => recommendation.category)));
 
   return (
-    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <WorkspaceHeader
           language={language}
@@ -190,7 +190,7 @@ export default async function InsightsPage() {
           signOutLabel={t.signOut}
         />
 
-        <section className="mt-12 grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
+        <section className="workspace-page-hero mt-8 grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-signal-cyan">
               {t.eyebrow}

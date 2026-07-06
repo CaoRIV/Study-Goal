@@ -6,6 +6,8 @@
     "**/.next/**": true,
     "**/.next-dev/**": true,
     "**/.next-local/**": true,
+    "**/.next-local-current/**": true,
+    "**/.next-local-*/**": true,
     "**/.next-build/**": true,
     "**/node_modules/**": true
   },
@@ -13,6 +15,8 @@
     "**/.next/**": true,
     "**/.next-dev/**": true,
     "**/.next-local/**": true,
+    "**/.next-local-current/**": true,
+    "**/.next-local-*/**": true,
     "**/.next-build/**": true,
     "**/node_modules/**": true
   }
