@@ -3,9 +3,12 @@ node_modules
 .next-dev
 .next-dev-runtime
 .next-local
+.next-local-current
+.next-local-*
 .next-build
 .env
 .env.local
 .env.*.local
 dev-server*.log
 prod-server*.log
+codex-dev-test*.log

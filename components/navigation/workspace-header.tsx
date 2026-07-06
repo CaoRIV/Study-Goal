@@ -51,7 +51,7 @@ export function WorkspaceHeader({
   }
 
   return (
-    <header className="workspace-panel p-4">
+    <header className="workspace-header workspace-panel sticky top-4 z-40 p-3 sm:p-4">
       <div className="flex items-center justify-between gap-4">
         <a
           href="/dashboard"
@@ -84,7 +84,7 @@ export function WorkspaceHeader({
                 className={cn(
                   "workspace-nav-link",
                   active &&
-                    "bg-cyan-400/12 text-signal-cyan ring-1 ring-cyan-300/20"
+                    "bg-slate-950 text-white shadow-[0_12px_30px_rgba(8,47,73,0.18)] ring-1 ring-slate-900/5 hover:bg-slate-900 hover:text-white"
                 )}
               >
                 {compactLabels[item.labelKey]}

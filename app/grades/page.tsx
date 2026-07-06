@@ -223,13 +223,13 @@ export default async function GradesPage() {
     .order("created_at", { ascending: true });
 
   return (
-    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
           <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />
         </div>
 
-        <section className="mb-8">
+        <section className="workspace-page-hero mb-8">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.eyebrow}</p>
           <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-ink">
             {t.title}

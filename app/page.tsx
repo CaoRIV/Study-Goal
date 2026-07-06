@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import type { ReactNode } from "react";
+import { MotionConfig, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
@@ -522,9 +523,11 @@ export default function Home() {
   const t = content[language];
 
   return (
+    <MotionConfig reducedMotion="user">
     <main id="main-content" className="relative overflow-hidden">
       <PublicHeader language={language} setLanguage={setLanguage} labels={t.nav} />
       <Hero t={t} />
+      <ChapterProgress t={t} />
       <Problem t={t} />
       <Solution t={t} />
       <Roadmap activeYear={activeYear} setActiveYear={setActiveYear} t={t} />
@@ -535,12 +538,15 @@ export default function Home() {
       <FinalCta t={t} />
       <PublicFooter language={language} />
     </main>
+    </MotionConfig>
   );
 }
 
 function Hero({ t }: { t: Content }) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className="relative px-4 pb-20 pt-32 sm:px-6 lg:px-8 lg:pb-28 lg:pt-40">
+    <section className="relative px-4 pb-16 pt-28 sm:px-6 lg:px-8 lg:pb-24 lg:pt-32">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div
           initial={false}
@@ -581,7 +587,7 @@ function Hero({ t }: { t: Content }) {
         </motion.div>
         <motion.div
           initial={false}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          animate={reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
           className="relative"
           id="demo"
@@ -594,60 +600,116 @@ function Hero({ t }: { t: Content }) {
 }
 
 function DashboardVisual({ t }: { t: Content }) {
+  const reduceMotion = useReducedMotion();
+  const floatMotion = reduceMotion ? {} : { y: [0, -8, 0] };
+  const softPulse = reduceMotion ? {} : { opacity: [0.84, 1, 0.84] };
+  const heroLayers = [
+    {
+      title: t.dashboard.gpaTracker,
+      value: "3.82",
+      detail: "+0.27",
+      icon: LineChart,
+      className: "left-2 top-10 sm:left-0"
+    },
+    {
+      title: t.dashboard.careerReadiness,
+      value: "86",
+      detail: t.dashboard.status,
+      icon: Medal,
+      className: "right-1 top-4 sm:right-0"
+    },
+    {
+      title: t.dashboard.skillTree,
+      value: "41",
+      detail: t.skills.level,
+      icon: Network,
+      className: "bottom-14 left-4 sm:left-8"
+    },
+    {
+      title: t.solution.portfolioEvidence,
+      value: "38",
+      detail: t.solution.artifacts,
+      icon: FolderKanban,
+      className: "bottom-5 right-3 sm:right-8"
+    }
+  ];
+
   return (
-    <div className="glass glass-elevated relative overflow-hidden rounded-[2rem] p-3 shadow-glow-blue">
-      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-400/18 to-transparent" />
-      <div className="relative rounded-[1.5rem] border border-outline bg-surface-panel/90 p-4 sm:p-5">
-        <div className="mb-5 flex items-center justify-between">
-          <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-signal-cyan">{t.dashboard.eyebrow}</p>
-            <h2 className="font-display text-xl font-semibold text-ink">{t.dashboard.title}</h2>
-          </div>
-          <div className="rounded-full border border-cyan-300/24 bg-cyan-300/10 px-3 py-1.5 text-sm text-signal-cyan">
-            {t.dashboard.status}
+    <div className="spatial-scene relative min-h-[590px] overflow-hidden rounded-[2rem] border border-outline bg-white/72 p-4 shadow-glow-blue backdrop-blur-xl sm:min-h-[640px]">
+      <div className="scene-grid absolute inset-0" aria-hidden="true" />
+      <div className="absolute inset-x-8 top-8 h-32 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
+
+      <motion.div
+        className="absolute inset-x-5 bottom-8 sm:inset-x-12"
+        animate={softPulse}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="study-plane study-plane-base rounded-[2rem] border border-cyan-800/12 bg-surface-cyan/80 p-5 shadow-glow-blue">
+          <div className="grid grid-cols-4 gap-3">
+            {t.roadmap.years.map((item, index) => (
+              <div key={item.year} className="rounded-xl bg-white/78 p-3 ring-1 ring-cyan-800/10">
+                <div className="mb-3 h-1.5 rounded-full bg-cyan-900/10">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright"
+                    style={{ width: `${44 + index * 14}%` }}
+                  />
+                </div>
+                <div className="text-[11px] font-medium text-signal-cyan">{item.year}</div>
+                <div className="mt-1 truncate text-xs font-semibold text-ink">{item.title}</div>
+              </div>
+            ))}
           </div>
         </div>
+      </motion.div>
 
-        <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="space-y-4">
-            <div className="rounded-2xl border border-outline bg-surface-warm p-4">
+      <motion.div
+        className="absolute left-6 right-6 top-20 sm:left-10 sm:right-10"
+        animate={floatMotion}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="study-plane study-plane-main glass-elevated rounded-[2rem] p-4 sm:p-5">
+          <div className="mb-5 flex items-center justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.dashboard.eyebrow}</p>
+              <h2 className="font-display text-2xl font-semibold text-ink">{t.dashboard.title}</h2>
+            </div>
+            <div className="rounded-full border border-cyan-300/24 bg-cyan-300/10 px-3 py-1.5 text-sm text-signal-cyan">
+              {t.dashboard.status}
+            </div>
+          </div>
+
+          <div className="grid gap-4 lg:grid-cols-[1fr_0.78fr]">
+            <div className="rounded-2xl border border-outline bg-white/82 p-4">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-sm font-medium text-ink">{t.dashboard.roadmap}</span>
                 <span className="text-xs text-ink-muted">{t.dashboard.credits}</span>
               </div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="relative h-36 rounded-xl bg-gradient-to-br from-white to-cyan-50 p-4 ring-1 ring-cyan-800/10">
+                <div className="absolute left-5 right-5 top-1/2 h-px bg-gradient-to-r from-cyan-300/20 via-cyan-500/55 to-cyan-300/20" />
+                <div className="relative grid h-full grid-cols-4 gap-3">
                 {t.roadmap.years.map((item, index) => (
-                  <div key={item.year} className="rounded-xl bg-surface-coral p-3">
-                    <div className="mb-3 h-1.5 rounded-full bg-surface-cyan">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright"
-                        style={{ width: `${42 + index * 15}%` }}
-                      />
-                    </div>
-                    <div className="text-xs text-ink-muted">{item.year}</div>
-                    <div className="mt-1 text-sm font-semibold text-ink">{item.title}</div>
+                  <div key={item.year} className="flex flex-col justify-between rounded-xl bg-white/70 p-3 shadow-sm shadow-cyan-950/5">
+                    <span className="text-xs text-ink-muted">{item.year}</span>
+                    <span className="font-display text-lg font-semibold text-ink">{item.gpa}</span>
+                    <span className="text-[11px] text-signal-cyan">{item.title}</span>
                   </div>
                 ))}
+                </div>
               </div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <MetricPanel title={t.dashboard.gpaTracker} value="3.82" accent="from-brand-cyan to-brand-bright" />
-              <MetricPanel title={t.dashboard.careerReadiness} value="86" accent="from-brand-orange to-orange-300" />
-            </div>
-          </div>
-          <div className="space-y-4">
-            <div className="rounded-2xl border border-outline bg-surface-warm p-4">
+
+            <div className="rounded-2xl border border-outline bg-white/82 p-4">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-sm font-medium text-ink">{t.dashboard.skillTree}</span>
-                <Code2 className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
+                <BrainCircuit className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
               </div>
-              <div className="relative h-44 overflow-hidden rounded-xl bg-surface-panel/90">
+              <div className="relative h-36 overflow-hidden rounded-xl bg-surface-panel/90">
                 <div className="absolute left-[16%] top-[52%] h-px w-[66%] rotate-[-18deg] bg-cyan-300/30" />
-                <div className="absolute left-[22%] top-[50%] h-px w-[58%] rotate-[26deg] bg-cyan-300/30" />
+                <div className="absolute left-[22%] top-[50%] h-px w-[58%] rotate-[26deg] bg-brand-green/28" />
                 {t.skillNodes.slice(0, 6).map((node) => (
                   <div
                     key={node.name}
-                  className="absolute flex h-12 w-12 items-center justify-center rounded-full border border-outline bg-gradient-to-br from-brand-cyan/25 to-brand-coral-soft/55 text-[10px] font-semibold text-ink shadow-glow-blue"
+                    className="absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-outline bg-gradient-to-br from-white to-cyan-50 text-[10px] font-semibold text-ink shadow-glow-blue"
                     style={{ left: node.x, top: node.y }}
                   >
                     {node.name.split(" ")[0]}
@@ -655,22 +717,42 @@ function DashboardVisual({ t }: { t: Content }) {
                 ))}
               </div>
             </div>
-            <div className="rounded-2xl border border-outline bg-surface-warm p-4">
-              <div className="mb-3 flex items-center justify-between text-sm">
-                <span className="font-medium text-ink">{t.dashboard.researchProgress}</span>
-                <span className="text-signal-cyan">72%</span>
-              </div>
-              <div className="h-2 rounded-full bg-surface-cyan">
-                <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" />
-              </div>
-              <div className="mt-4 grid grid-cols-3 gap-2 text-center text-xs text-ink-muted">
-                {t.dashboard.researchSteps.map((step) => (
-                  <span key={step} className="rounded-lg bg-surface-warm py-2">{step}</span>
-                ))}
-              </div>
-            </div>
+          </div>
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            {[
+              [t.dashboard.gpaTracker, "3.82", "from-brand-cyan to-brand-bright"],
+              [t.dashboard.careerReadiness, "86", "from-brand-green to-emerald-300"],
+              [t.dashboard.researchProgress, "72%", "from-brand-orange to-orange-300"]
+            ].map(([title, value, accent]) => (
+              <MetricPanel key={title} title={title} value={value} accent={accent} />
+            ))}
           </div>
         </div>
+      </motion.div>
+
+      {heroLayers.map((layer, index) => (
+        <motion.div
+          key={layer.title}
+          className={cn("absolute hidden w-44 sm:block", layer.className)}
+          animate={reduceMotion ? { opacity: 1 } : { y: [0, index % 2 === 0 ? -10 : 10, 0] }}
+          transition={{ duration: 6 + index, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div className="study-plane study-plane-card rounded-2xl border border-cyan-900/12 bg-white/88 p-4 shadow-glow-blue backdrop-blur-xl">
+            <div className="mb-3 flex items-center justify-between">
+              <layer.icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
+              <span className="text-xs text-ink-muted">{layer.detail}</span>
+            </div>
+            <div className="font-display text-3xl font-semibold text-ink">{layer.value}</div>
+            <div className="mt-1 text-xs font-medium text-ink-muted">{layer.title}</div>
+          </div>
+        </motion.div>
+      ))}
+
+      <div className="absolute inset-x-6 bottom-4 flex items-center justify-center gap-2 text-xs font-medium text-ink-muted">
+        <span className="h-px w-12 bg-cyan-900/14" />
+        {t.solution.commandCenter}
+        <span className="h-px w-12 bg-cyan-900/14" />
       </div>
     </div>
   );
@@ -678,10 +760,10 @@ function DashboardVisual({ t }: { t: Content }) {
 
 function MetricPanel({ title, value, accent }: { title: string; value: string; accent: string }) {
   return (
-    <div className="rounded-2xl border border-outline bg-surface-warm p-4">
+    <div className="rounded-2xl border border-outline bg-white/80 p-4">
       <div className="text-sm text-ink-muted">{title}</div>
       <div className="mt-2 flex items-end justify-between">
-        <div className="font-display text-4xl font-semibold text-ink">{value}</div>
+        <div className="font-display text-3xl font-semibold text-ink">{value}</div>
         <div className="flex h-16 items-end gap-1">
           {[42, 52, 48, 65, 74, 86].map((height, index) => (
             <div
@@ -693,6 +775,42 @@ function MetricPanel({ title, value, accent }: { title: string; value: string; a
         </div>
       </div>
     </div>
+  );
+}
+
+function ChapterProgress({ t }: { t: Content }) {
+  const chapters = [
+    { href: "#problem", label: t.problems.eyebrow, value: "01" },
+    { href: "#solution", label: t.solution.eyebrow, value: "02" },
+    { href: "#roadmap", label: t.roadmap.eyebrow, value: "03" },
+    { href: "#skills", label: t.skills.eyebrow, value: "04" },
+    { href: "#analytics", label: t.analytics.eyebrow, value: "05" }
+  ];
+
+  return (
+    <section className="chapter-progress px-4 pb-10 sm:px-6 lg:px-8" aria-label="Study journey chapters">
+      <div className="mx-auto max-w-7xl rounded-2xl border border-outline bg-white/78 p-2 shadow-glow-blue backdrop-blur-xl">
+        <div className="grid gap-2 md:grid-cols-5">
+          {chapters.map((chapter) => (
+            <a
+              key={chapter.href}
+              href={chapter.href}
+              className="group flex items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors duration-200 hover:bg-cyan-700/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+            >
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-cyan/10 font-display text-sm font-semibold text-signal-cyan ring-1 ring-cyan-800/12">
+                {chapter.value}
+              </span>
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-semibold text-ink">{chapter.label}</span>
+                <span className="mt-1 block h-1 rounded-full bg-cyan-900/10">
+                  <span className="block h-full w-0 rounded-full bg-brand-cyan transition-all duration-300 group-hover:w-full" />
+                </span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -723,11 +841,90 @@ function SectionTitle({
   );
 }
 
+function ChapterFrame({
+  id,
+  chapter,
+  eyebrow,
+  title,
+  copy,
+  nextHref,
+  nextLabel,
+  children
+}: {
+  id: string;
+  chapter: string;
+  eyebrow: string;
+  title: string;
+  copy?: string;
+  nextHref: string;
+  nextLabel: string;
+  children: ReactNode;
+}) {
+  return (
+    <section id={id} className="chapter-section px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
+        <aside className="chapter-rail hidden lg:block">
+          <div className="sticky top-28 rounded-2xl border border-outline bg-white/78 p-4 shadow-glow-blue backdrop-blur-xl">
+            <div className="font-display text-5xl font-semibold text-signal-cyan">{chapter}</div>
+            <div className="mt-4 h-px bg-gradient-to-r from-brand-cyan/45 to-transparent" />
+            <p className="mt-4 text-sm font-semibold text-ink">{eyebrow}</p>
+            <a
+              href={nextHref}
+              className="mt-6 inline-flex w-full items-center justify-between rounded-xl bg-brand-cyan px-3 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+            >
+              {nextLabel}
+              <ChevronRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </aside>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }}
+          transition={{ duration: 0.55, ease: "easeOut" }}
+          className="min-w-0"
+        >
+          <div className="mb-12 max-w-4xl">
+            <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-cyan-800/12 bg-white/74 px-3 py-1.5 text-sm font-semibold text-signal-cyan shadow-sm shadow-cyan-950/5">
+              <span className="font-display text-base">{chapter}</span>
+              <span className="h-1 w-1 rounded-full bg-brand-cyan/45" aria-hidden="true" />
+              <span>{eyebrow}</span>
+            </div>
+            <h2 className="font-display text-4xl font-semibold tracking-normal text-balance text-ink sm:text-5xl">
+              {title}
+            </h2>
+            {copy ? <p className="mt-5 max-w-2xl text-lg leading-8 text-ink-muted text-pretty">{copy}</p> : null}
+          </div>
+
+          {children}
+
+          <div className="mt-8 flex justify-start lg:hidden">
+            <a
+              href={nextHref}
+              className="inline-flex items-center gap-2 rounded-xl bg-brand-cyan px-4 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+            >
+              {nextLabel}
+              <ChevronRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Problem({ t }: { t: Content }) {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionTitle eyebrow={t.problems.eyebrow} title={t.problems.title} copy={t.problems.copy} />
+    <ChapterFrame
+      id="problem"
+      chapter="01"
+      eyebrow={t.problems.eyebrow}
+      title={t.problems.title}
+      copy={t.problems.copy}
+      nextHref="#solution"
+      nextLabel={t.solution.eyebrow}
+    >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
           {t.problems.items.map((problem, index) => (
             <motion.div
@@ -736,9 +933,9 @@ function Problem({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.45 }}
-              className="group rounded-2xl border border-brand-coral/16 bg-brand-coral/[0.04] p-5 transition-colors duration-200 hover:border-brand-coral/38 hover:bg-brand-coral/[0.075]"
+              className="group rounded-2xl border border-outline bg-white/74 p-5 shadow-sm shadow-cyan-950/5 transition-colors duration-200 hover:border-brand-cyan/28 hover:bg-white/92"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-coral/12 text-signal-red ring-1 ring-brand-coral/20 transition-colors group-hover:text-ink-muted">
+              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cyan/10 text-signal-cyan ring-1 ring-brand-cyan/16 transition-colors group-hover:bg-brand-cyan/14">
                 <problem.icon className="h-5 w-5" aria-hidden="true" />
               </div>
               <h3 className="font-display text-lg font-semibold text-ink">{problem.title}</h3>
@@ -746,16 +943,21 @@ function Problem({ t }: { t: Content }) {
             </motion.div>
           ))}
         </div>
-      </div>
-    </section>
+    </ChapterFrame>
   );
 }
 
 function Solution({ t }: { t: Content }) {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionTitle eyebrow={t.solution.eyebrow} title={t.solution.title} copy={t.solution.copy} />
+    <ChapterFrame
+      id="solution"
+      chapter="02"
+      eyebrow={t.solution.eyebrow}
+      title={t.solution.title}
+      copy={t.solution.copy}
+      nextHref="#roadmap"
+      nextLabel={t.roadmap.eyebrow}
+    >
         <div className="grid items-center gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="space-y-3">
             {t.solution.items.map((item, index) => (
@@ -853,8 +1055,7 @@ function Solution({ t }: { t: Content }) {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+    </ChapterFrame>
   );
 }
 
@@ -870,9 +1071,15 @@ function Roadmap({
   const active = t.roadmap.years[activeYear];
 
   return (
-    <section id="roadmap" className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionTitle eyebrow={t.roadmap.eyebrow} title={t.roadmap.title} copy={t.roadmap.copy} />
+    <ChapterFrame
+      id="roadmap"
+      chapter="03"
+      eyebrow={t.roadmap.eyebrow}
+      title={t.roadmap.title}
+      copy={t.roadmap.copy}
+      nextHref="#skills"
+      nextLabel={t.skills.eyebrow}
+    >
         <div className="glass rounded-[2rem] p-4 sm:p-6">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-outline bg-surface-panel/90 p-5">
@@ -938,16 +1145,21 @@ function Roadmap({
             </motion.div>
           </div>
         </div>
-      </div>
-    </section>
+    </ChapterFrame>
   );
 }
 
 function SkillsShowcase({ t }: { t: Content }) {
   return (
-    <section id="skills" className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionTitle eyebrow={t.skills.eyebrow} title={t.skills.title} copy={t.skills.copy} />
+    <ChapterFrame
+      id="skills"
+      chapter="04"
+      eyebrow={t.skills.eyebrow}
+      title={t.skills.title}
+      copy={t.skills.copy}
+      nextHref="#analytics"
+      nextLabel={t.analytics.eyebrow}
+    >
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="glass relative min-h-[460px] overflow-hidden rounded-[2rem] p-5">
             <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-brand-green/38" />
@@ -989,8 +1201,7 @@ function SkillsShowcase({ t }: { t: Content }) {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+    </ChapterFrame>
   );
 }
 
@@ -1038,9 +1249,15 @@ function Features({ t }: { t: Content }) {
 
 function Analytics({ t }: { t: Content }) {
   return (
-    <section id="analytics" className="px-4 py-20 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
-        <SectionTitle eyebrow={t.analytics.eyebrow} title={t.analytics.title} copy={t.analytics.copy} />
+    <ChapterFrame
+      id="analytics"
+      chapter="05"
+      eyebrow={t.analytics.eyebrow}
+      title={t.analytics.title}
+      copy={t.analytics.copy}
+      nextHref="#start"
+      nextLabel={t.finalCta.eyebrow}
+    >
         <div className="grid gap-4 lg:grid-cols-5">
           <ChartCard title={t.analytics.cards.gpa} value="+0.33" className="lg:col-span-2" liveSignal={t.analytics.liveSignal} />
           <ChartCard title={t.analytics.cards.credits} value="74%" className="lg:col-span-3" variant="wide" liveSignal={t.analytics.liveSignal} />
@@ -1078,8 +1295,7 @@ function Analytics({ t }: { t: Content }) {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+    </ChapterFrame>
   );
 }
 

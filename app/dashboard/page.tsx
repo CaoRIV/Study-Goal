@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import {
   Activity,
   ArrowRight,
@@ -529,6 +529,32 @@ export default async function DashboardPage() {
     language === "vi"
       ? `${readinessScore}/100 điểm sẵn sàng / ${activeCareerTargets} cơ hội đang hoạt động.`
       : `${readinessScore}/100 readiness / ${activeCareerTargets} active opportunities.`;
+  const commandLayers = [
+    {
+      icon: BarChart3,
+      label: t.metricLabels.currentGpa,
+      value: gpa !== null ? gpa.toFixed(2) : t.unavailable,
+      hint: `${t.metricLabels.projectedGpa}: ${projectedGpa !== null ? projectedGpa.toFixed(2) : t.unavailable}`
+    },
+    {
+      icon: BookOpenCheck,
+      label: t.metricLabels.completedCredits,
+      value: `${completedCredits}/${targetCredits}`,
+      hint: `${creditProgress}% ${t.metricLabels.creditProgress.toLowerCase()}`
+    },
+    {
+      icon: BrainCircuit,
+      label: t.pulse.skillMomentum,
+      value: `${skillProgress}%`,
+      hint: `${safeSkills.length} ${language === "vi" ? "kỹ năng đang theo dõi" : "tracked skills"}`
+    },
+    {
+      icon: BriefcaseBusiness,
+      label: t.pulse.careerReady,
+      value: `${readinessScore}/100`,
+      hint: `${activeCareerTargets} ${language === "vi" ? "cơ hội đang hoạt động" : "active opportunities"}`
+    }
+  ];
   const recommendations = createRuleRecommendations(
     {
       profile: {
@@ -611,7 +637,7 @@ export default async function DashboardPage() {
     .slice(-7);
 
   return (
-    <main id="main-content" className="min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <WorkspaceHeader
           language={language}
@@ -620,7 +646,7 @@ export default async function DashboardPage() {
           signOutLabel={t.signOut}
         />
 
-        <section className="academic-grid workspace-panel relative mt-6 overflow-hidden p-6 lg:p-8">
+        <section className="academic-grid workspace-command-center workspace-panel relative mt-6 overflow-hidden p-6 lg:p-8">
           <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-700/7 blur-3xl" />
           <div className="relative grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
             <div className="flex flex-col justify-between">
@@ -666,6 +692,31 @@ export default async function DashboardPage() {
               unavailable={t.unavailable}
               creditsLabel={t.units.credits}
             />
+          </div>
+
+          <div className="command-layer-grid relative mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            {commandLayers.map((layer, index) => {
+              const Icon = layer.icon;
+              return (
+                <div
+                  key={layer.label}
+                  className="command-layer-card"
+                  style={{ "--layer-index": index } as CSSProperties}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">
+                      L{index + 1}
+                    </span>
+                  </div>
+                  <p className="mt-4 text-sm font-semibold text-ink-muted">{layer.label}</p>
+                  <p className="mt-1 font-display text-3xl font-semibold text-ink">{layer.value}</p>
+                  <p className="mt-2 text-sm leading-6 text-ink-muted">{layer.hint}</p>
+                </div>
+              );
+            })}
           </div>
         </section>
 
