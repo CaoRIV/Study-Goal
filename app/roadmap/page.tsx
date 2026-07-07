@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import type { CSSProperties } from "react";
 import {
   BookOpenCheck,
   CalendarDays,
@@ -243,9 +244,13 @@ export default async function RoadmapPage() {
           </div>
         </section>
 
-        <section className="space-y-5">
-          {years.map((year) => (
-            <article key={year.yearIndex} className="rounded-[2rem] border border-outline bg-surface-coral p-5 shadow-2xl shadow-black/20">
+        <section className="roadmap-depth-stage space-y-5">
+          {years.map((year, index) => (
+            <article
+              key={year.yearIndex}
+              className="roadmap-year-card p-5"
+              style={{ "--year-depth": index } as CSSProperties}
+            >
               <div className="grid gap-5 lg:grid-cols-[220px_minmax(0,1fr)]">
                 <div className="lg:border-r lg:border-outline lg:pr-5">
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/18">
@@ -269,7 +274,7 @@ export default async function RoadmapPage() {
                       const semesterCourses = safeCourses.filter((course) => course.semester_id === semester.id);
 
                       return (
-                        <section key={semester.id} className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
+                        <section key={semester.id} className="roadmap-term-card rounded-2xl border border-outline p-4">
                           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                             <div>
                               <p className="text-xs uppercase tracking-[0.16em] text-signal-cyan">{t.terms[semester.term as keyof typeof t.terms] || semester.term}</p>
@@ -296,7 +301,7 @@ export default async function RoadmapPage() {
                     })}
                   </div>
 
-                  <div className="rounded-2xl border border-outline bg-surface-panel/90 p-4">
+                  <div className="roadmap-goal-panel rounded-2xl border border-outline p-4">
                     <div className="mb-4 flex items-center gap-3">
                       <Target className="h-5 w-5 text-signal-cyan" aria-hidden="true" />
                       <h3 className="font-semibold text-ink">{t.activeGoals}</h3>
@@ -308,7 +313,7 @@ export default async function RoadmapPage() {
                         const completedMilestones = goalMilestones.filter((milestone) => milestone.status === "completed").length;
 
                         return (
-                          <div key={goal.id} className="rounded-2xl border border-outline bg-surface-warm p-3">
+                          <div key={goal.id} className="rounded-2xl border border-outline bg-white/70 p-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
                             <div className="flex items-start justify-between gap-3">
                               <p className="font-medium leading-6 text-ink">{goal.title}</p>
                               <span className="shrink-0 text-sm font-semibold text-signal-cyan">{goal.progress}%</span>
@@ -342,7 +347,7 @@ function Metric({
   icon: typeof GraduationCap;
 }) {
   return (
-    <div className="rounded-2xl border border-outline bg-surface-warm p-4">
+    <div className="roadmap-metric-card rounded-2xl p-4">
       <div className="flex items-center justify-between gap-3">
         <span className="text-sm text-ink-muted">{label}</span>
         <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />

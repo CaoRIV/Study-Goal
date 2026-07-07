@@ -300,6 +300,130 @@ body::after {
     translateZ(calc(var(--layer-index) * 16px));
 }
 
+.semester-depth-map {
+  position: relative;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.semester-depth-map::before {
+  position: absolute;
+  right: 1.25rem;
+  left: 1.25rem;
+  top: 50%;
+  height: 1px;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(14, 116, 144, 0.24), rgba(5, 150, 105, 0.18), transparent);
+  transform: translateY(-50%);
+}
+
+.semester-depth-card {
+  box-shadow:
+    0 18px 50px rgba(8, 47, 73, 0.075),
+    inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  transform:
+    translateY(calc(var(--journey-index) * 0.18rem))
+    translateZ(calc(var(--journey-index) * 8px));
+  transform-style: preserve-3d;
+}
+
+.semester-depth-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.78), transparent 12rem),
+    linear-gradient(145deg, rgba(8, 145, 178, 0.08), transparent 42%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.semester-depth-card:hover {
+  transform:
+    translateY(calc(var(--journey-index) * 0.18rem - 0.22rem))
+    translateZ(calc(var(--journey-index) * 12px));
+}
+
+.semester-depth-card:hover::before,
+.semester-depth-card.is-current::before {
+  opacity: 1;
+}
+
+.roadmap-depth-stage {
+  position: relative;
+  perspective: 1400px;
+}
+
+.roadmap-depth-stage::before {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1.65rem;
+  width: 1px;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(to bottom, transparent, rgba(14, 116, 144, 0.28), rgba(5, 150, 105, 0.2), transparent);
+}
+
+.roadmap-year-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(187, 215, 224, 0.88);
+  border-radius: 2rem;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(241, 245, 249, 0.78)),
+    rgba(255, 255, 255, 0.76);
+  box-shadow:
+    0 28px 72px rgba(8, 47, 73, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  transform:
+    translateY(calc(var(--year-depth) * 0.28rem))
+    translateZ(calc(var(--year-depth) * 12px));
+  transform-style: preserve-3d;
+  transition:
+    transform 240ms ease,
+    border-color 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.roadmap-year-card::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 0% 0%, rgba(14, 116, 144, 0.16), transparent 20rem),
+    linear-gradient(115deg, transparent 0 64%, rgba(217, 119, 6, 0.07) 64.2%, transparent 66%);
+}
+
+.roadmap-year-card:hover {
+  border-color: rgba(14, 116, 144, 0.24);
+  box-shadow:
+    0 34px 86px rgba(8, 47, 73, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  transform:
+    translateY(calc(var(--year-depth) * 0.28rem - 0.2rem))
+    translateZ(calc(var(--year-depth) * 16px));
+}
+
+.roadmap-year-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.roadmap-metric-card,
+.roadmap-term-card,
+.roadmap-goal-panel {
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(236, 254, 255, 0.46));
+  box-shadow:
+    0 12px 32px rgba(8, 47, 73, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.76);
+  backdrop-filter: blur(12px);
+}
+
 .workspace-page-hero {
   position: relative;
   overflow: hidden;
@@ -441,7 +565,11 @@ body::after {
   .workspace-command-center,
   .workspace-page-hero,
   .command-layer-card,
-  .command-layer-card:hover {
+  .command-layer-card:hover,
+  .semester-depth-card,
+  .semester-depth-card:hover,
+  .roadmap-year-card,
+  .roadmap-year-card:hover {
     transform: none !important;
   }
 
@@ -472,6 +600,11 @@ body::after {
     top: auto;
     z-index: 1;
   }
+
+  .semester-depth-map::before,
+  .roadmap-depth-stage::before {
+    display: none;
+  }
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -483,6 +616,9 @@ body::after {
   .workspace-card,
   .workspace-form,
   .workspace-page-hero,
+  .roadmap-metric-card,
+  .roadmap-term-card,
+  .roadmap-goal-panel,
   .chapter-progress > div {
     background: rgba(255, 255, 255, 0.96);
     backdrop-filter: none;

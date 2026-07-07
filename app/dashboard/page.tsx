@@ -1296,8 +1296,8 @@ function SemesterJourney({
       </div>
 
       {semesters.length > 0 ? (
-        <div className="academic-grid workspace-panel p-4 sm:p-5">
-          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="academic-grid semester-depth-map workspace-panel p-4 sm:p-5">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {semesters.map((semester, index) => {
               const styles = statusStyles[semester.status];
 
@@ -1305,10 +1305,11 @@ function SemesterJourney({
                 <a
                   key={semester.id}
                   href="/grades"
+                  style={{ "--journey-index": index } as CSSProperties}
                   className={cn(
-                    "group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
+                    "semester-depth-card group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
                     semester.status === "current"
-                      ? "border-cyan-300/28 bg-cyan-300/[0.075] shadow-[0_20px_60px_rgba(6,182,212,0.08)]"
+                      ? "is-current border-cyan-300/28 bg-cyan-300/[0.075] shadow-[0_20px_60px_rgba(6,182,212,0.08)]"
                       : "border-outline bg-surface-panel/90 hover:border-cyan-700/18 hover:bg-slate-50"
                   )}
                 >
