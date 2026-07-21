@@ -551,7 +551,7 @@ function SkillNode({
   }
 
   return (
-    <article className="workspace-card group relative overflow-hidden p-4 transition-colors duration-200 hover:border-cyan-700/24">
+                <article className="workspace-card group relative overflow-hidden p-4">
       <div className={cn("pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r", categoryAccent[skill.category] || "from-brand-cyan to-brand-coral")} />
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">

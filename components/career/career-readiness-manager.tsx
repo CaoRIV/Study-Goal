@@ -387,7 +387,7 @@ export function CareerReadinessManager({
         ) : (
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {initialTargets.map((target) => (
-              <article key={target.id} className="workspace-card p-5 transition-colors hover:border-cyan-700/24">
+            <article key={target.id} className="workspace-card p-5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0">
                     <p className="flex items-center gap-2 text-sm text-ink-muted">

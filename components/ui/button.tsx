@@ -5,20 +5,33 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold transition-[background-color,border-color,color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-brand-paper disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-neo border-neo-strong border-neo-ink font-neo-body text-sm font-extrabold shadow-neo transition-[background-color,border-color,color,box-shadow,transform] duration-neo ease-neo-out hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-lg focus-visible:outline-none focus-visible:shadow-neo-focus active:translate-x-1 active:translate-y-1 active:shadow-neo-pressed disabled:pointer-events-none disabled:translate-x-0 disabled:translate-y-0 disabled:cursor-not-allowed disabled:shadow-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "bg-brand-orange text-slate-950 shadow-[0_18px_54px_rgba(249,115,22,0.2)] hover:bg-orange-400 active:bg-orange-600",
+          "bg-neo-action text-neo-ink hover:bg-orange-400",
+        primary:
+          "bg-neo-primary text-neo-white hover:bg-neo-primary-strong",
         secondary:
-          "border border-brand-cyan/25 bg-brand-cyan/10 text-cyan-800 backdrop-blur-xl hover:border-brand-cyan/40 hover:bg-brand-cyan/16",
-        ghost: "text-slate-700 hover:bg-brand-coral-soft/45 hover:text-brand-deep-red"
+          "bg-neo-mint text-neo-ink hover:bg-teal-300",
+        outline:
+          "bg-neo-white text-neo-ink hover:bg-neo-yellow",
+        ghost:
+          "border-transparent bg-transparent text-neo-ink shadow-none hover:border-neo-ink hover:bg-neo-yellow hover:shadow-neo-sm",
+        destructive:
+          "bg-neo-coral text-neo-ink hover:bg-red-400",
+        success:
+          "bg-neo-success text-neo-white hover:bg-green-700",
+        link:
+          "border-transparent bg-transparent text-neo-primary shadow-none underline-offset-4 hover:translate-x-0 hover:translate-y-0 hover:text-neo-primary-strong hover:underline hover:shadow-none active:translate-x-0 active:translate-y-0"
       },
       size: {
-        default: "h-11 px-6",
-        lg: "h-[52px] px-7 py-4 text-base",
-        icon: "h-10 w-10"
+        sm: "h-9 px-3 text-xs",
+        default: "h-11 px-5",
+        lg: "h-[52px] px-7 text-base",
+        icon: "h-11 w-11 px-0",
+        "icon-sm": "h-9 w-9 px-0"
       }
     },
     defaultVariants: {
@@ -39,6 +52,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
+        data-slot="button"
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
