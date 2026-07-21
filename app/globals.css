@@ -750,3 +750,87 @@ body::after {
     backdrop-filter: none;
   }
 }
+
+/* Pilot screens: scoped Neubrutalism migration. These selectors intentionally
+   sit after the legacy surface rules so unfinished routes keep their styling. */
+.neo-landing,
+.neo-pilot.workspace-shell {
+  background-color: var(--neo-canvas);
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.neo-pilot.workspace-shell::before,
+.neo-pilot.workspace-shell::after {
+  display: none;
+}
+
+.neo-landing .glass,
+.neo-landing .glass-elevated,
+.neo-landing .glass-soft {
+  border: var(--neo-border-width-strong) solid var(--neo-border-color);
+  border-radius: var(--neo-radius-lg);
+  background: var(--neo-paper);
+  box-shadow: var(--neo-shadow-lg);
+  backdrop-filter: none;
+}
+
+.neo-landing .glass-soft {
+  border-width: var(--neo-border-width);
+  border-radius: var(--neo-radius);
+  box-shadow: var(--neo-shadow-sm);
+}
+
+.neo-landing .chapter-section::before {
+  width: var(--neo-border-width);
+  background: var(--neo-ink);
+}
+
+.neo-landing .scene-grid,
+.neo-pilot .academic-grid {
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.08) 1px, transparent 1px);
+}
+
+.neo-dashboard .workspace-command-center {
+  background: var(--neo-yellow);
+  box-shadow: var(--neo-shadow-xl);
+  transform: none;
+}
+
+.neo-dashboard .workspace-command-center::before,
+.neo-dashboard .workspace-command-center::after,
+.neo-dashboard .semester-depth-card::before {
+  display: none;
+}
+
+.neo-dashboard .command-layer-card,
+.neo-dashboard .semester-depth-card {
+  border: var(--neo-border-width) solid var(--neo-border-color);
+  border-radius: var(--neo-radius);
+  background: var(--neo-paper);
+  box-shadow: var(--neo-shadow-sm);
+  transform: none;
+}
+
+.neo-dashboard .command-layer-card:hover,
+.neo-dashboard .semester-depth-card:hover {
+  border-color: var(--neo-border-color);
+  box-shadow: var(--neo-shadow);
+  transform: translate(-1px, -1px);
+}
+
+.neo-grades .workspace-page-hero {
+  border: var(--neo-border-width-strong) solid var(--neo-border-color);
+  border-radius: var(--neo-radius-lg);
+  background: var(--neo-yellow);
+  box-shadow: var(--neo-shadow-xl);
+  backdrop-filter: none;
+}
+
+.neo-grades .workspace-page-hero::before {
+  display: none;
+}

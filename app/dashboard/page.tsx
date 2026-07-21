@@ -637,7 +637,7 @@ export default async function DashboardPage() {
     .slice(-7);
 
   return (
-    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-pilot neo-dashboard workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <WorkspaceHeader
           language={language}
@@ -647,16 +647,16 @@ export default async function DashboardPage() {
         />
 
         <section className="academic-grid workspace-command-center workspace-panel relative mt-6 overflow-hidden p-6 lg:p-8">
-          <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-cyan-700/7 blur-3xl" />
+          <div className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rotate-12 border-neo-strong border-neo-ink bg-neo-coral" />
           <div className="relative grid gap-8 xl:grid-cols-[0.72fr_1.28fr] xl:items-stretch">
             <div className="flex flex-col justify-between">
               <div>
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-brand-bright/20 bg-brand-cyan/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-signal-cyan">
+                <div className="mb-5 inline-flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-white px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-neo-ink shadow-neo-xs">
                   <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                   {t.eyebrow}
                 </div>
-                <h1 className="max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl">
-                  {t.welcome}, <span className="text-signal-cyan">{displayName}</span>.
+                <h1 className="max-w-2xl font-display text-4xl font-black leading-[1.02] tracking-[-0.035em] text-neo-ink sm:text-5xl">
+                  {t.welcome}, <span className="underline decoration-neo-primary decoration-[6px] underline-offset-4">{displayName}</span>.
                 </h1>
               </div>
 
@@ -704,7 +704,7 @@ export default async function DashboardPage() {
                   style={{ "--layer-index": index } as CSSProperties}
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-sky text-neo-ink shadow-neo-xs">
                       <Icon className="h-4 w-4" aria-hidden="true" />
                     </span>
                     <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">
@@ -712,7 +712,7 @@ export default async function DashboardPage() {
                     </span>
                   </div>
                   <p className="mt-4 text-sm font-semibold text-ink-muted">{layer.label}</p>
-                  <p className="mt-1 font-display text-3xl font-semibold text-ink">{layer.value}</p>
+                  <p className="mt-1 font-display text-3xl font-black text-neo-ink">{layer.value}</p>
                   <p className="mt-2 text-sm leading-6 text-ink-muted">{layer.hint}</p>
                 </div>
               );
@@ -825,7 +825,7 @@ export default async function DashboardPage() {
           <div className="grid gap-5 xl:grid-cols-[0.72fr_1.28fr]">
             <div className="workspace-panel-muted relative overflow-hidden p-6">
               <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
+                <div className="flex h-11 w-11 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-yellow text-neo-ink shadow-neo-xs">
                   <Lightbulb className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.nextActions.title}</p>
@@ -833,7 +833,7 @@ export default async function DashboardPage() {
                 <p className="mt-3 max-w-xl leading-7 text-ink-muted">{focusAction.copy}</p>
                 <a
                   href={focusAction.href}
-                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-cyan px-5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,116,144,0.14)] transition-colors duration-200 hover:bg-brand-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-primary px-5 text-sm font-black text-white shadow-neo-sm transition-[box-shadow,transform] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none focus-visible:outline-none focus-visible:shadow-neo-focus"
                 >
                   {focusAction.cta}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -889,7 +889,7 @@ export default async function DashboardPage() {
         <section className="academic-grid workspace-panel-muted relative mt-6 overflow-hidden p-6">
           <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-coral text-neo-ink shadow-neo-xs">
                 <BriefcaseBusiness className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
@@ -901,7 +901,7 @@ export default async function DashboardPage() {
             </div>
             <a
               href="/career"
-              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-cyan-700/14 bg-cyan-700/8 px-5 text-sm font-semibold text-signal-cyan transition-colors duration-200 hover:bg-cyan-700/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+              className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-white px-5 text-sm font-black text-neo-ink shadow-neo-sm transition-[box-shadow,transform] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none focus-visible:outline-none focus-visible:shadow-neo-focus"
             >
               {careerLabel}
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -982,34 +982,34 @@ const accentStyles: Record<
   }
 > = {
   cyan: {
-    card: "border-outline bg-white/90 hover:border-cyan-700/24",
-    icon: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/12",
-    text: "text-signal-cyan",
-    bar: "bg-brand-cyan"
+    card: "border-neo-ink bg-neo-sky",
+    icon: "border-2 border-neo-ink bg-neo-white text-neo-ink shadow-neo-xs",
+    text: "text-neo-ink",
+    bar: "bg-neo-primary"
   },
   coral: {
-    card: "border-outline bg-white/90 hover:border-cyan-700/24",
-    icon: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/12",
-    text: "text-signal-cyan",
-    bar: "bg-brand-cyan"
+    card: "border-neo-ink bg-neo-coral",
+    icon: "border-2 border-neo-ink bg-neo-white text-neo-ink shadow-neo-xs",
+    text: "text-neo-ink",
+    bar: "bg-neo-danger"
   },
   green: {
-    card: "border-outline bg-white/90 hover:border-cyan-700/24",
-    icon: "bg-brand-green/10 text-signal-green ring-brand-green/18",
-    text: "text-signal-green",
-    bar: "bg-brand-green"
+    card: "border-neo-ink bg-neo-mint",
+    icon: "border-2 border-neo-ink bg-neo-white text-neo-ink shadow-neo-xs",
+    text: "text-neo-ink",
+    bar: "bg-neo-success"
   },
   orange: {
-    card: "border-outline bg-white/90 hover:border-cyan-700/24",
-    icon: "bg-brand-orange/10 text-signal-orange ring-brand-orange/18",
-    text: "text-signal-orange",
-    bar: "bg-brand-orange"
+    card: "border-neo-ink bg-neo-yellow",
+    icon: "border-2 border-neo-ink bg-neo-white text-neo-ink shadow-neo-xs",
+    text: "text-neo-ink",
+    bar: "bg-neo-warning"
   },
   cream: {
-    card: "border-outline bg-white/90 hover:border-cyan-700/24",
-    icon: "bg-cyan-700/8 text-signal-cyan ring-cyan-700/12",
-    text: "text-signal-cyan",
-    bar: "bg-brand-cyan"
+    card: "border-neo-ink bg-neo-paper",
+    icon: "border-2 border-neo-ink bg-neo-white text-neo-ink shadow-neo-xs",
+    text: "text-neo-ink",
+    bar: "bg-neo-primary"
   }
 };
 
@@ -1027,9 +1027,9 @@ function StudyContext({
   const styles = accentStyles[tone];
 
   return (
-    <div className={cn("rounded-2xl border p-4 backdrop-blur-sm", styles.card)}>
+    <div className={cn("rounded-neo border-2 p-4 shadow-neo-sm", styles.card)}>
       <div className="flex items-center gap-3">
-        <div className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
+        <div className={cn("flex h-9 w-9 items-center justify-center rounded-neo-sm", styles.icon)}>
           <Icon className="h-4 w-4" aria-hidden="true" />
         </div>
         <div className="min-w-0">
@@ -1094,10 +1094,10 @@ function AcademicPulse({
         </div>
         <div
           className={cn(
-            "inline-flex shrink-0 items-center gap-2 self-start rounded-full px-3 py-1.5 text-xs font-semibold ring-1",
+            "inline-flex shrink-0 items-center gap-2 self-start rounded-neo-sm border-2 border-neo-ink px-3 py-1.5 text-xs font-black shadow-neo-xs",
             healthy
-              ? "bg-cyan-300/10 text-signal-cyan ring-cyan-200/20"
-              : "bg-orange-300/10 text-signal-orange ring-orange-200/20"
+              ? "bg-neo-mint text-neo-ink"
+              : "bg-neo-yellow text-neo-ink"
           )}
         >
           <Activity className="h-3.5 w-3.5" aria-hidden="true" />
@@ -1106,16 +1106,16 @@ function AcademicPulse({
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-[0.72fr_1.28fr]">
-        <div className="flex items-center gap-5 rounded-[1.5rem] border border-cyan-300/14 bg-surface-panel/90 p-4">
+        <div className="flex items-center gap-5 rounded-neo border-2 border-neo-ink bg-neo-sky p-4 shadow-neo-sm">
           <div
             className="relative flex h-32 w-32 shrink-0 items-center justify-center rounded-full p-3"
             style={{
-              background: `conic-gradient(rgb(6 182 212) ${creditProgress * 3.6}deg, rgba(51, 65, 85, 0.72) 0deg)`
+              background: `conic-gradient(var(--neo-primary) ${creditProgress * 3.6}deg, var(--neo-paper) 0deg)`
             }}
             role="img"
             aria-label={`${creditProgress}%`}
           >
-            <div className="flex h-full w-full flex-col items-center justify-center rounded-full border border-outline bg-surface-panel/90">
+            <div className="flex h-full w-full flex-col items-center justify-center rounded-full border-2 border-neo-ink bg-neo-white">
               <span className="font-display text-3xl font-semibold text-ink">{creditProgress}%</span>
               <span className="mt-1 text-[11px] uppercase tracking-[0.12em] text-ink-muted">{creditsLabel}</span>
             </div>
@@ -1129,7 +1129,7 @@ function AcademicPulse({
           </div>
         </div>
 
-        <div className="rounded-[1.5rem] border border-outline bg-surface-panel/90 p-4">
+        <div className="rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm font-medium text-ink-muted">{labels.gpaTrend}</p>
@@ -1146,7 +1146,7 @@ function AcademicPulse({
             {gpaTrend.length > 0 ? (
               <GpaSparkline values={gpaTrend} label={labels.gpaTrend} />
             ) : (
-              <div className="flex h-20 items-center justify-center rounded-xl border border-dashed border-outline text-center text-xs text-ink-muted">
+              <div className="flex h-20 items-center justify-center rounded-neo-sm border-2 border-dashed border-neo-ink bg-neo-canvas text-center text-xs text-neo-ink-muted">
                 {labels.noTrend}
               </div>
             )}
@@ -1207,7 +1207,7 @@ function PulseMetric({
   const styles = accentStyles[tone];
 
   return (
-    <div className={cn("rounded-2xl border p-4", styles.card)}>
+    <div className={cn("rounded-neo border-2 p-4 shadow-neo-sm", styles.card)}>
       <div className="flex items-center justify-between gap-3">
         <span className="text-xs font-medium text-ink-muted">{label}</span>
         <Icon className={cn("h-4 w-4", styles.text)} aria-hidden="true" />
@@ -1228,8 +1228,8 @@ function SectionHeading({
 }) {
   return (
     <div className="mb-5 max-w-3xl">
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{eyebrow}</p>
-      <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">{title}</h2>
+      <p className="inline-flex rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-neo-ink shadow-neo-xs">{eyebrow}</p>
+      <h2 className="mt-3 font-display text-3xl font-black tracking-[-0.025em] text-neo-ink sm:text-4xl">{title}</h2>
       {description ? <p className="mt-3 text-base leading-7 text-ink-muted">{description}</p> : null}
     </div>
   );
@@ -1263,21 +1263,21 @@ function SemesterJourney({
   const statusStyles = {
     completed: {
       label: labels.completed,
-      badge: "bg-brand-cyan/16 text-signal-cyan ring-brand-cyan/30",
-      dot: "bg-brand-cyan",
-      line: "bg-brand-cyan"
+       badge: "bg-neo-mint text-neo-ink",
+       dot: "bg-neo-success",
+       line: "bg-neo-success"
     },
     current: {
       label: labels.current,
-      badge: "bg-brand-bright/14 text-signal-cyan ring-brand-bright/30",
-      dot: "bg-brand-bright",
-      line: "bg-brand-bright"
+       badge: "bg-neo-yellow text-neo-ink",
+       dot: "bg-neo-warning",
+       line: "bg-neo-warning"
     },
     planned: {
       label: labels.planned,
-      badge: "bg-slate-300/8 text-ink-muted ring-outline",
-      dot: "bg-surface-cyan",
-      line: "bg-surface-cyan"
+       badge: "bg-neo-paper text-neo-ink-muted",
+       dot: "bg-neo-muted",
+       line: "bg-neo-muted"
     }
   } as const;
 
@@ -1287,7 +1287,7 @@ function SemesterJourney({
         <SectionHeading eyebrow={labels.eyebrow} title={labels.title} />
         <a
           href="/roadmap"
-          className="mb-5 inline-flex items-center gap-2 self-start text-sm font-semibold text-signal-cyan transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 sm:self-auto"
+          className="mb-5 inline-flex items-center gap-2 self-start rounded-neo-sm border-2 border-neo-ink bg-neo-white px-4 py-2 text-sm font-black text-neo-ink shadow-neo-sm transition-[box-shadow,transform] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none focus-visible:outline-none focus-visible:shadow-neo-focus sm:self-auto"
         >
           <MapIcon className="h-4 w-4" aria-hidden="true" />
           {labels.eyebrow}
@@ -1307,16 +1307,16 @@ function SemesterJourney({
                   href="/grades"
                   style={{ "--journey-index": index } as CSSProperties}
                   className={cn(
-                    "semester-depth-card group relative min-h-60 overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,background-color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
+                    "semester-depth-card group relative min-h-60 overflow-hidden rounded-neo border-2 p-5 transition-[background-color,box-shadow,transform] duration-200 focus-visible:outline-none focus-visible:shadow-neo-focus",
                     semester.status === "current"
-                      ? "is-current border-cyan-300/28 bg-cyan-300/[0.075] shadow-[0_20px_60px_rgba(6,182,212,0.08)]"
-                      : "border-outline bg-surface-panel/90 hover:border-cyan-700/18 hover:bg-slate-50"
+                      ? "is-current border-neo-ink bg-neo-yellow shadow-neo-lg"
+                      : "border-neo-ink bg-neo-white shadow-neo-sm hover:-translate-y-0.5 hover:bg-neo-sky hover:shadow-neo"
                   )}
                 >
                   <div className={cn("absolute left-0 top-0 h-1", styles.line)} style={{ width: `${Math.max(8, semester.progress)}%` }} />
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-full border border-outline bg-surface-panel/90 font-display text-sm font-semibold text-ink">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-white font-display text-sm font-black text-neo-ink shadow-neo-xs">
                         {index + 1}
                       </span>
                       <div>
@@ -1324,7 +1324,7 @@ function SemesterJourney({
                         <h3 className="mt-1 font-display text-lg font-semibold text-ink">{semester.name}</h3>
                       </div>
                     </div>
-                    <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1", styles.badge)}>
+                    <span className={cn("inline-flex items-center gap-1.5 rounded-neo-sm border-2 border-neo-ink px-2.5 py-1 text-[11px] font-black shadow-neo-xs", styles.badge)}>
                       <span className={cn("h-1.5 w-1.5 rounded-full", styles.dot)} />
                       {styles.label}
                     </span>
@@ -1342,7 +1342,7 @@ function SemesterJourney({
                     {semester.courses.slice(0, 3).map((course) => (
                       <div
                         key={course.id}
-                        className="flex items-center gap-2 rounded-xl border border-outline bg-slate-50 px-3 py-2 text-xs text-ink-muted"
+                        className="flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-paper px-3 py-2 text-xs text-neo-ink-muted"
                         title={statusLabels[course.status] || course.status}
                       >
                         <span className={cn("h-1.5 w-1.5 shrink-0 rounded-full", course.status === "completed" ? "bg-cyan-300" : course.status === "in_progress" ? "bg-cyan-300" : "bg-surface-cyan")} />
@@ -1361,7 +1361,7 @@ function SemesterJourney({
       ) : (
         <a
           href="/grades"
-          className="academic-grid workspace-empty flex min-h-48 items-center justify-center p-6 text-center text-ink-muted transition-colors duration-200 hover:border-cyan-300/38 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+          className="academic-grid workspace-empty flex min-h-48 items-center justify-center p-6 text-center text-neo-ink-muted transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-neo-sky hover:text-neo-ink hover:shadow-neo focus-visible:outline-none focus-visible:shadow-neo-focus"
         >
           <span>
             <CalendarDays className="mx-auto mb-3 h-6 w-6 text-signal-cyan" aria-hidden="true" />
@@ -1405,13 +1405,13 @@ function NextModule({
     <a
       href={href}
       className={cn(
-        "workspace-card group relative flex min-h-56 flex-col overflow-hidden p-5 transition-[border-color,background-color,box-shadow] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
+        "workspace-card group relative flex min-h-56 flex-col overflow-hidden p-5 transition-[background-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:shadow-neo-lg focus-visible:outline-none focus-visible:shadow-neo-focus",
         styles.card,
         moduleSpanStyles[span]
       )}
     >
       <div className="flex items-start justify-between gap-4">
-        <div className={cn("flex h-11 w-11 items-center justify-center rounded-xl ring-1", styles.icon)}>
+        <div className={cn("flex h-11 w-11 items-center justify-center rounded-neo-sm", styles.icon)}>
           <Icon className="h-5 w-5" aria-hidden="true" />
         </div>
         <div className="text-right">
@@ -1449,7 +1449,7 @@ function ListPanel({
   return (
     <div className={cn("workspace-card h-full p-5", styles.card)}>
       <div className="mb-5 flex items-center gap-3">
-        <div className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
+        <div className={cn("flex h-9 w-9 items-center justify-center rounded-neo-sm", styles.icon)}>
           <Icon className="h-4 w-4" aria-hidden="true" />
         </div>
         <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>

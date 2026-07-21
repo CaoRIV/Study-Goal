@@ -223,17 +223,18 @@ export default async function GradesPage() {
     .order("created_at", { ascending: true });
 
   return (
-    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-pilot neo-grades workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
           <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />
         </div>
 
         <section className="workspace-page-hero mb-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.eyebrow}</p>
-          <h1 className="mt-4 max-w-4xl font-display text-5xl font-semibold leading-tight text-ink">
+          <p className="inline-flex rounded-neo-sm border-2 border-neo-ink bg-neo-white px-3 py-1.5 text-sm font-black uppercase tracking-[0.12em] text-neo-ink shadow-neo-xs">{t.eyebrow}</p>
+          <h1 className="mt-5 max-w-4xl font-display text-5xl font-black leading-[1.02] tracking-[-0.04em] text-neo-ink">
             {t.title}
           </h1>
+          <p className="mt-4 max-w-2xl text-base font-medium leading-7 text-neo-ink-muted">{t.description}</p>
         </section>
 
         <AcademicPlanner

@@ -18,20 +18,20 @@ export function PublicFooter({ language }: { language: Language }) {
         };
 
   return (
-    <footer className="border-t border-cyan-900/10 px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-ink-muted sm:flex-row sm:items-center sm:justify-between">
+    <footer className="border-t-neo-strong border-neo-ink px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm font-medium text-neo-ink-muted sm:flex-row sm:items-center sm:justify-between">
         <p>{labels.copy}</p>
         <nav
           aria-label={language === "vi" ? "Liên kết pháp lý" : "Legal links"}
           className="flex flex-wrap gap-x-5 gap-y-2"
         >
-          <a className="hover:text-cyan-800" href="/privacy">
+          <a className="font-bold hover:text-neo-primary" href="/privacy">
             {labels.privacy}
           </a>
-          <a className="hover:text-cyan-800" href="/terms">
+          <a className="font-bold hover:text-neo-primary" href="/terms">
             {labels.terms}
           </a>
-          <a className="hover:text-cyan-800" href="/support">
+          <a className="font-bold hover:text-neo-primary" href="/support">
             {labels.support}
           </a>
         </nav>

@@ -1,11 +1,18 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useId, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { BookOpenCheck, CalendarDays, Loader2, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import { useConfirmDialog } from "@/components/ui/confirm-dialog";
+import { EmptyState, EmptyStateDescription, EmptyStateIcon, EmptyStateTitle } from "@/components/ui/empty-state";
+import { Input as UiInput } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
+import { Select as UiSelect } from "@/components/ui/select";
 import {
   calculateCompletedCredits,
   calculateCreditProgress,
@@ -360,13 +367,11 @@ export function AcademicPlanner({
               <p className="text-sm text-ink-muted">{copy.intelligence.creditProgress}</p>
               <p className="mt-2 font-display text-3xl font-semibold text-ink">{creditProgress}%</p>
             </div>
-            <span className="workspace-status-pill px-3 py-1 text-sm font-semibold">
+            <Badge variant="outline" className="text-sm">
               {completedCredits}/{targetCredits}
-            </span>
+            </Badge>
           </div>
-          <div className="mt-5 h-2 rounded-full bg-surface-cyan">
-            <div className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright" style={{ width: `${creditProgress}%` }} />
-          </div>
+          <Progress className="mt-5" label={copy.intelligence.creditProgress} value={creditProgress} />
           <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.graduationTarget}</p>
         </div>
 
@@ -399,23 +404,23 @@ export function AcademicPlanner({
                 : copy.intelligence.noRemainingCourses}
             </p>
           </div>
-          <span className={`rounded-full px-4 py-2 text-sm font-semibold ring-1 ${isOnTrack ? "bg-cyan-300/10 text-signal-cyan ring-cyan-200/16" : "bg-orange-300/10 text-signal-orange ring-orange-200/16"}`}>
+          <Badge variant={isOnTrack ? "success" : "warning"} className="px-4 py-2 text-sm">
             {isOnTrack ? copy.intelligence.onTrack : copy.intelligence.needsFocus}
-          </span>
+          </Badge>
         </div>
       </section>
 
       {error ? (
-        <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red">
-          {error}
-        </div>
+        <Alert variant="destructive">
+          <AlertDescription className="col-start-1">{error}</AlertDescription>
+        </Alert>
       ) : null}
 
       <section className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
         <div className="space-y-6">
           <form className="workspace-form p-5" onSubmit={createSemester}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/16">
+              <div className="flex h-10 w-10 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-yellow text-neo-ink shadow-neo-xs">
                 <CalendarDays className="h-5 w-5" aria-hidden="true" />
               </div>
               <h2 className="font-display text-xl font-semibold text-ink">{copy.semesterForm.title}</h2>
@@ -433,7 +438,7 @@ export function AcademicPlanner({
 
           <form className="workspace-form p-5" onSubmit={createCourse}>
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-300/10 text-signal-cyan ring-1 ring-cyan-200/16">
+              <div className="flex h-10 w-10 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-sky text-neo-ink shadow-neo-xs">
                 <BookOpenCheck className="h-5 w-5" aria-hidden="true" />
               </div>
               <h2 className="font-display text-xl font-semibold text-ink">{copy.courseForm.title}</h2>
@@ -456,10 +461,11 @@ export function AcademicPlanner({
 
         <div className="space-y-4">
           {initialSemesters.length === 0 ? (
-            <div className="workspace-empty p-8 text-center">
-              <h2 className="font-display text-2xl font-semibold text-ink">{copy.empty.title}</h2>
-              <p className="mt-3 text-ink-muted">{copy.empty.description}</p>
-            </div>
+            <EmptyState>
+              <EmptyStateIcon><CalendarDays aria-hidden="true" /></EmptyStateIcon>
+              <EmptyStateTitle>{copy.empty.title}</EmptyStateTitle>
+              <EmptyStateDescription>{copy.empty.description}</EmptyStateDescription>
+            </EmptyState>
           ) : null}
 
           {initialSemesters.map((semester) => {
@@ -495,8 +501,8 @@ export function AcademicPlanner({
                     )}
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-outline">
-                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">
+                <div className="overflow-hidden rounded-neo border-neo-strong border-neo-ink shadow-neo-sm">
+                  <div className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 border-b-2 border-neo-ink bg-neo-yellow px-4 py-3 text-xs font-black uppercase tracking-[0.1em] text-neo-ink">
                     <span>{copy.table.course}</span>
                     <span>{copy.table.credits}</span>
                     <span>{copy.table.target}</span>
@@ -511,7 +517,7 @@ export function AcademicPlanner({
                     const isEditingCourse = editingCourseId === course.id;
 
                     return (
-                      <div key={course.id} className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 border-t border-outline px-4 py-4 text-sm text-ink">
+                      <div key={course.id} className="grid min-w-[760px] grid-cols-[1fr_0.55fr_0.55fr_0.55fr_0.75fr_92px] gap-2 border-t-2 border-neo-ink bg-neo-white px-4 py-4 text-sm text-neo-ink first:border-t-0">
                         {isEditingCourse ? (
                           <>
                             <div className="space-y-2">
@@ -587,10 +593,13 @@ function Input({
   max?: string;
   required?: boolean;
 }) {
+  const id = useId();
+
   return (
-    <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
-      <input
+    <div className="block">
+      <Label htmlFor={id} className="text-xs uppercase tracking-[0.1em]">{label}</Label>
+      <UiInput
+        id={id}
         required={required}
         type={type}
         step={step}
@@ -598,10 +607,10 @@ function Input({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-11 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+        className="mt-2"
         placeholder={placeholder}
       />
-    </label>
+    </div>
   );
 }
 
@@ -622,16 +631,18 @@ function Select({
   placeholder?: string;
   required?: boolean;
 }) {
+  const id = useId();
+
   return (
-    <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-muted">{label}</span>
-      <select required={required} className="mt-2 h-11 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-sm text-ink outline-none focus:border-cyan-300/50" value={value} onChange={(event) => onChange(event.target.value)}>
+    <div className="block">
+      <Label htmlFor={id} className="text-xs uppercase tracking-[0.1em]">{label}</Label>
+      <UiSelect id={id} required={required} wrapperClassName="mt-2" value={value} onChange={(event) => onChange(event.target.value)}>
         {placeholder ? <option value="" disabled>{placeholder}</option> : null}
         {options.map((option) => (
           <option key={option} value={option}>{labels[option] || option}</option>
         ))}
-      </select>
-    </label>
+      </UiSelect>
+    </div>
   );
 }
 
@@ -649,17 +660,16 @@ function IconButton({
   danger?: boolean;
 }) {
   return (
-    <button
+    <Button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`flex h-9 w-9 items-center justify-center rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50 ${
-        danger ? "text-ink-muted hover:bg-red-400/10 hover:text-signal-red" : "text-ink-muted hover:bg-surface-warm hover:text-ink"
-      }`}
+      variant={danger ? "destructive" : "outline"}
+      size="icon-sm"
       aria-label={label}
       title={label}
     >
       <Icon className="h-4 w-4" aria-hidden="true" />
-    </button>
+    </Button>
   );
 }

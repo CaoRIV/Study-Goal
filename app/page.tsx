@@ -524,7 +524,7 @@ export default function Home() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <main id="main-content" className="relative overflow-hidden">
+    <main id="main-content" className="neo-landing relative overflow-hidden bg-neo-canvas text-neo-ink">
       <PublicHeader language={language} setLanguage={setLanguage} labels={t.nav} />
       <Hero t={t} />
       <ChapterProgress t={t} />
@@ -554,11 +554,11 @@ function Hero({ t }: { t: Content }) {
           variants={fadeIn}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-brand-cyan/10 px-4 py-2 text-sm font-medium text-signal-cyan shadow-glow-blue">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-4 py-2 text-sm font-black uppercase tracking-[0.12em] text-neo-ink shadow-neo-sm">
             <Zap className="h-4 w-4 shrink-0" aria-hidden="true" />
             {t.hero.tagline}
           </div>
-          <h1 className="max-w-5xl font-display text-5xl font-semibold leading-[1.02] tracking-normal text-balance text-ink sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-5xl font-display text-5xl font-black leading-[0.96] tracking-[-0.04em] text-balance text-neo-ink sm:text-6xl lg:text-7xl">
             {t.hero.title}
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-ink-muted text-pretty">
@@ -578,9 +578,9 @@ function Hero({ t }: { t: Content }) {
           </div>
           <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
             {t.hero.stats.map(([value, label]) => (
-              <div key={label} className="glass-soft rounded-lg px-4 py-3">
-                <div className="font-display text-2xl font-semibold text-ink">{value}</div>
-                <div className="mt-1 text-xs uppercase tracking-[0.16em] text-ink-muted">{label}</div>
+              <div key={label} className="glass-soft rounded-neo-sm px-4 py-3">
+                <div className="font-display text-2xl font-black text-neo-ink">{value}</div>
+                <div className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-neo-ink-muted">{label}</div>
               </div>
             ))}
           </div>
@@ -635,22 +635,22 @@ function DashboardVisual({ t }: { t: Content }) {
   ];
 
   return (
-    <div className="spatial-scene relative min-h-[590px] overflow-hidden rounded-[2rem] border border-outline bg-white/72 p-4 shadow-glow-blue backdrop-blur-xl sm:min-h-[640px]">
+    <div className="spatial-scene relative min-h-[590px] overflow-hidden rounded-neo-lg border-neo-strong border-neo-ink bg-neo-sky p-4 shadow-neo-xl sm:min-h-[640px]">
       <div className="scene-grid absolute inset-0" aria-hidden="true" />
-      <div className="absolute inset-x-8 top-8 h-32 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
+      <div className="absolute right-8 top-8 h-24 w-24 rotate-6 border-2 border-neo-ink bg-neo-yellow" aria-hidden="true" />
 
       <motion.div
         className="absolute inset-x-5 bottom-8 sm:inset-x-12"
         animate={softPulse}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="study-plane study-plane-base rounded-[2rem] border border-cyan-800/12 bg-surface-cyan/80 p-5 shadow-glow-blue">
+        <div className="study-plane study-plane-base rounded-neo-lg border-neo-strong border-neo-ink bg-neo-mint p-5 shadow-neo-lg">
           <div className="grid grid-cols-4 gap-3">
             {t.roadmap.years.map((item, index) => (
-              <div key={item.year} className="rounded-xl bg-white/78 p-3 ring-1 ring-cyan-800/10">
+              <div key={item.year} className="rounded-neo-sm border-2 border-neo-ink bg-neo-white p-3 shadow-neo-xs">
                 <div className="mb-3 h-1.5 rounded-full bg-cyan-900/10">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-bright"
+                    className="h-full bg-neo-primary"
                     style={{ width: `${44 + index * 14}%` }}
                   />
                 </div>
@@ -667,28 +667,28 @@ function DashboardVisual({ t }: { t: Content }) {
         animate={floatMotion}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="study-plane study-plane-main glass-elevated rounded-[2rem] p-4 sm:p-5">
+        <div className="study-plane study-plane-main glass-elevated rounded-neo-lg p-4 sm:p-5">
           <div className="mb-5 flex items-center justify-between gap-4">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.dashboard.eyebrow}</p>
               <h2 className="font-display text-2xl font-semibold text-ink">{t.dashboard.title}</h2>
             </div>
-            <div className="rounded-full border border-cyan-300/24 bg-cyan-300/10 px-3 py-1.5 text-sm text-signal-cyan">
+            <div className="rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-3 py-1.5 text-sm font-bold text-neo-ink shadow-neo-xs">
               {t.dashboard.status}
             </div>
           </div>
 
           <div className="grid gap-4 lg:grid-cols-[1fr_0.78fr]">
-            <div className="rounded-2xl border border-outline bg-white/82 p-4">
+            <div className="rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-sm font-medium text-ink">{t.dashboard.roadmap}</span>
                 <span className="text-xs text-ink-muted">{t.dashboard.credits}</span>
               </div>
-              <div className="relative h-36 rounded-xl bg-gradient-to-br from-white to-cyan-50 p-4 ring-1 ring-cyan-800/10">
+              <div className="relative h-36 rounded-neo-sm border-2 border-neo-ink bg-neo-canvas p-4">
                 <div className="absolute left-5 right-5 top-1/2 h-px bg-gradient-to-r from-cyan-300/20 via-cyan-500/55 to-cyan-300/20" />
                 <div className="relative grid h-full grid-cols-4 gap-3">
                 {t.roadmap.years.map((item, index) => (
-                  <div key={item.year} className="flex flex-col justify-between rounded-xl bg-white/70 p-3 shadow-sm shadow-cyan-950/5">
+                  <div key={item.year} className="flex flex-col justify-between rounded-neo-sm border-2 border-neo-ink bg-neo-white p-3 shadow-neo-xs">
                     <span className="text-xs text-ink-muted">{item.year}</span>
                     <span className="font-display text-lg font-semibold text-ink">{item.gpa}</span>
                     <span className="text-[11px] text-signal-cyan">{item.title}</span>
@@ -698,18 +698,18 @@ function DashboardVisual({ t }: { t: Content }) {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-outline bg-white/82 p-4">
+            <div className="rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm">
               <div className="mb-4 flex items-center justify-between">
                 <span className="text-sm font-medium text-ink">{t.dashboard.skillTree}</span>
                 <BrainCircuit className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
               </div>
-              <div className="relative h-36 overflow-hidden rounded-xl bg-surface-panel/90">
+              <div className="relative h-36 overflow-hidden rounded-neo-sm border-2 border-neo-ink bg-neo-canvas">
                 <div className="absolute left-[16%] top-[52%] h-px w-[66%] rotate-[-18deg] bg-cyan-300/30" />
                 <div className="absolute left-[22%] top-[50%] h-px w-[58%] rotate-[26deg] bg-brand-green/28" />
                 {t.skillNodes.slice(0, 6).map((node) => (
                   <div
                     key={node.name}
-                    className="absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-xl border border-outline bg-gradient-to-br from-white to-cyan-50 text-[10px] font-semibold text-ink shadow-glow-blue"
+                    className="absolute flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-coral text-[10px] font-black text-neo-ink shadow-neo-xs"
                     style={{ left: node.x, top: node.y }}
                   >
                     {node.name.split(" ")[0]}
@@ -738,7 +738,7 @@ function DashboardVisual({ t }: { t: Content }) {
           animate={reduceMotion ? { opacity: 1 } : { y: [0, index % 2 === 0 ? -10 : 10, 0] }}
           transition={{ duration: 6 + index, repeat: Infinity, ease: "easeInOut" }}
         >
-          <div className="study-plane study-plane-card rounded-2xl border border-cyan-900/12 bg-white/88 p-4 shadow-glow-blue backdrop-blur-xl">
+          <div className="study-plane study-plane-card rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm">
             <div className="mb-3 flex items-center justify-between">
               <layer.icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
               <span className="text-xs text-ink-muted">{layer.detail}</span>
@@ -760,7 +760,7 @@ function DashboardVisual({ t }: { t: Content }) {
 
 function MetricPanel({ title, value, accent }: { title: string; value: string; accent: string }) {
   return (
-    <div className="rounded-2xl border border-outline bg-white/80 p-4">
+    <div className="rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm">
       <div className="text-sm text-ink-muted">{title}</div>
       <div className="mt-2 flex items-end justify-between">
         <div className="font-display text-3xl font-semibold text-ink">{value}</div>
@@ -768,7 +768,7 @@ function MetricPanel({ title, value, accent }: { title: string; value: string; a
           {[42, 52, 48, 65, 74, 86].map((height, index) => (
             <div
               key={index}
-              className={cn("w-2 rounded-full bg-gradient-to-t", accent)}
+              className={cn("w-2 bg-neo-primary", accent)}
               style={{ height: `${height}%` }}
             />
           ))}
@@ -789,15 +789,15 @@ function ChapterProgress({ t }: { t: Content }) {
 
   return (
     <section className="chapter-progress px-4 pb-10 sm:px-6 lg:px-8" aria-label="Study journey chapters">
-      <div className="mx-auto max-w-7xl rounded-2xl border border-outline bg-white/78 p-2 shadow-glow-blue backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl rounded-neo-lg border-neo-strong border-neo-ink bg-neo-paper p-2 shadow-neo-lg">
         <div className="grid gap-2 md:grid-cols-5">
           {chapters.map((chapter) => (
             <a
               key={chapter.href}
               href={chapter.href}
-              className="group flex items-center gap-3 rounded-xl px-3 py-3 text-left transition-colors duration-200 hover:bg-cyan-700/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="group flex items-center gap-3 rounded-neo-sm border-2 border-transparent px-3 py-3 text-left transition-[background-color,border-color,box-shadow,transform] hover:-translate-y-0.5 hover:border-neo-ink hover:bg-neo-yellow hover:shadow-neo-xs focus-visible:outline-none focus-visible:shadow-neo-focus"
             >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-cyan/10 font-display text-sm font-semibold text-signal-cyan ring-1 ring-cyan-800/12">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-primary font-display text-sm font-black text-white">
                 {chapter.value}
               </span>
               <span className="min-w-0">
@@ -830,13 +830,13 @@ function SectionTitle({
       viewport={{ once: true, margin: "-120px" }}
       variants={fadeIn}
       transition={{ duration: 0.55 }}
-      className="mx-auto mb-12 max-w-3xl text-center"
+      className="mb-12 max-w-3xl text-left"
     >
-      <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-signal-cyan">{eyebrow}</p>
-      <h2 className="font-display text-4xl font-semibold tracking-normal text-balance text-ink sm:text-5xl">
+      <p className="mb-3 inline-flex rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-3 py-1.5 text-sm font-black uppercase tracking-[0.12em] text-neo-ink shadow-neo-xs">{eyebrow}</p>
+      <h2 className="font-display text-4xl font-black tracking-[-0.035em] text-balance text-neo-ink sm:text-5xl">
         {title}
       </h2>
-      {copy ? <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-ink-muted text-pretty">{copy}</p> : null}
+      {copy ? <p className="mt-5 max-w-2xl text-lg leading-8 text-neo-ink-muted text-pretty">{copy}</p> : null}
     </motion.div>
   );
 }
@@ -864,13 +864,13 @@ function ChapterFrame({
     <section id={id} className="chapter-section px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[13rem_minmax(0,1fr)]">
         <aside className="chapter-rail hidden lg:block">
-          <div className="sticky top-28 rounded-2xl border border-outline bg-white/78 p-4 shadow-glow-blue backdrop-blur-xl">
-            <div className="font-display text-5xl font-semibold text-signal-cyan">{chapter}</div>
-            <div className="mt-4 h-px bg-gradient-to-r from-brand-cyan/45 to-transparent" />
+          <div className="sticky top-28 rounded-neo border-neo-strong border-neo-ink bg-neo-sky p-4 shadow-neo-lg">
+            <div className="font-display text-5xl font-black text-neo-ink">{chapter}</div>
+            <div className="mt-4 h-1 bg-neo-ink" />
             <p className="mt-4 text-sm font-semibold text-ink">{eyebrow}</p>
             <a
               href={nextHref}
-              className="mt-6 inline-flex w-full items-center justify-between rounded-xl bg-brand-cyan px-3 py-2.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+              className="mt-6 inline-flex w-full items-center justify-between rounded-neo-sm border-2 border-neo-ink bg-neo-primary px-3 py-2.5 text-sm font-black text-white shadow-neo-sm transition-[box-shadow,transform] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none focus-visible:outline-none focus-visible:shadow-neo-focus"
             >
               {nextLabel}
               <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -886,12 +886,12 @@ function ChapterFrame({
           className="min-w-0"
         >
           <div className="mb-12 max-w-4xl">
-            <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-cyan-800/12 bg-white/74 px-3 py-1.5 text-sm font-semibold text-signal-cyan shadow-sm shadow-cyan-950/5">
+            <div className="mb-4 inline-flex items-center gap-3 rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-3 py-1.5 text-sm font-black text-neo-ink shadow-neo-xs">
               <span className="font-display text-base">{chapter}</span>
               <span className="h-1 w-1 rounded-full bg-brand-cyan/45" aria-hidden="true" />
               <span>{eyebrow}</span>
             </div>
-            <h2 className="font-display text-4xl font-semibold tracking-normal text-balance text-ink sm:text-5xl">
+            <h2 className="font-display text-4xl font-black tracking-[-0.035em] text-balance text-neo-ink sm:text-5xl">
               {title}
             </h2>
             {copy ? <p className="mt-5 max-w-2xl text-lg leading-8 text-ink-muted text-pretty">{copy}</p> : null}
@@ -902,7 +902,7 @@ function ChapterFrame({
           <div className="mt-8 flex justify-start lg:hidden">
             <a
               href={nextHref}
-              className="inline-flex items-center gap-2 rounded-xl bg-brand-cyan px-4 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-brand-bright focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-primary px-4 py-3 text-sm font-black text-white shadow-neo-sm transition-[box-shadow,transform] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none focus-visible:outline-none focus-visible:shadow-neo-focus"
             >
               {nextLabel}
               <ChevronRight className="h-4 w-4" aria-hidden="true" />
@@ -933,7 +933,7 @@ function Problem({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.45 }}
-              className="group rounded-2xl border border-outline bg-white/74 p-5 shadow-sm shadow-cyan-950/5 transition-colors duration-200 hover:border-brand-cyan/28 hover:bg-white/92"
+              className="group rounded-neo border-2 border-neo-ink bg-neo-white p-5 shadow-neo-sm transition-[box-shadow,transform] hover:-translate-y-1 hover:shadow-neo"
             >
               <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cyan/10 text-signal-cyan ring-1 ring-brand-cyan/16 transition-colors group-hover:bg-brand-cyan/14">
                 <problem.icon className="h-5 w-5" aria-hidden="true" />
@@ -1080,9 +1080,9 @@ function Roadmap({
       nextHref="#skills"
       nextLabel={t.skills.eyebrow}
     >
-        <div className="glass rounded-[2rem] p-4 sm:p-6">
+        <div className="glass rounded-neo-lg p-4 sm:p-6">
           <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="relative min-h-[360px] overflow-hidden rounded-[1.5rem] border border-outline bg-surface-panel/90 p-5">
+            <div className="relative min-h-[360px] overflow-hidden rounded-neo border-2 border-neo-ink bg-neo-sky p-5">
               <div className="absolute left-8 right-8 top-1/2 h-px bg-gradient-to-r from-cyan-300/20 via-cyan-300/55 to-cyan-300/20" />
               <div className="relative grid h-full gap-4 sm:grid-cols-4">
                 {t.roadmap.years.map((item, index) => (
@@ -1091,10 +1091,10 @@ function Roadmap({
                     type="button"
                     onClick={() => setActiveYear(index)}
                     className={cn(
-                      "group flex min-h-72 cursor-pointer flex-col justify-between rounded-2xl border p-4 text-left transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300",
+                      "group flex min-h-72 cursor-pointer flex-col justify-between rounded-neo border-2 border-neo-ink p-4 text-left transition-[box-shadow,transform,background-color] focus-visible:outline-none focus-visible:shadow-neo-focus",
                       activeYear === index
-                        ? "border-cyan-200/34 bg-cyan-300/10 shadow-glow-blue"
-                        : "border-outline bg-surface-warm hover:border-outline hover:bg-surface-warm"
+                        ? "-translate-y-1 bg-neo-yellow shadow-neo-lg"
+                        : "bg-neo-white shadow-neo-sm hover:-translate-y-0.5 hover:bg-neo-mint hover:shadow-neo"
                     )}
                   >
                     <div>
@@ -1124,7 +1124,7 @@ function Roadmap({
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="rounded-[1.5rem] border border-outline bg-surface-warm p-6"
+              className="rounded-neo border-neo-strong border-neo-ink bg-neo-paper p-6 shadow-neo-lg"
             >
               <p className="text-sm uppercase tracking-[0.18em] text-signal-cyan">{t.roadmap.selected}</p>
               <h3 className="mt-3 font-display text-4xl font-semibold text-ink">{active.year}: {active.title}</h3>
@@ -1136,7 +1136,7 @@ function Roadmap({
                   [t.roadmap.metricLabels.research, active.stats[1]],
                   [t.roadmap.metricLabels.career, active.stats[2]]
                 ].map(([label, value]) => (
-                  <div key={label} className="rounded-2xl bg-surface-panel/90 p-4 ring-1 ring-outline">
+                  <div key={label} className="rounded-neo-sm border-2 border-neo-ink bg-neo-white p-4 shadow-neo-xs">
                     <div className="text-xs uppercase tracking-[0.16em] text-ink-muted">{label}</div>
                     <div className="mt-2 font-display text-2xl font-semibold text-ink">{value}</div>
                   </div>
@@ -1161,7 +1161,7 @@ function SkillsShowcase({ t }: { t: Content }) {
       nextLabel={t.analytics.eyebrow}
     >
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="glass relative min-h-[460px] overflow-hidden rounded-[2rem] p-5">
+          <div className="glass relative min-h-[460px] overflow-hidden rounded-neo-lg p-5">
             <div className="absolute left-[12%] top-[57%] h-px w-[72%] rotate-[-19deg] bg-brand-green/38" />
             <div className="absolute left-[15%] top-[60%] h-px w-[66%] rotate-[18deg] bg-brand-cyan/28" />
             <div className="absolute left-[28%] top-[52%] h-px w-[48%] rotate-[-49deg] bg-brand-coral/24" />
@@ -1175,8 +1175,8 @@ function SkillsShowcase({ t }: { t: Content }) {
                 className="absolute w-28 -translate-x-1/2 -translate-y-1/2"
                 style={{ left: node.x, top: node.y }}
               >
-                <div className="rounded-2xl border border-brand-green/16 bg-surface-panel/90 p-3 text-center shadow-glow-green backdrop-blur">
-                  <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-green/14 text-signal-green ring-1 ring-brand-green/22">
+                <div className="rounded-neo border-2 border-neo-ink bg-neo-mint p-3 text-center shadow-neo-sm">
+                  <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-white text-neo-ink">
                     <Network className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div className="text-sm font-semibold text-ink">{node.name}</div>
@@ -1189,7 +1189,7 @@ function SkillsShowcase({ t }: { t: Content }) {
           </div>
           <div className="space-y-3">
             {t.skills.skills.map((item, index) => (
-              <div key={item} className="flex items-center justify-between rounded-2xl border border-outline bg-surface-warm p-4">
+              <div key={item} className="flex items-center justify-between rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-xs">
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-green/10 text-signal-green ring-1 ring-brand-green/18">
                     <Code2 className="h-4 w-4" aria-hidden="true" />
@@ -1219,20 +1219,16 @@ function Features({ t }: { t: Content }) {
               viewport={{ once: true }}
               transition={{ delay: index * 0.04, duration: 0.42 }}
               className={cn(
-                "group rounded-2xl border p-5 transition-colors duration-200",
-                index % 4 === 0 && "border-brand-cyan/18 bg-brand-cyan/10 hover:border-brand-bright/38",
-                index % 4 === 1 && "border-brand-coral/18 bg-brand-coral/15 hover:border-brand-coral/38",
-                index % 4 === 2 && "border-brand-green/18 bg-brand-green/15 hover:border-brand-green/38",
-                index % 4 === 3 && "border-brand-orange/18 bg-brand-orange/15 hover:border-brand-orange/38"
+                "group rounded-neo border-2 border-neo-ink p-5 shadow-neo-sm transition-[box-shadow,transform] hover:-translate-y-1 hover:shadow-neo-lg",
+                index % 4 === 0 && "bg-neo-sky",
+                index % 4 === 1 && "bg-neo-coral",
+                index % 4 === 2 && "bg-neo-mint",
+                index % 4 === 3 && "bg-neo-yellow"
               )}
             >
               <div
                 className={cn(
-                  "mb-6 flex h-12 w-12 items-center justify-center rounded-xl ring-1 transition-colors",
-                  index % 4 === 0 && "bg-brand-cyan/16 text-signal-cyan ring-brand-bright/22",
-                  index % 4 === 1 && "bg-brand-coral/16 text-signal-red ring-brand-coral/22",
-                  index % 4 === 2 && "bg-brand-green/16 text-signal-green ring-brand-green/22",
-                  index % 4 === 3 && "bg-brand-orange/16 text-signal-orange ring-brand-orange/22"
+                  "mb-6 flex h-12 w-12 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-white text-neo-ink shadow-neo-xs"
                 )}
               >
                 <feature.icon className="h-5 w-5" aria-hidden="true" />
@@ -1394,8 +1390,8 @@ function FinalCta({ t }: { t: Content }) {
   return (
     <section id="start" className="px-4 pb-10 pt-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="glass glass-elevated relative overflow-hidden rounded-[2rem] px-6 py-16 text-center sm:px-10 lg:py-24">
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-brand-orange/18 to-transparent" />
+        <div className="glass glass-elevated relative overflow-hidden rounded-neo-lg bg-neo-yellow px-6 py-16 text-center sm:px-10 lg:py-24">
+          <div className="absolute -right-8 -top-8 h-32 w-32 rotate-12 border-neo-strong border-neo-ink bg-neo-coral" />
           <div className="relative mx-auto max-w-4xl">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-signal-orange">{t.finalCta.eyebrow}</p>
             <h2 className="font-display text-5xl font-semibold leading-tight tracking-normal text-balance text-ink sm:text-6xl">
