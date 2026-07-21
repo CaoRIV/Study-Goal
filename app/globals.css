@@ -505,92 +505,169 @@ body::after {
 
 @layer components {
   .form-input {
-    @apply h-12 w-full rounded-xl border border-cyan-700/15 bg-white/90 px-4 text-slate-900 outline-none transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-slate-500 hover:border-cyan-700/30 focus-visible:border-cyan-600/70 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-cyan-500/20;
+    display: block;
+    width: 100%;
+    height: 3rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius);
+    outline: none;
+    background: var(--neo-white);
+    box-shadow: var(--neo-shadow-xs);
+    color: var(--neo-ink);
+    font-weight: 600;
+    transition:
+      background-color var(--neo-duration-fast) var(--neo-ease-out),
+      box-shadow var(--neo-duration-fast) var(--neo-ease-out),
+      transform var(--neo-duration-fast) var(--neo-ease-out);
+  }
+
+  .form-input::placeholder {
+    color: #78716c;
+    opacity: 1;
+  }
+
+  .form-input:hover:not(:disabled) {
+    background: var(--neo-paper);
+    box-shadow: var(--neo-shadow-sm);
+  }
+
+  .form-input:focus-visible {
+    border-color: var(--neo-border-color);
+    background: var(--neo-white);
+    box-shadow: var(--neo-focus-ring);
+  }
+
+  .form-input:disabled {
+    cursor: not-allowed;
+    background: var(--neo-canvas);
+    box-shadow: none;
+    opacity: 0.58;
   }
 
   .workspace-nav-link {
-    @apply inline-flex h-9 items-center justify-center rounded-full px-3 text-sm font-medium text-slate-700 transition-[background-color,color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-cyan-600/10 hover:text-cyan-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500;
+    display: inline-flex;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius-sm);
+    background: var(--neo-white);
+    box-shadow: var(--neo-shadow-xs);
+    color: var(--neo-ink);
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+    transition:
+      background-color var(--neo-duration-fast) var(--neo-ease-out),
+      box-shadow var(--neo-duration-fast) var(--neo-ease-out),
+      color var(--neo-duration-fast) var(--neo-ease-out),
+      transform var(--neo-duration-fast) var(--neo-ease-out);
+  }
+
+  .workspace-nav-link:hover {
+    background: var(--neo-yellow);
+    box-shadow: var(--neo-shadow-sm);
+    color: var(--neo-ink);
+    transform: translate(-1px, -1px);
+  }
+
+  .workspace-nav-link[aria-current="page"] {
+    background: var(--neo-primary);
+    box-shadow: var(--neo-shadow-sm);
+    color: var(--neo-white);
+  }
+
+  .workspace-nav-link[aria-current="page"]:hover {
+    background: var(--neo-primary-strong);
+    color: var(--neo-white);
+  }
+
+  .workspace-nav-link:focus-visible {
+    outline: none;
+    box-shadow: var(--neo-focus-ring);
+  }
+
+  .workspace-nav-link:active {
+    box-shadow: var(--neo-shadow-pressed);
+    transform: translate(2px, 2px);
   }
 
   .study-list-item {
-    @apply rounded-xl border border-cyan-800/10 bg-white/85 p-3.5 transition-colors duration-200 hover:border-cyan-800/20 hover:bg-slate-50;
+    padding: 0.875rem;
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius);
+    background: var(--neo-white);
+    box-shadow: var(--neo-shadow-xs);
+    transition:
+      background-color var(--neo-duration-fast) var(--neo-ease-out),
+      box-shadow var(--neo-duration-fast) var(--neo-ease-out);
+  }
+
+  .study-list-item:hover {
+    background: var(--neo-paper);
+    box-shadow: var(--neo-shadow-sm);
   }
 
   .workspace-panel {
     position: relative;
-    border: 1px solid rgba(187, 215, 224, 0.88);
-    border-radius: 1rem;
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86)),
-      rgba(255, 255, 255, 0.86);
-    box-shadow:
-      0 18px 54px rgba(8, 47, 73, 0.08),
-      0 2px 8px rgba(15, 23, 42, 0.035),
-      inset 0 1px 0 rgba(255, 255, 255, 0.86);
-    backdrop-filter: blur(18px) saturate(1.12);
+    border: var(--neo-border-width-strong) solid var(--neo-border-color);
+    border-radius: var(--neo-radius-lg);
+    background: var(--neo-white);
+    box-shadow: var(--neo-shadow-lg);
   }
 
   .workspace-panel-muted {
     position: relative;
-    border: 1px solid rgba(187, 215, 224, 0.82);
-    border-radius: 1rem;
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.76), rgba(241, 245, 249, 0.86)),
-      rgba(248, 250, 252, 0.82);
-    box-shadow:
-      0 14px 42px rgba(8, 47, 73, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(14px);
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius-lg);
+    background: var(--neo-canvas);
+    box-shadow: var(--neo-shadow-sm);
   }
 
   .workspace-card {
-    border: 1px solid rgba(187, 215, 224, 0.84);
-    border-radius: 0.875rem;
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.82));
-    box-shadow:
-      0 14px 36px rgba(8, 47, 73, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.76);
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius);
+    background: var(--neo-paper);
+    box-shadow: var(--neo-shadow-sm);
   }
 
   .workspace-card-muted {
-    border: 1px solid rgba(187, 215, 224, 0.78);
-    border-radius: 0.875rem;
-    background:
-      linear-gradient(145deg, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.76));
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.68);
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius);
+    background: var(--neo-canvas);
+    box-shadow: var(--neo-shadow-xs);
   }
 
   .workspace-form {
-    border: 1px solid rgba(187, 215, 224, 0.88);
-    border-radius: 1rem;
-    background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.86));
-    box-shadow:
-      0 18px 54px rgba(8, 47, 73, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(18px);
+    border: var(--neo-border-width-strong) solid var(--neo-border-color);
+    border-radius: var(--neo-radius-lg);
+    background: var(--neo-paper);
+    box-shadow: var(--neo-shadow-lg);
   }
 
   .workspace-empty {
-    border: 1px dashed rgba(14, 116, 144, 0.22);
-    border-radius: 1rem;
-    background:
-      linear-gradient(145deg, rgba(248, 250, 252, 0.9), rgba(236, 254, 255, 0.54));
+    border: var(--neo-border-width-strong) dashed var(--neo-border-color);
+    border-radius: var(--neo-radius-lg);
+    background: var(--neo-paper);
   }
 
   .workspace-status-pill {
-    border: 1px solid rgba(14, 116, 144, 0.14);
-    border-radius: 999px;
-    background: rgba(14, 116, 144, 0.07);
-    color: var(--brand-cyan);
+    border: var(--neo-border-width) solid var(--neo-border-color);
+    border-radius: var(--neo-radius-pill);
+    background: var(--neo-mint);
+    box-shadow: var(--neo-shadow-xs);
+    color: var(--neo-ink);
+    font-weight: 800;
   }
 
   .workspace-header {
-    border-radius: 1.25rem;
-    box-shadow:
-      0 20px 70px rgba(8, 47, 73, 0.11),
-      0 1px 0 rgba(255, 255, 255, 0.76) inset;
+    border-radius: var(--neo-radius-lg);
+    box-shadow: var(--neo-shadow);
   }
 }
 

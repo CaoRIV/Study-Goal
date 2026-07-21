@@ -81,11 +81,7 @@ export function WorkspaceHeader({
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={cn(
-                  "workspace-nav-link",
-                  active &&
-                    "bg-slate-950 text-white shadow-[0_12px_30px_rgba(8,47,73,0.18)] ring-1 ring-slate-900/5 hover:bg-slate-900 hover:text-white"
-                )}
+                className="workspace-nav-link"
               >
                 {compactLabels[item.labelKey]}
               </a>

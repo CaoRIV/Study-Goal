@@ -602,7 +602,7 @@ function GoalCard({
   const nextMilestone = milestones.find((milestone) => milestone.status !== "completed");
 
   return (
-    <article className="workspace-card p-4 transition-colors hover:border-cyan-700/24">
+                  <article className="workspace-card p-4">
       {isEditing ? (
         <div className="space-y-3">
           <Input label={copy.form.titleLabel} value={draft.title} onChange={(value) => setDraft((current) => ({ ...current, title: value }))} placeholder={copy.form.titlePlaceholder} />
