@@ -10,6 +10,23 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        neo: {
+          ink: "var(--neo-ink)",
+          "ink-muted": "var(--neo-ink-muted)",
+          paper: "var(--neo-paper)",
+          canvas: "var(--neo-canvas)",
+          white: "var(--neo-white)",
+          primary: "var(--neo-primary)",
+          "primary-strong": "var(--neo-primary-strong)",
+          action: "var(--neo-action)",
+          yellow: "var(--neo-yellow)",
+          mint: "var(--neo-mint)",
+          coral: "var(--neo-coral)",
+          sky: "var(--neo-sky)",
+          success: "var(--neo-success)",
+          warning: "var(--neo-warning)",
+          danger: "var(--neo-danger)"
+        },
         brand: {
           navy: "#0F172A",
           cyan: "#0E7490",
@@ -69,13 +86,66 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-body)", "ui-sans-serif", "system-ui"],
-        display: ["var(--font-display)", "ui-sans-serif", "system-ui"]
+        display: ["var(--font-display)", "ui-sans-serif", "system-ui"],
+        "neo-body": ["var(--font-neo-body)", "ui-sans-serif", "system-ui"],
+        "neo-display": ["var(--font-neo-display)", "ui-sans-serif", "system-ui"]
+      },
+      fontWeight: {
+        neo: "800",
+        "neo-heavy": "900"
+      },
+      letterSpacing: {
+        neo: "-0.025em",
+        "neo-wide": "0.08em"
+      },
+      borderColor: {
+        neo: "var(--neo-border-color)"
+      },
+      borderWidth: {
+        neo: "var(--neo-border-width)",
+        "neo-strong": "var(--neo-border-width-strong)"
+      },
+      borderRadius: {
+        "neo-none": "var(--neo-radius-none)",
+        "neo-sm": "var(--neo-radius-sm)",
+        neo: "var(--neo-radius)",
+        "neo-lg": "var(--neo-radius-lg)",
+        "neo-pill": "var(--neo-radius-pill)"
       },
       boxShadow: {
+        "neo-xs": "var(--neo-shadow-xs)",
+        "neo-sm": "var(--neo-shadow-sm)",
+        neo: "var(--neo-shadow)",
+        "neo-lg": "var(--neo-shadow-lg)",
+        "neo-xl": "var(--neo-shadow-xl)",
+        "neo-pressed": "var(--neo-shadow-pressed)",
+        "neo-focus": "var(--neo-focus-ring)",
         "glow-blue": "0 18px 54px rgba(14, 116, 144, 0.12)",
         "glow-orange": "0 18px 48px rgba(180, 83, 9, 0.12)",
         "glow-coral": "0 18px 48px rgba(190, 18, 60, 0.1)",
         "glow-green": "0 18px 46px rgba(4, 120, 87, 0.1)"
+      },
+      outlineColor: {
+        neo: "var(--neo-ink)"
+      },
+      outlineWidth: {
+        neo: "3px"
+      },
+      transitionDuration: {
+        "neo-fast": "var(--neo-duration-fast)",
+        neo: "var(--neo-duration)",
+        "neo-slow": "var(--neo-duration-slow)"
+      },
+      transitionTimingFunction: {
+        "neo-out": "var(--neo-ease-out)",
+        "neo-in": "var(--neo-ease-in)"
+      },
+      backgroundImage: {
+        "neo-grid":
+          "linear-gradient(var(--neo-ink) 1px, transparent 1px), linear-gradient(90deg, var(--neo-ink) 1px, transparent 1px)"
+      },
+      backgroundSize: {
+        "neo-grid": "32px 32px"
       },
       animation: {
         "marquee-slow": "marquee 32s linear infinite",
