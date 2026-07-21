@@ -88,7 +88,7 @@ export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
         ref={dialogRef}
         aria-labelledby="confirm-dialog-title"
         aria-describedby="confirm-dialog-description"
-        className="fixed inset-0 m-auto w-[calc(100vw_-_2rem)] max-w-md overflow-visible bg-transparent p-0 text-ink backdrop:bg-brand-navy/35 backdrop:backdrop-blur-sm"
+        className="fixed inset-0 m-auto w-[calc(100vw_-_2rem)] max-w-md overflow-visible bg-transparent p-0 text-neo-ink backdrop:bg-black/55"
         onCancel={(event) => {
           event.preventDefault();
           close(false);
@@ -98,47 +98,39 @@ export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
         }}
       >
         {pending ? (
-          <div className="relative overflow-hidden rounded-[2rem] border border-brand-coral/30 bg-surface-panel p-6 shadow-[0_32px_100px_rgba(15,23,42,0.24)] sm:p-7">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -right-20 -top-24 h-56 w-56 rounded-full bg-brand-coral-soft/60 blur-3xl"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute -bottom-24 -left-20 h-52 w-52 rounded-full bg-brand-cyan/10 blur-3xl"
-            />
-
-            <div className="relative">
+          <div className="relative rounded-neo-lg border-neo-strong border-neo-ink bg-neo-paper p-6 shadow-neo-xl sm:p-7">
+            <div>
               <div className="flex items-start justify-between gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-coral-soft/65 text-signal-red ring-1 ring-brand-coral/25">
+                <div className="flex h-12 w-12 items-center justify-center rounded-neo border-neo-strong border-neo-ink bg-neo-coral text-neo-ink shadow-neo-sm">
                   <AlertTriangle className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <button
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="icon-sm"
                   onClick={() => close(false)}
-                  className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors duration-200 hover:bg-brand-coral-soft/45 hover:text-signal-red focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
                   aria-label={language === "vi" ? "Đóng" : "Close"}
                 >
                   <X className="h-4 w-4" aria-hidden="true" />
-                </button>
+                </Button>
               </div>
 
-              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-red">
+              <p className="mt-6 text-xs font-extrabold uppercase tracking-neo-wide text-neo-danger">
                 {copy.eyebrow}
               </p>
               <h2
                 id="confirm-dialog-title"
-                className="mt-2 font-display text-2xl font-semibold leading-tight text-ink"
+                className="mt-2 font-neo-display text-2xl font-neo-heavy leading-tight tracking-neo text-neo-ink"
               >
                 {copy.title}
               </h2>
               <p
                 id="confirm-dialog-description"
-                className="mt-3 text-base leading-7 text-ink-muted"
+                className="mt-3 text-base font-medium leading-7 text-neo-ink-muted"
               >
                 {pending.description}
               </p>
-              <p className="mt-3 text-sm font-medium text-signal-red">
+              <p className="mt-3 text-sm font-bold text-neo-danger">
                 {copy.warning}
               </p>
 
@@ -152,14 +144,15 @@ export function ConfirmDialogProvider({ children }: { children: ReactNode }) {
                 >
                   {copy.cancel}
                 </Button>
-                <button
+                <Button
                   type="button"
+                  variant="destructive"
                   onClick={() => close(true)}
-                  className="inline-flex h-11 min-w-28 cursor-pointer items-center justify-center gap-2 rounded-full bg-brand-deep-red px-6 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(153,27,27,0.2)] transition-colors duration-200 hover:bg-red-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-coral focus-visible:ring-offset-2 focus-visible:ring-offset-white active:bg-red-900"
+                  className="min-w-28"
                 >
                   <Trash2 className="h-4 w-4" aria-hidden="true" />
                   {copy.confirm}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
