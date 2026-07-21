@@ -834,3 +834,34 @@ body::after {
 .neo-grades .workspace-page-hero::before {
   display: none;
 }
+
+.neo-dashboard .command-layer-card:nth-child(4n + 1) {
+  background: var(--neo-sky);
+}
+
+.neo-dashboard .command-layer-card:nth-child(4n + 2) {
+  background: var(--neo-coral);
+}
+
+.neo-dashboard .command-layer-card:nth-child(4n + 3) {
+  background: var(--neo-mint);
+}
+
+.neo-dashboard .command-layer-card:nth-child(4n) {
+  background: var(--neo-paper);
+}
+
+.neo-grades .academic-summary-card-sky,
+.neo-grades .academic-intelligence-card:nth-child(1) {
+  background: var(--neo-sky);
+}
+
+.neo-grades .academic-summary-card-mint,
+.neo-grades .academic-intelligence-card:nth-child(2) {
+  background: var(--neo-mint);
+}
+
+.neo-grades .academic-summary-card-coral,
+.neo-grades .academic-intelligence-card:nth-child(3) {
+  background: var(--neo-coral);
+}

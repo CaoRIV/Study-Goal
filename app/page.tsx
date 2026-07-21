@@ -577,8 +577,16 @@ function Hero({ t }: { t: Content }) {
             </Button>
           </div>
           <div className="mt-10 grid max-w-xl grid-cols-3 gap-3">
-            {t.hero.stats.map(([value, label]) => (
-              <div key={label} className="glass-soft rounded-neo-sm px-4 py-3">
+            {t.hero.stats.map(([value, label], index) => (
+              <div
+                key={label}
+                className={cn(
+                  "rounded-neo-sm border-2 border-neo-ink px-4 py-3 shadow-neo-sm",
+                  index === 0 && "bg-neo-sky",
+                  index === 1 && "bg-neo-yellow",
+                  index === 2 && "bg-neo-mint"
+                )}
+              >
                 <div className="font-display text-2xl font-black text-neo-ink">{value}</div>
                 <div className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-neo-ink-muted">{label}</div>
               </div>
@@ -933,7 +941,13 @@ function Problem({ t }: { t: Content }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.45 }}
-              className="group rounded-neo border-2 border-neo-ink bg-neo-white p-5 shadow-neo-sm transition-[box-shadow,transform] hover:-translate-y-1 hover:shadow-neo"
+              className={cn(
+                "group rounded-neo border-2 border-neo-ink p-5 shadow-neo-sm transition-[box-shadow,transform] hover:-translate-y-1 hover:shadow-neo",
+                index % 4 === 0 && "bg-neo-coral",
+                index % 4 === 1 && "bg-neo-sky",
+                index % 4 === 2 && "bg-neo-yellow",
+                index % 4 === 3 && "bg-neo-mint"
+              )}
             >
               <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-cyan/10 text-signal-cyan ring-1 ring-brand-cyan/16 transition-colors group-hover:bg-brand-cyan/14">
                 <problem.icon className="h-5 w-5" aria-hidden="true" />
@@ -967,7 +981,14 @@ function Solution({ t }: { t: Content }) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.06, duration: 0.45 }}
-                className="glass-soft flex items-center justify-between rounded-2xl p-4"
+                className={cn(
+                  "flex items-center justify-between rounded-neo border-2 border-neo-ink p-4 shadow-neo-sm",
+                  index === 0 && "bg-neo-sky",
+                  index === 1 && "bg-neo-mint",
+                  index === 2 && "bg-neo-coral",
+                  index === 3 && "bg-neo-yellow",
+                  index === 4 && "bg-neo-paper"
+                )}
               >
                 <div className="flex items-center gap-4">
                   <div
@@ -1012,7 +1033,15 @@ function Solution({ t }: { t: Content }) {
               </div>
               <div className="grid gap-4 sm:grid-cols-3">
                 {t.solution.miniCards.map((label, index) => (
-                  <div key={label} className="rounded-2xl border border-outline bg-surface-warm p-4">
+                  <div
+                    key={label}
+                    className={cn(
+                      "rounded-neo border-2 border-neo-ink p-4 shadow-neo-xs",
+                      index === 0 && "bg-neo-sky",
+                      index === 1 && "bg-neo-coral",
+                      index === 2 && "bg-neo-mint"
+                    )}
+                  >
                     <div className="text-sm text-ink-muted">{label}</div>
               <div className="mt-3 h-28 rounded-xl bg-gradient-to-b from-brand-cyan/18 to-brand-coral-soft/38 p-3">
                       <div className="flex h-full items-end gap-2">
