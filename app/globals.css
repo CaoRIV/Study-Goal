@@ -3,8 +3,57 @@
 @tailwind utilities;
 
 :root {
-  --font-display: var(--font-geist-sans);
-  --font-body: var(--font-geist-sans);
+  /* Neubrutalism typography aliases. Keep the bundled Geist font as the
+     migration-safe fallback; the aliases let us swap the family globally. */
+  --font-neo-display: var(--font-geist-sans);
+  --font-neo-body: var(--font-geist-sans);
+  --font-display: var(--font-neo-display);
+  --font-body: var(--font-neo-body);
+
+  /* Neubrutalism color system */
+  --neo-ink: #111111;
+  --neo-ink-muted: #44403c;
+  --neo-paper: #fffdf5;
+  --neo-canvas: #f3f0e8;
+  --neo-white: #ffffff;
+  --neo-primary: #6366f1;
+  --neo-primary-strong: #4f46e5;
+  --neo-action: #f97316;
+  --neo-yellow: #ffd84d;
+  --neo-mint: #4ecdc4;
+  --neo-coral: #ff6b6b;
+  --neo-sky: #60a5fa;
+  --neo-success: #16a34a;
+  --neo-warning: #ca8a04;
+  --neo-danger: #dc2626;
+
+  /* Neubrutalism structure */
+  --neo-border-color: var(--neo-ink);
+  --neo-border-width: 2px;
+  --neo-border-width-strong: 3px;
+  --neo-radius-none: 0;
+  --neo-radius-sm: 0.25rem;
+  --neo-radius: 0.5rem;
+  --neo-radius-lg: 0.75rem;
+  --neo-radius-pill: 999px;
+
+  /* Hard shadows: no blur, one consistent light direction */
+  --neo-shadow-color: var(--neo-ink);
+  --neo-shadow-xs: 2px 2px 0 var(--neo-shadow-color);
+  --neo-shadow-sm: 3px 3px 0 var(--neo-shadow-color);
+  --neo-shadow: 4px 4px 0 var(--neo-shadow-color);
+  --neo-shadow-lg: 6px 6px 0 var(--neo-shadow-color);
+  --neo-shadow-xl: 8px 8px 0 var(--neo-shadow-color);
+  --neo-shadow-pressed: 1px 1px 0 var(--neo-shadow-color);
+  --neo-focus-ring: 0 0 0 3px var(--neo-yellow), 0 0 0 5px var(--neo-ink);
+
+  /* Responsive micro-interactions */
+  --neo-duration-fast: 150ms;
+  --neo-duration: 200ms;
+  --neo-duration-slow: 300ms;
+  --neo-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --neo-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+
   --brand-navy: #0f172a;
   --brand-cyan: #0e7490;
   --brand-cyan-bright: #0891b2;
