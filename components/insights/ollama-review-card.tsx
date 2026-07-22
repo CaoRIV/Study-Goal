@@ -64,10 +64,9 @@ export function OllamaReviewCard({ language }: { language: Language }) {
   }
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-emerald-700/14 bg-white/90 p-6 shadow-[0_24px_80px_rgba(16,185,129,0.1)] backdrop-blur-xl">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-green via-brand-cyan to-brand-orange" />
-      <div className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-emerald-300/18 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 left-1/4 h-56 w-56 rounded-full bg-cyan-300/12 blur-3xl" />
+    <section className="neo-ollama-card relative overflow-hidden rounded-neo-lg border-neo-strong border-neo-ink bg-neo-mint p-6 shadow-neo-xl">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-2 border-b-2 border-neo-ink bg-neo-primary" />
+      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rotate-12 border-2 border-neo-ink bg-neo-yellow" />
       <div className="relative grid gap-6 lg:grid-cols-[0.48fr_1.52fr]">
         <div className="flex flex-col justify-between gap-8">
           <div>

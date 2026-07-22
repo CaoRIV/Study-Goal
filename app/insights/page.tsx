@@ -181,7 +181,7 @@ export default async function InsightsPage() {
   const visibleCategories = Array.from(new Set(recommendations.map((recommendation) => recommendation.category)));
 
   return (
-    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-app neo-insights workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <WorkspaceHeader
           language={language}
@@ -213,7 +213,7 @@ export default async function InsightsPage() {
 
         <section className="mt-10">
           <div className="mb-5 flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-300/12 text-signal-cyan ring-1 ring-cyan-200/20">
+            <div className="flex h-11 w-11 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-yellow text-neo-ink shadow-neo-xs">
               <Lightbulb className="h-5 w-5" aria-hidden="true" />
             </div>
             <h2 className="font-display text-3xl font-semibold text-ink">{t.primary}</h2>
@@ -231,7 +231,7 @@ export default async function InsightsPage() {
         </section>
 
         <section className="mt-10 grid gap-5 xl:grid-cols-[0.58fr_1.42fr]">
-          <aside className="rounded-[2rem] border border-cyan-800/10 bg-white/86 p-6 shadow-[0_22px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl">
+          <aside className="rounded-neo-lg border-neo-strong border-neo-ink bg-neo-sky p-6 shadow-neo-lg">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">
               {t.secondary}
             </p>
@@ -244,7 +244,7 @@ export default async function InsightsPage() {
                 return (
                   <div
                     key={category}
-                    className="flex items-center justify-between gap-4 rounded-2xl border border-cyan-900/8 bg-brand-paper/90 px-4 py-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.75)] transition-colors duration-200 hover:border-cyan-800/16 hover:bg-white"
+                    className="flex items-center justify-between gap-4 rounded-neo border-2 border-neo-ink bg-neo-white px-4 py-3.5 shadow-neo-xs transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-neo-sm"
                   >
                     <div className="flex items-center gap-3">
                       <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl ring-1", styles.icon)}>
@@ -267,7 +267,7 @@ export default async function InsightsPage() {
 
 function SignalPill({ icon: Icon, label }: { icon: typeof Sparkles; label: string }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-cyan-800/10 bg-white/82 px-4 py-2 text-sm font-semibold text-ink shadow-[0_10px_30px_rgba(8,145,178,0.08)]">
+    <span className="neo-signal-pill inline-flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-white px-4 py-2 text-sm font-black text-neo-ink shadow-neo-xs">
       <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
       {label}
     </span>
@@ -276,7 +276,7 @@ function SignalPill({ icon: Icon, label }: { icon: typeof Sparkles; label: strin
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[1.5rem] border border-cyan-800/10 bg-white/86 p-5 shadow-[0_18px_55px_rgba(8,145,178,0.08)] backdrop-blur-xl">
+    <div className="neo-insight-stat rounded-neo border-2 border-neo-ink bg-neo-white p-5 shadow-neo-sm">
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</p>
       <p className="mt-4 font-display text-4xl font-semibold text-ink">{value}</p>
     </div>
@@ -296,7 +296,7 @@ function RecommendationCard({
   const styles = categoryStyles[recommendation.category];
 
   return (
-    <article className={cn("group relative overflow-hidden rounded-[1.5rem] border p-5 transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_26px_70px_rgba(15,23,42,0.1)]", styles.card)}>
+    <article className={cn("neo-recommendation group relative overflow-hidden rounded-neo border-2 border-neo-ink p-5 shadow-neo-sm transition-[box-shadow,transform] duration-200 hover:-translate-y-1 hover:shadow-neo-lg", styles.card)}>
       <div className={cn("absolute inset-x-0 top-0 h-1", styles.bar)} />
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
