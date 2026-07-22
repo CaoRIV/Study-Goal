@@ -865,3 +865,234 @@ body::after {
 .neo-grades .academic-intelligence-card:nth-child(3) {
   background: var(--neo-coral);
 }
+
+/* Remaining application routes share this scoped Neubrutalism layer. */
+.neo-app.workspace-shell,
+.neo-auth,
+.neo-onboarding {
+  background-color: var(--neo-canvas);
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.neo-app.workspace-shell::before,
+.neo-app.workspace-shell::after {
+  display: none;
+}
+
+.neo-app .workspace-page-hero {
+  border: var(--neo-border-width-strong) solid var(--neo-border-color);
+  border-radius: var(--neo-radius-lg);
+  background: var(--neo-yellow);
+  box-shadow: var(--neo-shadow-xl);
+  backdrop-filter: none;
+}
+
+.neo-app .workspace-page-hero::before {
+  display: none;
+}
+
+.neo-app .workspace-page-hero h1 {
+  color: var(--neo-ink);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+.neo-app .workspace-page-hero > p:first-child,
+.neo-app .workspace-page-hero > div:first-child > p:first-child {
+  display: inline-flex;
+  width: fit-content;
+  border: var(--neo-border-width) solid var(--neo-border-color);
+  border-radius: var(--neo-radius-sm);
+  background: var(--neo-white);
+  padding: 0.375rem 0.75rem;
+  color: var(--neo-ink);
+  box-shadow: var(--neo-shadow-xs);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.neo-roadmap .workspace-page-hero,
+.neo-portfolio .workspace-page-hero {
+  background: var(--neo-sky);
+}
+
+.neo-goals .workspace-page-hero,
+.neo-clubs .workspace-page-hero {
+  background: var(--neo-coral);
+}
+
+.neo-skills .workspace-page-hero,
+.neo-profile .workspace-page-hero {
+  background: var(--neo-mint);
+}
+
+.neo-career .workspace-page-hero,
+.neo-insights .workspace-page-hero {
+  background: var(--neo-yellow);
+}
+
+.neo-app .workspace-card {
+  transition:
+    transform var(--neo-duration) var(--neo-ease-out),
+    box-shadow var(--neo-duration) var(--neo-ease-out);
+}
+
+.neo-app .workspace-card:hover {
+  box-shadow: var(--neo-shadow-lg);
+  transform: translate(-2px, -2px);
+}
+
+.neo-app .workspace-card:nth-child(4n + 1) {
+  background: var(--neo-sky);
+}
+
+.neo-app .workspace-card:nth-child(4n + 2) {
+  background: var(--neo-mint);
+}
+
+.neo-app .workspace-card:nth-child(4n + 3) {
+  background: var(--neo-coral);
+}
+
+.neo-app .workspace-card:nth-child(4n) {
+  background: var(--neo-yellow);
+}
+
+.neo-app .workspace-empty {
+  background: var(--neo-paper);
+}
+
+.neo-roadmap .roadmap-year-card {
+  border: var(--neo-border-width-strong) solid var(--neo-border-color);
+  border-radius: var(--neo-radius-lg);
+  background: var(--neo-paper);
+  box-shadow: var(--neo-shadow-lg);
+  backdrop-filter: none;
+  transform: none;
+}
+
+.neo-roadmap .roadmap-year-card:nth-child(4n + 1) {
+  background: var(--neo-sky);
+}
+
+.neo-roadmap .roadmap-year-card:nth-child(4n + 2) {
+  background: var(--neo-mint);
+}
+
+.neo-roadmap .roadmap-year-card:nth-child(4n + 3) {
+  background: var(--neo-coral);
+}
+
+.neo-roadmap .roadmap-year-card:nth-child(4n) {
+  background: var(--neo-yellow);
+}
+
+.neo-roadmap .roadmap-year-card::before {
+  display: none;
+}
+
+.neo-roadmap .roadmap-year-card:hover {
+  border-color: var(--neo-border-color);
+  box-shadow: var(--neo-shadow-xl);
+  transform: translate(-2px, -2px);
+}
+
+.neo-roadmap .roadmap-metric-card,
+.neo-roadmap .roadmap-term-card,
+.neo-roadmap .roadmap-goal-panel {
+  border: var(--neo-border-width) solid var(--neo-border-color);
+  border-radius: var(--neo-radius);
+  background: var(--neo-white);
+  box-shadow: var(--neo-shadow-sm);
+  backdrop-filter: none;
+}
+
+.neo-roadmap .roadmap-metric-card:nth-child(4n + 1) {
+  background: var(--neo-yellow);
+}
+
+.neo-roadmap .roadmap-metric-card:nth-child(4n + 2) {
+  background: var(--neo-coral);
+}
+
+.neo-roadmap .roadmap-metric-card:nth-child(4n + 3) {
+  background: var(--neo-mint);
+}
+
+.neo-roadmap .roadmap-metric-card:nth-child(4n) {
+  background: var(--neo-white);
+}
+
+.neo-insights .neo-insight-stat:nth-child(3n + 1) {
+  background: var(--neo-sky);
+}
+
+.neo-insights .neo-insight-stat:nth-child(3n + 2) {
+  background: var(--neo-coral);
+}
+
+.neo-insights .neo-insight-stat:nth-child(3n) {
+  background: var(--neo-mint);
+}
+
+.neo-insights .neo-recommendation:nth-child(4n + 1) {
+  background: var(--neo-sky);
+}
+
+.neo-insights .neo-recommendation:nth-child(4n + 2) {
+  background: var(--neo-mint);
+}
+
+.neo-insights .neo-recommendation:nth-child(4n + 3) {
+  background: var(--neo-coral);
+}
+
+.neo-insights .neo-recommendation:nth-child(4n) {
+  background: var(--neo-yellow);
+}
+
+.neo-auth .neo-auth-stat:nth-child(3n + 1) {
+  background: var(--neo-yellow);
+}
+
+.neo-auth .neo-auth-stat:nth-child(3n + 2) {
+  background: var(--neo-coral);
+}
+
+.neo-auth .neo-auth-stat:nth-child(3n) {
+  background: var(--neo-mint);
+}
+
+.neo-onboarding .workspace-form {
+  background: var(--neo-sky);
+}
+
+.neo-app input:not([type="checkbox"]):not([type="radio"]),
+.neo-app select,
+.neo-app textarea {
+  border: var(--neo-border-width) solid var(--neo-border-color);
+  border-radius: var(--neo-radius-sm);
+  background: var(--neo-white);
+  color: var(--neo-ink);
+  box-shadow: var(--neo-shadow-xs);
+}
+
+.neo-app input:not([type="checkbox"]):not([type="radio"]):focus,
+.neo-app select:focus,
+.neo-app textarea:focus {
+  border-color: var(--neo-border-color);
+  outline: none;
+  box-shadow: var(--neo-focus-ring);
+}
+
+.neo-app [class~="rounded-2xl"][class~="border"] {
+  border-width: var(--neo-border-width);
+  border-color: var(--neo-border-color);
+  border-radius: var(--neo-radius);
+  box-shadow: var(--neo-shadow-xs);
+  backdrop-filter: none;
+}

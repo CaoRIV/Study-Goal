@@ -209,7 +209,7 @@ export default async function SkillsPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-app neo-skills workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <div className="mb-8">
           <WorkspaceHeader

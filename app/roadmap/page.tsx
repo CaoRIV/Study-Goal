@@ -223,7 +223,7 @@ export default async function RoadmapPage() {
   });
 
   return (
-    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-app neo-roadmap workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
           <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />

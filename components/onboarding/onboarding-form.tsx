@@ -103,14 +103,14 @@ export function OnboardingForm({
   }
 
   return (
-    <div id="main-content" className="min-h-screen px-4 py-28 sm:px-6 lg:px-8">
+    <div id="main-content" className="neo-onboarding min-h-screen px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-700/14 bg-cyan-700/8 px-4 py-2 text-sm font-medium text-signal-cyan">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-4 py-2 text-sm font-black text-neo-ink shadow-neo-xs">
             <Sparkles className="h-4 w-4" aria-hidden="true" />
             {copy.badge}
           </div>
-          <h1 className="font-display text-5xl font-semibold leading-tight text-ink">
+          <h1 className="font-display text-5xl font-black leading-[1.02] tracking-[-0.035em] text-neo-ink">
             {copy.title}
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">
@@ -134,13 +134,13 @@ export function OnboardingForm({
               required
               value={careerGoal}
               onChange={(event) => setCareerGoal(event.target.value)}
-              className="mt-2 min-h-28 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 py-3 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+              className="form-input mt-2 min-h-32 py-3"
               placeholder={copy.placeholders.careerGoal}
             />
           </label>
 
           {error ? (
-            <div className="rounded-2xl border border-red-300/20 bg-red-400/10 px-4 py-3 text-sm text-signal-red sm:col-span-2">
+            <div className="rounded-neo border-neo-strong border-neo-ink bg-neo-coral px-4 py-3 text-sm font-semibold text-neo-ink shadow-neo-sm sm:col-span-2">
               {error}
             </div>
           ) : null}
@@ -185,7 +185,7 @@ function Field({
         max={max}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="mt-2 h-12 w-full rounded-xl border border-outline bg-surface-panel/90 px-4 text-ink outline-none transition-colors placeholder:text-ink-muted focus:border-cyan-300/50"
+        className="form-input mt-2"
         placeholder={placeholder}
       />
     </label>

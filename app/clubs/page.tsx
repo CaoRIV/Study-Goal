@@ -177,7 +177,7 @@ export default async function ClubsPage() {
     .order("created_at", { ascending: false });
 
   return (
-    <main id="main-content" className="workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-app neo-clubs workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
         <div className="mb-8">
           <WorkspaceHeader language={language} subtitle={t.subtitle} languageLabel={t.languageLabel} signOutLabel={t.signOut} />
