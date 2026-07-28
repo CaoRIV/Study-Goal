@@ -361,7 +361,7 @@ export function AcademicPlanner({
       </section>
 
       <section className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr_0.9fr]">
-        <div className="academic-intelligence-card workspace-panel-muted p-5">
+        <div className="academic-intelligence-card academic-intelligence-card-sky workspace-panel-muted p-5">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm text-ink-muted">{copy.intelligence.creditProgress}</p>
@@ -375,7 +375,7 @@ export function AcademicPlanner({
           <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.graduationTarget}</p>
         </div>
 
-        <div className="academic-intelligence-card workspace-panel-muted p-5">
+        <div className="academic-intelligence-card academic-intelligence-card-mint workspace-panel-muted p-5">
           <p className="text-sm text-ink-muted">{copy.intelligence.projectedGpa}</p>
           <p className="mt-2 font-display text-3xl font-semibold text-ink">
             {projectedGpa === null ? copy.summary.unavailable : projectedGpa}
@@ -383,7 +383,7 @@ export function AcademicPlanner({
           <p className="mt-3 text-sm text-ink-muted">{copy.intelligence.targetGpa}: {targetGpa || copy.summary.unavailable}</p>
         </div>
 
-        <div className="academic-intelligence-card workspace-panel-muted p-5">
+        <div className="academic-intelligence-card academic-intelligence-card-coral workspace-panel-muted p-5">
           <p className="text-sm text-ink-muted">{copy.intelligence.simulator}</p>
           <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
             <Input label={copy.intelligence.simulatorLabel} type="number" step="0.01" min="0" max="4.3" value={simulatedGrade} onChange={setSimulatedGrade} placeholder="3.70" />

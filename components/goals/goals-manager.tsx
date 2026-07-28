@@ -648,7 +648,7 @@ function GoalCard({
                 max="100"
                 value={goal.progress}
                 onChange={(event) => onProgressChange(Number(event.target.value))}
-                className="w-full cursor-pointer accent-brand-cyan"
+                className="neo-range w-full cursor-pointer"
               />
             </div>
 
@@ -676,15 +676,17 @@ function GoalCard({
               {milestones.length === 0 ? <p className="text-sm text-ink-muted">{copy.milestones.empty}</p> : null}
               {milestones.map((milestone) => (
                 <div key={milestone.id} className="flex items-start gap-2 rounded-xl border border-outline bg-surface-panel/90 p-3">
-                  <button
+                  <Button
                     type="button"
-                    className="mt-0.5 text-signal-red"
+                    variant={milestone.status === "completed" ? "success" : "outline"}
+                    size="icon-sm"
+                    className="mt-0.5"
                     onClick={() => onMilestoneStatus(milestone.id, milestone.status === "completed" ? "todo" : "completed")}
                     disabled={isBusy}
                     aria-label={copy.milestones.completed}
                   >
                     {milestone.status === "completed" ? <CheckCircle2 className="h-4 w-4" /> : <Circle className="h-4 w-4" />}
-                  </button>
+                  </Button>
                   <div className="min-w-0 flex-1">
                     <p className={`text-sm ${milestone.status === "completed" ? "text-ink-muted line-through" : "text-ink"}`}>{milestone.title}</p>
                     <select className="mt-2 h-8 rounded-xl border border-outline bg-surface-panel/90 px-2 text-xs text-ink-muted outline-none focus:border-cyan-500/50" value={milestone.status} onChange={(event) => onMilestoneStatus(milestone.id, event.target.value)} disabled={isBusy}>
@@ -704,9 +706,9 @@ function GoalCard({
                 className="h-10 min-w-0 flex-1 rounded-xl border border-outline bg-surface-panel/90 px-3 text-sm text-ink outline-none placeholder:text-ink-muted focus:border-cyan-500/50"
                 placeholder={copy.milestones.placeholder}
               />
-              <button type="button" onClick={onCreateMilestone} disabled={isBusy || !milestoneTitle.trim()} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-orange text-slate-950 transition-colors hover:bg-orange-400 disabled:pointer-events-none disabled:opacity-50" aria-label={copy.milestones.add}>
+              <Button type="button" size="icon-sm" onClick={onCreateMilestone} disabled={isBusy || !milestoneTitle.trim()} className="h-10 w-10" aria-label={copy.milestones.add} title={copy.milestones.add}>
                 <Plus className="h-4 w-4" aria-hidden="true" />
-              </button>
+              </Button>
             </div>
           </div>
         </>
@@ -823,17 +825,16 @@ function IconButton({
   danger?: boolean;
 }) {
   return (
-    <button
+    <Button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors disabled:pointer-events-none disabled:opacity-50 ${
-        danger ? "text-ink-muted hover:bg-red-400/10 hover:text-signal-red" : "text-ink-muted hover:bg-surface-warm hover:text-ink"
-      }`}
+      variant={danger ? "destructive" : "outline"}
+      size="icon-sm"
       aria-label={label}
       title={label}
     >
       <Icon className="h-4 w-4" aria-hidden="true" />
-    </button>
+    </Button>
   );
 }

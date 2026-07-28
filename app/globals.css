@@ -835,34 +835,34 @@ body::after {
   display: none;
 }
 
-.neo-dashboard .command-layer-card:nth-child(4n + 1) {
+.neo-dashboard .command-layer-card-sky {
   background: var(--neo-sky);
 }
 
-.neo-dashboard .command-layer-card:nth-child(4n + 2) {
+.neo-dashboard .command-layer-card-coral {
   background: var(--neo-coral);
 }
 
-.neo-dashboard .command-layer-card:nth-child(4n + 3) {
+.neo-dashboard .command-layer-card-mint {
   background: var(--neo-mint);
 }
 
-.neo-dashboard .command-layer-card:nth-child(4n) {
+.neo-dashboard .command-layer-card-paper {
   background: var(--neo-paper);
 }
 
 .neo-grades .academic-summary-card-sky,
-.neo-grades .academic-intelligence-card:nth-child(1) {
+.neo-grades .academic-intelligence-card-sky {
   background: var(--neo-sky);
 }
 
 .neo-grades .academic-summary-card-mint,
-.neo-grades .academic-intelligence-card:nth-child(2) {
+.neo-grades .academic-intelligence-card-mint {
   background: var(--neo-mint);
 }
 
 .neo-grades .academic-summary-card-coral,
-.neo-grades .academic-intelligence-card:nth-child(3) {
+.neo-grades .academic-intelligence-card-coral {
   background: var(--neo-coral);
 }
 
@@ -946,20 +946,23 @@ body::after {
   transform: translate(-2px, -2px);
 }
 
-.neo-app .workspace-card:nth-child(4n + 1) {
-  background: var(--neo-sky);
-}
-
-.neo-app .workspace-card:nth-child(4n + 2) {
-  background: var(--neo-mint);
-}
-
-.neo-app .workspace-card:nth-child(4n + 3) {
+.neo-goals .workspace-card,
+.neo-portfolio .workspace-card {
   background: var(--neo-coral);
 }
 
-.neo-app .workspace-card:nth-child(4n) {
+.neo-career .workspace-card {
   background: var(--neo-yellow);
+}
+
+.neo-skills .workspace-card,
+.neo-profile .workspace-card {
+  background: var(--neo-mint);
+}
+
+.neo-clubs .workspace-card,
+.neo-insights .workspace-card {
+  background: var(--neo-sky);
 }
 
 .neo-app .workspace-empty {
@@ -975,19 +978,19 @@ body::after {
   transform: none;
 }
 
-.neo-roadmap .roadmap-year-card:nth-child(4n + 1) {
+.neo-roadmap .roadmap-tone-sky {
   background: var(--neo-sky);
 }
 
-.neo-roadmap .roadmap-year-card:nth-child(4n + 2) {
+.neo-roadmap .roadmap-tone-mint {
   background: var(--neo-mint);
 }
 
-.neo-roadmap .roadmap-year-card:nth-child(4n + 3) {
+.neo-roadmap .roadmap-tone-coral {
   background: var(--neo-coral);
 }
 
-.neo-roadmap .roadmap-year-card:nth-child(4n) {
+.neo-roadmap .roadmap-tone-yellow {
   background: var(--neo-yellow);
 }
 
@@ -1011,59 +1014,61 @@ body::after {
   backdrop-filter: none;
 }
 
-.neo-roadmap .roadmap-metric-card:nth-child(4n + 1) {
+.neo-roadmap .roadmap-metric-yellow {
   background: var(--neo-yellow);
 }
 
-.neo-roadmap .roadmap-metric-card:nth-child(4n + 2) {
+.neo-roadmap .roadmap-metric-coral {
   background: var(--neo-coral);
 }
 
-.neo-roadmap .roadmap-metric-card:nth-child(4n + 3) {
+.neo-roadmap .roadmap-metric-mint {
   background: var(--neo-mint);
 }
 
-.neo-roadmap .roadmap-metric-card:nth-child(4n) {
+.neo-roadmap .roadmap-metric-white {
   background: var(--neo-white);
 }
 
-.neo-insights .neo-insight-stat:nth-child(3n + 1) {
+.neo-insights .neo-insight-stat-sky {
   background: var(--neo-sky);
 }
 
-.neo-insights .neo-insight-stat:nth-child(3n + 2) {
+.neo-insights .neo-insight-stat-coral {
   background: var(--neo-coral);
 }
 
-.neo-insights .neo-insight-stat:nth-child(3n) {
+.neo-insights .neo-insight-stat-mint {
   background: var(--neo-mint);
 }
 
-.neo-insights .neo-recommendation:nth-child(4n + 1) {
+.neo-insights .neo-recommendation-academic,
+.neo-insights .neo-recommendation-clubs {
   background: var(--neo-sky);
 }
 
-.neo-insights .neo-recommendation:nth-child(4n + 2) {
+.neo-insights .neo-recommendation-skills {
   background: var(--neo-mint);
 }
 
-.neo-insights .neo-recommendation:nth-child(4n + 3) {
+.neo-insights .neo-recommendation-portfolio {
   background: var(--neo-coral);
 }
 
-.neo-insights .neo-recommendation:nth-child(4n) {
+.neo-insights .neo-recommendation-goals,
+.neo-insights .neo-recommendation-career {
   background: var(--neo-yellow);
 }
 
-.neo-auth .neo-auth-stat:nth-child(3n + 1) {
+.neo-auth .neo-auth-stat-yellow {
   background: var(--neo-yellow);
 }
 
-.neo-auth .neo-auth-stat:nth-child(3n + 2) {
+.neo-auth .neo-auth-stat-coral {
   background: var(--neo-coral);
 }
 
-.neo-auth .neo-auth-stat:nth-child(3n) {
+.neo-auth .neo-auth-stat-mint {
   background: var(--neo-mint);
 }
 
@@ -1071,7 +1076,7 @@ body::after {
   background: var(--neo-sky);
 }
 
-.neo-app input:not([type="checkbox"]):not([type="radio"]),
+.neo-app input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 .neo-app select,
 .neo-app textarea {
   border: var(--neo-border-width) solid var(--neo-border-color);
@@ -1081,12 +1086,27 @@ body::after {
   box-shadow: var(--neo-shadow-xs);
 }
 
-.neo-app input:not([type="checkbox"]):not([type="radio"]):focus,
+.neo-app input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
 .neo-app select:focus,
 .neo-app textarea:focus {
   border-color: var(--neo-border-color);
   outline: none;
   box-shadow: var(--neo-focus-ring);
+}
+
+.neo-app input[type="range"].neo-range {
+  height: 1.25rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  accent-color: var(--neo-primary);
+}
+
+.neo-app input[type="range"].neo-range:focus-visible {
+  outline: var(--neo-border-width) solid var(--neo-ink);
+  outline-offset: 0.25rem;
+  box-shadow: none;
 }
 
 .neo-app [class~="rounded-2xl"][class~="border"] {
