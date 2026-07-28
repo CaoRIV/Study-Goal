@@ -103,7 +103,7 @@ export function OnboardingForm({
   }
 
   return (
-    <div id="main-content" className="neo-onboarding min-h-screen px-4 py-28 sm:px-6 lg:px-8">
+    <main id="main-content" className="neo-onboarding min-h-screen px-4 py-28 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <div className="mb-6 inline-flex items-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-yellow px-4 py-2 text-sm font-black text-neo-ink shadow-neo-xs">
@@ -151,7 +151,7 @@ export function OnboardingForm({
           </Button>
         </form>
       </div>
-    </div>
+    </main>
   );
 }
 

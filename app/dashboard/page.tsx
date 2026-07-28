@@ -534,24 +534,28 @@ export default async function DashboardPage() {
       icon: BarChart3,
       label: t.metricLabels.currentGpa,
       value: gpa !== null ? gpa.toFixed(2) : t.unavailable,
+      tone: "sky",
       hint: `${t.metricLabels.projectedGpa}: ${projectedGpa !== null ? projectedGpa.toFixed(2) : t.unavailable}`
     },
     {
       icon: BookOpenCheck,
       label: t.metricLabels.completedCredits,
       value: `${completedCredits}/${targetCredits}`,
+      tone: "coral",
       hint: `${creditProgress}% ${t.metricLabels.creditProgress.toLowerCase()}`
     },
     {
       icon: BrainCircuit,
       label: t.pulse.skillMomentum,
       value: `${skillProgress}%`,
+      tone: "mint",
       hint: `${safeSkills.length} ${language === "vi" ? "kỹ năng đang theo dõi" : "tracked skills"}`
     },
     {
       icon: BriefcaseBusiness,
       label: t.pulse.careerReady,
       value: `${readinessScore}/100`,
+      tone: "paper",
       hint: `${activeCareerTargets} ${language === "vi" ? "cơ hội đang hoạt động" : "active opportunities"}`
     }
   ];
@@ -700,7 +704,7 @@ export default async function DashboardPage() {
               return (
                 <div
                   key={layer.label}
-                  className="command-layer-card"
+                  className={`command-layer-card command-layer-card-${layer.tone}`}
                   style={{ "--layer-index": index } as CSSProperties}
                 >
                   <div className="flex items-center justify-between gap-3">

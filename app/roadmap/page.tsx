@@ -237,10 +237,10 @@ export default async function RoadmapPage() {
             </h1>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <Metric label={t.currentYear} value={`${t.year} ${profile.current_year || 1}`} icon={CalendarDays} />
-            <Metric label={t.academicDuration} value={`${targetYears} ${t.year.toLowerCase()}`} icon={Map} />
-            <Metric label={t.roadmapCompletion} value={`${roadmapCompletion}%`} icon={CheckCircle2} />
-            <Metric label={t.completedCredits} value={`${completedCredits}/${targetCredits}`} icon={GraduationCap} />
+            <Metric tone="yellow" label={t.currentYear} value={`${t.year} ${profile.current_year || 1}`} icon={CalendarDays} />
+            <Metric tone="coral" label={t.academicDuration} value={`${targetYears} ${t.year.toLowerCase()}`} icon={Map} />
+            <Metric tone="mint" label={t.roadmapCompletion} value={`${roadmapCompletion}%`} icon={CheckCircle2} />
+            <Metric tone="white" label={t.completedCredits} value={`${completedCredits}/${targetCredits}`} icon={GraduationCap} />
           </div>
         </section>
 
@@ -248,7 +248,7 @@ export default async function RoadmapPage() {
           {years.map((year, index) => (
             <article
               key={year.yearIndex}
-              className="roadmap-year-card p-5"
+              className={`roadmap-year-card roadmap-tone-${["sky", "mint", "coral", "yellow"][(year.yearIndex - 1) % 4]} p-5`}
               style={{ "--year-depth": index } as CSSProperties}
             >
               <div className="grid gap-5 lg:grid-cols-[220px_minmax(0,1fr)]">
@@ -340,14 +340,16 @@ export default async function RoadmapPage() {
 function Metric({
   label,
   value,
-  icon: Icon
+  icon: Icon,
+  tone
 }: {
   label: string;
   value: string;
   icon: typeof GraduationCap;
+  tone: "yellow" | "coral" | "mint" | "white";
 }) {
   return (
-    <div className="roadmap-metric-card rounded-2xl p-4">
+    <div className={`roadmap-metric-card roadmap-metric-${tone} rounded-2xl p-4`}>
       <div className="flex items-center justify-between gap-3">
         <span className="text-sm text-ink-muted">{label}</span>
         <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />

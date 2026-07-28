@@ -476,12 +476,12 @@ function ClubCard({
           <p className="mt-2 text-sm font-semibold text-signal-cyan">{club.role}</p>
         </div>
         <div className="flex shrink-0 gap-1">
-          <button type="button" onClick={onEdit} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-warm hover:text-ink" aria-label={copy.actions.edit}>
+          <Button type="button" variant="outline" size="icon-sm" onClick={onEdit} disabled={isBusy} aria-label={copy.actions.edit} title={copy.actions.edit}>
             <Pencil className="h-4 w-4" aria-hidden="true" />
-          </button>
-          <button type="button" onClick={onDelete} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-red-400/12 hover:text-signal-red" aria-label={copy.actions.delete}>
+          </Button>
+          <Button type="button" variant="destructive" size="icon-sm" onClick={onDelete} disabled={isBusy} aria-label={copy.actions.delete} title={copy.actions.delete}>
             {isBusy ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
-          </button>
+          </Button>
         </div>
       </div>
 

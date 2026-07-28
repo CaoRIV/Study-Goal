@@ -205,9 +205,9 @@ export default async function InsightsPage() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3">
-            <StatCard label={t.stats.recommendations} value={String(recommendations.length)} />
-            <StatCard label={t.stats.highPriority} value={String(highPriorityCount)} />
-            <StatCard label={t.stats.dataSources} value="7" />
+            <StatCard tone="sky" label={t.stats.recommendations} value={String(recommendations.length)} />
+            <StatCard tone="coral" label={t.stats.highPriority} value={String(highPriorityCount)} />
+            <StatCard tone="mint" label={t.stats.dataSources} value="7" />
           </div>
         </section>
 
@@ -274,9 +274,9 @@ function SignalPill({ icon: Icon, label }: { icon: typeof Sparkles; label: strin
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string }) {
+function StatCard({ label, value, tone }: { label: string; value: string; tone: "sky" | "coral" | "mint" }) {
   return (
-    <div className="neo-insight-stat rounded-neo border-2 border-neo-ink bg-neo-white p-5 shadow-neo-sm">
+    <div className={`neo-insight-stat neo-insight-stat-${tone} rounded-neo border-2 border-neo-ink bg-neo-white p-5 shadow-neo-sm`}>
       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">{label}</p>
       <p className="mt-4 font-display text-4xl font-semibold text-ink">{value}</p>
     </div>
@@ -296,7 +296,7 @@ function RecommendationCard({
   const styles = categoryStyles[recommendation.category];
 
   return (
-    <article className={cn("neo-recommendation group relative overflow-hidden rounded-neo border-2 border-neo-ink p-5 shadow-neo-sm transition-[box-shadow,transform] duration-200 hover:-translate-y-1 hover:shadow-neo-lg", styles.card)}>
+    <article className={cn(`neo-recommendation neo-recommendation-${recommendation.category} group relative overflow-hidden rounded-neo border-2 border-neo-ink p-5 shadow-neo-sm transition-[box-shadow,transform] duration-200 hover:-translate-y-1 hover:shadow-neo-lg`, styles.card)}>
       <div className={cn("absolute inset-x-0 top-0 h-1", styles.bar)} />
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">

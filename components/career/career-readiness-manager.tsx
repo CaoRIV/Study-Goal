@@ -396,9 +396,9 @@ export function CareerReadinessManager({
                     </p>
                     <h3 className="mt-2 break-words font-display text-xl font-semibold text-ink">{target.role}</h3>
                   </div>
-                  <button type="button" onClick={() => deleteTarget(target.id)} aria-label={copy.pipeline.delete} className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-red-400/10 hover:text-signal-red">
+                  <Button type="button" variant="destructive" size="icon-sm" onClick={() => deleteTarget(target.id)} disabled={Boolean(pending)} aria-label={copy.pipeline.delete} title={copy.pipeline.delete}>
                     {pending === `delete-${target.id}` ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : <Trash2 className="h-4 w-4" aria-hidden="true" />}
-                  </button>
+                  </Button>
                 </div>
                 <select
                   className="form-input mt-5"

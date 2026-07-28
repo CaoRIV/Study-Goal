@@ -209,8 +209,8 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
                   ["GPA", "3.82", BookOpenCheck],
                   ["Mục tiêu", "18", Target],
                   ["Hồ sơ năng lực", "38", FolderKanban]
-                ].map(([label, value, Icon]) => (
-                  <div key={label as string} className="neo-auth-stat rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm">
+                ].map(([label, value, Icon], index) => (
+                  <div key={label as string} className={`neo-auth-stat neo-auth-stat-${["yellow", "coral", "mint"][index]} rounded-neo border-2 border-neo-ink bg-neo-white p-4 shadow-neo-sm`}>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-ink-muted">{label as string}</span>
                       <Icon className="h-4 w-4 text-signal-cyan" aria-hidden="true" />
