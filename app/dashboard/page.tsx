@@ -1,9 +1,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties } from "react";
 import {
   Activity,
-  ArrowRight,
   ArrowUpRight,
   BarChart3,
   BookOpenCheck,
@@ -11,11 +10,8 @@ import {
   BriefcaseBusiness,
   CalendarDays,
   CalendarRange,
-  Clock3,
   Compass,
-  Flag,
   GraduationCap,
-  Lightbulb,
   Map as MapIcon,
   Sparkles,
   Target,
@@ -23,6 +19,7 @@ import {
   UsersRound
 } from "lucide-react";
 
+import { TodayCommandCenter } from "@/components/dashboard/today-command-center";
 import { WorkspaceHeader } from "@/components/navigation/workspace-header";
 import {
   calculateCompletedCredits,
@@ -31,6 +28,7 @@ import {
   calculateProjectedGpa
 } from "@/lib/calculations/academic";
 import { calculateCareerReadiness } from "@/lib/calculations/career";
+import { buildTodayCommandCenter } from "@/lib/dashboard/today";
 import { LANGUAGE_COOKIE, normalizeLanguage } from "@/lib/language";
 import { createRuleRecommendations } from "@/lib/recommendations/rules";
 import { createClient } from "@/lib/supabase/server";
@@ -112,11 +110,27 @@ type CareerReadiness = {
 };
 
 type CareerTarget = {
+  id: string;
   company: string;
   role: string;
   stage: string;
   deadline: string | null;
 };
+
+type DailyCheckIn = {
+  entity_type: "goal" | "milestone";
+  entity_id: string;
+  state: "completed" | "rescheduled" | "blocked";
+};
+
+function getTodayInTimeZone(timeZone: string) {
+  return new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    timeZone
+  }).format(new Date());
+}
 
 const dashboardCopy = {
   en: {
@@ -130,8 +144,6 @@ const dashboardCopy = {
     languageLabel: "Change language",
     eyebrow: "Dashboard",
     welcome: "Welcome back",
-    description:
-      "Your live command center now reflects semesters, courses, grades, and goals from your Study Goal workspace.",
     fallbackName: "Student",
     notSet: "Not set",
     unavailable: "N/A",
@@ -142,7 +154,6 @@ const dashboardCopy = {
       active: "active",
       completed: "completed"
     },
-    courseFallback: "Course",
     statusLabels: {
       planned: "Planned",
       in_progress: "In progress",
@@ -179,29 +190,7 @@ const dashboardCopy = {
       yearUnit: "year",
       text: "See every year, semester, course, goal, and milestone in one master plan."
     },
-    nextActions: {
-      title: "Next best actions",
-      createSemester: "Create your first semester",
-      createSemesterCopy: "Start the academic planner by adding the semester you are currently studying.",
-      addCourse: "Add your first course",
-      addCourseCopy: "Connect credits and grades to make GPA analytics meaningful.",
-      createGoal: "Create your first goal",
-      createGoalCopy: "Give the dashboard a target to track beyond grades.",
-      completeCourse: "Complete one course record",
-      completeCourseCopy: "Add a final grade to unlock your current GPA.",
-      review: "Review this week's plan",
-      reviewCopy: "Your core data is live. Keep updating grades and goal progress weekly."
-    },
-    recentCourses: "Recent courses",
-    activeGoalsTitle: "Active goals",
-    weeklyFocus: "Weekly focus",
-    noFocus: "No active milestones yet.",
-    sourceGoal: "Goal",
-    noCourses: "No courses yet.",
-    noGoals: "No goals yet.",
-    careerGoal: "Career goal",
     emptyCareerGoal: "No career goal yet.",
-    readiness: "Readiness score",
     pulse: {
       eyebrow: "Academic pulse",
       title: "Your semester at a glance",
@@ -232,10 +221,6 @@ const dashboardCopy = {
       title: "One system, clear academic lanes",
       description: "Each module has its own signal color while staying connected to your master plan."
     },
-    focusBoard: {
-      eyebrow: "Focus board",
-      title: "What deserves attention next"
-    },
     northStar: "Career north star"
   },
   vi: {
@@ -249,8 +234,6 @@ const dashboardCopy = {
     languageLabel: "Đổi ngôn ngữ",
     eyebrow: "Bảng điều khiển",
     welcome: "Chào mừng trở lại",
-    description:
-      "Trung tâm điều khiển của bạn giờ phản ánh dữ liệu thật từ học kỳ, môn học, điểm số, mục tiêu và kỹ năng trong Study Goal.",
     fallbackName: "Sinh viên",
     notSet: "Chưa thiết lập",
     unavailable: "Chưa có",
@@ -261,7 +244,6 @@ const dashboardCopy = {
       active: "đang làm",
       completed: "đã hoàn thành"
     },
-    courseFallback: "Môn học",
     statusLabels: {
       planned: "Dự định",
       in_progress: "Đang học",
@@ -298,29 +280,7 @@ const dashboardCopy = {
       yearUnit: "năm",
       text: "Xem từng năm, học kỳ, môn học, mục tiêu và cột mốc trong một kế hoạch tổng thể."
     },
-    nextActions: {
-      title: "Hành động tiếp theo",
-      createSemester: "Tạo học kỳ đầu tiên",
-      createSemesterCopy: "Bắt đầu trình lập kế hoạch học tập bằng học kỳ bạn đang học.",
-      addCourse: "Thêm môn học đầu tiên",
-      addCourseCopy: "Kết nối tín chỉ và điểm số để phân tích GPA có ý nghĩa.",
-      createGoal: "Tạo mục tiêu đầu tiên",
-      createGoalCopy: "Cho bảng điều khiển một mục tiêu để theo dõi ngoài điểm số.",
-      completeCourse: "Hoàn tất một môn học",
-      completeCourseCopy: "Nhập điểm cuối kỳ để mở khóa GPA hiện tại.",
-      review: "Xem lại kế hoạch tuần này",
-      reviewCopy: "Dữ liệu lõi đã hoạt động. Hãy cập nhật điểm, kỹ năng và tiến độ mục tiêu hằng tuần."
-    },
-    recentCourses: "Môn học gần đây",
-    activeGoalsTitle: "Mục tiêu đang hoạt động",
-    weeklyFocus: "Trọng tâm tuần này",
-    noFocus: "Chưa có cột mốc đang hoạt động.",
-    sourceGoal: "Mục tiêu",
-    noCourses: "Chưa có môn học.",
-    noGoals: "Chưa có mục tiêu.",
-    careerGoal: "Mục tiêu nghề nghiệp",
     emptyCareerGoal: "Chưa có mục tiêu nghề nghiệp.",
-    readiness: "Điểm sẵn sàng",
     pulse: {
       eyebrow: "Nhịp học tập",
       title: "Toàn cảnh học kỳ của bạn",
@@ -351,27 +311,9 @@ const dashboardCopy = {
       title: "Một hệ thống, từng luồng học tập rõ ràng",
       description: "Mỗi module có màu tín hiệu riêng nhưng vẫn kết nối với kế hoạch tổng thể."
     },
-    focusBoard: {
-      eyebrow: "Bảng ưu tiên",
-      title: "Việc cần tập trung tiếp theo"
-    },
     northStar: "Đích đến sự nghiệp"
   }
 } as const;
-
-type NextActionsCopy = {
-  title: string;
-  createSemester: string;
-  createSemesterCopy: string;
-  addCourse: string;
-  addCourseCopy: string;
-  createGoal: string;
-  createGoalCopy: string;
-  completeCourse: string;
-  completeCourseCopy: string;
-  review: string;
-  reviewCopy: string;
-};
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();
@@ -396,6 +338,7 @@ export default async function DashboardPage() {
     redirect("/onboarding");
   }
 
+  const today = getTodayInTimeZone("Asia/Ho_Chi_Minh");
   const [
     { data: semesters },
     { data: courses },
@@ -405,7 +348,8 @@ export default async function DashboardPage() {
     { data: clubs },
     { data: portfolioItems },
     { data: careerReadiness },
-    { data: careerTargets }
+    { data: careerTargets },
+    { data: dailyCheckIns }
   ] = await Promise.all([
     supabase
       .from("semesters")
@@ -449,8 +393,13 @@ export default async function DashboardPage() {
       .maybeSingle(),
     supabase
       .from("career_targets")
-      .select("company, role, stage, deadline")
+      .select("id, company, role, stage, deadline")
+      .eq("user_id", user.id),
+    supabase
+      .from("daily_check_ins")
+      .select("entity_type, entity_id, state")
       .eq("user_id", user.id)
+      .eq("check_in_date", today)
   ]);
 
   const safeSemesters = (semesters || []).map((semester) => ({
@@ -474,6 +423,7 @@ export default async function DashboardPage() {
   const safePortfolioItems = (portfolioItems || []) as PortfolioItem[];
   const safeCareerReadiness = careerReadiness as CareerReadiness | null;
   const safeCareerTargets = (careerTargets || []) as CareerTarget[];
+  const safeDailyCheckIns = (dailyCheckIns || []) as DailyCheckIn[];
   const displayName = profile.full_name || user.email || t.fallbackName;
   const completedCredits = calculateCompletedCredits(safeCourses);
   const gpa = calculateGpa(safeCourses);
@@ -484,7 +434,6 @@ export default async function DashboardPage() {
   const isProjectedHealthy = targetGpa && projectedGpa ? projectedGpa >= targetGpa : true;
   const activeGoals = safeGoals.filter((goal) => !["completed", "paused"].includes(goal.status));
   const completedGoals = safeGoals.filter((goal) => goal.status === "completed");
-  const goalTitleById = new Map(safeGoals.map((goal) => [goal.id, goal.title]));
   const targetYears = Number(profile.academic_year_target || 4);
   const expectedSemesters = Math.max(1, targetYears * 2);
   const roadmapCompletion = Math.min(100, Math.round(((semesters?.length || 0) / expectedSemesters) * 100));
@@ -582,27 +531,11 @@ export default async function DashboardPage() {
     },
     language
   );
-  const topRecommendation = recommendations[0];
   const insightsTitle = language === "vi" ? "Gợi ý thông minh" : "Smart Insights";
   const insightsText =
     language === "vi"
       ? `${recommendations.length} gợi ý ưu tiên từ học tập, mục tiêu, kỹ năng và sự nghiệp.`
       : `${recommendations.length} prioritized recommendations across academics, goals, skills, and career.`;
-  const nextAction = getNextAction({
-    hasSemesters: safeSemesters.length > 0,
-    hasCourses: safeCourses.length > 0,
-    hasGoals: safeGoals.length > 0,
-    hasGpa: gpa !== null,
-    copy: t.nextActions
-  });
-  const focusAction = topRecommendation
-    ? {
-        title: topRecommendation.title,
-        copy: topRecommendation.summary,
-        href: "/insights",
-        cta: language === "vi" ? "Mở gợi ý AI" : "Open insights"
-      }
-    : nextAction;
   const activeSemesterId = safeCourses.find((course) => course.status === "in_progress")?.semester_id;
   const currentSemester =
     safeSemesters.find((semester) => semester.id === activeSemesterId) ||
@@ -639,6 +572,16 @@ export default async function DashboardPage() {
       return Number((runningGradePoints / runningCredits).toFixed(2));
     })
     .slice(-7);
+  const todayCommand = buildTodayCommandCenter({
+    goals: safeGoals,
+    milestones: safeMilestones,
+    careerTargets: safeCareerTargets,
+    checkIns: safeDailyCheckIns,
+    today,
+    projectedGpa,
+    targetGpa,
+    language
+  });
 
   return (
     <main id="main-content" className="neo-pilot neo-dashboard workspace-shell min-h-screen px-4 py-8 sm:px-6 lg:px-8">
@@ -723,6 +666,14 @@ export default async function DashboardPage() {
             })}
           </div>
         </section>
+
+        <TodayCommandCenter
+          language={language}
+          today={today}
+          priorities={todayCommand.priorities}
+          deadlines={todayCommand.deadlines}
+          risks={todayCommand.risks}
+        />
 
         <SemesterJourney
           semesters={semesterJourney}
@@ -824,72 +775,6 @@ export default async function DashboardPage() {
           </div>
         </section>
 
-        <section className="mt-10">
-          <SectionHeading eyebrow={t.focusBoard.eyebrow} title={t.focusBoard.title} />
-          <div className="grid gap-5 xl:grid-cols-[0.72fr_1.28fr]">
-            <div className="workspace-panel-muted relative overflow-hidden p-6">
-              <div className="relative">
-                <div className="flex h-11 w-11 items-center justify-center rounded-neo-sm border-2 border-neo-ink bg-neo-yellow text-neo-ink shadow-neo-xs">
-                  <Lightbulb className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-signal-cyan">{t.nextActions.title}</p>
-                <h2 className="mt-3 font-display text-3xl font-semibold text-ink">{focusAction.title}</h2>
-                <p className="mt-3 max-w-xl leading-7 text-ink-muted">{focusAction.copy}</p>
-                <a
-                  href={focusAction.href}
-                  className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-neo-sm border-2 border-neo-ink bg-neo-primary px-5 text-sm font-black text-white shadow-neo-sm transition-[box-shadow,transform] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none focus-visible:outline-none focus-visible:shadow-neo-focus"
-                >
-                  {focusAction.cta}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-
-            <div className="grid gap-5 md:grid-cols-2">
-              <ListPanel title={t.weeklyFocus} empty={t.noFocus} icon={Clock3} tone="coral">
-                {safeMilestones.slice(0, 4).map((milestone) => (
-                  <div key={milestone.id} className="study-list-item">
-                    <p className="font-semibold text-ink">{milestone.title}</p>
-                    <p className="mt-1 text-xs text-ink-muted">
-                      {t.sourceGoal}: {goalTitleById.get(milestone.goal_id) || t.goals}
-                    </p>
-                  </div>
-                ))}
-              </ListPanel>
-
-              <ListPanel title={t.recentCourses} empty={t.noCourses} icon={BookOpenCheck} tone="cyan">
-                {safeCourses.slice(0, 4).map((course) => (
-                  <div key={course.id} className="study-list-item flex items-center justify-between gap-4">
-                    <div>
-                      <p className="font-semibold text-ink">{course.name}</p>
-                      <p className="mt-1 text-xs text-ink-muted">
-                        {course.code || t.courseFallback} / {t.statusLabels[course.status as keyof typeof t.statusLabels] || course.status}
-                      </p>
-                    </div>
-                    <span className="text-sm font-semibold text-signal-cyan">{course.final_grade ?? "-"}</span>
-                  </div>
-                ))}
-              </ListPanel>
-
-              <div className="md:col-span-2">
-                <ListPanel title={t.activeGoalsTitle} empty={t.noGoals} icon={Flag} tone="coral">
-                  {activeGoals.slice(0, 4).map((goal) => (
-                    <div key={goal.id} className="study-list-item">
-                      <div className="flex items-center justify-between gap-4">
-                        <p className="font-semibold text-ink">{goal.title}</p>
-                        <span className="text-sm font-semibold text-signal-orange">{goal.progress}%</span>
-                      </div>
-                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-surface-cyan">
-                        <div className="h-full rounded-full bg-orange-300" style={{ width: `${goal.progress}%` }} />
-                      </div>
-                    </div>
-                  ))}
-                </ListPanel>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="academic-grid workspace-panel-muted relative mt-6 overflow-hidden p-6">
           <div className="relative flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             <div className="flex items-start gap-4">
@@ -915,63 +800,6 @@ export default async function DashboardPage() {
       </div>
     </main>
   );
-}
-
-function getNextAction({
-  hasSemesters,
-  hasCourses,
-  hasGoals,
-  hasGpa,
-  copy
-}: {
-  hasSemesters: boolean;
-  hasCourses: boolean;
-  hasGoals: boolean;
-  hasGpa: boolean;
-  copy: NextActionsCopy;
-}) {
-  if (!hasSemesters) {
-    return {
-      title: copy.createSemester,
-      copy: copy.createSemesterCopy,
-      href: "/grades",
-      cta: copy.createSemester
-    };
-  }
-
-  if (!hasCourses) {
-    return {
-      title: copy.addCourse,
-      copy: copy.addCourseCopy,
-      href: "/grades",
-      cta: copy.addCourse
-    };
-  }
-
-  if (!hasGoals) {
-    return {
-      title: copy.createGoal,
-      copy: copy.createGoalCopy,
-      href: "/goals",
-      cta: copy.createGoal
-    };
-  }
-
-  if (!hasGpa) {
-    return {
-      title: copy.completeCourse,
-      copy: copy.completeCourseCopy,
-      href: "/grades",
-      cta: copy.completeCourse
-    };
-  }
-
-  return {
-    title: copy.review,
-    copy: copy.reviewCopy,
-    href: "/goals",
-    cta: copy.review
-  };
 }
 
 type AccentTone = "cyan" | "coral" | "green" | "orange" | "cream";
@@ -1433,35 +1261,3 @@ function NextModule({
     </a>
   );
 }
-
-function ListPanel({
-  title,
-  empty,
-  children,
-  icon: Icon,
-  tone
-}: {
-  title: string;
-  empty: string;
-  children: ReactNode;
-  icon: typeof GraduationCap;
-  tone: AccentTone;
-}) {
-  const hasItems = Array.isArray(children) ? children.length > 0 : Boolean(children);
-  const styles = accentStyles[tone];
-
-  return (
-    <div className={cn("workspace-card h-full p-5", styles.card)}>
-      <div className="mb-5 flex items-center gap-3">
-        <div className={cn("flex h-9 w-9 items-center justify-center rounded-neo-sm", styles.icon)}>
-          <Icon className="h-4 w-4" aria-hidden="true" />
-        </div>
-        <h3 className="font-display text-lg font-semibold text-ink">{title}</h3>
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-1">
-        {hasItems ? children : <p className="study-list-item text-sm text-ink-muted">{empty}</p>}
-      </div>
-    </div>
-  );
-}
-

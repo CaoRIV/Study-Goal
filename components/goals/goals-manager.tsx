@@ -453,7 +453,7 @@ export function GoalsManager({
 
       <section className="grid gap-6 lg:grid-cols-[380px_minmax(0,1fr)]">
         <div className="space-y-4 lg:sticky lg:top-6 lg:self-start">
-          <form className="workspace-form p-5" onSubmit={createGoal}>
+          <form id="create-goal" className="workspace-form scroll-mt-6 p-5" onSubmit={createGoal}>
             <div className="mb-5 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
                 <Target className="h-5 w-5" aria-hidden="true" />
@@ -493,7 +493,7 @@ export function GoalsManager({
           ) : null}
         </div>
 
-        <div className="space-y-4">
+        <div id="goal-board" className="scroll-mt-6 space-y-4">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700/8 text-signal-cyan ring-1 ring-cyan-700/12">
               <Flag className="h-5 w-5" aria-hidden="true" />
