@@ -320,7 +320,7 @@ export function PortfolioManager({
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[440px_minmax(0,1fr)]">
-        <form className="workspace-form h-fit p-6" onSubmit={createItem}>
+        <form id="create-evidence" className="workspace-form h-fit scroll-mt-6 p-6" onSubmit={createItem}>
           <div className="mb-6 flex items-center gap-3">
             <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-700/14 bg-cyan-700/8 text-signal-cyan">
               <Plus className="h-5 w-5" aria-hidden="true" />
