@@ -1,4 +1,28 @@
-# Study Goal
+<p align="center">
+  <img src="./public/study-goal-logo.png" alt="Study Goal logo" width="144" />
+</p>
+
+<h1 align="center">Study Goal</h1>
+
+<p align="center">
+  <strong>A focused operating system for the university journey.</strong>
+</p>
+
+<p align="center">
+  <a href="./package.json"><img src="https://img.shields.io/badge/version-0.1.0-0e7490?style=flat-square" alt="Version 0.1.0" /></a>
+  <a href="./package.json"><img src="https://img.shields.io/badge/Next.js-15.5.19-1f2937?style=flat-square&amp;logo=nextdotjs&amp;logoColor=white" alt="Next.js 15.5.19" /></a>
+  <a href="./package.json"><img src="https://img.shields.io/badge/React-19.2.7-087ea4?style=flat-square&amp;logo=react&amp;logoColor=white" alt="React 19.2.7" /></a>
+  <a href="./package-lock.json"><img src="https://img.shields.io/badge/TypeScript-5.9.3-3178c6?style=flat-square&amp;logo=typescript&amp;logoColor=white" alt="TypeScript 5.9.3" /></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-Web-0e7490?style=flat-square" alt="Platform: Web" />
+  <a href="#production-build"><img src="https://img.shields.io/badge/build-verified-2ea44f?style=flat-square" alt="Build verified" /></a>
+  <img src="https://img.shields.io/badge/tests-not_configured-6e7781?style=flat-square" alt="Tests not configured" />
+  <img src="https://img.shields.io/badge/license-not_specified-6e7781?style=flat-square" alt="License not specified" />
+</p>
+
+<br />
 
 Study Goal is a premium university operating system for ambitious students. It helps students plan semesters, track GPA, manage goals, build skills, and visualize their university journey as a long-term master plan.
 
